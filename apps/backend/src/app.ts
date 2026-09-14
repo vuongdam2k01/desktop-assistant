@@ -22,6 +22,7 @@ import { type AccountDataLifecycle, EmptyAccountDataLifecycle } from './account/
 import { AccountService } from './account/account-service.js';
 import { accountRoutes } from './routes/account.js';
 import { updateFeedRoutes } from './routes/update-feed.js';
+import { buildLoggerOptions } from './http/log-redaction.js';
 
 export interface BuildAppDependencies {
   identityVerifier?: IdentityVerifier;
@@ -46,43 +47,7 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
 
   const app = fastify({
     trustProxy: config.trustProxy,
-    logger:
-      options.logger === false
-        ? false
-        : {
-            level: 'info',
-            redact: {
-              paths: [
-                'req.headers.authorization',
-                'req.headers.cookie',
-                'res.headers["set-cookie"]',
-                'headers.authorization',
-                'headers.cookie',
-                'headers["set-cookie"]',
-                '*.*client_secret*',
-                '*.*clientSecret*',
-                '*.*refresh_token*',
-                '*.*refreshToken*',
-                '*.*access_token*',
-                '*.*accessToken*',
-                '*.*idToken*',
-                '*.*id_token*',
-                '*.*binding*',
-                '*.*code*',
-                '*.client_secret*',
-                '*.clientSecret*',
-                '*.refresh_token*',
-                '*.refreshToken*',
-                '*.access_token*',
-                '*.accessToken*',
-                '*.idToken*',
-                '*.id_token*',
-                '*.binding*',
-                '*.code*',
-              ],
-              censor: '[REDACTED]',
-            },
-          },
+    logger: options.logger === false ? false : buildLoggerOptions(),
   });
 
   // 1. Transport and error policy

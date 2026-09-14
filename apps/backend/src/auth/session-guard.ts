@@ -109,8 +109,16 @@ export function createAuthenticateSession(
         });
       }
 
+      // The invitation is matched through the account's address rather than through
+      // `activated_account_id`. Revoking clears that column in the same statement that sets
+      // the status, and the schema's `invitation_consumption` constraint requires it to be
+      // null for any status other than redeemed, so a lookup by that column can never return
+      // a revoked row and the rejection below could never fire.
       const invCheck = await client.query<{ status: string }>(
-        'SELECT status FROM invitation WHERE activated_account_id = $1',
+        `SELECT i.status
+           FROM invitation i
+           JOIN account a ON a.email = i.email
+          WHERE a.id = $1`,
         [row.account_id]
       );
       if (invCheck.rows[0]?.status === 'revoked') {

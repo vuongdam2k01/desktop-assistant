@@ -153,7 +153,10 @@ export class SessionService {
         );
       }
 
-      // Upsert device: unique on (account_id, device_id)
+      // Upsert device: unique on (account_id, device_id). A revocation is deliberately not
+      // cleared here. Signing in again is exactly what whoever holds a lost device would do,
+      // so re-enrolment must not be the act that lifts the revocation; clearing it is an
+      // operator decision made elsewhere.
       const deviceIdField = params.deviceId.trim();
       const deviceName = params.deviceName?.trim() || null;
       const deviceUuid = crypto.randomUUID();
@@ -163,8 +166,7 @@ export class SessionService {
          VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)
          ON CONFLICT (account_id, device_id) 
          DO UPDATE SET device_name = EXCLUDED.device_name, 
-                       last_active_at = CURRENT_TIMESTAMP, 
-                       revoked_at = NULL`,
+                       last_active_at = CURRENT_TIMESTAMP`,
         [deviceUuid, accountId, deviceIdField, deviceName]
       );
 

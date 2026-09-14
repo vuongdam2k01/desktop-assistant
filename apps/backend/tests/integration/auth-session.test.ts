@@ -295,6 +295,81 @@ describe('Auth and Session Lifecycle Integration', () => {
     expect(refRes.json().code).toBe('SESSION_REVOKED');
   });
 
+  // The guard rejects a request whose invitation has been revoked. That rejection is the
+  // only thing standing between a withdrawn participant and a working session once a second
+  // revocation path exists that forgets to revoke the sessions too.
+  it('refuses an access token once the invitation behind it is revoked', async () => {
+    const email = `revoke_guard_${Date.now()}@example.com`;
+    await addInvitation({ email });
+
+    const idToken = 'token-revoke-guard-' + crypto.randomUUID();
+    mockVerifier.setIdentity(idToken, {
+      sub: 'google-sub-revguard-' + crypto.randomUUID(),
+      email,
+      emailVerified: true,
+    });
+
+    const signinRes = await app.inject({
+      method: 'POST',
+      url: '/v1/auth/google',
+      payload: { idToken, deviceId: 'dev-revguard' },
+    });
+    const tokens = signinRes.json();
+
+    // Revoke the invitation without touching the sessions, which is what any second
+    // revocation path would do.
+    await app.pgPool.query(
+      `UPDATE invitation SET status = 'revoked', activated_account_id = NULL WHERE email = $1`,
+      [email]
+    );
+
+    const guarded = await app.inject({
+      method: 'GET',
+      url: '/v1/oauth/notion/authorize-url?redirectUri=http%3A%2F%2F127.0.0.1%3A8765%2Fcb',
+      headers: { authorization: `Bearer ${tokens.accessToken}` },
+    });
+
+    expect(guarded.statusCode).toBe(401);
+    expect(guarded.json().code).toBe('SESSION_REVOKED');
+  });
+
+  // A device revocation that the next sign-in undoes is not a revocation. The laptop is
+  // lost, the operator revokes it, and whoever holds it signs in again and is re-enrolled.
+  it('keeps a device revoked when the same device signs in again', async () => {
+    const email = `revoke_device_${Date.now()}@example.com`;
+    await addInvitation({ email });
+
+    const idToken = 'token-revoke-device-' + crypto.randomUUID();
+    const sub = 'google-sub-revdev-' + crypto.randomUUID();
+    mockVerifier.setIdentity(idToken, { sub, email, emailVerified: true });
+
+    const first = await app.inject({
+      method: 'POST',
+      url: '/v1/auth/google',
+      payload: { idToken, deviceId: 'dev-lost-laptop' },
+    });
+    expect(first.statusCode).toBe(200);
+
+    await app.pgPool.query(
+      `UPDATE device SET revoked_at = NOW() WHERE device_id = $1`,
+      ['dev-lost-laptop']
+    );
+
+    const secondToken = 'token-revoke-device-2-' + crypto.randomUUID();
+    mockVerifier.setIdentity(secondToken, { sub, email, emailVerified: true });
+    await app.inject({
+      method: 'POST',
+      url: '/v1/auth/google',
+      payload: { idToken: secondToken, deviceId: 'dev-lost-laptop' },
+    });
+
+    const after = await app.pgPool.query<{ revoked_at: Date | null }>(
+      'SELECT revoked_at FROM device WHERE device_id = $1',
+      ['dev-lost-laptop']
+    );
+    expect(after.rows[0]?.revoked_at).not.toBeNull();
+  });
+
   it('enforces TLS: rejects plain HTTP when enforceTls is enabled', async () => {
     const tlsConfig = { ...config, enforceTls: true };
     const tlsApp = await buildApp({
