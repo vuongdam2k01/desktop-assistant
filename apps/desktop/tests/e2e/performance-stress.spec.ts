@@ -102,7 +102,7 @@ test.describe('F17 Performance, Stress Benchmark & Memory Diagnostics', () => {
         // Dispatch transition
         await electronApp.evaluate(({ BrowserWindow }, { work, loco }) => {
           const wins = BrowserWindow.getAllWindows();
-          const petWin = wins.find(w => w.getTitle() === 'Pet Window') as unknown as {
+          const petWin = wins.find(w => w.webContents.getURL().includes('renderer-pet')) as unknown as {
             petController?: { setState: (p: unknown) => void };
           };
           petWin?.petController?.setState({ workStatus: work, locomotion: loco });
@@ -164,7 +164,7 @@ test.describe('F17 Performance, Stress Benchmark & Memory Diagnostics', () => {
 
     // 2. Trigger idle pause via visibility change or wait
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       petWin?.webContents.send('pet:visibilityChanged', false);
     });
 
@@ -187,7 +187,7 @@ test.describe('F17 Performance, Stress Benchmark & Memory Diagnostics', () => {
 
     // 4. Resume via visibility true and mark activity
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       petWin?.webContents.send('pet:visibilityChanged', true);
       petWin?.webContents.send('pet:activity', { type: 'move' });
     });

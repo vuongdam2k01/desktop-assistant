@@ -54,7 +54,7 @@ test.describe('Pointer mask from a real capture', () => {
 
   test('a live capture yields a mask that separates the character from its padding', async () => {
     const captured = await electronApp.evaluate(async ({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       if (!petWin) throw new Error('Pet Window not found');
       const image = await petWin.capturePage();
       const bitmap = image.toBitmap();

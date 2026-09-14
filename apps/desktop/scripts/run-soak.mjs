@@ -94,7 +94,7 @@ async function main() {
 
         await electronApp.evaluate(({ BrowserWindow }, { w, l }) => {
           const wins = BrowserWindow.getAllWindows();
-          const petWin = wins.find(win => win.getTitle() === 'Pet Window');
+          const petWin = wins.find(win => win.webContents.getURL().includes('renderer-pet'));
           petWin?.petController?.setState({ workStatus: w, locomotion: l });
         }, { w: nextWork, l: nextLoco });
       }

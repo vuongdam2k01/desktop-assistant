@@ -73,7 +73,7 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
       // Trigger via main process window controller
       await electronApp.evaluate(({ BrowserWindow }, s) => {
         const wins = BrowserWindow.getAllWindows();
-        const petWin = wins.find(w => w.getTitle() === 'Pet Window') as unknown as { petController?: { setState: (p: unknown) => void } };
+        const petWin = wins.find(w => w.webContents.getURL().includes('renderer-pet')) as unknown as { petController?: { setState: (p: unknown) => void } };
         petWin?.petController?.setState({ workStatus: s });
       }, status);
       await expect(stage).toHaveAttribute('data-work-status', String(status), { timeout: 2000 });
@@ -87,7 +87,7 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
 
     // Set both workStatus: 2 (working) and locomotion: 1 (walking)
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window') as unknown as { petController?: { setState: (p: unknown) => void } };
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet')) as unknown as { petController?: { setState: (p: unknown) => void } };
       petWin?.petController?.setState({ workStatus: 2, locomotion: 1 });
     });
     await expect(stage).toHaveAttribute('data-work-status', '2');
@@ -95,7 +95,7 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
 
     // Update only locomotion to 0 (standing), workStatus must remain 2
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window') as unknown as { petController?: { setState: (p: unknown) => void } };
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet')) as unknown as { petController?: { setState: (p: unknown) => void } };
       petWin?.petController?.setState({ locomotion: 0 });
     });
     await expect(stage).toHaveAttribute('data-locomotion', '0');
@@ -103,7 +103,7 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
 
     // Update only workStatus to 3 (waiting approval), locomotion must remain 0
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window') as unknown as { petController?: { setState: (p: unknown) => void } };
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet')) as unknown as { petController?: { setState: (p: unknown) => void } };
       petWin?.petController?.setState({ workStatus: 3 });
     });
     await expect(stage).toHaveAttribute('data-work-status', '3');
@@ -113,7 +113,7 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
   test('pet:packState IPC invoke returns active pack metadata and layer values', async () => {
     // Set explicit state
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window') as unknown as { petController?: { setState: (p: unknown) => void } };
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet')) as unknown as { petController?: { setState: (p: unknown) => void } };
       petWin?.petController?.setState({ workStatus: 4, locomotion: 2 });
     });
     await expect(petPage.locator('#pet-stage')).toHaveAttribute('data-work-status', '4');
@@ -179,33 +179,33 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
 
     // Set state to workStatus: 1
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       petWin?.webContents.send('pet:setState', { workStatus: 1, locomotion: 0 });
     });
     await expect(stage).toHaveAttribute('data-work-status', '1');
 
     // Hide pet window
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       petWin?.webContents.send('pet:visibilityChanged', false);
       petWin?.hide();
     });
 
     const isVisibleAfterHide = await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       return petWin?.isVisible();
     });
     expect(isVisibleAfterHide).toBe(false);
 
     // Show pet window
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       petWin?.showInactive();
       petWin?.webContents.send('pet:visibilityChanged', true);
     });
 
     const isVisibleAfterShow = await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       return petWin?.isVisible();
     });
     expect(isVisibleAfterShow).toBe(true);
@@ -217,16 +217,21 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
   test('window bounds persist across restart in the same userData directory', async () => {
     // Move pet window to (420, 360)
     await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
-      petWin?.setBounds({ x: 420, y: 360, width: 200, height: 200 });
-      petWin?.emit('move');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
+      if (!petWin) {
+        throw new Error('Pet window not found; nothing was moved, so nothing would be persisted.');
+      }
+      petWin.setBounds({ x: 420, y: 360, width: 200, height: 200 });
+      petWin.emit('move');
     });
 
-    // Wait for debounced write
-    await new Promise(r => setTimeout(r, 400));
-
-    // Verify pet-window-state.json exists
+    // The write is debounced, and a loaded runner can take longer than the debounce
+    // itself. Wait for the file rather than for a duration.
     const stateFile = path.join(tmpUserData, 'pet-window-state.json');
+    const deadline = Date.now() + 10_000;
+    while (!fs.existsSync(stateFile) && Date.now() < deadline) {
+      await new Promise(r => setTimeout(r, 50));
+    }
     expect(fs.existsSync(stateFile)).toBe(true);
 
     // Close application
@@ -251,7 +256,7 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
       await relPage.waitForSelector('#pet-stage[data-render-status="ready"]', { timeout: 15_000 });
 
       const bounds = await relaunchApp.evaluate(({ BrowserWindow }) => {
-        const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+        const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
         return petWin?.getBounds();
       });
 
@@ -264,7 +269,7 @@ test.describe('F17 Pet Rendering E2E Suite', () => {
 
   test('alpha-boundary scan passes on capturePage() with zero dark fringing', async () => {
     const pngBase64 = await electronApp.evaluate(async ({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       if (!petWin) throw new Error('Pet Window not found');
       const image = await petWin.capturePage();
       return image.toPNG().toString('base64');

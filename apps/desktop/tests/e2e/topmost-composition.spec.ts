@@ -60,7 +60,7 @@ test.describe('Topmost OS Composition Verification', () => {
    */
   async function setPetContentProtection(enabled: boolean): Promise<void> {
     await electronApp.evaluate(({ BrowserWindow }, on) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       petWin?.setContentProtection(on);
     }, enabled);
   }
@@ -76,7 +76,7 @@ test.describe('Topmost OS Composition Verification', () => {
 
   test('pet renders above background fullscreen window and reveals background through transparent padding', async () => {
     const petBounds = await electronApp.evaluate(({ BrowserWindow }) => {
-      const petWin = BrowserWindow.getAllWindows().find(w => w.getTitle() === 'Pet Window');
+      const petWin = BrowserWindow.getAllWindows().find(w => w.webContents.getURL().includes('renderer-pet'));
       return petWin?.getBounds() ?? { x: 100, y: 100, width: 200, height: 200 };
     });
 
