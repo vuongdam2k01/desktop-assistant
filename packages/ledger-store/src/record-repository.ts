@@ -444,7 +444,13 @@ export class RecordRepository {
   }
 
   appendDecision(input: AppendDecisionInput): DecisionRecord {
-    return this.db.transaction(() => {
+    // An expired request has to be recorded as expired even though this call then fails.
+    // Marking it inside the transaction and throwing in the next statement rolled the mark
+    // back, so the request stayed pending, every later attempt was refused for the same
+    // reason, and the gate's pending list kept an entry nothing could ever clear. The
+    // transaction therefore commits the mark and reports it, and the refusal is raised after
+    // that commit.
+    const outcome = this.db.transaction((): DecisionRecord | { expiredRequestId: string } => {
       this.assertJobExists(input.jobId);
 
       // If decision answers an approval request, validate and resolve the projection
@@ -488,10 +494,7 @@ export class RecordRepository {
           this.db
             .prepare("UPDATE approval_request SET status = 'expired' WHERE request_id = ? AND status = 'pending'")
             .run(input.answers);
-          throw new LedgerStoreError(
-            'APPROVAL_REQUEST_UNKNOWN',
-            `Approval request "${input.answers}" has expired.`
-          );
+          return { expiredRequestId: input.answers };
         }
 
         let newStatus: string = 'approved';
@@ -532,6 +535,15 @@ export class RecordRepository {
 
       return record;
     })();
+
+    if ('expiredRequestId' in outcome) {
+      throw new LedgerStoreError(
+        'APPROVAL_REQUEST_UNKNOWN',
+        `Approval request "${outcome.expiredRequestId}" has expired.`
+      );
+    }
+
+    return outcome;
   }
 
   appendError(input: AppendErrorInput): ErrorRecord {

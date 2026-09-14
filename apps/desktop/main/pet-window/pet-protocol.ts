@@ -82,6 +82,10 @@ export type PetActivationErrorCode =
   | 'INCOMPATIBLE_REVISION'
   | 'BLEND_DURATION_OUT_OF_RANGE'
   | 'ACTIVATION_TIMEOUT'
+  // Another activation overtook this one before it reached the screen.
+  | 'ACTIVATION_SUPERSEDED'
+  // The window was destroyed between reading the asset and handing it over.
+  | 'ACTIVATION_WINDOW_GONE'
   | 'RENDERER_UNAVAILABLE';
 
 export interface PetActivationPackage {

@@ -367,20 +367,40 @@ export class PetWindowControllerImpl implements PetWindowController {
 
       port1.start();
 
-      // Post port2 to renderer with manifest/metadata
-      this.win.webContents.postMessage(
-        'pet:activatePack',
-        {
-          packId,
-          contractVersion,
-          descriptor,
-          capabilities,
-        },
-        [port2]
-      );
+      // The window can be destroyed while the asset above is read from disk, which is what
+      // quitting during a pack reload does. Posting to a destroyed window throws inside this
+      // executor, and with no reader of the rejection the process would be torn down before
+      // `will-quit` closed the credential database.
+      try {
+        if (this.win.isDestroyed()) {
+          throw new Error('WINDOW_DESTROYED');
+        }
 
-      // Post buffer through port1
-      port1.postMessage({ buffer });
+        this.win.webContents.postMessage(
+          'pet:activatePack',
+          {
+            packId,
+            contractVersion,
+            descriptor,
+            capabilities,
+          },
+          [port2]
+        );
+
+        port1.postMessage({ buffer });
+      } catch (err) {
+        if (!settled) {
+          settled = true;
+          clearTimeout(timer);
+          try {
+            port1.close();
+          } catch (closeErr) {
+            void closeErr;
+          }
+          console.warn('[PetController] Could not hand the pack to the renderer:', err);
+          resolve({ activated: false, error: 'ACTIVATION_WINDOW_GONE' });
+        }
+      }
     });
   }
 

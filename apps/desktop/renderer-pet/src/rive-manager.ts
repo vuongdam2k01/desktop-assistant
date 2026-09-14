@@ -237,10 +237,12 @@ export class RiveManager {
     locoInput.value = this.currentLocomotion;
 
     // Swap canvases on next animation frame
+    let superseded = false;
     await new Promise<void>(resolve => {
       requestAnimationFrame(() => {
         if (generation !== this.activationGeneration) {
           candidateInstance.cleanup();
+          superseded = true;
           resolve();
           return;
         }
@@ -278,6 +280,15 @@ export class RiveManager {
         resolve();
       });
     });
+
+    if (superseded) {
+      // Another activation overtook this one at the swap, so this candidate was destroyed
+      // and never displayed. Reporting success here would have the main process commit this
+      // pack's identity while a different pack is on screen: the pack state would name the
+      // wrong file, a reload would fetch the wrong file, and the pointer mask would be
+      // rebuilt from a silhouette that is not the one being drawn.
+      return { activated: false, error: 'ACTIVATION_SUPERSEDED' };
+    }
 
     return { activated: true, packId };
   }

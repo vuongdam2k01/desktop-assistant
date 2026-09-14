@@ -63,7 +63,11 @@ export async function registerPetWindowModule(context: DesktopContext): Promise<
 
   const onReload = (event: Electron.IpcMainEvent): void => {
     if (event.senderFrame === win.webContents.mainFrame) {
-      void controller.reloadActivePack();
+      // A rejection with no reader ends the process. Nothing about a failed reload should
+      // take the tray, the ledger and the credential store down with it.
+      controller.reloadActivePack().catch(err => {
+        console.error('[PetWindow] Reloading the active pack failed:', err);
+      });
     }
   };
 
