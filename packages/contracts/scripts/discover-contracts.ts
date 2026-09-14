@@ -101,7 +101,7 @@ export function discoverContracts(repoRoot: string): DiscoveryResult {
 
     let parsed: unknown;
     try {
-      parsed = yaml.parse(match[1]);
+      parsed = yaml.parse(match[1] ?? '');
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e);
       throw new Error(`Malformed YAML front matter in ${md}: ${msg}`, { cause: e });
@@ -190,14 +190,21 @@ export function discoverContracts(repoRoot: string): DiscoveryResult {
     // Sort descending by semver
     list.sort((a, b) => compareSemver(b.version, a.version));
 
+    const winner = list[0];
+    if (!winner) {
+      // A contract key exists only because something was pushed under it, so an empty list
+      // means the grouping above is broken rather than that this contract has no versions.
+      throw new Error(`Contract "${contract}" was grouped with no descriptors.`);
+    }
+
     // Check for duplicate highest versions
-    if (list.length > 1 && compareSemver(list[0].version, list[1].version) === 0) {
+    const runnerUp = list[1];
+    if (runnerUp && compareSemver(winner.version, runnerUp.version) === 0) {
       throw new Error(
-        `Duplicate winner versions detected for contract "${contract}" at version ${list[0].version}: ${list[0].descriptorPath} and ${list[1].descriptorPath}`
+        `Duplicate winner versions detected for contract "${contract}" at version ${winner.version}: ${winner.descriptorPath} and ${runnerUp.descriptorPath}`
       );
     }
 
-    const winner = list[0];
     const superseded = list.slice(1).map(d => `${d.version} (${d.descriptorPath})`);
 
     for (const f of winner.eligibleFiles) {

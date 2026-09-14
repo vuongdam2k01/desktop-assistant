@@ -388,7 +388,10 @@ describe('Record Scenarios (ledger spec)', () => {
     expect(records).toHaveLength(2);
     expect(records[0]!.recordId).toBe(intent.recordId);
     expect(records[1]!.recordId).toBe(result.recordId);
-    expect(records[1]!.content.outcome).toBe('failed');
+    const resultRecord = records[1]!;
+    expect(resultRecord.type).toBe('result');
+    if (resultRecord.type !== 'result') throw new Error('expected a result record');
+    expect(resultRecord.content.outcome).toBe('failed');
   });
 
   it('Scenario: The process stops between the two records', async () => {

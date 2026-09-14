@@ -115,7 +115,7 @@ describe('SQL DDL parsing and interface generation', () => {
     `;
     const tables = parseSqlTables(sql);
     expect(tables).toHaveLength(1);
-    const t = tables[0];
+    const t = tables[0]!;
     expect(t.interfaceName).toBe('TestCompositeRow');
 
     const cols = new Map(t.columns.map(c => [c.colName, c]));
@@ -137,7 +137,8 @@ describe('SQL DDL parsing and interface generation', () => {
       );
     `;
     const tables = parseSqlTables(sql);
-    const cols = new Map(tables[0].columns.map(c => [c.colName, c]));
+    expect(tables).toHaveLength(1);
+    const cols = new Map(tables[0]!.columns.map(c => [c.colName, c]));
 
     expect(cols.get('id')?.tsType).toBe('string');
     expect(cols.get('amount')?.tsType).toBe('string');

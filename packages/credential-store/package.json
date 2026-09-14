@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsc --build",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
     "test": "vitest run"
   },
   "dependencies": {

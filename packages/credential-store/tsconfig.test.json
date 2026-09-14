@@ -1,0 +1,15 @@
+{
+  // The package builds only `src`, so its build configuration cannot also carry the tests
+  // without emitting them. This configuration exists so the type checker still covers them:
+  // a repository that treats a green typecheck as proof should not be leaving its test tree
+  // outside the check.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "rootDir": "."
+  },
+  "include": ["src/**/*", "tests/**/*", "benchmarks/**/*"]
+}

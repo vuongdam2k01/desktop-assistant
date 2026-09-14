@@ -9,6 +9,7 @@ import {
   CONNECTOR_AUTHORISATION_DESCRIPTOR,
   PROVIDER_CREDENTIAL_DESCRIPTOR,
 } from '../src/default-credential-classes.js';
+import type { CredentialClassDescriptor } from '@desktop-assistant/contracts/credential-class-descriptor';
 import { TestBindingCipherGateway } from './test-cipher.js';
 
 /**
@@ -22,7 +23,7 @@ describe('an erasure interrupted before it finished', () => {
   let tempDir: string;
   let dbPath: string;
 
-  function makeStore(classes: readonly { classId: string }[]): CredentialStore {
+  function makeStore(classes: readonly CredentialClassDescriptor[]): CredentialStore {
     const store = new CredentialStore({
       databasePath: dbPath,
       cipherGateway: new TestBindingCipherGateway('binding_machine_alpha'),
@@ -30,7 +31,7 @@ describe('an erasure interrupted before it finished', () => {
       now: () => '2026-04-01T10:00:00.000Z',
     });
     for (const descriptor of classes) {
-      store.registerClass(descriptor as never);
+      store.registerClass(descriptor);
     }
     return store;
   }

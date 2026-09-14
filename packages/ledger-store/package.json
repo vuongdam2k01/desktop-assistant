@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
     "test": "vitest run",
     "benchmark": "tsx benchmarks/ledger-benchmark.ts"
   },

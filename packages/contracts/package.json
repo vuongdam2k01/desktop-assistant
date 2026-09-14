@@ -20,7 +20,7 @@
     "generate": "tsx scripts/generate.ts",
     "check": "tsx scripts/check.ts",
     "build": "tsc --build",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
     "test": "vitest run"
   },
   "devDependencies": {

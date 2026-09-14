@@ -19,7 +19,6 @@ export class TestBindingCipherGateway implements CipherGateway {
     if (!this.available) {
       throw new CredentialStoreError({
         code: 'SECURE_STORAGE_UNAVAILABLE',
-        message: 'Test cipher is unavailable',
       });
     }
 
@@ -38,14 +37,12 @@ export class TestBindingCipherGateway implements CipherGateway {
     if (!this.available) {
       throw new CredentialStoreError({
         code: 'SECURE_STORAGE_UNAVAILABLE',
-        message: 'Test cipher is unavailable',
       });
     }
 
     if (ciphertext.length < 3 + 12 + 16) {
       throw new CredentialStoreError({
         code: 'CREDENTIAL_UNREADABLE',
-        message: 'Ciphertext buffer is truncated',
       });
     }
 
@@ -53,7 +50,6 @@ export class TestBindingCipherGateway implements CipherGateway {
     if (prefix !== 'ENC') {
       throw new CredentialStoreError({
         code: 'CREDENTIAL_UNREADABLE',
-        message: 'Foreign scheme marker in ciphertext',
       });
     }
 
@@ -78,7 +74,6 @@ export class TestBindingCipherGateway implements CipherGateway {
     } catch {
       throw new CredentialStoreError({
         code: 'CREDENTIAL_UNREADABLE',
-        message: 'Decryption authentication failed',
       });
     }
   }

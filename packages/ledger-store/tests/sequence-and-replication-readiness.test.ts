@@ -3,6 +3,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import Database from 'better-sqlite3';
 import { openLedgerStore } from '../src/opener.js';
 import type { LedgerStore } from '../src/ledger-store.js';
+import type { IntentRecord, ResultRecord } from '../src/types.js';
 import {
   createTestDir,
   makeIntentInput,
@@ -114,7 +115,7 @@ describe('Sequence and Replication Readiness Scenarios (ledger spec)', () => {
     await store.createJob({ id: 'job_batch_repl', originalRequest: 'Batch append' });
 
     const corr = 'corr_batch_atomic_1';
-    const intentRecord = {
+    const intentRecord: IntentRecord = {
       recordId: 'rec_batch_int_1',
       jobId: 'job_batch_repl',
       position: 0,
@@ -133,7 +134,7 @@ describe('Sequence and Replication Readiness Scenarios (ledger spec)', () => {
       },
     };
 
-    const resultRecord = {
+    const resultRecord: ResultRecord = {
       recordId: 'rec_batch_res_1',
       jobId: 'job_batch_repl',
       position: 1,
