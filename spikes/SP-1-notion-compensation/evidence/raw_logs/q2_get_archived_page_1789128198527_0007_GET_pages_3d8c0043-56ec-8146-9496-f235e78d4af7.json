@@ -1,0 +1,108 @@
+{
+  "call_id": "1789128198527_0007_GET_pages_3d8c0043-56ec-8146-9496-f235e78d4af7",
+  "category": "q2_get_archived_page",
+  "timestamp": "2026-09-11T12:03:19Z",
+  "duration_ms": 773,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8146-9496-f235e78d4af7",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:03:19 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a396874a1ee777f1-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=qmU91UvMjDgllW0HyeYpz4RB9WSKgzx19RYzyEF.hWQ-1789128198.734227-1.0.1.1-uW7LULExG_TCc8dpDoEWtdIbuYWQVW02oOBLfPP4uUvxXaapVGxSLvq84VxS8c5gr8QmbU.8KX1qdnN6a_Iyk1g_kKWa3fBQHl5XNKWOKNVP0SQuGb2es074d0bgMiGu; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:33:19 GMT",
+      "ETag": "W/\"4bb-WkXWNETFBmU4dcI8PKPRmSUE7DI\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "e1ca1831-de54-4ca1-93d0-8bcfe732ba8b",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8146-9496-f235e78d4af7",
+      "created_time": "2026-09-11T12:03:00.000Z",
+      "last_edited_time": "2026-09-11T12:03:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": true,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": {
+            "id": "108827de-b2e1-4444-ba38-fcd37b77626d",
+            "name": "Backlog",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Create-Archive Test 2026-09-11T12:03:17.137431",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Create-Archive Test 2026-09-11T12:03:17.137431",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Create-Archive-Test-2026-09-11T12-03-17-137431-3d8c004356ec81469496f235e78d4af7",
+      "public_url": null,
+      "archived": true,
+      "request_id": "e1ca1831-de54-4ca1-93d0-8bcfe732ba8b"
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,31 @@
+=== Q2: COMPILATION TOOLCHAIN & REBUILD MEASUREMENTS (macOS Apple Silicon M1) ===
+
+--- 1. Toolchain Inventory ---
+Xcode CLT Path: /Library/Developer/CommandLineTools
+Clang Version: Apple clang version 21.0.0 (clang-2100.1.1.101)
+Target: arm64-apple-darwin25.5.0
+Python Path: /usr/bin/python3 (symlink to /Library/Developer/CommandLineTools/usr/bin/python3)
+Python Version: Python 3.9.6
+Node Version: v26.8.2
+Node Arch: arm64
+node-gyp: v12.4.0
+
+--- 2. Build-from-source (node-gyp clean && node-gyp rebuild --release --force_build=1) ---
+Command: npx node-gyp clean && npx node-gyp rebuild --release --force_build=1
+Duration: 25.28 seconds
+Build targets:
+  - sqlite3 amalgamation C compilation -> Release/obj.target/sqlite3/gen/sqlite3/sqlite3.o
+  - Static library creation -> Release/sqlite3.a
+  - better_sqlite3 C++ wrapper compilation -> Release/obj.target/better_sqlite3/src/better_sqlite3.o
+  - Shared object linking -> Release/better_sqlite3.node
+Status: BUILD_SUCCESS (ok)
+
+--- 3. @electron/rebuild for Electron 44.3.0 ---
+Command: npx @electron/rebuild -v 44.3.0 -m . -w better-sqlite3
+Duration: 2.13 seconds
+Status: PASS (✔ Rebuild Complete)
+
+--- 4. Verification in Electron 44.3.0 Runtime ---
+Command: ELECTRON_RUN_AS_NODE=1 ./node_modules/.bin/electron -e "..."
+Result: {"answer":100,"ver":"3.53.4"}
+Status: PASS

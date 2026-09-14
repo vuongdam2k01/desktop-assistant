@@ -1,0 +1,17 @@
+﻿=== Q1 ABI MISMATCH VERIFICATION LOG ===
+Target: better-sqlite3 v11.10.0
+Host Node: v24.21.0 (NODE_MODULE_VERSION 137)
+Electron: v44.3.0 (NODE_MODULE_VERSION 149)
+
+Error encountered when loading Node-compiled binary in Electron:
+Error: The module '\\?\C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\Release\better_sqlite3.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 137. This version of Node.js requires
+NODE_MODULE_VERSION 149. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or `npm install`).
+    code: 'ERR_DLOPEN_FAILED'
+
+CONCLUSION:
+better-sqlite3 is a C++ native addon directly linked against V8 / Node internal headers, NOT a pure N-API wrapper.
+It is strictly tied to NODE_MODULE_VERSION (ABI).
+A binary compiled for Node 24 (ABI 137) CANNOT be loaded by Electron 44 (ABI 149).

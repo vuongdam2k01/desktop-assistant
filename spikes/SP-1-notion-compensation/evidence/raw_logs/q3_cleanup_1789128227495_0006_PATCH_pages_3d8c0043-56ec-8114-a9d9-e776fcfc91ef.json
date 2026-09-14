@@ -1,0 +1,106 @@
+{
+  "call_id": "1789128227495_0006_PATCH_pages_3d8c0043-56ec-8114-a9d9-e776fcfc91ef",
+  "category": "q3_cleanup",
+  "timestamp": "2026-09-11T12:03:48Z",
+  "duration_ms": 885,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8114-a9d9-e776fcfc91ef",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "archived": true
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:03:48 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a39687ff2c7ad4e1-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=Lu_B5A61gCenqxRN3f2kqzLwEpDSRlMCRQRcu6TREoM-1789128227.705326-1.0.1.1-XoDIWx9VqFFrwR1aq.XzlgUesgkCdOnnSMcksSQ9hVOAhd8Uai_QvuzqtJIVNxFuxzmUyYkZDenk6DzKpXcKB_XEz8rooNYB_2eqdYdOKAmQQkrffsI356fgb7Euyxb8; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:33:48 GMT",
+      "ETag": "W/\"430-H8k+uMQYhg35ctUqREDJsHKRhUY\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "da87b85d-a9a9-4eab-8e74-cc07d173de24",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8114-a9d9-e776fcfc91ef",
+      "created_time": "2026-09-11T12:03:00.000Z",
+      "last_edited_time": "2026-09-11T12:03:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": true,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": null
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q3 Irreversible Test Task",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q3 Irreversible Test Task",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q3-Irreversible-Test-Task-3d8c004356ec8114a9d9e776fcfc91ef",
+      "public_url": null,
+      "archived": true,
+      "request_id": "da87b85d-a9a9-4eab-8e74-cc07d173de24"
+    },
+    "error": null
+  }
+}

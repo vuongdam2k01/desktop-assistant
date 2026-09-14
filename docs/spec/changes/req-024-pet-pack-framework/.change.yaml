@@ -1,0 +1,8 @@
+schema: design
+created: 2026-09-13
+kind: B
+skip_specs: false
+depends_on:
+  - req-005-electron-rive-pet-render
+  - req-018-pet-liveness
+  - req-022-account-sync

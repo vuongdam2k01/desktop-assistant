@@ -1,0 +1,66 @@
+/**
+ * Shape of a window placement request crossing the boundary into the native module, for platform/contracts/native-window-manager@1.0.0, and the same shape a remembered pet position is restored from. A placement is data rather than a command: it says where a window should be and whether it should be seen, and it never says anything about focus, because moving a window must never activate it. What this file cannot express is every rule that depends on the machine the placement lands on — that the rectangle intersects the work area of a display currently connected, that the window handle belongs to this process, and that a placement restored from an earlier session still refers to a display that exists. Those are checked against the live display topology, and a placement that satisfies this file is still repositioned to the primary work area when it falls outside every connected display.
+ */
+export interface WindowPlacementOptions {
+  /**
+   * Left edge, in the virtual-desktop coordinate space that spans every connected display. Negative values are ordinary: a display placed to the left of the primary one has them.
+   */
+  x: number;
+  /**
+   * Top edge, in the same coordinate space. Negative values are ordinary for a display placed above the primary one.
+   */
+  y: number;
+  /**
+   * Width in the same space. A window of zero width would be unreachable while still holding a handle, so it is refused rather than accepted and hidden.
+   */
+  width: number;
+  /**
+   * Height in the same space, refused at zero for the same reason as width.
+   */
+  height: number;
+  /**
+   * Whether the window is shown at this placement. A pre-warmed card window is placed while false and revealed by a later placement, which is what lets a reveal cost no window creation and steal no keystroke.
+   */
+  visible: boolean;
+}
+
+
+export const NATIVE_WINDOW_MANAGER_SCHEMA = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/platform/native-window-manager/window-placement/1.0.0.json",
+  "title": "WindowPlacementOptions",
+  "description": "Shape of a window placement request crossing the boundary into the native module, for platform/contracts/native-window-manager@1.0.0, and the same shape a remembered pet position is restored from. A placement is data rather than a command: it says where a window should be and whether it should be seen, and it never says anything about focus, because moving a window must never activate it. What this file cannot express is every rule that depends on the machine the placement lands on — that the rectangle intersects the work area of a display currently connected, that the window handle belongs to this process, and that a placement restored from an earlier session still refers to a display that exists. Those are checked against the live display topology, and a placement that satisfies this file is still repositioned to the primary work area when it falls outside every connected display.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "x",
+    "y",
+    "width",
+    "height",
+    "visible"
+  ],
+  "properties": {
+    "x": {
+      "type": "integer",
+      "description": "Left edge, in the virtual-desktop coordinate space that spans every connected display. Negative values are ordinary: a display placed to the left of the primary one has them."
+    },
+    "y": {
+      "type": "integer",
+      "description": "Top edge, in the same coordinate space. Negative values are ordinary for a display placed above the primary one."
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Width in the same space. A window of zero width would be unreachable while still holding a handle, so it is refused rather than accepted and hidden."
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Height in the same space, refused at zero for the same reason as width."
+    },
+    "visible": {
+      "type": "boolean",
+      "description": "Whether the window is shown at this placement. A pre-warmed card window is placed while false and revealed by a later placement, which is what lets a reveal cost no window creation and steal no keystroke."
+    }
+  }
+} as const;

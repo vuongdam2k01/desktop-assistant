@@ -1,0 +1,40 @@
+================================================================================
+SPIKE SP-21 / Q10: TỰ ĐỘNG GỬI LẠI ĐÚNG THỨ TỰ & CHỐNG GỬI TRÙNG (IDEMPOTENCY)
+Yêu cầu: Backend trở lại -> Tự gửi lại ĐÚNG THỨ TỰ (FIFO), TUYỆT ĐỐI KHÔNG GỬI TRÙNG.
+================================================================================
+
+1. GỬI 3 LỆNH TUẦN TỰ KHI BACKEND GIÁN ĐOẠN:
+  - Đã đưa vào hàng chờ ngoại tuyến: "Lệnh #1: Khởi tạo project Workspace A"
+  - Đã đưa vào hàng chờ ngoại tuyến: "Lệnh #2: Tạo database Tasks trong Workspace A"
+  - Đã đưa vào hàng chờ ngoại tuyến: "Lệnh #3: Gán quyền cho nhóm kỹ thuật"
+  -> Số lượng lệnh trong SQLite queue: 3
+  -> Trạng thái SYSTEM card hiện tại: ĐANG BẬT (Active)
+
+2. BACKEND PHỤC HỒI (KHỞI ĐỘNG LẠI SERVER):
+  - Backend stub server đã online tại http://127.0.0.1:3993/health
+
+3. TIẾN HÀNH ĐỒNG BỘ TỰ ĐỘNG (DRAIN QUEUE):
+  - Số lệnh đồng bộ thành công: 3
+  - Lỗi phát sinh: 0 lỗi
+
+4. ĐỐI CHIẾU THỨ TỰ NHẬN LỆNH TẠI PHÍA SERVER:
+  - Tổng số lệnh Server nhận được: 3
+  [Server nhận #1] "Lệnh #1: Khởi tạo project Workspace A" (Key: idemp-02396fad-6c1c-4620-a585-ab4829846442) -> ĐÚNG THỨ TỰ ✅
+  [Server nhận #2] "Lệnh #2: Tạo database Tasks trong Workspace A" (Key: idemp-703e521b-727d-4475-a1c1-62c3b69e7d94) -> ĐÚNG THỨ TỰ ✅
+  [Server nhận #3] "Lệnh #3: Gán quyền cho nhóm kỹ thuật" (Key: idemp-228aba57-0587-4647-b4c4-7441bb0c3861) -> ĐÚNG THỨ TỰ ✅
+  -> ✅ ĐÃ XÁC NHẬN: Thứ tự gửi lại khớp 100% thứ tự ban đầu của người dùng (FIFO).
+
+5. KIỂM THỬ KHẢ NĂNG CHỐNG GỬI TRÙNG (IDEMPOTENCY):
+  Giả lập tình huống mạng chập chờn: Worker retry gửi lại Lệnh #2 với cùng IdempotencyKey...
+  - Phản hồi từ Server khi gặp duplicate: {"status":"deduplicated","idempotencyKey":"idemp-703e521b-727d-4475-a1c1-62c3b69e7d94","message":"Command already received. Duplicate ignored."}
+  - Tổng số lệnh lưu trong server sau duplicate: 3 (Kỳ vọng vẫn = 3, KHÔNG tăng)
+  -> ✅ ĐÃ XÁC NHẬN: Idempotency Key bảo đảm không bị duplicate lệnh khi retry.
+
+6. TRẠNG THÁI CUỐI TRONG HỆ THỐNG:
+  - Số lệnh còn tồn đọng trong queue: 0 (Kỳ vọng = 0)
+  - Trạng thái SYSTEM card: ĐÃ TỰ ĐỘNG THU HỒI ✅
+
+7. KẾT LUẬN Q10:
+  - Khi backend trở lại, toàn bộ lệnh trong hàng chờ tự động gửi lại ĐÚNG THỨ TỰ (FIFO).
+  - Cơ chế Idempotency Key chống tuyệt đối việc gửi trùng lệnh.
+  - Đủ điều kiện kỹ thuật để ký nghiệm thu Tiêu chí phát hành #10 (Release Criteria #10).

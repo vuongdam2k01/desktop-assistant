@@ -1,0 +1,77 @@
+==========================================================================
+POSTGRESQL TABLE CONTENTS AFTER FULL RUN — Desktop Assistant Backend (SP-20)
+Generated at: 2026-09-12T05:10:34.072Z
+Proof for Q4: PROVING NO CONNECTOR TOKENS, NO USER COMMANDS, NO LEDGER
+==========================================================================
+
+--------------------------------------------------------------------------
+TABLE: public.account
+--------------------------------------------------------------------------
+Total rows: 1
+[
+  {
+    "id": "2ab667f5-ca18-417e-878e-f87301faab29",
+    "google_sub": "sub_beta_001",
+    "email": "beta.tester@example.com",
+    "status": "active",
+    "created_at": "2026-09-12T05:10:33.096Z",
+    "updated_at": "2026-09-12T05:10:33.096Z"
+  }
+]
+
+--------------------------------------------------------------------------
+TABLE: public.device
+--------------------------------------------------------------------------
+Total rows: 1
+[
+  {
+    "id": "458a2f28-ca4a-4e88-a713-3f588dd29525",
+    "account_id": "2ab667f5-ca18-417e-878e-f87301faab29",
+    "device_id": "dev_win_001",
+    "device_name": "Windows Desktop Workstation",
+    "last_active_at": "2026-09-12T05:10:33.108Z",
+    "created_at": "2026-09-12T05:10:33.108Z"
+  }
+]
+
+--------------------------------------------------------------------------
+TABLE: public.session
+--------------------------------------------------------------------------
+Total rows: 1
+[
+  {
+    "id": "6c338b38-9d80-4de4-a020-c673666824b1",
+    "account_id": "2ab667f5-ca18-417e-878e-f87301faab29",
+    "device_id": "dev_win_001",
+    "refresh_token_hash": "d1c04e7b731d3c328e71b6b9f686e986c945b38e60b3a6fc60c05bc138c2324d",
+    "expires_at": "2026-10-12T05:10:33.113Z",
+    "revoked_at": null,
+    "created_at": "2026-09-12T05:10:33.113Z"
+  }
+]
+
+--------------------------------------------------------------------------
+TABLE: public.invite_allowlist
+--------------------------------------------------------------------------
+Total rows: 2
+[
+  {
+    "id": "allow_po",
+    "email": "owner@example.com",
+    "invite_code": null,
+    "status": "active",
+    "expires_at": null,
+    "activated_account_id": null,
+    "created_at": "2026-09-12T05:10:32.942Z"
+  },
+  {
+    "id": "allow_001",
+    "email": "beta.tester@example.com",
+    "invite_code": null,
+    "status": "redeemed",
+    "expires_at": null,
+    "activated_account_id": "2ab667f5-ca18-417e-878e-f87301faab29",
+    "created_at": "2026-09-12T05:10:32.942Z"
+  }
+]
+

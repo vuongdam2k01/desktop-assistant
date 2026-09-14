@@ -1,0 +1,15 @@
+{
+  "mechanism": "fs.readFileSync binary buffer slice passed to rive.Rive constructor",
+  "swapToMarty": {
+    "asset": "marty.riv",
+    "path": "/Users/<user>/projects/desktop-assistant/spikes/SP-3-electron-rive/macos/src/electron-rive/assets/marty.riv",
+    "status": "ok"
+  },
+  "swapBack": {
+    "asset": "skills.riv",
+    "path": "/Users/<user>/projects/desktop-assistant/spikes/SP-3-electron-rive/macos/src/electron-rive/assets/skills.riv",
+    "status": "ok"
+  },
+  "rebuildRequired": false,
+  "verdict": "IDENTICAL_TO_WINDOWS"
+}

@@ -1,0 +1,41 @@
+[RUNNER] Launching worker with CRASH_POINT=1, FULLFSYNC=1, SYNC=FULL...
+
+--- Worker Output (pre-crash) ---
+[WORKER 18383] Started with CrashPoint=1, JobId=job_crash_pt1
+
+▶ [ENGINE] Starting Job job_crash_pt1 (Mode: smart, CrashPoint: 1)...
+✔ [ENGINE] Job job_crash_pt1 created with status 'pending'
+⏳ [ENGINE] Approval required for Notion update.
+✔ [ENGINE] Job job_crash_pt1 transitioned to 'waiting_approval'. Approval card posted.
+💥 [CRASH INJECTOR] TRIGGERING SIGKILL at Point 1: Before user approval decision (Job in waiting_approval)
+💥 Process PID 18383 terminating immediately...
+
+--- Crash Exit Status ---
+Exit Code: null
+Signal: SIGKILL
+
+--- SQLite WAL Integrity Check ---
+PRAGMA integrity_check: [{"integrity_check":"ok"}]
+
+--- Running Recovery Protocol ---
+
+======================================================
+🔄 [RECOVERY MANAGER] Starting crash recovery protocol...
+======================================================
+📋 Found 1 active/unfinalized job(s) in SQLite database.
+
+🔍 Inspecting Job job_crash_pt1 (Status: waiting_approval)...
+   Last Ledger Record: NONE
+   📌 Job is waiting for user approval. Re-enqueuing APPROVAL card.
+
+======================================================
+🗂️ RECONSTRUCTED CARD QUEUE (Priority Order per PRD A.4):
+   [1] Type: APPROVAL | Job: job_crash_pt1 | Title: Phê duyệt thao tác Notion: notion_update_page
+======================================================
+
+
+--- Post-Recovery Verification ---
+Job ID: job_crash_pt1
+Job Status: waiting_approval
+Ledger Records Count: 0
+✔ Point 1 PASSED: Job retained 'waiting_approval', APPROVAL card restored.

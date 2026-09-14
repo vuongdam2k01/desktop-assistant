@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: Update Feed
+  version: 1.0.0
+  description: >-
+    The static, unauthenticated HTTP surface a released application reads to learn whether a newer version
+    exists and to fetch it. It is deliberately the dumbest surface in the product: two reads, no session, no
+    identity, nothing the server decides. Trust is established on the device instead, by checking the
+    downloaded bytes against the digest in the manifest and the downloaded executable against the trust
+    provider of the operating system, so an origin that served the wrong file cannot cause the wrong file to
+    be installed. Range support is required rather than optional, because a partially downloaded installer
+    that cannot be resumed is downloaded again from the start on a connection that already failed once.
+servers:
+  - url: https://updates.example.invalid
+    description: >-
+      Placeholder. The origin is configuration, and moving the release to another origin or content
+      distribution network is a PATCH change to this contract, because nothing here depends on which host
+      answers.
+paths:
+  /updates/latest.yml:
+    get:
+      operationId: getLatestManifest
+      summary: Read the manifest describing the most recent release.
+      description: >-
+        Served as YAML with no authentication and no cryptographic signature of its own. The shape of the
+        manifest is update-feed.schema.json, and its integrity is established by what follows it rather than
+        by how it arrived: the digest it carries is checked against the downloaded artifact, and the
+        Authenticode signature of that artifact is checked against the trusted roots on the device.
+      responses:
+        '200':
+          description: The manifest for the current release.
+          content:
+            text/yaml:
+              schema:
+                $ref: "./update-feed.schema.json"
+        '404':
+          description: >-
+            No manifest is published. The client treats this as no update available and says nothing to the
+            user, because a release channel that has published nothing yet is not a failure.
+        '500':
+          description: >-
+            The origin failed. The check is abandoned until the next one; a failed check never interrupts
+            work and never reports an update the client could not read.
+  /updates/{filename}:
+    get:
+      operationId: getReleaseArtifact
+      summary: Fetch a release artifact named by the manifest.
+      description: >-
+        Returns the installer or its block map as a byte stream. The name comes from the manifest rather than
+        from anything the client composes, so this path exposes only what a published manifest already names.
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          description: The artifact name, exactly as the manifest carries it.
+          schema:
+            type: string
+        - name: Range
+          in: header
+          required: false
+          description: >-
+            Byte range, written as "bytes=0-1048575". Support is required: it is what lets an interrupted
+            download resume and what lets a differential download fetch only the blocks that changed.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The whole artifact.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '206':
+          description: The requested byte range of the artifact.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: >-
+            No such artifact. The update fails cleanly and the partially downloaded file, if any, is deleted
+            rather than kept for a later attempt against a manifest that may have moved on.
+        '416':
+          description: >-
+            The requested range lies outside the artifact. The client restarts the download from the
+            beginning rather than assembling a file from ranges it could not verify.

@@ -1,0 +1,128 @@
+{
+  "call_id": "1789128439110_0227_POST_pages",
+  "category": "q7_temp_page",
+  "timestamp": "2026-09-11T12:07:20Z",
+  "duration_ms": 996,
+  "request": {
+    "method": "POST",
+    "url": "https://api.notion.com/v1/pages",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "parent": {
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "properties": {
+        "Name": {
+          "title": [
+            {
+              "text": {
+                "content": "Page for 404 vs Archive Test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:20 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968d2928fa0dcd-MNL",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=.6XX5QDxR7wsAyA.3KPu5gwhMwFYQh5tbkXR6Dm3yRQ-1789128439.2296228-1.0.1.1-.EqqN9vwTW1L7Xgu95CmrY6gqljEIQl.bS6OrMdnThhelGb.M.SFcDsOzwOfyiXGsWAOjDo8xpXdzHUVYmU_y5fFRLS.4oVJTdMvFfJdZvuM_Nw2FCV49xW8LdPlVZI0; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:20 GMT",
+      "ETag": "W/\"4b9-TaMv3837KXONXDwLiEcmfIarJj0\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "72b18526-c8e2-46aa-81ef-05083eca78a8",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-81a4-9e70-ebb9bb0848f1",
+      "created_time": "2026-09-11T12:07:00.000Z",
+      "last_edited_time": "2026-09-11T12:07:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "5f9885ba-7007-4fbb-a946-70324a88bfc6",
+            "name": "Not started",
+            "color": "default"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": null
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Page for 404 vs Archive Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Page for 404 vs Archive Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/Page-for-404-vs-Archive-Test-3d8c004356ec81a49e70ebb9bb0848f1",
+      "public_url": null,
+      "archived": false,
+      "request_id": "72b18526-c8e2-46aa-81ef-05083eca78a8"
+    },
+    "error": null
+  }
+}

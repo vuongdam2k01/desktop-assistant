@@ -1,0 +1,130 @@
+{
+  "workspace": "B",
+  "timestamp": "2026-09-11T15:36:09.148Z",
+  "tasks": [
+    {
+      "id": "3d8d409b-f710-81e3-be3c-cf542e0fea7d",
+      "title": "Setup CI cho repo mobile",
+      "status": "In progress",
+      "due_date": "2026-09-16",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "feature"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815e-8983-fece8d842210"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-81d0-aa61-cba2fc2f9228",
+      "title": "Sync với khách về contract",
+      "status": "Done",
+      "due_date": "2026-09-08",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "meeting"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815e-8983-fece8d842210"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-81b6-b5f0-ee97effb7b75",
+      "title": "Viết test cho module payroll",
+      "status": "Not started",
+      "due_date": "2026-09-21",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "feature"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-81df-98b7-daacebb34946"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-81d1-919f-fa377811676a",
+      "title": "Fix crash khi upload avatar",
+      "status": "Not started",
+      "due_date": "2026-09-17",
+      "priority": "",
+      "order": null,
+      "assignee": "Hùng",
+      "tags": [
+        "bug"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-81df-98b7-daacebb34946"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-8157-b7f9-c3b7a166c4f1",
+      "title": "Monthly report HR",
+      "status": "Not started",
+      "due_date": "2026-09-30",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "docs"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-81df-98b7-daacebb34946"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-812b-b19e-f71d6f0b224c",
+      "title": "Weekly report Vinmart",
+      "status": "Not started",
+      "due_date": "2026-09-30",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "docs"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815e-8983-fece8d842210"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-8162-856a-fff0359fbb44",
+      "title": "Design review màn checkout",
+      "status": "In progress",
+      "due_date": "2026-09-14",
+      "priority": "",
+      "order": null,
+      "assignee": "Trang",
+      "tags": [
+        "feature"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815e-8983-fece8d842210"
+      ],
+      "archived": false
+    }
+  ],
+  "projects": [
+    {
+      "id": "3d8d409b-f710-81df-98b7-daacebb34946",
+      "title": "HR portal nội bộ",
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-815e-8983-fece8d842210",
+      "title": "Mobile app Vinmart",
+      "archived": false
+    }
+  ]
+}

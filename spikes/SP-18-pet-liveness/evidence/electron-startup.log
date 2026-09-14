@@ -1,0 +1,135 @@
+[2026-09-12T03:53:49.620Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:53:49.682Z] app.whenReady reached
+[2026-09-12T03:53:49.691Z] Selected mode: arch-a
+[2026-09-12T03:53:49.844Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:54:29.853Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:54:29.854Z] Win32 API loaded via koffi
+[2026-09-12T03:54:29.918Z] app.whenReady reached
+[2026-09-12T03:54:29.926Z] Selected mode: arch-a
+[2026-09-12T03:54:30.083Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:54:30.215Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:54:30.236Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:55:06.105Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:55:06.107Z] Win32 API loaded via koffi
+[2026-09-12T03:55:06.182Z] app.whenReady reached
+[2026-09-12T03:55:06.192Z] Selected mode: arch-a
+[2026-09-12T03:55:06.421Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:55:06.548Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:55:06.621Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:55:14.335Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-b"]
+[2026-09-12T03:55:14.337Z] Win32 API loaded via koffi
+[2026-09-12T03:55:14.427Z] app.whenReady reached
+[2026-09-12T03:55:14.439Z] Selected mode: arch-b
+[2026-09-12T03:55:14.647Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:55:14.778Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:55:42.189Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:55:42.191Z] Win32 API loaded via koffi
+[2026-09-12T03:55:42.261Z] app.whenReady reached
+[2026-09-12T03:55:42.269Z] Selected mode: arch-a
+[2026-09-12T03:55:42.397Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:55:42.549Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:55:42.551Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:56:09.088Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:56:09.090Z] Win32 API loaded via koffi
+[2026-09-12T03:56:09.153Z] app.whenReady reached
+[2026-09-12T03:56:09.162Z] Selected mode: arch-a
+[2026-09-12T03:56:09.400Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:56:09.503Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:56:09.578Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:56:32.620Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-b"]
+[2026-09-12T03:56:32.622Z] Win32 API loaded via koffi
+[2026-09-12T03:56:32.695Z] app.whenReady reached
+[2026-09-12T03:56:32.705Z] Selected mode: arch-b
+[2026-09-12T03:56:32.854Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:56:33.138Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:57:15.054Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:57:15.056Z] Win32 API loaded via koffi
+[2026-09-12T03:57:15.131Z] app.whenReady reached
+[2026-09-12T03:57:15.141Z] Selected mode: arch-a
+[2026-09-12T03:57:15.281Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:57:15.414Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:57:15.466Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:57:45.961Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:57:45.962Z] Win32 API loaded via koffi
+[2026-09-12T03:57:46.028Z] app.whenReady reached
+[2026-09-12T03:57:46.038Z] Selected mode: arch-a
+[2026-09-12T03:57:46.180Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:57:46.326Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:57:46.345Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:58:11.500Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:58:11.501Z] Win32 API loaded via koffi
+[2026-09-12T03:58:11.568Z] app.whenReady reached
+[2026-09-12T03:58:11.577Z] Selected mode: arch-a
+[2026-09-12T03:58:11.746Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:58:11.886Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:58:11.907Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:59:29.591Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T03:59:29.592Z] Win32 API loaded via koffi
+[2026-09-12T03:59:29.660Z] app.whenReady reached
+[2026-09-12T03:59:29.669Z] Selected mode: arch-a
+[2026-09-12T03:59:29.843Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T03:59:29.991Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T03:59:30.028Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:01:27.777Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:01:27.779Z] Win32 API loaded via koffi
+[2026-09-12T04:01:27.843Z] app.whenReady reached
+[2026-09-12T04:01:27.852Z] Selected mode: arch-a
+[2026-09-12T04:01:27.997Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:01:28.158Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:01:28.159Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:02:41.406Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:02:41.407Z] Win32 API loaded via koffi
+[2026-09-12T04:02:41.471Z] app.whenReady reached
+[2026-09-12T04:02:41.480Z] Selected mode: arch-a
+[2026-09-12T04:02:41.647Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:02:41.789Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:02:41.852Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:15:12.495Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:15:12.496Z] Win32 API loaded via koffi
+[2026-09-12T04:15:12.562Z] app.whenReady reached
+[2026-09-12T04:15:12.570Z] Selected mode: arch-a
+[2026-09-12T04:15:12.731Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:15:12.908Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:15:12.909Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:35:44.386Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:35:44.389Z] Win32 API loaded via koffi
+[2026-09-12T04:35:44.456Z] app.whenReady reached
+[2026-09-12T04:35:44.464Z] Selected mode: arch-a
+[2026-09-12T04:35:44.611Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:35:44.806Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:35:44.807Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:36:41.230Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:36:41.231Z] Win32 API loaded via koffi
+[2026-09-12T04:36:41.303Z] app.whenReady reached
+[2026-09-12T04:36:41.311Z] Selected mode: arch-a
+[2026-09-12T04:36:41.456Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:36:41.635Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:36:41.636Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:38:01.073Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:38:01.074Z] Win32 API loaded via koffi
+[2026-09-12T04:38:01.145Z] app.whenReady reached
+[2026-09-12T04:38:01.158Z] Selected mode: arch-a
+[2026-09-12T04:38:01.313Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:38:01.489Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:38:01.491Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:39:29.033Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:39:29.034Z] Win32 API loaded via koffi
+[2026-09-12T04:39:29.103Z] app.whenReady reached
+[2026-09-12T04:39:29.114Z] Selected mode: arch-a
+[2026-09-12T04:39:29.324Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:39:29.513Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:39:29.534Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:39:58.600Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:39:58.602Z] Win32 API loaded via koffi
+[2026-09-12T04:39:58.672Z] app.whenReady reached
+[2026-09-12T04:39:58.682Z] Selected mode: arch-a
+[2026-09-12T04:39:58.828Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:39:58.980Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:39:58.990Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:40:35.878Z] Starting main.js, process.argv: ["C:\\Users\\vuong\\AppData\\Local\\npm-cache\\_npx\\1323dbbc85759269\\node_modules\\electron\\dist\\electron.exe","D:\\projects\\desktop-assistant\\spikes\\SP-18-pet-liveness\\src\\electron-liveness","--mode=arch-a"]
+[2026-09-12T04:40:35.880Z] Win32 API loaded via koffi
+[2026-09-12T04:40:35.951Z] app.whenReady reached
+[2026-09-12T04:40:35.960Z] Selected mode: arch-a
+[2026-09-12T04:40:36.117Z] Control server running at http://127.0.0.1:18928
+[2026-09-12T04:40:36.272Z] applyWin32Styles applied successfully to HWND
+[2026-09-12T04:40:36.273Z] applyWin32Styles applied successfully to HWND

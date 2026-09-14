@@ -1,0 +1,718 @@
+{
+  "call_id": "1789128431427_0214_POST_databases_3d8d409b-f710-8184-9b52-c5257e276372_query",
+  "category": "q6_query_sample_tasks",
+  "timestamp": "2026-09-11T12:07:12Z",
+  "duration_ms": 733,
+  "request": {
+    "method": "POST",
+    "url": "https://api.notion.com/v1/databases/3d8d409b-f710-8184-9b52-c5257e276372/query",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "page_size": 5
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:12 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968cf9ce174a0c-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=HDByiU0yKmiKAQSx3dM6Qfd9wqj5mrQBwhe86F_biQ0-1789128431.6527874-1.0.1.1-mwPVZj2bwWBsDzVDKa_JkMKNpFERJRDvY7WI6qOBwoZHEFb_ggo23G9bPzbfWnnytuerxETXtyS9Qfc4rYrUb47ph3svRuu3CUhiV9fmUOp3jPm6os1BzT2Modv7dbVr; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:12 GMT",
+      "ETag": "W/\"2734-LCMVuNXNb2U/vkKwgvQonEJiWNg\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "028e72a8-381b-49b5-8831-e1481906b54d",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "list",
+      "results": [
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T12:05:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-8184-9b52-c5257e276372"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Due date": {
+              "id": "%3CR%5Eo",
+              "type": "date",
+              "date": {
+                "start": "2026-09-20",
+                "end": null,
+                "time_zone": null
+              }
+            },
+            "Assignee": {
+              "id": "EcIH",
+              "type": "people",
+              "people": [
+                {
+                  "object": "user",
+                  "id": "2cfd872b-594c-81c2-b5a4-000262cf9e79",
+                  "name": "Workspace Owner",
+                  "avatar_url": null,
+                  "type": "person",
+                  "person": {
+                    "email": "owner@example.com",
+                    "email_verified": true
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "id": "G%7CgC",
+              "type": "select",
+              "select": {
+                "id": "360255fe-ef0c-4808-b2f2-5d626280c70c",
+                "name": "Backlog",
+                "color": "default"
+              }
+            },
+            "Tags": {
+              "id": "QKhu",
+              "type": "multi_select",
+              "multi_select": [
+                {
+                  "id": "2c8bc977-02b8-404f-afd7-8562cd18f909",
+                  "name": "design",
+                  "color": "default"
+                }
+              ]
+            },
+            "Days left": {
+              "id": "Yv~c",
+              "type": "formula",
+              "formula": {
+                "type": "number",
+                "number": 8
+              }
+            },
+            "Project": {
+              "id": "b%3Ax%7B",
+              "type": "relation",
+              "relation": [
+                {
+                  "id": "3d8d409b-f710-81b0-94a0-d3122e5b622e"
+                }
+              ],
+              "has_more": false
+            },
+            "Project status": {
+              "id": "cZsp",
+              "type": "rollup",
+              "rollup": {
+                "type": "array",
+                "array": [
+                  {
+                    "type": "select",
+                    "select": {
+                      "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                      "name": "Đang chạy",
+                      "color": "default"
+                    }
+                  }
+                ],
+                "function": "show_original"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Đánh giá thư viện animation",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Đánh giá thư viện animation",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/nh-gi-th-vi-n-animation-3d8d409bf71081f5ad4ef4836815ac1c",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-818a-af67-e8821487e0be",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-8184-9b52-c5257e276372"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Due date": {
+              "id": "%3CR%5Eo",
+              "type": "date",
+              "date": {
+                "start": "2026-09-18",
+                "end": null,
+                "time_zone": null
+              }
+            },
+            "Assignee": {
+              "id": "EcIH",
+              "type": "people",
+              "people": [
+                {
+                  "object": "user",
+                  "id": "2cfd872b-594c-81c2-b5a4-000262cf9e79",
+                  "name": "Workspace Owner",
+                  "avatar_url": null,
+                  "type": "person",
+                  "person": {
+                    "email": "owner@example.com",
+                    "email_verified": true
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "id": "G%7CgC",
+              "type": "select",
+              "select": {
+                "id": "360255fe-ef0c-4808-b2f2-5d626280c70c",
+                "name": "Backlog",
+                "color": "default"
+              }
+            },
+            "Tags": {
+              "id": "QKhu",
+              "type": "multi_select",
+              "multi_select": [
+                {
+                  "id": "3229ac8f-1d12-4523-96e5-be802cfe802d",
+                  "name": "frontend",
+                  "color": "default"
+                },
+                {
+                  "id": "1b5f4507-0708-4481-955b-07a450c47d92",
+                  "name": "backend",
+                  "color": "default"
+                }
+              ]
+            },
+            "Days left": {
+              "id": "Yv~c",
+              "type": "formula",
+              "formula": {
+                "type": "number",
+                "number": 6
+              }
+            },
+            "Project": {
+              "id": "b%3Ax%7B",
+              "type": "relation",
+              "relation": [
+                {
+                  "id": "3d8d409b-f710-816e-8c7a-d618b3d0657e"
+                }
+              ],
+              "has_more": false
+            },
+            "Project status": {
+              "id": "cZsp",
+              "type": "rollup",
+              "rollup": {
+                "type": "array",
+                "array": [
+                  {
+                    "type": "select",
+                    "select": {
+                      "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                      "name": "Đang chạy",
+                      "color": "default"
+                    }
+                  }
+                ],
+                "function": "show_original"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Viết test e2e cho checkout",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Viết test e2e cho checkout",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/Vi-t-test-e2e-cho-checkout-3d8d409bf710818aaf67e8821487e0be",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-8133-b9e7-e06f34864d83",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-8184-9b52-c5257e276372"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Due date": {
+              "id": "%3CR%5Eo",
+              "type": "date",
+              "date": {
+                "start": "2026-09-15",
+                "end": null,
+                "time_zone": null
+              }
+            },
+            "Assignee": {
+              "id": "EcIH",
+              "type": "people",
+              "people": [
+                {
+                  "object": "user",
+                  "id": "2cfd872b-594c-81c2-b5a4-000262cf9e79",
+                  "name": "Workspace Owner",
+                  "avatar_url": null,
+                  "type": "person",
+                  "person": {
+                    "email": "owner@example.com",
+                    "email_verified": true
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "id": "G%7CgC",
+              "type": "select",
+              "select": {
+                "id": "360255fe-ef0c-4808-b2f2-5d626280c70c",
+                "name": "Backlog",
+                "color": "default"
+              }
+            },
+            "Tags": {
+              "id": "QKhu",
+              "type": "multi_select",
+              "multi_select": [
+                {
+                  "id": "fc1562a1-f4c1-4ed4-ba5f-eef2c2ca1a40",
+                  "name": "ops",
+                  "color": "default"
+                }
+              ]
+            },
+            "Days left": {
+              "id": "Yv~c",
+              "type": "formula",
+              "formula": {
+                "type": "number",
+                "number": 3
+              }
+            },
+            "Project": {
+              "id": "b%3Ax%7B",
+              "type": "relation",
+              "relation": [
+                {
+                  "id": "3d8d409b-f710-81ce-8668-f1cf957d5abb"
+                }
+              ],
+              "has_more": false
+            },
+            "Project status": {
+              "id": "cZsp",
+              "type": "rollup",
+              "rollup": {
+                "type": "array",
+                "array": [
+                  {
+                    "type": "select",
+                    "select": {
+                      "id": "2520cb87-5ce1-478f-8966-d2099d6f0ea2",
+                      "name": "Tạm dừng",
+                      "color": "default"
+                    }
+                  }
+                ],
+                "function": "show_original"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Chuẩn bị môi trường staging",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Chuẩn bị môi trường staging",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/Chu-n-b-m-i-tr-ng-staging-3d8d409bf7108133b9e7e06f34864d83",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-812a-90dd-ee736ca811b6",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-8184-9b52-c5257e276372"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Due date": {
+              "id": "%3CR%5Eo",
+              "type": "date",
+              "date": {
+                "start": "2026-09-09",
+                "end": null,
+                "time_zone": null
+              }
+            },
+            "Assignee": {
+              "id": "EcIH",
+              "type": "people",
+              "people": [
+                {
+                  "object": "user",
+                  "id": "2cfd872b-594c-81c2-b5a4-000262cf9e79",
+                  "name": "Workspace Owner",
+                  "avatar_url": null,
+                  "type": "person",
+                  "person": {
+                    "email": "owner@example.com",
+                    "email_verified": true
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "id": "G%7CgC",
+              "type": "select",
+              "select": {
+                "id": "90bdf688-65cc-4d3d-9039-67b49398e357",
+                "name": "Xong",
+                "color": "default"
+              }
+            },
+            "Tags": {
+              "id": "QKhu",
+              "type": "multi_select",
+              "multi_select": []
+            },
+            "Days left": {
+              "id": "Yv~c",
+              "type": "formula",
+              "formula": {
+                "type": "number",
+                "number": -2
+              }
+            },
+            "Project": {
+              "id": "b%3Ax%7B",
+              "type": "relation",
+              "relation": [
+                {
+                  "id": "3d8d409b-f710-81b0-94a0-d3122e5b622e"
+                }
+              ],
+              "has_more": false
+            },
+            "Project status": {
+              "id": "cZsp",
+              "type": "rollup",
+              "rollup": {
+                "type": "array",
+                "array": [
+                  {
+                    "type": "select",
+                    "select": {
+                      "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                      "name": "Đang chạy",
+                      "color": "default"
+                    }
+                  }
+                ],
+                "function": "show_original"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Họp review kiến trúc",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Họp review kiến trúc",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/H-p-review-ki-n-tr-c-3d8d409bf710812a90ddee736ca811b6",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-81b6-b826-ea46af09e2ee",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-8184-9b52-c5257e276372"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Due date": {
+              "id": "%3CR%5Eo",
+              "type": "date",
+              "date": {
+                "start": "2026-09-12",
+                "end": null,
+                "time_zone": null
+              }
+            },
+            "Assignee": {
+              "id": "EcIH",
+              "type": "people",
+              "people": [
+                {
+                  "object": "user",
+                  "id": "2cfd872b-594c-81c2-b5a4-000262cf9e79",
+                  "name": "Workspace Owner",
+                  "avatar_url": null,
+                  "type": "person",
+                  "person": {
+                    "email": "owner@example.com",
+                    "email_verified": true
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "id": "G%7CgC",
+              "type": "select",
+              "select": {
+                "id": "ee7036c8-50f9-4f5f-9ed0-6dedd623243b",
+                "name": "Chờ review",
+                "color": "default"
+              }
+            },
+            "Tags": {
+              "id": "QKhu",
+              "type": "multi_select",
+              "multi_select": [
+                {
+                  "id": "558fdf5a-3bc5-485b-9e56-50c6ac8a22e6",
+                  "name": "urgent",
+                  "color": "default"
+                }
+              ]
+            },
+            "Days left": {
+              "id": "Yv~c",
+              "type": "formula",
+              "formula": {
+                "type": "number",
+                "number": 0
+              }
+            },
+            "Project": {
+              "id": "b%3Ax%7B",
+              "type": "relation",
+              "relation": [
+                {
+                  "id": "3d8d409b-f710-8157-9121-c2fc870aaa27"
+                }
+              ],
+              "has_more": false
+            },
+            "Project status": {
+              "id": "cZsp",
+              "type": "rollup",
+              "rollup": {
+                "type": "array",
+                "array": [
+                  {
+                    "type": "select",
+                    "select": {
+                      "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                      "name": "Đang chạy",
+                      "color": "default"
+                    }
+                  }
+                ],
+                "function": "show_original"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Fix crash khi mất mạng",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Fix crash khi mất mạng",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/Fix-crash-khi-m-t-m-ng-3d8d409bf71081b6b826ea46af09e2ee",
+          "public_url": null,
+          "archived": false
+        }
+      ],
+      "next_cursor": "s:783cf39b-6401-445d-ad4f-09e6e800e462:3d8d409b-f710-8115-a650-f40bc5a97bcb",
+      "has_more": true,
+      "type": "page_or_database",
+      "page_or_database": {},
+      "request_id": "028e72a8-381b-49b5-8831-e1481906b54d"
+    },
+    "error": null
+  }
+}

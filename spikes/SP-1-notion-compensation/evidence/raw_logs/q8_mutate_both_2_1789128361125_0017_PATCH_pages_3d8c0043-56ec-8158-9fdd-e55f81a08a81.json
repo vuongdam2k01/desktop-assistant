@@ -1,0 +1,130 @@
+{
+  "call_id": "1789128361125_0017_PATCH_pages_3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+  "category": "q8_mutate_both_2",
+  "timestamp": "2026-09-11T12:06:02Z",
+  "duration_ms": 1072,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Status": {
+          "select": {
+            "name": "Xong"
+          }
+        },
+        "Task Status": {
+          "status": {
+            "name": "Done"
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:02 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968b41bc918410-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=E77GvtjL0TIbDatxhXMCt7ZTIUEoXX.0dUnSidBUWhM-1789128361.2350395-1.0.1.1-kuCgQ_C93LA1xF0zDk6EVxegZskRxvM3miCAOd1NQFxjwHWEzoT.fwr5PtxHyHAA4Vl.Hft1z2KLDR_O4tIUSAc3dog.A5E_w0bCKSv40sAesACvYUIZVrlzCGXZKuvH; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:02 GMT",
+      "ETag": "W/\"4f9-NImxmDbTHutEocfh1jVHHqD8bvI\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "46b098ea-ff7e-4a38-b8b8-4d6bc2b4a790",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+      "created_time": "2026-09-11T12:05:00.000Z",
+      "last_edited_time": "2026-09-11T12:06:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "179803ea-b4d3-4538-81cb-38991e635d8b",
+            "name": "Done",
+            "color": "green"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": {
+            "id": "88d638d8-e6f4-447b-94cd-9882e9634bac",
+            "name": "Xong",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q8 Status vs Select Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q8-Status-vs-Select-Test-3d8c004356ec81589fdde55f81a08a81",
+      "public_url": null,
+      "archived": false,
+      "request_id": "46b098ea-ff7e-4a38-b8b8-4d6bc2b4a790"
+    },
+    "error": null
+  }
+}

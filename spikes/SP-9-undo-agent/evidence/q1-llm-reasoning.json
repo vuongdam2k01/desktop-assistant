@@ -1,0 +1,607 @@
+[
+  {
+    "job": 1,
+    "name": "Job 1: S-01 Create single task",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 2,
+        "original_tool": "notion_create_page",
+        "target_object_id": "3d8c0043-56ec-8150-bba0-e52c4b9670b0",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_archive_page",
+        "compensating_args": {
+          "page_id": "3d8c0043-56ec-8150-bba0-e52c4b9670b0"
+        },
+        "order_rationale": "Single action; reverse order is itself."
+      }
+    ]
+  },
+  {
+    "job": 2,
+    "name": "Job 2: S-02 Update task status",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 2,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8329bf-3814-815b-bbe9-cde812ef0b56",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8329bf-3814-815b-bbe9-cde812ef0b56",
+          "properties": {
+            "Order": {
+              "number": 1
+            },
+            "Due date": {
+              "date": {
+                "start": "2026-09-12",
+                "end": null
+              }
+            },
+            "Status": {
+              "select": {
+                "name": "In progress"
+              }
+            },
+            "Priority": {
+              "select": {
+                "name": "High"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "user"
+                  }
+                }
+              ]
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Fix crash màn thanh toán"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Single action in the ledger; no dependency inversion required. Placed as the sole compensating step."
+      }
+    ]
+  },
+  {
+    "job": 3,
+    "name": "Job 3: S-04 Create & reorder tasks",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 6,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8329bf-3814-814e-bfb8-d3f5a7f2cefb",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8329bf-3814-814e-bfb8-d3f5a7f2cefb",
+          "properties": {
+            "Order": {
+              "number": 3
+            },
+            "Due date": {
+              "date": {
+                "start": "2026-09-11",
+                "end": null
+              }
+            },
+            "Status": {
+              "select": {
+                "name": "Not started"
+              }
+            },
+            "Priority": {
+              "select": {
+                "name": "Medium"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "user"
+                  }
+                }
+              ]
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Review PR #212 của Hùng"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Reverse chronological order: undo the last property update first."
+      },
+      {
+        "original_seq": 4,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8329bf-3814-8137-99c4-fedaeee5f434",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8329bf-3814-8137-99c4-fedaeee5f434",
+          "properties": {
+            "Order": {
+              "number": 2
+            },
+            "Due date": {
+              "date": {
+                "start": "2026-09-18",
+                "end": null
+              }
+            },
+            "Status": {
+              "select": {
+                "name": "Not started"
+              }
+            },
+            "Priority": {
+              "select": {
+                "name": "Medium"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "user"
+                  }
+                }
+              ]
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Viết docs onboarding"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Reverse chronological order: undo the second property update after the third."
+      },
+      {
+        "original_seq": 2,
+        "original_tool": "notion_create_page",
+        "target_object_id": "3d8329bf-3814-81e5-b6ad-ede5ae3f49e8",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_archive_page",
+        "compensating_args": {
+          "page_id": "3d8329bf-3814-81e5-b6ad-ede5ae3f49e8"
+        },
+        "order_rationale": "Reverse chronological order: archive the created page last, after reverting all property updates on other pages."
+      }
+    ]
+  },
+  {
+    "job": 4,
+    "name": "Job 4: S-05 Update Assignee",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 2,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8d409b-f710-81f8-ab02-f55279826f41",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8d409b-f710-81f8-ab02-f55279826f41",
+          "properties": {
+            "Due date": {
+              "date": {
+                "start": "2026-09-14",
+                "end": null
+              }
+            },
+            "Assignee": {
+              "people": []
+            },
+            "Status": {
+              "select": {
+                "name": "In progress"
+              }
+            },
+            "Assignee Name": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "Trang"
+                  }
+                }
+              ]
+            },
+            "Tags": {
+              "multi_select": [
+                {
+                  "name": "feature"
+                }
+              ]
+            },
+            "Project": {
+              "relation": [
+                {
+                  "id": "3d8d409b-f710-816b-86fb-ecad565aea0c"
+                }
+              ]
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "Linh"
+                  }
+                }
+              ]
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Design review màn checkout"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Single action in ledger; placed first in reverse order."
+      }
+    ]
+  },
+  {
+    "job": 5,
+    "name": "Job 5: S-08 Reorder tasks",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 4,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8329bf-3814-810d-a8b7-e82c5840fc33",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8329bf-3814-810d-a8b7-e82c5840fc33",
+          "properties": {
+            "Order": {
+              "number": 1
+            },
+            "Due date": {
+              "date": {
+                "start": "2026-09-12",
+                "end": null
+              }
+            },
+            "Status": {
+              "select": {
+                "name": "In progress"
+              }
+            },
+            "Priority": {
+              "select": {
+                "name": "High"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "user"
+                  }
+                }
+              ]
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Fix crash màn thanh toán"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Reverse chronological order: seq 4 occurred after seq 2, so it must be undone first."
+      },
+      {
+        "original_seq": 2,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8329bf-3814-819b-af6a-f6a28bd5eaab",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8329bf-3814-819b-af6a-f6a28bd5eaab",
+          "properties": {
+            "Order": {
+              "number": 3
+            },
+            "Due date": {
+              "date": {
+                "start": "2026-09-11",
+                "end": null
+              }
+            },
+            "Status": {
+              "select": {
+                "name": "Not started"
+              }
+            },
+            "Priority": {
+              "select": {
+                "name": "Medium"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "user"
+                  }
+                }
+              ]
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Review PR #212 của Hùng"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Undo seq 2 after seq 4, as it was earlier in the original sequence."
+      }
+    ]
+  },
+  {
+    "job": 6,
+    "name": "Job 6: Multi-create tasks",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 4,
+        "original_tool": "notion_create_page",
+        "target_object_id": "3d8c0043-56ec-81af-b9b0-dbf178ace44b",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_archive_page",
+        "compensating_args": {
+          "page_id": "3d8c0043-56ec-81af-b9b0-dbf178ace44b"
+        },
+        "order_rationale": "Reverse chronological order: undo the most recent creation first."
+      },
+      {
+        "original_seq": 2,
+        "original_tool": "notion_create_page",
+        "target_object_id": "3d8c0043-56ec-81b0-8ce4-df920df9f6d2",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_archive_page",
+        "compensating_args": {
+          "page_id": "3d8c0043-56ec-81b0-8ce4-df920df9f6d2"
+        },
+        "order_rationale": "Reverse chronological order: undo the earlier creation after the later one."
+      }
+    ]
+  },
+  {
+    "job": 7,
+    "name": "Job 7: Internal dependency (Create -> Update)",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 4,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+          "properties": {
+            "Due date": {
+              "date": null
+            },
+            "Task Status": {
+              "status": {
+                "name": "Not started"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "bot"
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "select": {
+                "name": "Not started"
+              }
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Thử nghiệm payment sandbox"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Must revert property update before archiving the page, as archiving first would prevent property updates."
+      },
+      {
+        "original_seq": 2,
+        "original_tool": "notion_create_page",
+        "target_object_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_archive_page",
+        "compensating_args": {
+          "page_id": "3d8c0043-56ec-8160-abc8-cda251b85939"
+        },
+        "order_rationale": "Archive the page last, after its properties have been restored to the original state."
+      }
+    ]
+  },
+  {
+    "job": 8,
+    "name": "Job 8: Conflict scenario target",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 2,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8c0043-56ec-8135-b0c2-fcdcc2575226",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8c0043-56ec-8135-b0c2-fcdcc2575226",
+          "properties": {
+            "Due date": {
+              "date": {
+                "start": "2026-09-12",
+                "end": null
+              }
+            },
+            "Task Status": {
+              "status": {
+                "name": "Not started"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "user"
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "select": {
+                "name": "Not started"
+              }
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Gửi report tuần cho Linh"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Single action in ledger; placed as the sole compensating step in reverse order."
+      }
+    ]
+  },
+  {
+    "job": 9,
+    "name": "Job 9: 100% Irreversible (Create comment)",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 2,
+        "original_tool": "notion_create_comment",
+        "target_object_id": "3d8c0043-56ec-81f8-b7f2-c566bca74d31",
+        "classification": "irreversible",
+        "reason": "Notion API does not support deleting or modifying comments.",
+        "compensating_tool": null,
+        "compensating_args": null,
+        "order_rationale": "Only one action; no reverse order needed."
+      }
+    ]
+  },
+  {
+    "job": 10,
+    "name": "Job 10: Undo of undo target",
+    "correctOrder": true,
+    "plan": [
+      {
+        "original_seq": 2,
+        "original_tool": "notion_update_page_properties",
+        "target_object_id": "3d8c0043-56ec-8156-82cd-f9f6540515fe",
+        "classification": "reversible",
+        "reason": null,
+        "compensating_tool": "notion_update_page_properties",
+        "compensating_args": {
+          "page_id": "3d8c0043-56ec-8156-82cd-f9f6540515fe",
+          "properties": {
+            "Due date": {
+              "date": {
+                "start": "2026-09-11",
+                "end": null
+              }
+            },
+            "Task Status": {
+              "status": {
+                "name": "Not started"
+              }
+            },
+            "Creator": {
+              "rich_text": [
+                {
+                  "text": {
+                    "content": "user"
+                  }
+                }
+              ]
+            },
+            "Status": {
+              "select": {
+                "name": "Not started"
+              }
+            },
+            "Name": {
+              "title": [
+                {
+                  "text": {
+                    "content": "Review PR #212 của Hùng"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "order_rationale": "Single action; placed as the sole compensating step in reverse order."
+      }
+    ]
+  }
+]

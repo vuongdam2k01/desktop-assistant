@@ -1,0 +1,10 @@
+{
+  "name": "sp3-electron-rive-macos",
+  "version": "1.0.0",
+  "description": "SP-3 Electron + Rive pet rendering spike on macOS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {}
+}

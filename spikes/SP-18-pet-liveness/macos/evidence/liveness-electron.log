@@ -1,0 +1,29 @@
+[2026-09-13T14:43:54.414Z] App ready. Starting HTTP server on port 3838
+[2026-09-13T14:43:54.428Z] HTTP server listening on http://127.0.0.1:3838
+[2026-09-13T14:43:54.578Z] Created Architecture A windows successfully at (300, 330)
+[2026-09-13T14:43:58.006Z] App ready. Starting HTTP server on port 3838
+[2026-09-13T14:44:28.682Z] App ready. Starting HTTP server on port 3838
+[2026-09-13T14:44:28.715Z] HTTP server listening on http://127.0.0.1:3838
+[2026-09-13T14:44:29.016Z] Created Architecture A windows successfully at (300, 330)
+[2026-09-13T14:44:44.383Z] Created Architecture B fullscreen overlay successfully (1920x1080)
+[2026-09-13T14:45:03.692Z] Created Architecture A windows successfully at (300, 330)
+[2026-09-13T14:45:04.697Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:45:06.734Z] Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:45:14.899Z] Created Architecture B fullscreen overlay successfully (1920x1080)
+[2026-09-13T14:45:15.902Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:45:17.929Z] Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:45:26.164Z] Created Architecture A windows successfully at (300, 330)
+[2026-09-13T14:45:26.174Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:45:51.689Z] Created Architecture A windows successfully at (300, 330)
+[2026-09-13T14:45:52.695Z] Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:46:01.471Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:46:11.186Z] Motion updated: {"type":"cross-screen","speed":10,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:46:14.315Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:46:26.668Z] Motion updated: {"type":"circle","speed":6,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:46:59.393Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:47:46.917Z] Motion updated: {"type":"linear","speed":6,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:48:48.140Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:50:11.631Z] Motion updated: {"type":"linear","speed":6,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:51:25.554Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:51:31.116Z] Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+[2026-09-13T14:51:34.953Z] Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}

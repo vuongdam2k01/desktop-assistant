@@ -1,0 +1,53 @@
+{
+  "call_id": "1789128196282_0003_PATCH_pages_3d8c0043-56ec-8122-b0d7-cba070e61750",
+  "category": "q1_patch_created_time",
+  "timestamp": "2026-09-11T12:03:16Z",
+  "duration_ms": 455,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8122-b0d7-cba070e61750",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "created_time": "2026-01-01T00:00:00.000Z"
+      }
+    }
+  },
+  "response": {
+    "status_code": 400,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:03:16 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "191",
+      "Connection": "close",
+      "CF-Ray": "a396873c089f8285-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"bf-t/aJR19FdJpkcXehOqkmLvSbRUY\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "c2162ccd-8eaf-41eb-b3c5-7a072447a19c",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=koNOafx7LXN4BFflI9HNq6Ih2nErICFAhC1XKyWN97Q-1789128196.4920251-1.0.1.1-e69jbdUQvk2_PkaXJXlVaOM8wasb9ICmvpXMTHWLve0DdUCOJ5TaFfOYreJ4Mg6XnykNqCfCxu3fylCYQHAfpOPVn5no_N0gjFw4zyPTcvNsK5NsvUgVOjgDactUiJFx; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:33:16 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "Couldn't find editable properties for these identifiers: created_time",
+      "request_id": "c2162ccd-8eaf-41eb-b3c5-7a072447a19c"
+    },
+    "error": "HTTP Error 400: Bad Request"
+  }
+}

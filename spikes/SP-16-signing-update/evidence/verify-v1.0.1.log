@@ -1,0 +1,67 @@
+﻿
+
+Verifying: d:\projects\desktop-assistant\spikes\SP-16-signing-update\builds\v1.0.1\DesktopAssistantSpike Setup 1.0.1.exe
+
+
+Signature Index: 0 (Primary Signature)
+Hash of file (sha1): AA4DC2EF34B0C8CFA8E6B28F056EC8E3C2C16F24
+
+Signing Certificate Chain:
+    Issued to: Desktop Assistant (Spike SP-16 Code Signing)
+
+    Issued by: Desktop Assistant (Spike SP-16 Code Signing)
+
+    Expires:   Sun Sep 12 10:21:05 2027
+
+    SHA1 hash: 5B751250AE89DDBD2DCDFDB5CC77BCC991195440
+
+
+The signature is timestamped: Sat Sep 12 10:39:13 2026
+
+Timestamp Verified by:
+    Issued to: DigiCert Assured ID Root CA
+
+    Issued by: DigiCert Assured ID Root CA
+
+    Expires:   Mon Nov 10 07:00:00 2031
+
+    SHA1 hash: 0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43
+
+
+        Issued to: DigiCert Trusted Root G4
+
+        Issued by: DigiCert Assured ID Root CA
+
+        Expires:   Mon Nov 10 06:59:59 2031
+
+        SHA1 hash: A99D5B79E9F1CDA59CDAB6373169D5353F5874C6
+
+
+            Issued to: DigiCert Trusted G4 TimeStamping RSA4096 SHA256 2025 CA1
+
+            Issued by: DigiCert Trusted Root G4
+
+            Expires:   Fri Jan 15 06:59:59 2038
+
+            SHA1 hash: 07894D00FC194A17DB273AEB5CF8FACEF14423A4
+
+
+                Issued to: DigiCert SHA256 RSA4096 Timestamp Responder 2026 1
+
+                Issued by: DigiCert Trusted G4 TimeStamping RSA4096 SHA256 2025 CA1
+
+                Expires:   Thu Nov 05 06:59:59 2037
+
+                SHA1 hash: 51D9ABDA034973D84F4266ACA48248E6B369C439
+
+
+
+Successfully verified: d:\projects\desktop-assistant\spikes\SP-16-signing-update\builds\v1.0.1\DesktopAssistantSpike Setup 1.0.1.exe
+
+
+Number of files successfully Verified: 1
+
+Number of warnings: 0
+
+Number of errors: 0
+

@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# spikes/SP-0-gui-harness/macos/src/launch
+# Launch an application, wait for its GUI window, activate it, and report window info.
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HELPER="$SCRIPT_DIR/bin/harness_helper"
+
+if [[ ! -x "$HELPER" ]]; then
+    clang -framework CoreGraphics -framework ApplicationServices -framework CoreFoundation -framework AppKit \
+          -o "$HELPER" "$SCRIPT_DIR/harness_helper.m"
+fi
+
+APP_NAME=""
+BUNDLE_ID=""
+CMD=""
+TIMEOUT=10
+OUTPUT_JSON=0
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --app)
+            APP_NAME="$2"; shift 2 ;;
+        --bundle)
+            BUNDLE_ID="$2"; shift 2 ;;
+        --cmd)
+            CMD="$2"; shift 2 ;;
+        --timeout)
+            TIMEOUT="$2"; shift 2 ;;
+        --json)
+            OUTPUT_JSON=1; shift ;;
+        *)
+            echo "Unknown argument: $1" >&2
+            echo "Usage: launch [--app <Name> | --bundle <id> | --cmd <command>] [--timeout <sec>] [--json]" >&2
+            exit 1 ;;
+    esac
+done
+
+PID=""
+if [[ -n "$APP_NAME" ]]; then
+    open -a "$APP_NAME"
+    PID=$(pgrep -x "$APP_NAME" | head -n 1 || true)
+elif [[ -n "$BUNDLE_ID" ]]; then
+    open -b "$BUNDLE_ID"
+    "$HELPER" activate "$BUNDLE_ID" >/dev/null 2>&1 || true
+elif [[ -n "$CMD" ]]; then
+    eval "$CMD" &
+    PID=$!
+else
+    echo "Must specify --app, --bundle, or --cmd" >&2
+    exit 1
+fi
+
+# Poll for window
+START_TIME=$(date +%s)
+WID=""
+WIN_INFO=""
+
+while true; do
+    CURRENT_TIME=$(date +%s)
+    ELAPSED=$((CURRENT_TIME - START_TIME))
+    if [[ $ELAPSED -ge $TIMEOUT ]]; then
+        break
+    fi
+
+    # Check window list
+    if [[ -n "$APP_NAME" ]]; then
+        WIN_INFO=$("$HELPER" list --json | node -e '
+            const fs = require("fs");
+            const data = JSON.parse(fs.readFileSync(0, "utf-8"));
+            const target = "'"$APP_NAME"'".toLowerCase();
+            const w = data.find(x => x.owner.toLowerCase().includes(target) && x.layer === 0 && x.w > 50 && x.h > 50);
+            if (w) console.log(JSON.stringify(w));
+        ' 2>/dev/null || true)
+    fi
+
+    if [[ -n "$WIN_INFO" ]]; then
+        WID=$(node -e "console.log(JSON.parse(process.argv[1]).id)" "$WIN_INFO" 2>/dev/null || true)
+        break
+    fi
+    sleep 0.3
+done
+
+if [[ -n "$APP_NAME" ]]; then
+    osascript -e "tell application \"$APP_NAME\" to activate" >/dev/null 2>&1 || true
+fi
+
+if [[ $OUTPUT_JSON -eq 1 ]]; then
+    if [[ -n "$WIN_INFO" ]]; then
+        echo "$WIN_INFO"
+    else
+        echo "{\"error\": \"Window not found within timeout\", \"pid\": \"$PID\"}"
+    fi
+else
+    if [[ -n "$WIN_INFO" ]]; then
+        echo "Launched successfully:"
+        echo "$WIN_INFO"
+    else
+        echo "Launched process (PID: $PID), but no window detected within ${TIMEOUT}s"
+    fi
+fi

@@ -1,0 +1,83 @@
+================================================================================
+SPIKE SP-6 / Q3: 🔴 KIỂM CHỨNG PAUSE / RESUME ĐÚNG ĐIỂM DỪNG (US-4.2 / AC2)
+Yêu cầu cứng: Khi Approve, job tiếp tục từ đúng điểm dừng, KHÔNG chạy lại bước đã xong.
+================================================================================
+
+--------------------------------------------------------------------------------
+[CHẾ ĐỘ 1] IN-FLIGHT ASYNC SUSPENSION & RESUME (Phục vụ UI Card / Approval Gate)
+--------------------------------------------------------------------------------
+
+1. Bắt đầu prompt agent: 'Đọc task trước (read_data), rồi thêm task mới (write_data) Setup CI-CD.'
+2. Chờ agent thực thi xong Bước 1 (read_data) và rơi vào trạng thái waiting_approval...
+
+--- Trạng thái tại thời điểm agent đang tạm dừng (PAUSE POINT) ---
+- readCallCount (Bước 1): 1 (Đã chạy xong)
+- writeCallCount (Bước 2): 0 (Chưa chạy, đang treo chờ duyệt)
+
+3. Người dùng bấm [APPROVE] trên giao diện!
+4. Chờ agent tiếp tục và hoàn tất...
+  [Approval Gate] Gặp thao tác ghi 'Setup CI-CD'. Treo tiến trình chờ người dùng duyệt...
+  [Approval Gate] Nhận được quyết định người dùng: APPROVED ✅
+
+--- Kiểm tra sau khi Resume hoàn tất ---
+- readCallCount (Bước 1): 1 (Kỳ vọng = 1, KHÔNG chạy lại)
+- writeCallCount (Bước 2): 1 (Kỳ vọng = 1, chỉ chạy 1 lần sau khi duyệt)
+- Phản hồi tổng kết của agent:
+  "---
+
+## 📋 Tổng kết
+
+| Hành động | Kết quả |
+|-----------|---------|
+| **Đọc danh sách** | Có 2 task: "Setup Project" (Done), "Write Specs" (In Progress) |
+| **Thêm task mới** | "Setup CI-CD" đã được tạo với trạng thái **Todo**, ID: `task-3` |
+| **Tổng số task** | Hiện có **3 task** trong hệ thống |
+
+✅ Hoàn tất!"
+✅ CHẾ ĐỘ 1 THÀNH CÔNG: Treo đúng điểm dừng, resume trơn tru, tuyệt đối không chạy lại bước 1.
+
+--------------------------------------------------------------------------------
+[CHẾ ĐỘ 2] COLD CHECKPOINT PERSISTENCE & RESUME (Phục vụ Crash Recovery / Session Restore)
+--------------------------------------------------------------------------------
+
+1. Giả lập một session bị gián đoạn đã lưu vào Persistent Storage (SQLite):
+   - Lượt 1: User prompt 'Read tasks then create task Deploy Staging'
+   - Lượt 2: Assistant gọi 2 tool: call-step-1 (read_data) và call-step-2 (write_data)
+   - Lượt 3: ToolResult của call-step-1 đã hoàn thành (read_data)
+   - call-step-2 (write_data) rơi vào trạng thái waiting_approval thì app bị tắt.
+   -> Checkpoint hiện có 3 tin nhắn.
+
+2. Người dùng mở lại app và bấm [APPROVE] cho thao tác write_data:
+   - Thực thi thao tác write_data đã duyệt
+   - Kết quả thực thi write_data: [{"type":"text","text":"Created item: {\"id\":\"task-3\",\"title\":\"Deploy Staging\",\"status\":\"Todo\"}"}]
+   - writeCallCount của env2 = 1
+
+3. Khởi tạo instance Agent MỚI hoàn toàn từ resumedMessages (4 tin nhắn)
+   Tin nhắn cuối cùng là: role='toolResult'
+4. Gọi coldResumedAgent.continue() để tiếp tục chu trình suy luận...
+   -> coldResumedAgent.continue() hoàn thành thành công trong 2741ms!
+- Phản hồi của cold resumed agent:
+  "Here's a summary of what happened:
+
+**Current tasks:**
+| ID | Title | Status |
+|---|---|---|
+| task-1 | Setup Project | Done |
+| task-2 | Write Specs | In Progress |
+
+**New task created:**
+- **Deploy Staging** (task-3) — Status: **Todo**
+
+The new task has been added to your list. Let me know if you'd like to update anything!"
+
+--- Kiểm chứng tiêu chí US-4.2 / AC2 trên Cold Restart ---
+- readCallCount của env2: 0 (Kỳ vọng = 0, vì bước 1 đã hoàn thành từ phiên trước)
+- writeCallCount của env2: 1 (Kỳ vọng = 1, chỉ chạy 1 lần sau khi duyệt)
+✅ CHẾ ĐỘ 2 THÀNH CÔNG: Cold restart nạp lại checkpoint và resume qua continue() hoàn hảo!
+
+================================================================================
+KẾT LUẬN CHÍNH THỨC Q3: ĐẠT 100% (ĐÁP ỨNG TUYỆT ĐỐI US-4.2 / AC2)
+1. Trong bộ nhớ (In-flight): Tool wrapper treo async Promise, app giữ nguyên trạng thái, duyệt là chạy tiếp.
+2. Khôi phục bền vững (Cold Restart): Checkpoint lưu cặp assistant(toolCalls) -> toolResult,
+   tiếp tục bằng Agent.continue() mà không chạy lại bất kỳ bước nào đã xong.
+================================================================================

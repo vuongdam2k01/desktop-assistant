@@ -1,0 +1,37 @@
+================================================================================
+SPIKE SP-19 / Q1: Manifest Schema đủ diễn đạt HAI connector khác hình dạng
+Yêu cầu FR-CF-01: Định danh, OAuth capability, tool đọc/ghi, snapshot, compensation, irreversible
+================================================================================
+
+[1] Kiểm tra định danh và thông tin chung:
+  - Connector 1: id=notion, name=Notion, version=1.0.0, icon=assets/notion.svg
+  - Connector 2: id=gmail, name=Gmail, version=1.0.0, icon=assets/gmail.svg
+  ✅ Cả hai manifest có đủ: id, name, version, icon, description.
+
+[2] Kiểm tra cấu hình OAuth & Capability:
+  - Notion: type=oauth2, capabilities=[pages_read, pages_write]
+  - Gmail: type=oauth2, pkce=true, capabilities=[email_read]
+  - Gmail Scope Profiles: [byo, central_mass_distribution]
+  ✅ OAuth capabilities và scope profiles được biểu diễn đầy đủ.
+
+[3] Kiểm tra công thức tool và hợp đồng an toàn:
+  - Notion tools (7):
+    * [READ] notion_query_database: snapshot=no, comp=none, reversible
+    * [READ] notion_get_page: snapshot=no, comp=none, reversible
+    * [WRITE] notion_create_page: snapshot=no, comp=archive_page, reversible
+    * [WRITE] notion_update_page_properties: snapshot=yes (sanitize: 6 fields), comp=restore_properties, reversible
+    * [WRITE] notion_archive_page: snapshot=yes (sanitize: 6 fields), comp=unarchive_page, reversible
+    * [WRITE] notion_create_comment: snapshot=no, comp=none, IRREVERSIBLE
+    * [WRITE] notion_delete_block: snapshot=no, comp=none, IRREVERSIBLE
+  - Gmail tools (2):
+    * [READ] gmail_search_emails: read-only
+    * [READ] gmail_get_email_details: read-only
+  ✅ Notion update_page_properties khai báo đủ snapshot + sanitization rules loại trừ formula/rollup/created_time.
+  ✅ Notion create_comment gắn cờ irreversible: true đúng như kiểm chứng SP-1.
+
+================================================================================
+KẾT LUẬN Q1: ĐẠT
+Manifest schema v0 hoàn toàn đủ năng lực biểu diễn HAI connector khác hình dạng:
+- Notion: Read/Write, snapshot trước-ghi, bù trừ khôi phục thuộc tính, cờ irreversible.
+- Gmail: Read-only, không có snapshot/bù trừ, phân hóa scope profile BYO vs Central.
+================================================================================

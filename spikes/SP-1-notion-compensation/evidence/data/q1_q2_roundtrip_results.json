@@ -1,0 +1,84 @@
+{
+  "q1_property_capabilities": {
+    "page_id": "3d8c0043-56ec-8161-b5c5-e7a4d9dd3c56",
+    "read_top_level_fields": [
+      "object",
+      "id",
+      "created_time",
+      "last_edited_time",
+      "created_by",
+      "last_edited_by",
+      "cover",
+      "icon",
+      "parent",
+      "in_trash",
+      "is_archived",
+      "is_locked",
+      "properties",
+      "url",
+      "public_url",
+      "archived",
+      "request_id"
+    ],
+    "read_properties": {
+      "Due date": {
+        "type": "date",
+        "id": "N%7D%5B%5E"
+      },
+      "Task Status": {
+        "type": "status",
+        "id": "TbrL"
+      },
+      "Status": {
+        "type": "select",
+        "id": "~iuF"
+      },
+      "Name": {
+        "type": "title",
+        "id": "title"
+      }
+    },
+    "write_created_time_result": {
+      "status": 400,
+      "code": "validation_error",
+      "message": "Couldn't find editable properties for these identifiers: created_time"
+    },
+    "write_created_by_result": {
+      "status": 400,
+      "code": "validation_error",
+      "message": "created_by is not a property that exists."
+    }
+  },
+  "q2_create_archive_roundtrip": {
+    "page_id": "3d8c0043-56ec-81ef-a904-f94bb111c448",
+    "pre_write_snapshot": null,
+    "create_status": 200,
+    "compensate_action": "PATCH /v1/pages/:id {'archived': true}",
+    "compensate_status": 200,
+    "post_compensate_get_status": 200,
+    "post_compensate_archived": true,
+    "leak_or_diff": "Page vẫn tồn tại trong Notion Trash; ID không bị thu hồi; có thể tra cứu thấy nếu query với filter archived hoặc gọi trực tiếp bằng ID."
+  },
+  "q2_update_rollback_roundtrip": {
+    "page_id": "3d8c0043-56ec-8161-b5c5-e7a4d9dd3c56",
+    "name_match": true,
+    "status_match": true,
+    "due_date_match": true,
+    "content_recovery_rate": "100%",
+    "metadata_diff": {
+      "initial_last_edited_time": "2026-09-11T12:06:00.000Z",
+      "final_last_edited_time": "2026-09-11T12:06:00.000Z",
+      "initial_last_edited_by": "3d8c0043-56ec-814e-a28e-00276c461f30",
+      "final_last_edited_by": "3d8c0043-56ec-814e-a28e-00276c461f30"
+    }
+  },
+  "q2_archive_unarchive_roundtrip": {
+    "page_id": "3d8c0043-56ec-8161-b5c5-e7a4d9dd3c56",
+    "unarchive_status": 200,
+    "is_archived_now": false,
+    "properties_intact": true,
+    "blocks_count": 1,
+    "blocks_intact": true,
+    "recovery_percentage": "100% nội dung & properties (chỉ last_edited_time cập nhật)"
+  }
+}

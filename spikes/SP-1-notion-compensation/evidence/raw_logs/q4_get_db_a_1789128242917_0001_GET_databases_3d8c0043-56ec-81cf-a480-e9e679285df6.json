@@ -1,0 +1,139 @@
+{
+  "call_id": "1789128242917_0001_GET_databases_3d8c0043-56ec-81cf-a480-e9e679285df6",
+  "category": "q4_get_db_a",
+  "timestamp": "2026-09-11T12:04:03Z",
+  "duration_ms": 533,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/databases/3d8c0043-56ec-81cf-a480-e9e679285df6",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:04:03 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a396885fbdfb4a9f-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=kOo0Gmla61.jtsJib6MiOQP141X1MSSUjGq4pYsQJy4-1789128243.1561248-1.0.1.1-s_pOv.6wiGmtSFXbeu2JFAKmeJaCVVhR89ezgDy_z0u_C3VUEcW.1sLLo4GI6M62nC3vox7619JcXUPSMyrdU3uKcGZwMnBS5K5GQbp2rmAUWK2Z4IZAorzEEnyNggFi; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:34:03 GMT",
+      "ETag": "W/\"602-UiXcOYuMlcLklmdggrWlf+W3Zg0\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "36c7b2a3-edd6-44ec-a02b-26c819632fae",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "database",
+      "id": "3d8c0043-56ec-81cf-a480-e9e679285df6",
+      "cover": null,
+      "icon": null,
+      "created_time": "2026-09-11T10:54:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_time": "2026-09-11T10:54:00.000Z",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Tasks",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Tasks",
+          "href": null
+        }
+      ],
+      "description": [],
+      "is_inline": false,
+      "database_type": null,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "name": "Due date",
+          "description": null,
+          "type": "date",
+          "date": {}
+        },
+        "Status": {
+          "id": "~iuF",
+          "name": "Status",
+          "description": null,
+          "type": "select",
+          "select": {
+            "options": [
+              {
+                "id": "108827de-b2e1-4444-ba38-fcd37b77626d",
+                "name": "Backlog",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "898c7412-5994-49d4-aa4f-9b9c4b8f3f45",
+                "name": "Đang làm",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "37d1f5bc-0971-4b46-af9f-5a398c98d39c",
+                "name": "Chờ review",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "88d638d8-e6f4-447b-94cd-9882e9634bac",
+                "name": "Xong",
+                "color": "default",
+                "description": null
+              }
+            ]
+          }
+        },
+        "Name": {
+          "id": "title",
+          "name": "Name",
+          "description": null,
+          "type": "title",
+          "title": {}
+        }
+      },
+      "parent": {
+        "type": "page_id",
+        "page_id": "3d8c0043-56ec-8048-b55b-e5d65d40a401"
+      },
+      "url": "https://app.notion.com/p/3d8c004356ec81cfa480e9e679285df6",
+      "public_url": null,
+      "in_trash": false,
+      "archived": false,
+      "request_id": "36c7b2a3-edd6-44ec-a02b-26c819632fae"
+    },
+    "error": null
+  }
+}

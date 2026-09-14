@@ -1,0 +1,5 @@
+schema: lite
+created: 2026-09-13
+kind: A
+skip_specs: true
+depends_on: [req-025-pi-agent-system]

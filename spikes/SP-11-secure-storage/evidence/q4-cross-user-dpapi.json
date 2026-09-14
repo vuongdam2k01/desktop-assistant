@@ -1,0 +1,21 @@
+﻿{
+    "TestName":  "Windows DPAPI Cross-User Isolation Test",
+    "PrimaryUser":  "BEO-LAP\\vuong",
+    "SecondaryUser":  "testuser_sp11",
+    "CiphertextBytes":  278,
+    "PrimaryUserSelfDecrypt":  true,
+    "SecondaryUserResult":  {
+                                "Success":  false,
+                                "ExceptionType":  "System.Security.Cryptography.CryptographicException",
+                                "ExceptionMessage":  "Key not valid for use in specified state.",
+                                "Win32HResult":  "0x8009000B",
+                                "Win32ErrorCodeName":  "NTE_BAD_KEY_STATE",
+                                "Meaning":  "Key not valid for use in specified state (User Master Key does not match cipher owner SID)"
+                            },
+    "SecurityConclusion":  {
+                               "CrossUserIsolation":  "ENFORCED (User B cannot decrypt User A\u0027s credentials even with local read permission)",
+                               "BackupRestore":  "Restoring ciphertext to another machine will trigger NTE_BAD_KEY_STATE (0x8009000B); app must cleanly detect and ask user to re-authenticate",
+                               "DPAPIBoundTo":  "Windows User Account SID + User Profile Master Key (%APPDATA%\\Microsoft\\Protect\\{SID})",
+                               "MachineMigration":  "CANNOT BE DECRYPTED on a different machine or user profile without original DPAPI master keys"
+                           }
+}

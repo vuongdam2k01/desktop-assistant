@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SP-3 Pet Renderer (macOS)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    html, body {
+      width: 320px;
+      height: 320px;
+      overflow: hidden;
+      background: transparent !important;
+    }
+    #container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+    }
+    #rive-canvas {
+      width: 280px;
+      height: 280px;
+      background: transparent !important;
+      display: block;
+    }
+    #hud {
+      position: absolute;
+      bottom: 8px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 3px 10px;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .badge-idle { background: #3b82f6; color: white; }
+    .badge-receiving_order { background: #eab308; color: black; }
+    .badge-working { background: #8b5cf6; color: white; }
+    .badge-waiting_approval { background: #f97316; color: white; }
+    .badge-has_result { background: #10b981; color: white; }
+    .fps-counter {
+      color: #38bdf8;
+      font-weight: 600;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    }
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <canvas id="rive-canvas" width="280" height="280"></canvas>
+    <div id="hud">
+      <span id="state-badge" class="badge badge-idle">idle</span>
+      <span class="fps-counter"><span id="fps-val">60</span> fps</span>
+    </div>
+  </div>
+
+  <script src="./assets/rive.js"></script>
+  <script src="./renderer.js"></script>
+</body>
+</html>

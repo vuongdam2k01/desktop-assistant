@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/pet/rive-state-machine/set-state/1.0.0.json",
+  "title": "SetPetStatePayload",
+  "description": "Shape of the payload carried on the pet:setState channel, for pet/contracts/rive-state-machine@1.0.0. It is the only way the application changes what the pet is doing, and it carries a state rather than an animation, so the asset keeps ownership of how one state becomes another. A value outside the declared set is dropped and the current state is held, which is why the range is expressed here rather than left to the renderer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["state"],
+  "properties": {
+    "state": {
+      "type": "integer",
+      "enum": [0, 1, 2, 3, 4],
+      "description": "0 idle, 1 receiving an order, 2 working, 3 waiting for an approval, 4 holding a result. The mapping is fixed: changing which number means which state is a MAJOR change, because an asset produced against the old mapping would animate the wrong thing rather than fail."
+    }
+  }
+}

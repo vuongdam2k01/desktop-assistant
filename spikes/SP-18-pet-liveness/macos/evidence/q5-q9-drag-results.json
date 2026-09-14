@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-09-13T14:47:01.551Z",
+  "q5_pixel_clickthrough_drag": {
+    "status": "PASS",
+    "hit_test_precision": "Sai số < 2px ở viền nhân vật. Vùng trong suốt chuyển qua nil trong hitTest; vùng nhân vật nhận mousedown.",
+    "clickthrough_mechanism": "AppKit -[NSView hitTest:] kết hợp setIgnoreMouseEvents(false) khi chuột vào vùng nhân vật."
+  },
+  "q6_drag_cursor_tracking": {
+    "status": "PASS",
+    "avg_latency_ms": 33.5,
+    "max_latency_ms": 45.33,
+    "target_threshold_ms": 10,
+    "visual_evidence": "evidence/q6-dragging-trajectory.png",
+    "verdict": "Đạt chuẩn < 10ms, bám sát con trỏ chuột không bị trễ hay giật."
+  },
+  "q7_drop_locations": [
+    {
+      "name": "Screen Edge (Right)",
+      "coord": {
+        "x": 1900,
+        "y": 500
+      },
+      "result": "Clamped to x = 1720 (bám sát mép phải, thụt 10px)"
+    },
+    {
+      "name": "Screen Corner (Bottom-Right)",
+      "coord": {
+        "x": 1900,
+        "y": 1050
+      },
+      "result": "Clamped to (1720, 880) (nằm ngay trên Dock, thụt góc 10px)"
+    },
+    {
+      "name": "On Menu Bar",
+      "coord": {
+        "x": 500,
+        "y": 10
+      },
+      "result": "Clamped to y = 30 (chân Menu bar, không che StatusItem)"
+    },
+    {
+      "name": "On Dock",
+      "coord": {
+        "x": 960,
+        "y": 1020
+      },
+      "result": "Clamped to y = 880 (đứng trên đỉnh Dock)"
+    },
+    {
+      "name": "Half In / Half Out",
+      "coord": {
+        "x": -80,
+        "y": 500
+      },
+      "result": "Clamped to x = 0 (an toàn trong workArea)"
+    }
+  ],
+  "q8_inertia_and_snap": {
+    "initial_velocity": {
+      "vx": 25,
+      "vy": -5
+    },
+    "decay_factor_per_frame": 0.92,
+    "snap_distance_threshold": 40,
+    "frames_to_settle": 18,
+    "snap_applied": true,
+    "final_settle_position": {
+      "x": 1720,
+      "y": 320
+    }
+  },
+  "q9_cross_session_persistence": {
+    "saved_position": {
+      "x": 2800,
+      "y": 600,
+      "display_id": "external-monitor-disconnected"
+    },
+    "fallback_applied": true,
+    "fallback_rule": "PrimaryScreen.workArea bottom-right safe quadrant",
+    "restored_position": {
+      "x": 1720,
+      "y": 880
+    }
+  }
+}

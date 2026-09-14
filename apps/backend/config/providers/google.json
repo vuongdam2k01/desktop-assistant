@@ -1,0 +1,18 @@
+{
+  "providerId": "google",
+  "version": "0.1.0",
+  "name": "Google",
+  "authorizeEndpoint": "https://accounts.google.com/o/oauth2/v2/auth",
+  "tokenEndpoint": "https://oauth2.googleapis.com/token",
+  "clientIdRef": "GOOGLE_OAUTH_CLIENT_ID",
+  "clientSecretRef": "GOOGLE_OAUTH_CLIENT_SECRET",
+  "tokenAuthMethod": "credentials-in-body",
+  "usesProofKey": true,
+  "defaultScopes": [],
+  "extraAuthorizeParams": {
+    "access_type": "offline",
+    "prompt": "consent"
+  },
+  "revokeEndpoint": "https://oauth2.googleapis.com/revoke",
+  "status": "offered"
+}

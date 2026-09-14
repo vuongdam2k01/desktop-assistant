@@ -1,0 +1,29 @@
+=== Testing Q4: User Deny & Locked Keychain Scenarios ===
+--- Scenario 1: User Denial (errSecUserCanceled = -128) ---
+[SecKeychainAddGenericPassword] SUCCESS (errSecSuccess = 0)
+[SecKeychainFindGenericPassword] FAILED: OSStatus = -128 (User canceled the operation.)
+--- Scenario 2: Locked Keychain (errSecInteractionNotAllowed = -25308) ---
+Item added to test keychain.
+Locked keychain.
+Attempting read from locked keychain:
+keychain: "/Users/<user>/Library/Keychains/q4_locked.keychain-db"
+version: 512
+class: "genp"
+attributes:
+    0x00000007 <blob>="DesktopAssistant-LockedService"
+    0x00000008 <blob>=<NULL>
+    "acct"<blob>="auth_token"
+    "cdat"<timedate>=0x32303236303931333134303432335A00  "20260913140423Z\000"
+    "crtr"<uint32>=<NULL>
+    "cusi"<sint32>=<NULL>
+    "desc"<blob>=<NULL>
+    "gena"<blob>=<NULL>
+    "icmt"<blob>=<NULL>
+    "invi"<sint32>=<NULL>
+    "mdat"<timedate>=0x32303236303931333134303432335A00  "20260913140423Z\000"
+    "nega"<sint32>=<NULL>
+    "prot"<blob>=<NULL>
+    "scrp"<sint32>=<NULL>
+    "svce"<blob>="DesktopAssistant-LockedService"
+    "type"<uint32>=<NULL>
+=== Done ===

@@ -1,0 +1,34 @@
+================================================================================
+SPIKE SP-6 / Q1: Đăng ký tool tuỳ ý và chặn bộ tool coding mặc định
+Yêu cầu FR-AG-02: Worker-agent KHÔNG có các tool coding mặc định (read/bash/edit/write).
+================================================================================
+
+[1] Khởi tạo Agent với 2 tool nghiệp vụ tuỳ ý:
+  - Tool name: "read_data", label: "Read Tasks Data", description: "Read the list of current tasks from the database"
+  - Tool name: "write_data", label: "Write Task Data", description: "Create or update a task in the database"
+
+[2] Kiểm tra danh sách tool thực tế trong agent.state.tools: [read_data, write_data]
+[3] Đối chiếu với bộ tool coding mặc định của pi coding agent: [bash, read, edit, write]
+✅ ĐẠT: Không có bất kỳ tool coding mặc định nào xuất hiện trong worker-agent!
+
+[4] Thử nghiệm thực tế: Yêu cầu agent gọi tool bash và tool write/edit file.
+Prompt: "Hãy dùng lệnh bash 'ls -la' để xem file trên hệ thống và ghi vào file /tmp/test.txt"
+
+[5] Phản hồi của Agent:
+Tôi không có tool `bash` để thực thi lệnh hệ thống. Các tool hiện có của tôi chỉ bao gồm:
+
+- **`read_data`**: Đọc danh sách công việc (tasks) từ cơ sở dữ liệu.
+- **`write_data`**: Tạo hoặc cập nhật một công việc (task) trong cơ sở dữ liệu.
+
+Những tool này hoàn toàn không có khả năng thực thi lệnh shell như `ls -la` hay ghi file ra hệ thống (`/tmp/test.txt`).
+
+Nếu bạn cần thực hiện thao tác đó, bạn sẽ cần một môi trường có quyền truy cập shell (terminal) hoặc một agent khác được trang bị tool `bash`. Tôi có thể giúp gì khác trong phạm vi các tool hiện có không?
+Tool executions started during prompt: 0
+✅ ĐẠT: Agent nhận biết không có tool coding/bash và từ chối một cách an toàn mà không kích hoạt tool nào.
+
+================================================================================
+KẾT LUẬN Q1: ĐẠT 100%
+1. Đăng ký tool tuỳ biến: Hoàn toàn được hỗ trợ qua AgentTool interface.
+2. Chặn bộ tool coding mặc định: Mặc định Pi Agent class KHÔNG hề nạp bash/read/edit/write;
+   chỉ những tool ta khai báo tường minh mới có mặt trong runtime.
+================================================================================

@@ -1,0 +1,47 @@
+================================================================================
+SPIKE SP-21 / Q12: SỐNG SÓT QUA RESTART APP & ĐỊA ĐIỂM LƯU TRỮ HÀNG CHỜ
+Câu hỏi: Hàng chờ cục bộ sống sót qua restart app không? Lưu ở đâu: cùng SQLite với ledger hay riêng?
+================================================================================
+
+1. TIẾN TRÌNH 1 (PHÂN HỆ APP ĐỢT 1):
+  - Khởi tạo kết nối SQLite ledger + queue tại: /home/<user>/projects/desktop-assistant/spikes/SP-21-ask-user-offline/evidence/test-persistence-q12.db
+  - Backend đang offline (port 3995). Người dùng đưa 2 lệnh vào composer:
+  - Tiến trình 1 đã ghi nhận vào SQLite: 2 lệnh (Status: QUEUED_OFFLINE)
+  [P1-Cmd1] ID: 34a5db0b-4034-482b-8951-ac0bb6874d70 -> "Lệnh quan trọng trước khi tắt máy: Cập nhật Roadmap Q4"
+  [P1-Cmd2] ID: 6f5338d4-7c02-47a6-8808-d21df2a359f4 -> "Lệnh thứ hai: Đồng bộ 15 tasks từ email"
+
+  ⚡ THOÁT TIẾN TRÌNH 1 HOÀN TOÀN (Mô phỏng người dùng đóng app hoặc crash) ⚡
+
+2. TIẾN TRÌNH 2 (MỞ LẠI APP SAU KHI RESTART):
+  - Khởi tạo instance SQLiteLedger mới mở lại đúng file DB cũ...
+  - Số lượng lệnh tồn tại sau khi Restart: 2 (Kỳ vọng = 2)
+  [Khôi phục #1] ID: 34a5db0b-4034-482b-8951-ac0bb6874d70, Key: idemp-282c04b1-86a6-4b5d-9329-f75502cd1ff8, Text: "Lệnh quan trọng trước khi tắt máy: Cập nhật Roadmap Q4", Status: QUEUED_OFFLINE
+  [Khôi phục #2] ID: 6f5338d4-7c02-47a6-8808-d21df2a359f4, Key: idemp-2f30ab09-0156-4b74-b979-0ee1027960eb, Text: "Lệnh thứ hai: Đồng bộ 15 tasks từ email", Status: QUEUED_OFFLINE
+  - Kiểm tra tính nguyên vẹn: SỐNG SÓT 100% NGUYÊN VẸN QUA RESTART ✅
+
+3. ĐỒNG BỘ TIẾP TỤC Ở PHIÊN APP MỚI KHI BACKEND SỐNG LẠI:
+  - Backend online tại port 3995
+  - Đồng bộ thành công: 2 lệnh
+  - Số lệnh Backend nhận được: 2
+  - Hàng chờ còn tồn trong DB sau sync: 0
+
+--------------------------------------------------------------------------------
+4. SO SÁNH VỊ TRÍ LƯU TRỮ: CÙNG FILE SQLITE VỚI LEDGER HAY FILE RIÊNG?
+--------------------------------------------------------------------------------
+
+| Tiêu chí | CÙNG một file SQLite (khuyên dùng) | TÁCH RIÊNG 2 file SQLite |
+| --- | --- | --- |
+| **Tính nguyên tử (ACID)** | **VƯỢT TRỘI:** Giao dịch nguyên tử liên bảng (Jobs + Queue + Ledger) trong 1 commit. Không có trạng thái rách dữ liệu. | **KÉM:** Không hỗ trợ transaction cross-db nguyên bản; cần tự xây 2-phase commit phức tạp. |
+| **Quản trị kết nối (Connection Pool)** | **GỌN NHẸ:** 1 connection duy nhất trong Electron Main Process, kiểm soát concurrency và WAL tập trung. | **PHỨC TẠP:** Phải mở và quản lý 2 database connections, nhân đôi tài nguyên handle file. |
+| **Khóa tập tin trên OS (File Locking)** | **AN TOÀN:** Windows và macOS chỉ quản lý 1 file lock và 1 cặp shm/wal file, giảm nguy cơ file lock tranh chấp. | **RỦI RO:** Hai file độc lập tăng nguy cơ bị OS/Antivirus lock hoặc lệch trạng thái khi crash. |
+| **Schema Migration** | **ĐỒNG BỘ:** 1 phiên bản user_version di chuyển toàn bộ cấu trúc DB cùng lúc khi cập nhật app. | **RỜI RẠC:** Phải duy trì 2 migration scripts riêng lẻ cho từng DB. |
+| **Tách biệt dữ liệu (Separation of Concerns)** | **ĐẠT:** Tách biệt bằng tên bảng (offline_command_queue vs ledger_entries vs decisions). Dễ dàng xóa dọn (retention policy). | **ĐẠT:** Tách vật lý trên ổ đĩa. |
+
+KHUYẾN NGHỊ KIẾN TRÚC DỨT KHOÁT:
+- Lưu CÙNG một cơ sở dữ liệu SQLite duy nhất (desktop-assistant.db) tại thư mục người dùng (userData).
+- Sử dụng BẢNG RIÊNG (offline_command_queue) với khóa duy nhất idempotency_key, độc lập logic với bảng append-only ledger_entries.
+- Chu kỳ dọn dẹp (Retention): Các lệnh có status = 'SYNCED' được tự động dọn sau 7 ngày để giữ kích thước DB tối ưu.
+
+5. KẾT LUẬN Q12:
+  - Hàng chờ cục bộ SỐNG SÓT 100% qua mọi lần tắt app, khởi động lại máy, hoặc crash.
+  - Vị trí lưu trữ tối ưu: CÙNG một file SQLite với ledger (desktop-assistant.db), tách biệt ở cấp độ BẢNG (table-level separation).

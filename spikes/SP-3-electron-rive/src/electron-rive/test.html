@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="background: transparent; margin: 0; padding: 0;">
+  <canvas id="canvas" width="200" height="200"></canvas>
+  <script src="./assets/rive.js"></script>
+  <script>
+    const { ipcRenderer } = require('electron');
+    const fs = require('fs');
+    const path = require('path');
+
+    async function run() {
+      const files = ['skills.riv', 'vehicles.riv', 'marty.riv'];
+      const results = {};
+
+      for (const f of files) {
+        try {
+          const filePath = path.join(__dirname, 'assets', f);
+          const buf = fs.readFileSync(filePath);
+          await new Promise((resolve) => {
+            const r = new rive.Rive({
+              buffer: buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength),
+              canvas: document.getElementById('canvas'),
+              autoplay: false,
+              locateFile: (file) => path.join(__dirname, 'assets', file),
+              onLoad: () => {
+                results[f] = {
+                  animations: r.animationNames || [],
+                  stateMachines: r.stateMachineNames || []
+                };
+                if (r.stateMachineNames && r.stateMachineNames.length > 0) {
+                  results[f].inputs = {};
+                  for (const sm of r.stateMachineNames) {
+                    try {
+                      results[f].inputs[sm] = (r.stateMachineInputs(sm) || []).map(inp => ({
+                        name: inp.name,
+                        type: inp.type,
+                        value: inp.value
+                      }));
+                    } catch (err) {
+                      results[f].inputs[sm] = { error: err.message };
+                    }
+                  }
+                }
+                resolve();
+              },
+              onLoadError: (err) => {
+                results[f] = { error: err };
+                resolve();
+              }
+            });
+          });
+        } catch (e) {
+          results[f] = { error: e.message };
+        }
+      }
+
+      ipcRenderer.send('inspect-done', results);
+    }
+
+    window.addEventListener('DOMContentLoaded', run);
+  </script>
+</body>
+</html>

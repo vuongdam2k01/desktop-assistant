@@ -1,0 +1,32 @@
+{
+  "workload": {
+    "job1_bulkRequests": 15,
+    "job2_interactiveRequests": 1,
+    "job3_urgentRequests": 1,
+    "rateLimitRps": 3
+  },
+  "fifo": {
+    "job1_avgWaitMs": 1733,
+    "job1_totalDurationMs": 4121,
+    "job2_waitMs": 4251,
+    "job2_totalMs": 4372,
+    "job3_waitMs": 4515,
+    "job3_totalMs": 4635,
+    "headOfLineBlockingObserved": true
+  },
+  "fairQueue": {
+    "job1_avgWaitMs": 2266,
+    "job1_totalDurationMs": 4787,
+    "job2_waitMs": 252,
+    "job2_totalMs": 374,
+    "job3_waitMs": 516,
+    "job3_totalMs": 637,
+    "headOfLineBlockingPrevented": true,
+    "job2SpeedupRatio": 11.7
+  },
+  "architecturalRecommendation": {
+    "queueLayer": "Connector Gateway / Rate Limiter Service (Singleton in Electron Main Process)",
+    "schedulingAlgorithm": "Deficit Round-Robin / Fair Queueing per Job ID kết hợp Leaky/Token Bucket",
+    "rationale": "Hàng đợi rate limit bắt buộc phải là singleton dùng chung tại tầng Runtime (Connector Gateway) để bảo đảm tổng số request phát ra không vượt quá trần 3 req/s của Notion. Để triệt tiêu hiện tượng Head-of-Line blocking (khi một job background gửi hàng chục request làm đơ job UI tương tác), thuật toán phân phối lượt gọi phải dùng Fair Queueing (Round-robin theo job_id) thay vì FIFO ngây thơ."
+  }
+}

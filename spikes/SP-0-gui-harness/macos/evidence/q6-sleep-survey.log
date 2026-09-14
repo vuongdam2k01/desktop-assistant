@@ -1,0 +1,20 @@
+=== Q6 SCREEN LOCK & SYSTEM SLEEP SURVEY ===
+Current pmset settings:
+System-wide power settings:
+Currently in use:
+ standby              0
+ Sleep On Power Button 1
+ autorestartatconnect 0
+ autorestart          0
+ powernap             1
+ networkoversleep     0
+ disksleep            10
+ sleep                1 (sleep prevented by powerd, screensharingd)
+ ttyskeepawake        1
+ displaysleep         10
+ tcpkeepalive         1
+ womp                 1
+
+Caffeinate test:
+Command: caffeinate -dimsu -t 2
+Caffeinate test exit code: 0

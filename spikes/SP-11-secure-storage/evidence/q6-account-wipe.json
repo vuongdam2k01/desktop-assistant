@@ -1,0 +1,22 @@
+{
+  "spec": "FR-BE-12 (Account Deletion & Local Data Purge)",
+  "preWipeState": {
+    "keyCount": 5,
+    "vaultFileSize": 3603,
+    "fileExists": true
+  },
+  "wipeExecution": {
+    "memoryZeroFillPasses": 1,
+    "diskOverwritePasses": 2,
+    "diskUnlink": true,
+    "wipedKeysCount": 5
+  },
+  "postWipeVerification": {
+    "vaultFileExists": false,
+    "cacheSize": 0,
+    "remainingKeys": [],
+    "queryResult": null,
+    "orphanedOsCredentials": 0,
+    "conclusion": "PASS: 100% of credentials obliterated from memory and disk without leaving any orphaned OS Credential Manager entries."
+  }
+}

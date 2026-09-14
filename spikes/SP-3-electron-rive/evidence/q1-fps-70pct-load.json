@@ -1,0 +1,58 @@
+﻿{
+    "TargetCpuPercent":  70,
+    "ActualAverageCpu":  45.9,
+    "CpuSamples":  [
+                       68.4,
+                       63,
+                       78.9,
+                       84.4,
+                       64,
+                       20.4,
+                       16.6,
+                       17.6,
+                       25,
+                       21.1
+                   ],
+    "StressedMetrics":  {
+                            "currentFps":  60,
+                            "avgFps":  60,
+                            "minFps":  60,
+                            "maxFps":  61,
+                            "p95Fps":  61,
+                            "sampleCount":  20,
+                            "fpsHistory":  [
+                                               61,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60,
+                                               60
+                                           ],
+                            "activeState":  "idle",
+                            "lastTransitionMs":  0,
+                            "transitions":  [
+
+                                            ],
+                            "processMemory":  {
+                                                  "rssMb":  "92.81",
+                                                  "heapTotalMb":  "5.15",
+                                                  "heapUsedMb":  "4.26"
+                                              }
+                        },
+    "PassNfrPf04":  true,
+    "Criterion":  "NFR-PF-04 requires \u003e= 30fps without stutter under ~70% CPU load"
+}

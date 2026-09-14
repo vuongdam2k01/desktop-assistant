@@ -1,0 +1,130 @@
+{
+  "call_id": "1789128362199_0018_PATCH_pages_3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+  "category": "q8_undo_by_id",
+  "timestamp": "2026-09-11T12:06:02Z",
+  "duration_ms": 633,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Status": {
+          "select": {
+            "id": "898c7412-5994-49d4-aa4f-9b9c4b8f3f45"
+          }
+        },
+        "Task Status": {
+          "status": {
+            "id": "2441e731-5bb9-4140-9ed2-3ffc239ec6d7"
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:02 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968b492daa4a45-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=jZ4q09lhBPtO.lzbleU8SU_LXT_59_E0l4fTLkDEuts-1789128362.4334335-1.0.1.1-V92P2L1eT9wbcCDesv8sQnFO895eb1oQFbzyMIrX9m.L4yjtPEkRIh7IL7gPB50srMvCCGzjmNxV3PYnztj52JxrHY.kBy0YfP.vqdfrg8ggJYl21gg9UgRQxw20BB.j; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:02 GMT",
+      "ETag": "W/\"505-BrPkmZheSLmC9l0zMKRZ8tW+IhQ\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "407968ec-b098-4181-9f7d-68db5014873c",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+      "created_time": "2026-09-11T12:05:00.000Z",
+      "last_edited_time": "2026-09-11T12:06:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "2441e731-5bb9-4140-9ed2-3ffc239ec6d7",
+            "name": "In progress",
+            "color": "blue"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": {
+            "id": "898c7412-5994-49d4-aa4f-9b9c4b8f3f45",
+            "name": "Đang làm",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q8 Status vs Select Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q8-Status-vs-Select-Test-3d8c004356ec81589fdde55f81a08a81",
+      "public_url": null,
+      "archived": false,
+      "request_id": "407968ec-b098-4181-9f7d-68db5014873c"
+    },
+    "error": null
+  }
+}

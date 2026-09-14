@@ -1,0 +1,6 @@
+{
+  "beforeOcclusionFps": 60,
+  "occludedFps": 60,
+  "uncoveredFps": 60,
+  "resumedSeamlessly": true
+}

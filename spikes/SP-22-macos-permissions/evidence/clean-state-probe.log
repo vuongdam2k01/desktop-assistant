@@ -1,0 +1,21 @@
+=== macOS TCC & Permission Probe ===
+PID: 14037
+Bundle ID: com.desktopassistant.spike22.test
+Bundle Path: /Users/<user>/projects/desktop-assistant/spikes/SP-22-macos-permissions/src/TestPermissions.app
+Prompt flag: NO
+
+[1] ACCESSIBILITY (kTCCServiceAccessibility):
+    Preflight (AXIsProcessTrusted): NOT TRUSTED (DENIED/NOT_DETERMINED)
+[2] SCREEN RECORDING (kTCCServiceScreenCapture):
+    Preflight (CGPreflightScreenCaptureAccess): DENIED/NOT_DETERMINED
+[3] INPUT MONITORING (kTCCServiceListenEvent):
+    CGEventTapCreate: FAILED / NULL (DENIED / NOT AUTHORIZED)
+[4] AUTOMATION / APPLE EVENTS (kTCCServiceAppleEvents):
+    Target: Finder (PID 1914)
+    AEDeterminePermission: NOT DETERMINED (errAEEventWouldRequireUserConsent = -1744)
+[5] FILES & FOLDERS:
+    AppSupport (/Users/<user>/Library/Application Support/DesktopAssistant): ACCESSIBLE (ZERO PERMISSION NEEDED)
+    Desktop (/Users/<user>/Desktop): ACCESSIBLE
+    Documents (/Users/<user>/Documents): ACCESSIBLE
+
+=== Probe complete ===

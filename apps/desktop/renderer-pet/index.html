@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ws://127.0.0.1:5173 ws://localhost:5173; object-src 'none'; base-uri 'none'"
+    />
+    <title>Pet Window</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        height: 200px;
+        background-color: transparent;
+        overflow: hidden;
+        user-select: none;
+        -webkit-app-region: no-drag;
+      }
+      #pet-stage {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: transparent;
+        overflow: hidden;
+        -webkit-app-region: no-drag;
+      }
+      .pet-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        pointer-events: none;
+      }
+      #pet-canvas-primary {
+        z-index: 1;
+        opacity: 1;
+      }
+      #pet-canvas-secondary {
+        z-index: 2;
+        opacity: 0;
+      }
+      #pet-drag-region {
+        position: absolute;
+        left: 44px;
+        top: 68px;
+        width: 112px;
+        height: 116px;
+        -webkit-app-region: drag;
+        cursor: grab;
+        z-index: 10;
+        background: transparent;
+      }
+      #pet-badge-slot {
+        position: absolute;
+        top: 24px;
+        right: 4px;
+        width: 44px;
+        height: 44px;
+        pointer-events: none;
+        -webkit-app-region: no-drag;
+        z-index: 20;
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="pet-stage"
+      data-contract-version="2.0.0"
+      data-render-status="initializing"
+      data-active-pack=""
+      data-work-status="0"
+      data-locomotion="0"
+      data-fps="0"
+    >
+      <canvas id="pet-canvas-primary" class="pet-canvas" width="200" height="200"></canvas>
+      <canvas id="pet-canvas-secondary" class="pet-canvas" width="200" height="200"></canvas>
+      <div id="pet-drag-region"></div>
+      <div id="pet-badge-slot"></div>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

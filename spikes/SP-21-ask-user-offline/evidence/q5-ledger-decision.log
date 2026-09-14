@@ -1,0 +1,45 @@
+================================================================================
+SPIKE SP-21 / Q5: KIỂM CHỨNG BẢN GHI LEDGER LOẠI 'decision' (Phụ lục A.5 mục 4)
+Yêu cầu: Bản ghi decision chứa: question, options, câu trả lời, nguồn trả lời, thời điểm.
+================================================================================
+
+1. TẠO BẢN GHI DECISION 1 TỪ BUBBLE (Ô THOẠI):
+  - Người dùng bấm chọn option 'Linh Nguyen' trên ô thoại (bubble)
+  - Decision 1 ID: 8c6b19dd-94d3-479c-9382-694a754a2311
+  - Job ID: job-decision-bubble
+  - Question: "Bạn muốn assign task cho ai?"
+  - Options: [{"id":"u_linh","label":"Linh Nguyen","description":"Tech Lead"},{"id":"u_nam","label":"Nam Tran","description":"Backend Dev"}]
+  - Answer: {"option_id":"u_linh"}
+  - Answer Source: "bubble"
+  - Created At (Thời điểm): "2026-09-12T05:08:45.145Z"
+
+2. TẠO BẢN GHI DECISION 2 TỪ APP WINDOW (CỬA SỔ APP):
+  - Người dùng gõ text tự do trên cửa sổ App: 'Hoãn sang Thứ Ba vì vướng release'
+  - Decision 2 ID: 5c009eac-b0d3-4a08-b324-d0b13179b3d8
+  - Job ID: job-decision-app
+  - Question: "Xác nhận thời hạn hoàn thành sprint:"
+  - Options: [{"id":"opt_fri","label":"Thứ Sáu 17h"},{"id":"opt_mon","label":"Thứ Hai tuần sau"}]
+  - Answer: {"text":"Hoãn sang Thứ Ba vì vướng release"}
+  - Answer Source: "app"
+  - Created At (Thời điểm): "2026-09-12T05:08:45.150Z"
+
+3. TRUY VẤN VÀ ĐỐI CHIẾU TRỰC TIẾP TỪ SQLITE:
+  - Số lượng bản ghi decision của job 1: 1
+  - Trường 'question': ĐẦY ĐỦ VÀ CHÍNH XÁC ✅
+  - Trường 'options': ĐẦY ĐỦ VÀ CHÍNH XÁC ✅
+  - Trường 'answer': ĐẦY ĐỦ VÀ CHÍNH XÁC ✅
+  - Trường 'answer_source': ĐẦY ĐỦ VÀ CHÍNH XÁC ✅
+  - Trường 'created_at (thời điểm)': ĐẦY ĐỦ VÀ CHÍNH XÁC ✅
+
+4. KIỂM TRA BẢO VỆ APPEND-ONLY (TRIGGER CHẶN UPDATE/DELETE TRÊN BẢN GHI DECISION):
+  - UPDATE bị chặn: APPEND_ONLY_VIOLATION: decisions cannot be updated -> PASS ✅
+  - DELETE bị chặn: APPEND_ONLY_VIOLATION: decisions cannot be deleted -> PASS ✅
+
+5. KẾT LUẬN Q5:
+  - Bản ghi loại 'decision' ghi nhận đầy đủ 5/5 trường bắt buộc theo Phụ lục A.5 mục 4:
+    1. question (chuỗi câu hỏi gộp)
+    2. options (danh sách 0-4 lựa chọn kèm label/desc)
+    3. câu trả lời (option_id hoặc text)
+    4. nguồn trả lời ('bubble' từ ô thoại pet hoặc 'app' từ cửa sổ chính)
+    5. thời điểm (timestamp ISO 8601)
+  - Bản ghi được bảo vệ bởi trigger append-only SQLite, không thể bị sửa/xoá.

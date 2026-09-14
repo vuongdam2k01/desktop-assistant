@@ -1,0 +1,41 @@
+{
+  "evaluatedLibraries": [
+    {
+      "name": "Electron safeStorage",
+      "status": "RECOMMENDED (PRODUCTION READY)",
+      "maintenance": "Active (Core Electron API, maintained by Electron team)",
+      "mechanism": "Windows DPAPI + AES-256-GCM (v10 format)",
+      "sizeLimit": "No artificial limit (tested up to 1 MB+ seamlessly)",
+      "nativeDependency": "None (built into Electron binary, zero ABI rebuild issues)",
+      "userIsolation": "Enforced via Windows DPAPI Master Key (tied to SID + logon password)",
+      "systemUiPollution": "Zero (ciphertext stored privately in app DB/file, invisible in Control Panel)",
+      "accountWipe": "100% clean (deleting DB/file leaves zero orphaned credentials in OS)"
+    },
+    {
+      "name": "keytar (github.com/atom/node-keytar)",
+      "status": "DEPRECATED / ARCHIVED",
+      "maintenance": "Archived by GitHub in 2022. No further updates.",
+      "mechanism": "Native C++ binding to Advapi32.dll (Windows Credential Manager)",
+      "sizeLimit": "2560 bytes hard limit per entry",
+      "nativeDependency": "Heavy (native C++ node-gyp module, frequently breaks on Node/Electron ABI upgrades)",
+      "userIsolation": "Enforced per Windows user account",
+      "systemUiPollution": "High (every key appears in Control Panel > Credential Manager)",
+      "accountWipe": "Error-prone (requires manual enumeration; orphaned keys persist if target name is lost)"
+    },
+    {
+      "name": "Windows Credential Manager (Native Win32)",
+      "status": "NOT RECOMMENDED FOR ARBITRARY CREDENTIALS",
+      "maintenance": "Built-in OS API",
+      "mechanism": "Advapi32.dll CredWrite / CredRead",
+      "sizeLimit": "Hard limit 2560 bytes (CRED_MAX_GENERIC_CREDENTIAL_BLOB_SIZE). Win32 Error 1783 on exceed.",
+      "nativeDependency": "Requires custom native addon or P/Invoke wrapper",
+      "userIsolation": "Enforced per Windows user account",
+      "systemUiPollution": "High (entries visible in Control Panel)",
+      "accountWipe": "Requires enumeration loops"
+    }
+  ],
+  "vsCodeReference": {
+    "precedent": "VS Code previously used keytar, but deprecated and completely removed it in 2022 (VS Code PR #167098) in favor of Electron safeStorage.",
+    "rationale": "Eliminated native build failures across ABI versions, removed Credential Manager size boundaries, and prevented OS credential clutter."
+  }
+}

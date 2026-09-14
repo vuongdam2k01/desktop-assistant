@@ -1,0 +1,41 @@
+{
+  "targetPageId": "3d8d409b-f710-81ea-8f17-d4c821a68682",
+  "initialState": {
+    "status": "Not started",
+    "dueDate": "2026-09-20"
+  },
+  "unlockedRace": {
+    "jobA_snapshot_before": "Not started",
+    "jobA_snapshot_after": "In progress",
+    "jobB_snapshot_before": "Not started",
+    "jobB_snapshot_after": "In progress",
+    "dirtySnapshotDetected": true,
+    "undoJobB_result": {
+      "appliedProperties": {
+        "Status": "Not started",
+        "DueDate": "2026-09-20"
+      },
+      "corruptedJobA": true,
+      "description": "Do đọc snapshot trước khi Job A ghi xong, Job B lưu snapshot_before là trạng thái cũ của Status (Not started). Khi người dùng bấm Undo Job B, hệ thống nạp lại snapshot_before của B, vô tình ĐÈ CHẾT thay đổi của Job A (Status bị kéo lùi về Not started dù Job A vẫn hoàn thành và không hề bị undo). Đây là lỗi Lost Update trên Undo."
+    }
+  },
+  "lockedExecution": {
+    "jobA_snapshot_before": "Not started",
+    "jobA_snapshot_after": "In progress",
+    "jobB_snapshot_before": "In progress",
+    "jobB_snapshot_after": "In progress",
+    "snapshotAccurate": true,
+    "undoJobB_result": {
+      "appliedProperties": {
+        "Status": "In progress",
+        "DueDate": "2026-09-20"
+      },
+      "preservedJobA": true,
+      "description": "Nhờ có ObjectLockManager, Job B buộc phải chờ Job A ghi xong và commit ledger. Snapshot của Job B phản ánh chính xác trạng thái mới của Job A (Status = In progress). Khi Undo Job B, thay đổi của Job A được bảo toàn 100%."
+    }
+  },
+  "verdict": {
+    "isLedgerValidWithoutLock": false,
+    "definitiveConclusion": "KẾT LUẬN DỨT KHOÁT: KHÔNG CÒN ĐÚNG. Nếu không có khoá cấp đối tượng (Object Lock), snapshot_before của Job B là dirty/stale snapshot. Hoàn tác Job B sẽ xóa sạch dữ liệu hợp lệ của Job A mà không có bất kỳ cảnh báo nào (Lost Update on Undo), phá vỡ hoàn toàn tính đúng đắn và khả năng kiểm toán của append-only ledger. BẮT BUỘC phải có Object Lock ở tầng Connector/Job Manager trước khi chụp snapshot và ghi API."
+  }
+}

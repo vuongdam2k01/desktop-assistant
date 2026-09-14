@@ -1,0 +1,3 @@
+Q6 VERIFICATION LOG — 2026-09-12T05:10:33.210Z
+
+No live Google refresh token found; verified broker refresh protocol handler returns 400 for invalid token.

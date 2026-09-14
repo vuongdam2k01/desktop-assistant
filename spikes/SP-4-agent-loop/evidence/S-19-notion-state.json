@@ -1,0 +1,127 @@
+{
+  "workspace": "A",
+  "timestamp": "2026-09-11T15:41:40.933Z",
+  "tasks": [
+    {
+      "id": "3d8c0043-56ec-81d6-a47e-d79e3c9a8f77",
+      "title": "Review spec checkout: Cart",
+      "status": "Not started",
+      "due_date": "2026-09-16",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-81cc-a3ce-c19915167a49",
+      "title": "Review spec checkout: Order confirmation",
+      "status": "Not started",
+      "due_date": "2026-09-16",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-81cd-8157-ca0475016656",
+      "title": "Review spec checkout: Overview",
+      "status": "Not started",
+      "due_date": "2026-09-16",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-819d-9641-cbbbccdbcd21",
+      "title": "Review spec checkout: Payment",
+      "status": "Not started",
+      "due_date": "2026-09-16",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-81ef-a180-e01e08950443",
+      "title": "Chuẩn bị demo Vinmart",
+      "status": "Not started",
+      "due_date": "2026-09-22",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-811a-81f3-c77ce4b3ac16",
+      "title": "Họp retro sprint 14",
+      "status": "Not started",
+      "due_date": "2026-09-16",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-81a8-981a-e7bb88418cdb",
+      "title": "Fix bug đăng nhập SSO",
+      "status": "In progress",
+      "due_date": "2026-09-18",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-8193-9001-c620c180256a",
+      "title": "Gửi report tuần cho Linh",
+      "status": "Not started",
+      "due_date": "2026-09-12",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-81fa-a26d-db5e0223d92f",
+      "title": "Review PR #212 của Hùng",
+      "status": "Not started",
+      "due_date": "2026-09-11",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8c0043-56ec-8112-9a40-dc06f004ee8e",
+      "title": "Viết docs API HR portal",
+      "status": "In progress",
+      "due_date": "2026-09-15",
+      "priority": "",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    }
+  ],
+  "projects": []
+}

@@ -1,0 +1,32 @@
+{
+  "testTimestamp": "2026-09-12T02:02:47.000Z",
+  "testedImage": "spikes/SP-4-agent-loop/evidence/s16-slack-hr.png",
+  "prompt": "Trong ảnh này viết những gì?",
+  "results": {
+    "seed-2-0-pro-260328": {
+      "modelName": "Seed 2.0 Pro",
+      "visionSupported": true,
+      "httpStatus": 200,
+      "parsedContent": "Header: # hr-portal | Company Workspace. Sender: Tuan Pham (11:03 AM). 3 tasks: 1) Sửa lỗi sập/treo khi tải ảnh đại diện người dùng; 2) Viết bộ kiểm thử cho module tính lương; 3) Cập nhật tài liệu hướng dẫn đón nhân sự mới của bộ phận Nhân sự (Drive). Reaction: +1.",
+      "tokens": { "promptTokens": 1327, "completionTokens": 842, "totalTokens": 2169 }
+    },
+    "deepseek-v4-flash-ga-260731": {
+      "modelName": "DeepSeek V4 Flash",
+      "visionSupported": false,
+      "httpStatus": 400,
+      "errorCode": "InvalidParameter",
+      "errorMessage": "Model do not support image input. Request id: 02178917856585615b33ccaa151d3ed7feaaa761bc71c3773b831",
+      "param": "image_url",
+      "piSdkBehavior": "Stream yields no text events, totalTokens: 0, silent refusal"
+    },
+    "deepseek-v4-pro-ga-260813": {
+      "modelName": "DeepSeek V4 Pro",
+      "visionSupported": false,
+      "httpStatus": 400,
+      "errorCode": "InvalidParameter",
+      "errorMessage": "Model do not support image input. Request id: 02178917856725315b33ccaa151d3ed7feaaa761bc71c379dfe81",
+      "param": "image_url",
+      "piSdkBehavior": "Stream yields no text events, totalTokens: 0, silent refusal"
+    }
+  }
+}

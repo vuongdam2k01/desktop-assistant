@@ -1,0 +1,199 @@
+{
+  "call_id": "1789128441959_0231_GET_databases_3d8c0043-56ec-81cf-a480-e9e679285df6",
+  "category": "q8_get_db_schema",
+  "timestamp": "2026-09-11T12:07:22Z",
+  "duration_ms": 673,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/databases/3d8c0043-56ec-81cf-a480-e9e679285df6",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:22 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968d3badb40728-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=pVt2bAU1FUyRl1In58vb.iNMVqzDYfdVayri_5pc_9c-1789128442.192098-1.0.1.1-UxOk_LDxjDfr2E43tLgQkXJfXXyxL4qnhNkiPQwSDwXl_RN6VpY1_x_FSZftAkYjzoUuOLPpvB4go4DULSNDeDq.M.j6C0teSFUgqqtdT9ymlP9a5qBXV1zouq5Q9I_I; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:22 GMT",
+      "ETag": "W/\"9a6-mIzyHGcNpefAjHbrdscFW148d1s\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "a0649ece-94a1-4f4d-85b3-b1e76738ee65",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "database",
+      "id": "3d8c0043-56ec-81cf-a480-e9e679285df6",
+      "cover": null,
+      "icon": null,
+      "created_time": "2026-09-11T10:54:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_time": "2026-09-11T12:07:00.000Z",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Tasks",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Tasks",
+          "href": null
+        }
+      ],
+      "description": [],
+      "is_inline": false,
+      "database_type": null,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "name": "Due date",
+          "description": null,
+          "type": "date",
+          "date": {}
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "name": "Task Status",
+          "description": null,
+          "type": "status",
+          "status": {
+            "options": [
+              {
+                "id": "5f9885ba-7007-4fbb-a946-70324a88bfc6",
+                "name": "Not started",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "2441e731-5bb9-4140-9ed2-3ffc239ec6d7",
+                "name": "In progress",
+                "color": "blue",
+                "description": null
+              },
+              {
+                "id": "179803ea-b4d3-4538-81cb-38991e635d8b",
+                "name": "Done",
+                "color": "green",
+                "description": null
+              }
+            ],
+            "groups": [
+              {
+                "id": "675fb6c7-a333-4b4c-95a7-fd75aef6458b",
+                "name": "To-do",
+                "color": "gray",
+                "option_ids": [
+                  "5f9885ba-7007-4fbb-a946-70324a88bfc6"
+                ]
+              },
+              {
+                "id": "89e9d677-03bd-4cd1-91fe-ebd520b7c884",
+                "name": "In progress",
+                "color": "blue",
+                "option_ids": [
+                  "2441e731-5bb9-4140-9ed2-3ffc239ec6d7"
+                ]
+              },
+              {
+                "id": "3227b7aa-9e40-4606-a072-fdf8ca16cf4c",
+                "name": "Complete",
+                "color": "green",
+                "option_ids": [
+                  "179803ea-b4d3-4538-81cb-38991e635d8b"
+                ]
+              }
+            ]
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "name": "Status",
+          "description": null,
+          "type": "select",
+          "select": {
+            "options": [
+              {
+                "id": "108827de-b2e1-4444-ba38-fcd37b77626d",
+                "name": "Backlog",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "898c7412-5994-49d4-aa4f-9b9c4b8f3f45",
+                "name": "Đang làm",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "37d1f5bc-0971-4b46-af9f-5a398c98d39c",
+                "name": "Chờ review",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "88d638d8-e6f4-447b-94cd-9882e9634bac",
+                "name": "Xong",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "2d1ce1f0-b8d7-4cf0-b500-0a0f08cca9df",
+                "name": "Tùy biến mới lạ",
+                "color": "purple",
+                "description": null
+              }
+            ]
+          }
+        },
+        "Name": {
+          "id": "title",
+          "name": "Name",
+          "description": null,
+          "type": "title",
+          "title": {}
+        }
+      },
+      "parent": {
+        "type": "page_id",
+        "page_id": "3d8c0043-56ec-8048-b55b-e5d65d40a401"
+      },
+      "url": "https://app.notion.com/p/3d8c004356ec81cfa480e9e679285df6",
+      "public_url": null,
+      "in_trash": false,
+      "archived": false,
+      "request_id": "a0649ece-94a1-4f4d-85b3-b1e76738ee65"
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,42 @@
+﻿{
+    "Timestamp":  "2026-09-12 11:01:58",
+    "Q10_WindowEnumerationCount":  11,
+    "Q11_ForegroundHook":  {
+                               "EventsCount":  2,
+                               "CpuOverheadPct":  0.503,
+                               "Status":  "PASS"
+                           },
+    "Q12_PerchTracking":  {
+                              "AvgLatencyMs":  5.11,
+                              "Status":  "PASS"
+                          },
+    "Q13_HighlightPointing":  {
+                                  "TargetWindow":  "Notepad",
+                                  "TargetHwnd":  2361946,
+                                  "TargetBounds":  {
+                                                       "Y":  190,
+                                                       "Width":  332,
+                                                       "Height":  202,
+                                                       "X":  190
+                                                   },
+                                  "PetPosition":  {
+                                                      "Y":  10,
+                                                      "X":  230
+                                                  },
+                                  "PointingVector":  {
+                                                         "Dx":  26,
+                                                         "Dy":  120,
+                                                         "AngleDeg":  45
+                                                     },
+                                  "HighlightBorder":  "2px solid rgba(99, 102, 241, 0.8)",
+                                  "Feasibility":  "FEASIBLE"
+                              },
+    "Q14_CaretDetection":  {
+                               "found":  true,
+                               "strategy":  "UIAutomationControlBounds",
+                               "x":  750,
+                               "y":  572,
+                               "width":  62,
+                               "height":  48
+                           }
+}

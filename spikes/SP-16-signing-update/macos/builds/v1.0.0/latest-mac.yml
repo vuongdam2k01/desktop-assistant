@@ -1,0 +1,11 @@
+version: 1.0.0
+files:
+  - url: DesktopAssistantSpikeMac-1.0.0-arm64-mac.zip
+    sha512: EVJviJwsxtPnxwVb9h0/ZJTPPQGveI+/eIVKT+KSPkc3ZFE1suyhO91D88t5QykYlmtn7VB2QEPm9nwcFhfdlQ==
+    size: 126712016
+  - url: DesktopAssistantSpikeMac-1.0.0-arm64.dmg
+    sha512: g29ctj2UHGFmTnGfqpYPpORguWEsAYK+fjL2WStDKMmXu6TTwTstM7bFhxpICZfNoS2mPI8koltK01aRRYiS3g==
+    size: 127002554
+path: DesktopAssistantSpikeMac-1.0.0-arm64-mac.zip
+sha512: EVJviJwsxtPnxwVb9h0/ZJTPPQGveI+/eIVKT+KSPkc3ZFE1suyhO91D88t5QykYlmtn7VB2QEPm9nwcFhfdlQ==
+releaseDate: '2026-09-13T14:38:47.855Z'

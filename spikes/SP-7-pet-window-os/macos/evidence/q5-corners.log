@@ -1,0 +1,94 @@
+==========================================================
+SP-7 / Q5 CORNERS & WORKAREA ADAPTATION TEST (macOS)
+Timestamp: 2026-09-13T13:37:59Z
+==========================================================
+Corner positions and bounds verification:
+{
+    "status": "ok",
+    "workArea": {
+        "x": 0,
+        "y": 30,
+        "width": 1920,
+        "height": 960
+    },
+    "corners": [
+        {
+            "corner": "top-left",
+            "pet": {
+                "x": 0,
+                "y": 30,
+                "w": 140,
+                "h": 140
+            },
+            "card": {
+                "x": 150,
+                "y": 40,
+                "width": 340,
+                "height": 220
+            },
+            "insideWorkArea": true
+        },
+        {
+            "corner": "top-right",
+            "pet": {
+                "x": 1780,
+                "y": 30,
+                "w": 140,
+                "h": 140
+            },
+            "card": {
+                "x": 1430,
+                "y": 40,
+                "width": 340,
+                "height": 220
+            },
+            "insideWorkArea": true
+        },
+        {
+            "corner": "bottom-left",
+            "pet": {
+                "x": 0,
+                "y": 850,
+                "w": 140,
+                "h": 140
+            },
+            "card": {
+                "x": 150,
+                "y": 770,
+                "width": 340,
+                "height": 220
+            },
+            "insideWorkArea": true
+        },
+        {
+            "corner": "bottom-right",
+            "pet": {
+                "x": 1780,
+                "y": 850,
+                "w": 140,
+                "h": 140
+            },
+            "card": {
+                "x": 1430,
+                "y": 770,
+                "width": 340,
+                "height": 220
+            },
+            "insideWorkArea": true
+        }
+    ]
+}
+
+[Corner: top-left] Moving pet to (0, 30)...
+Screenshot saved: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q5-corner-top-left.png
+
+[Corner: top-right] Moving pet to (1780, 30)...
+Screenshot saved: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q5-corner-top-right.png
+
+[Corner: bottom-left] Moving pet to (0, 850)...
+Screenshot saved: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q5-corner-bottom-left.png
+
+[Corner: bottom-right] Moving pet to (1780, 850)...
+Screenshot saved: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q5-corner-bottom-right.png
+
+Q5 Corner Test Complete. All 4 corners verified inside workArea.

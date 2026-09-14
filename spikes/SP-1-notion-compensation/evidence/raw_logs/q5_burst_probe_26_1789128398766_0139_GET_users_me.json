@@ -1,0 +1,61 @@
+{
+  "call_id": "1789128398766_0139_GET_users_me",
+  "category": "q5_burst_probe_26",
+  "timestamp": "2026-09-11T12:06:39Z",
+  "duration_ms": 389,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/users/me",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:39 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "364",
+      "Connection": "close",
+      "CF-Ray": "a3968c2d3bd64a24-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"16c-KnGWvp1PEbFULrI9H1BkX1ThjUw\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "b000d258-0e62-45e8-8b66-3fed3ba63fb8",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=ab7cdAnBJEhJag8wFjn4TN1ej8MWksjPOu_ad7Z9F.4-1789128398.9196498-1.0.1.1-7QWXHFO0JVc2_aXjU78a1WY_ZTmTVW1KkTHFj7ms3OLva7TB8JVQ7CraVReDeBsGuS39ImXBMO86IFOgnVgaHEsgUJYozjohcGoqbjKXBRzNHhDi.Ed2OF7BqNWkLkUN; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:39 GMT"
+    },
+    "body": {
+      "object": "user",
+      "id": "3d8c0043-56ec-814e-a28e-00276c461f30",
+      "name": "spike-a",
+      "avatar_url": null,
+      "type": "bot",
+      "bot": {
+        "owner": {
+          "type": "workspace",
+          "workspace": true
+        },
+        "workspace_name": "spike-a-simple",
+        "workspace_id": "c08c0043-56ec-81c6-8c5e-00039b9f22d4",
+        "workspace_limits": {
+          "max_file_upload_size_in_bytes": 5242880
+        }
+      },
+      "request_id": "b000d258-0e62-45e8-8b66-3fed3ba63fb8"
+    },
+    "error": null
+  }
+}

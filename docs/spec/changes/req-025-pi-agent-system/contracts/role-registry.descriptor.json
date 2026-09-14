@@ -1,0 +1,17 @@
+{
+  "descriptorVersion": "0.1.0",
+  "storeId": "role-registry",
+  "version": "1.0.0",
+  "name": "Role registry",
+  "encryptionClass": "mutable",
+  "resolutionRule": "last-writer-wins-with-preservation",
+  "orderingBasis": "device-sequence-causal",
+  "retention": {
+    "minimumDays": 1,
+    "userConfigurable": false,
+    "deletionRequiresConfirmation": true
+  },
+  "membership": "The account's own role entries: for each, the whole entry document as validated against contracts/role-registry.schema.json. Built-in entries are excluded — they are the product's data, identical for every account, and are re-materialised at every start rather than carried between devices, which is also what makes it impossible for a replicated record to redefine one. A capability pack's contributed entries are excluded too: they belong to that pack's activation state and arrive and depart with it. The assignment of a tier to a model is excluded — that is the routing table, a store of its own — and so is the skill catalogue's enabled state and the packs' activation state, each of which registers its own descriptor.",
+  "supersededTarget": "role-registry",
+  "eraseOnSignout": true
+}

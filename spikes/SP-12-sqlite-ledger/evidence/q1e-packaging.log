@@ -1,0 +1,19 @@
+﻿=== Q1e: electron-builder PACKAGING LOG ===
+Command: electron-builder --win --dir
+Time Elapsed: 34.6886537s
+Output:
+  ΓÇó electron-builder  version=26.15.3 os=10.0.26200
+  ΓÇó loaded configuration  file=package.json ("build" field)
+  ΓÇó executing @electron/rebuild  electronVersion=44.3.0 arch=x64 buildFromSource=false workspaceRoot=C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\src\packaging-test projectDir=./ appDir=./
+  ΓÇó installing native dependencies  arch=x64
+  ΓÇó preparing       moduleName=better-sqlite3 arch=x64
+  ΓÇó finished        moduleName=better-sqlite3 arch=x64
+  ΓÇó completed installing native dependencies
+  ΓÇó packaging       platform=win32 arch=x64 electron=44.3.0 appOutDir=dist\win-unpacked
+  ΓÇó downloaded      label=electron progress=100%
+  ΓÇó downloaded electron zip extracted successfully  output=C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\src\packaging-test\dist\win-unpacked
+  ΓÇó searching for node modules  pm=npm searchDir=C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\src\packaging-test
+  ΓÇó updating asar integrity executable resource  executablePath=dist\win-unpacked\sp12-packaging-test.exe
+  ΓÇó default Electron icon is used  reason=application icon is not set
+  ΓÇó signing with signtool.exe  path=dist\win-unpacked\sp12-packaging-test.exe
+

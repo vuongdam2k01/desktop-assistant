@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>SP-0 Electron Minimal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body {
+      background: transparent;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
+    .card {
+      background: rgba(22, 27, 34, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(88, 166, 255, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+      width: 400px;
+      color: #f0f6fc;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 16px rgba(56, 139, 253, 0.25);
+      text-align: center;
+      -webkit-app-region: drag;
+    }
+    .badge {
+      display: inline-block;
+      background: #238636;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #58a6ff;
+    }
+    p {
+      font-size: 13px;
+      color: #8b949e;
+      line-height: 1.5;
+    }
+    .footer {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #3fb950;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">SP-0 · GUI HARNESS</div>
+    <h1>Electron Minimal Window</h1>
+    <p>Transparent • Frameless • Always-On-Top</p>
+    <div class="footer">✓ Verified Native Desktop Rendering</div>
+  </div>
+</body>
+</html>

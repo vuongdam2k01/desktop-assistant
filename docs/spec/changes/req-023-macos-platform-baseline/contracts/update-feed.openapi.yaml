@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Update Feed
+  version: 1.1.0
+  description: >-
+    The static, unauthenticated HTTP surface a released application reads to learn whether a newer version
+    exists and to fetch it. It is deliberately the dumbest surface in the product: two reads, no session, no
+    identity, nothing the server decides. Version 1.1.0 widens the key of the feed from one dimension to two, so
+    that a manifest describes one release for one operating system and one processor architecture rather than
+    one release outright — a client is then never offered a package its own updater cannot apply. Trust is
+    still established on the device, by checking the downloaded bytes against the digest in the manifest and
+    the downloaded package against the trust provider of the operating system, with the added condition on
+    macOS that a package whose signing identity differs from that of the installed application is refused rather
+    than installed. Range support is required rather than optional, because a partially downloaded package
+    that cannot be resumed is downloaded again from the start on a connection that already failed once.
+servers:
+  - url: https://updates.example.invalid
+    description: >-
+      Placeholder. The origin is configuration, and moving the release to another origin or content
+      distribution network is a PATCH change to this contract, because nothing here depends on which host
+      answers.
+paths:
+  /updates/{manifest}:
+    get:
+      operationId: getLatestManifest
+      summary: Read the manifest describing the most recent release for one operating system and architecture.
+      description: >-
+        Served as YAML with no authentication and no cryptographic signature of its own. The client reads the
+        manifest belonging to the machine it runs on; a client written against 1.0.0 reads `latest.yml` and
+        continues to receive the Windows feed, which is what that name meant. The shape of the manifest is
+        update-feed.schema.json, and its integrity is established by what follows it rather than by how it
+        arrived.
+      parameters:
+        - name: manifest
+          in: path
+          required: true
+          description: >-
+            The manifest name for the operating system and architecture of the reader — `latest.yml` for Windows,
+            `latest-mac.yml` for macOS, with the architecture carried inside the document. The set of names is
+            closed: a name outside it is a 404 rather than a search.
+          schema:
+            type: string
+            enum: [latest.yml, latest-mac.yml]
+      responses:
+        '200':
+          description: The manifest for the current release on that operating system.
+          content:
+            text/yaml:
+              schema:
+                $ref: "./update-feed.schema.json"
+        '404':
+          description: >-
+            No manifest is published for that operating system. The client treats this as no update available
+            and says nothing to the user, because a platform that has published nothing yet is not a failure.
+            This is also what a release published for one operating system alone looks like to the other.
+        '500':
+          description: >-
+            The origin failed. The check is abandoned until the next one; a failed check never interrupts
+            work and never reports an update the client could not read.
+  /updates/{filename}:
+    get:
+      operationId: getReleaseArtifact
+      summary: Fetch a release artifact named by the manifest.
+      description: >-
+        Returns the package or its block map as a byte stream. The name comes from the manifest rather than
+        from anything the client composes, so this path exposes only what a published manifest already names.
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          description: The artifact name, exactly as the manifest carries it.
+          schema:
+            type: string
+        - name: Range
+          in: header
+          required: false
+          description: >-
+            Byte range, written as "bytes=0-1048575". Support is required: it is what lets an interrupted
+            download resume and what lets a differential download fetch only the blocks that changed.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The whole artifact.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '206':
+          description: The requested byte range of the artifact.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: >-
+            No such artifact. The update fails cleanly and the partially downloaded file, if any, is deleted
+            rather than kept for a later attempt against a manifest that may have moved on.
+        '416':
+          description: >-
+            The requested range lies outside the artifact. The client restarts the download from the
+            beginning rather than assembling a file from ranges it could not verify.

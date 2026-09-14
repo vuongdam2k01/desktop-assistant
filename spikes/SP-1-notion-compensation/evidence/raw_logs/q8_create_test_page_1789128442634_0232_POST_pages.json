@@ -1,0 +1,128 @@
+{
+  "call_id": "1789128442634_0232_POST_pages",
+  "category": "q8_create_test_page",
+  "timestamp": "2026-09-11T12:07:23Z",
+  "duration_ms": 462,
+  "request": {
+    "method": "POST",
+    "url": "https://api.notion.com/v1/pages",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "parent": {
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "properties": {
+        "Name": {
+          "title": [
+            {
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:23 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968d3f2d8a4a01-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=krUy2dQktsQAhx3QInMI.YctrgBwOe.IrhkhwUickJo-1789128442.7494256-1.0.1.1-Zs2FuR.YtuRB0Wr_j0pMJnkvEk89lgOgaXXUA3ZCQkD.VZH1MB8IOIx1Lu8JRxWjkngNcbj4u5vr0vtZoRIfZ4j_kkkUpvLhhQbrfCyWrsGcf0W7Py4ghPRuLjrksDM2; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:23 GMT",
+      "ETag": "W/\"4b9-x3/4FF5g0AaZxvwOlzTJJwTEdNI\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "71a80b10-beb4-41e1-84fc-0e52b4192b71",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-81b9-bf91-e99eeacd77cf",
+      "created_time": "2026-09-11T12:07:00.000Z",
+      "last_edited_time": "2026-09-11T12:07:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "5f9885ba-7007-4fbb-a946-70324a88bfc6",
+            "name": "Not started",
+            "color": "default"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": null
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q8 Status vs Select Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q8-Status-vs-Select-Test-3d8c004356ec81b9bf91e99eeacd77cf",
+      "public_url": null,
+      "archived": false,
+      "request_id": "71a80b10-beb4-41e1-84fc-0e52b4192b71"
+    },
+    "error": null
+  }
+}

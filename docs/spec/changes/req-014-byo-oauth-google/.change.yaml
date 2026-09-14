@@ -1,0 +1,9 @@
+schema: design
+created: 2026-09-12
+kind: B
+skip_specs: false
+depends_on:
+  - req-019-connector-framework
+  - req-012-secure-storage
+  - req-022-account-sync
+synced_at: "2026-09-12T19:52:07.390Z"

@@ -1,0 +1,44 @@
+================================================================================
+SPIKE SP-21 / Q1: KIỂM CHỨNG HỢP ĐỒNG THAM SỐ ask_user (FR-INT-07, Phụ lục A.5)
+Yêu cầu: question (string), options[] {id, label, description?} (0-4), allow_free_text (default: true)
+================================================================================
+
+1. KIỂM THỬ SCHEMA ĐƠN VỊ (TypeBox Contract):
+  - Valid minimal (chỉ có question): PASS ✅
+  - Valid full (3 options <= 30 ký tự, allow_free_text: true): PASS ✅
+  - allow_free_text mặc định khi không truyền: true (Kỳ vọng: true) -> PASS ✅
+  - Invalid case: 5 options (> 4 maxItems): PASS ✅ (Bị từ chối chính xác)
+  - Invalid case: label > 30 ký tự: PASS ✅ (Bị từ chối chính xác)
+
+2. KIỂM THỬ GỌI TOOL ask_user BỞI AGENT THẬT (LLM Calling):
+  Gửi lệnh: 'Tạo giúp tôi task 'Chuẩn bị tài liệu Release v1.0', nhưng tôi chưa nói rõ độ ưu tiên'
+  Chờ agent sinh tool call ask_user...
+
+  [BẰNG CHỨNG NHẬN ĐƯỢC TỪ AGENT THẬT]:
+  - Tool name: ask_user
+  - question: "Task "Chuẩn bị tài liệu Release v1.0" nên có mức độ ưu tiên nào?"
+  - options count: 3
+  - options payload: [
+  {
+    "id": "high",
+    "label": "Cao",
+    "description": "Cần hoàn thành sớm, ưu tiên hàng đầu"
+  },
+  {
+    "id": "normal",
+    "label": "Bình thường",
+    "description": "Mức độ ưu tiên trung bình"
+  },
+  {
+    "id": "low",
+    "label": "Thấp",
+    "description": "Có thể làm sau, không gấp"
+  }
+]
+  - allow_free_text: true
+  - Đối chiếu payload của LLM với AskUserSchema: KHỚP 100% ✅
+
+3. KẾT LUẬN Q1:
+  - Tool ask_user nhận đúng tham số có cấu trúc: question, options[] {id, label, description?}, allow_free_text mặc định true.
+  - Ràng buộc 0–4 options và label <= 30 ký tự được thực thi chính xác bởi TypeBox.
+  - Model LLM sinh đúng chuẩn tham số khi thiếu thông tin then chốt.

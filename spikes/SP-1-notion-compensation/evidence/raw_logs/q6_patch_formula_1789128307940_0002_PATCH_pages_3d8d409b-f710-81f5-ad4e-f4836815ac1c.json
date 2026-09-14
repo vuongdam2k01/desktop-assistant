@@ -1,0 +1,57 @@
+{
+  "call_id": "1789128307940_0002_PATCH_pages_3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+  "category": "q6_patch_formula",
+  "timestamp": "2026-09-11T12:05:08Z",
+  "duration_ms": 485,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Days left": {
+          "formula": {
+            "number": 99
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 400,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:08 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a39689f5ecdb4a84-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=1P_FBtUbA1pFPT6NQ6jw8pQ.T8t__0yiRxjKP7Cb1f0-1789128308.1476817-1.0.1.1-LYJdJ1nBti2LmC4iyoZwUfgGPP_fhz_d37DBvpbyqDVaGdi4NMpEk_J.944P95l.pYj9AZscEr_Ru6r2ZwdPkjZCQFBJ2xr1oOtAIUfJwfcT9oDV0qmmQU75z4Af.cXD; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:08 GMT",
+      "ETag": "W/\"705-d998B92ooke5S/G5QmsU9L28xFU\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "972e8bcc-9ab7-4626-bcfa-360629fcca5d",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "body failed validation. Fix one:\nbody.properties.Days left.title should be defined, instead was `undefined`.\nbody.properties.Days left.rich_text should be defined, instead was `undefined`.\nbody.properties.Days left.number should be defined, instead was `undefined`.\nbody.properties.Days left.url should be defined, instead was `undefined`.\nbody.properties.Days left.select should be defined, instead was `undefined`.\nbody.properties.Days left.multi_select should be defined, instead was `undefined`.\nbody.properties.Days left.people should be defined, instead was `undefined`.\nbody.properties.Days left.email should be defined, instead was `undefined`.\nbody.properties.Days left.phone_number should be defined, instead was `undefined`.\nbody.properties.Days left.date should be defined, instead was `undefined`.\nbody.properties.Days left.checkbox should be defined, instead was `undefined`.\nbody.properties.Days left.relation should be defined, instead was `undefined`.\nbody.properties.Days left.files should be defined, instead was `undefined`.\nbody.properties.Days left.status should be defined, instead was `undefined`.\nbody.properties.Days left.place should be defined, instead was `undefined`.\nbody.properties.Days left.verification should be defined, instead was `undefined`.\nbody.properties.Days left.id should be defined, instead was `undefined`.\nbody.properties.Days left.name should be defined, instead was `undefined`.\nbody.properties.Days left.start should be defined, instead was `undefined`.\nbody.properties.Days left.lat should be defined, instead was `undefined`.\nbody.properties.Days left.state should be defined, instead was `undefined`.",
+      "request_id": "972e8bcc-9ab7-4626-bcfa-360629fcca5d"
+    },
+    "error": "HTTP Error 400: Bad Request"
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://desktop-assistant.local/schemas/rule-ir-v0.json",
+  "title": "RuleIR_v0",
+  "description": "JSON Schema for Desktop Assistant Rule Intermediate Representation (SP-8)",
+  "type": "object",
+  "required": ["id", "name", "action", "priority", "predicate"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["APPROVAL", "DENY", "ALLOW"]
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "predicate": {
+      "$ref": "#/definitions/PredicateNode"
+    }
+  },
+  "definitions": {
+    "PredicateNode": {
+      "oneOf": [
+        { "$ref": "#/definitions/AndPredicate" },
+        { "$ref": "#/definitions/OrPredicate" },
+        { "$ref": "#/definitions/NotPredicate" },
+        { "$ref": "#/definitions/ToolPredicate" },
+        { "$ref": "#/definitions/TargetScopePredicate" },
+        { "$ref": "#/definitions/PropertyPredicate" },
+        { "$ref": "#/definitions/OwnershipPredicate" },
+        { "$ref": "#/definitions/ThresholdPredicate" },
+        { "$ref": "#/definitions/TemporalPredicate" },
+        { "$ref": "#/definitions/IrreversiblePredicate" },
+        { "$ref": "#/definitions/PermissionPredicate" }
+      ]
+    },
+    "AndPredicate": {
+      "type": "object",
+      "required": ["kind", "predicates"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "and" },
+        "predicates": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/PredicateNode" },
+          "minItems": 1
+        }
+      }
+    },
+    "OrPredicate": {
+      "type": "object",
+      "required": ["kind", "predicates"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "or" },
+        "predicates": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/PredicateNode" },
+          "minItems": 1
+        }
+      }
+    },
+    "NotPredicate": {
+      "type": "object",
+      "required": ["kind", "predicate"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "not" },
+        "predicate": { "$ref": "#/definitions/PredicateNode" }
+      }
+    },
+    "ToolPredicate": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "tool" },
+        "tool_name": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "connector": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        }
+      }
+    },
+    "TargetScopePredicate": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "target_scope" },
+        "target_type": {
+          "type": "string",
+          "enum": ["database", "page", "block", "schema", "workspace"]
+        },
+        "database_id": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "in": { "type": "array", "items": { "type": "string" } },
+                "eq": { "type": "string" }
+              }
+            }
+          ]
+        },
+        "page_id": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "in": { "type": "array", "items": { "type": "string" } },
+                "eq": { "type": "string" }
+              }
+            }
+          ]
+        },
+        "ancestor_ids": {
+          "type": "object",
+          "properties": {
+            "contains": { "type": "string" },
+            "contains_any": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "PropertyPredicate": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "property" },
+        "changed_properties": {
+          "type": "object",
+          "properties": {
+            "contains": { "type": "string" },
+            "contains_any": { "type": "array", "items": { "type": "string" } },
+            "not_empty_after_excluding": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "property_transition": {
+          "type": "object",
+          "required": ["property"],
+          "properties": {
+            "property": { "type": "string" },
+            "from": {},
+            "to": {},
+            "to_in": { "type": "array" },
+            "to_not_in": { "type": "array" },
+            "to_matches": { "type": "string" }
+          }
+        },
+        "remove_property": {
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "in": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "OwnershipPredicate": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "ownership" },
+        "created_by": {
+          "type": "object",
+          "properties": {
+            "in": { "type": "array", "items": { "type": "string" } },
+            "not_in": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "assignee": {
+          "type": "object",
+          "properties": {
+            "contains": { "type": "string" },
+            "not_contains": { "type": "string" },
+            "in": { "type": "array", "items": { "type": "string" } },
+            "not_in": { "type": "array", "items": { "type": "string" } },
+            "not_equal_to_current_user": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "ThresholdPredicate": {
+      "type": "object",
+      "required": ["kind", "metric", "operator", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "threshold" },
+        "metric": {
+          "type": "string",
+          "enum": [
+            "job_cumulative_writes",
+            "job_deadline_changes",
+            "job_distinct_pages",
+            "calendar_day_creates"
+          ]
+        },
+        "operator": {
+          "type": "string",
+          "enum": ["gt", "gte", "eq"]
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "TemporalPredicate": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "temporal" },
+        "time_window": {
+          "type": "object",
+          "properties": {
+            "not_between": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        },
+        "days_of_week": {
+          "type": "object",
+          "properties": {
+            "in": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "IrreversiblePredicate": {
+      "type": "object",
+      "required": ["kind", "is_irreversible"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "irreversible" },
+        "is_irreversible": { "type": "boolean" }
+      }
+    },
+    "PermissionPredicate": {
+      "type": "object",
+      "required": ["kind", "changes_permission"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "permission" },
+        "changes_permission": { "type": "boolean" }
+      }
+    }
+  }
+}

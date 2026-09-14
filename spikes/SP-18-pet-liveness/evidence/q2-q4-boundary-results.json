@@ -1,0 +1,54 @@
+﻿{
+    "Timestamp":  "2026-09-12 10:57:24",
+    "Displays":  [
+                     {
+                         "id":  3737660811,
+                         "bounds":  {
+                                        "x":  0,
+                                        "y":  0,
+                                        "width":  1280,
+                                        "height":  720
+                                    },
+                         "workArea":  {
+                                          "x":  0,
+                                          "y":  0,
+                                          "width":  1280,
+                                          "height":  672
+                                      },
+                         "scaleFactor":  1.5
+                     },
+                     {
+                         "id":  2884746797,
+                         "bounds":  {
+                                        "x":  1280,
+                                        "y":  0,
+                                        "width":  1920,
+                                        "height":  1080
+                                    },
+                         "workArea":  {
+                                          "x":  1280,
+                                          "y":  0,
+                                          "width":  1920,
+                                          "height":  1032
+                                      },
+                         "scaleFactor":  1
+                     }
+                 ],
+    "Q2_BoundaryCrossing":  {
+                                "FPS_DuringCrossing":  60,
+                                "AvgFPS":  60,
+                                "MinFPS":  60,
+                                "SeamStatus":  "CROSS_SCREEN_SUPPORTED"
+                            },
+    "Q4_BoundsClamping":  {
+                              "OffscreenAttempt":  {
+                                                       "y":  -100,
+                                                       "x":  -100
+                                                   },
+                              "ObservedPos":  {
+                                                  "x":  1196,
+                                                  "y":  200
+                                              },
+                              "RecoveryRecommendation":  "Pet Clamp To Nearest Visible WorkArea on Tick"
+                          }
+}

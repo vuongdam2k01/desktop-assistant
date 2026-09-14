@@ -1,0 +1,38 @@
+{
+  "name": "desktop-assistant",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": "24.21.0",
+    "pnpm": "12.4.1"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=@desktop-assistant/desktop",
+    "dev:backend": "turbo run dev --filter=@desktop-assistant/backend",
+    "db:up": "pnpm --filter=@desktop-assistant/backend db:up",
+    "db:down": "pnpm --filter=@desktop-assistant/backend db:down",
+    "db:migrate": "pnpm --filter=@desktop-assistant/backend db:migrate",
+    "contracts:generate": "pnpm --filter=@desktop-assistant/contracts generate",
+    "contracts:check": "pnpm --filter=@desktop-assistant/contracts check",
+    "lint": "eslint . && build-check bom",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "build:check": "build-check all",
+    "native:build": "node tooling/native-target.mjs build",
+    "native:test": "node tooling/native-target.mjs test",
+    "package:unsigned": "pnpm --filter=@desktop-assistant/desktop package:unsigned"
+  },
+  "devDependencies": {
+    "@desktop-assistant/build-check": "workspace:*",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.4",
+    "eslint": "10.10.0",
+    "prettier": "3.9.6",
+    "turbo": "2.10.12",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.0"
+  }
+}

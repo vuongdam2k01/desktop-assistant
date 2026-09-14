@@ -1,0 +1,41 @@
+================================================================================
+SPIKE SP-19 / Q6: Connector CHƯA kết nối bị loại bỏ hoàn toàn khỏi Tool Set
+Yêu cầu FR-CF-06: Agent không được 'biết' đến tool của connector chưa kết nối
+================================================================================
+
+[1] Trạng thái đăng ký trong Connector Registry:
+  - Notion: connected
+  - Gmail:  disconnected
+
+[2] Danh sách tool được cấp vào Agent runtime (FR-CF-06):
+  - Active Connector IDs: [notion]
+  - Tool names (7): [notion_query_database, notion_get_page, notion_create_page, notion_update_page_properties, notion_archive_page, notion_create_comment, notion_delete_block]
+  ✅ ĐẠT: Không có bất kỳ tool nào của Gmail xuất hiện trong tool set!
+
+[3] Gửi prompt yêu cầu đọc Gmail tới Agent: "Hãy kiểm tra hộp thư Gmail của tôi xem có email nào từ noreply@agentkit.best không."
+
+[4] Kết quả thực thi Job:
+  - Status: completed
+  - Tool calls count: 0
+  - Phản hồi từ Agent:
+Rất tiếc, hiện tại tôi **không có công cụ** nào để truy cập hoặc kiểm tra hộp thư Gmail của bạn. Các công cụ tôi có chỉ giới hạn trong việc tương tác với **Notion** (truy vấn database, tạo/cập nhật page, comment, v.v.).
+
+Để kiểm tra email từ `noreply@agentkit.best`, bạn có thể:
+
+1. **Mở Gmail** trực tiếp và tìm kiếm với từ khóa:  
+   `from:noreply@agentkit.best`
+2. Hoặc nếu bạn có một Notion database quản lý email/task, tôi có thể giúp bạn tra cứu ở đó.
+
+Bạn có muốn tôi hỗ trợ gì trên Notion thay thế không?
+  - Agent nhận biết không có tool/quyền truy cập: true
+
+[5] Thử chuyển trạng thái Gmail sang 'connected':
+  - Active Connectors sau khi kết nối: [notion, gmail]
+  - Tool count sau khi kết nối: 9
+  ✅ ĐẠT: Sau khi kết nối, Gmail tools tự động xuất hiện mà không cần restart hệ thống.
+
+================================================================================
+KẾT LUẬN Q6: ĐẠT 100%
+Connector CHƯA kết nối bị loại bỏ hoàn toàn khỏi Tool Set (FR-CF-06).
+Agent không hề 'biết' về sự tồn tại của tool Gmail và từ chối an toàn.
+================================================================================

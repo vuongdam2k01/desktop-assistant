@@ -1,0 +1,6 @@
+--- Starting Run 1 of 10 ---
+Screenshot captured at run 1: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q1-focus-editor-during-popup.png
+Typing duration: 5806ms
+Card visible: True, Card focused: False
+Expected length: 200 | Actual length: 200
+Run 1: PASS (200/200 characters received, 0 lost)

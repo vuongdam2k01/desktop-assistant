@@ -1,0 +1,28 @@
+================================================================================
+THỬ NGHIỆM CÁC ĐƯỜNG VÒNG BYPASS TRÊN PI AGENT
+================================================================================
+
+[Đường vòng 1: Gọi tool không tồn tại / Tool giả mạo]
+Nếu agent hoặc prompt injection cố tình gọi tool 'bash', 'system_exec', hay 'write_file'...
+  -> Kết quả: Framework từ chối tìm thấy tool. Pi agent-loop trả về: 'Tool bash not found'. Không có gì thực thi.
+
+[Đường vòng 2: Thử nghiệm không cài middleware framework (beforeToolCall = undefined)]
+Giả sử người dùng hoặc code quên cài đặt agent.beforeToolCall của framework...
+Liệu lớp bọc Application-level wrapper (wrappedTool.execute) có bị vô hiệu hoá không?
+  -> writeCallCount trước test: 0, sau test: 0
+  -> KẾT QUẢ: Lớp wrap Application-level vẫn chặn 100%! Không phụ thuộc vào middleware framework!
+
+[Đường vòng 3: Thử nghiệm tool gọi tool (Nested tool calls)]
+Trong kiến trúc của ta, tool sinh từ connector manifest là các leaf functions (chỉ gọi Notion API qua HTTP fetch).
+Tool không có quyền truy cập vào instance Agent hay tool registry để gọi tool khác ngầm.
+  -> Kết quả: Không thể xảy ra recursive bypass.
+
+================================================================================
+KẾT LUẬN Q2 (HARD GATE 0-LỌT):
+1. Trật tự ghi ledger intent → hook đánh giá → thực thi → ghi ledger result hoạt động chính xác tuyệt đối.
+2. Bằng chứng đanh thép: writeCallCount = 0 khi hook từ chối.
+3. Tính độc lập: Vì toàn bộ tool do ta wrap trước khi nạp vào agent (FR-AG-02),
+   bảo đảm này nằm ở tầng ngôn ngữ (closure wrapper), không thể bị bypass bởi prompt injection
+   hay sự thiếu sót của middleware framework.
+4. Hard gate 0-lọt: ĐẠT!
+================================================================================

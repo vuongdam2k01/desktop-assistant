@@ -1,0 +1,35 @@
+================================================================================
+SPIKE SP-19 / Q9: Phát hiện và phân biệt các trạng thái Connector (FR-CF-05)
+Yêu cầu: Phân biệt chính xác: connected / token_expired / permission_error / revoked
+================================================================================
+
+[1] Thử nghiệm trạng thái: CONNECTED (Token hợp lệ)
+  - Notion status: connected (checkedAt: 2026-09-12T05:04:39.548Z)
+  - Gmail status:  connected (canRefresh: true)
+  ✅ Trạng thái 'connected' được phát hiện chính xác.
+
+[2] Thử nghiệm trạng thái: TOKEN_EXPIRED
+  - Expired Gmail status: token_expired
+  - Error message: HTTP 401 UNAUTHENTICATED: Token expired
+  - canRefresh: false
+  ✅ Trạng thái 'token_expired' được phát hiện và báo canRefresh=false để UI hiển thị nút Reconnect.
+
+[3] Thử nghiệm trạng thái: PERMISSION_ERROR
+  - Mock forbidden check status: permission_error
+  - Error details: HTTP 403 Forbidden: Insufficient OAuth scopes for database access
+  ✅ Trạng thái 'permission_error' phân biệt rõ ràng với token_expired.
+
+[4] Thử nghiệm trạng thái: REVOKED
+  - Revoked Gmail status: revoked
+  - Error message: Token was revoked
+  - canRefresh: false
+  ✅ Trạng thái 'revoked' được phát hiện chính xác, khóa hoàn toàn quyền thực thi.
+
+================================================================================
+KẾT LUẬN Q9: ĐẠT 100%
+Hệ thống phát hiện và phân biệt tường minh cả 4 trạng thái connector (FR-CF-05):
+1. connected        -> Probe 200 OK, sẵn sàng thực thi.
+2. token_expired    -> 401 UNAUTHENTICATED, xác định được canRefresh (tự refresh hay cần Reconnect).
+3. permission_error -> 403 Forbidden, báo lỗi thiếu quyền / scope.
+4. revoked          -> Token bị thu hồi, ngắt kết nối dứt khoát.
+================================================================================

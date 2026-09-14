@@ -1,0 +1,23 @@
+{
+  "name": "sp-8-rule-ir-hardgate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:unit": "tsx src/tests/run-unit-tests.ts",
+    "test:benchmark": "tsx src/tests/benchmark-latency.ts",
+    "test:corpus": "tsx src/runner/run-corpus.ts",
+    "test:all": "tsx src/runner/run-all.ts"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "dotenv": "^17.4.2",
+    "typebox": "^1.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
+  }
+}

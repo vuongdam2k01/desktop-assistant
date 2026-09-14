@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/approval/risk-judge/0.1.0.json",
+  "title": "RiskEvaluationResult",
+  "description": "Normative shape of a Tier 2 verdict, for approval/contracts/risk-judge@0.1.0. Every path out of the evaluation produces one of these documents, including every failure: a timeout, an unreachable provider, a refused connection and an unparseable response all yield a result with decision ESCALATE_USER and isFallback true, never an absence and never an approval (INV-AP-12). The decision vocabulary is closed at three values, and no value in it means allow-an-operation-Tier-1-refused - the judge can hold or narrow what Tier 1 permitted and can never widen it (INV-AP-11).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "riskLevel", "reasoning", "isFallback", "latencyMs"],
+  "properties": {
+    "decision": {
+      "enum": ["AUTO_APPROVE", "AUTO_REJECT", "ESCALATE_USER"],
+      "description": "The verdict. Closed at three values: adding a fourth is a MAJOR bump, because a verdict the calling wrapper does not recognise is one it would have to interpret, and the only safe interpretation of an unknown verdict is to stop."
+    },
+    "riskLevel": {
+      "enum": ["SAFE", "LOW", "MEDIUM", "HIGH", "UNCERTAIN"],
+      "description": "How the judge categorised the operation. Explanatory rather than operative: what happens to the call is decided by `decision` alone, so a mismatch between level and decision is a reporting fault and never a licence to act. The measured spike exercised LOW, HIGH and UNCERTAIN (spikes/SP-10-risk-judge/src/types.ts); SAFE and MEDIUM are specified here and are so far unexercised."
+    },
+    "reasoning": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One line recorded with the ledger record for this call, and shown to the user when the call is escalated. It explains a verdict already reached; nothing here is read back as input to any later decision."
+    },
+    "isFallback": {
+      "type": "boolean",
+      "description": "True when this result came from the fail-closed path rather than from model inference. It is required rather than optional so that a verdict can never be read as considered when it was in fact a failure: an audit that cannot tell the two apart cannot tell a working judge from an unreachable one."
+    },
+    "latencyMs": {
+      "type": "number",
+      "minimum": 0,
+      "description": "How long the evaluation took, including a fail-closed path that ended early. Recorded so that the latency thresholds in verification.md are measured from what the product observed rather than from what a provider reported."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "isFallback": { "const": true } },
+        "required": ["isFallback"]
+      },
+      "then": {
+        "properties": {
+          "decision": { "const": "ESCALATE_USER" },
+          "riskLevel": { "const": "UNCERTAIN" }
+        },
+        "required": ["decision", "riskLevel"]
+      }
+    }
+  ]
+}

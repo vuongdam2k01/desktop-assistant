@@ -1,0 +1,54 @@
+==========================================================
+SP-7 / Q4 MULTI-MONITOR & FALLBACK TEST (macOS)
+Timestamp: 2026-09-13T13:37:35Z
+==========================================================
+Display Configuration from Electron Screen API:
+{
+    "primary": {
+        "id": 10,
+        "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1920,
+            "height": 1080
+        },
+        "workArea": {
+            "x": 0,
+            "y": 30,
+            "width": 1920,
+            "height": 960
+        },
+        "scaleFactor": 1
+    },
+    "allDisplays": [
+        {
+            "id": 10,
+            "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1920,
+                "height": 1080
+            },
+            "workArea": {
+                "x": 0,
+                "y": 30,
+                "width": 1920,
+                "height": 960
+            },
+            "scaleFactor": 1
+        }
+    ]
+}
+
+[Step 2] Testing E2 Fallback Algorithm (Simulated Disconnected Display)...
+Active displays: 1
+Primary workArea: {'x': 0, 'y': 30, 'width': 1920, 'height': 960}
+Simulated stored position from detached monitor: {'x': 3500, 'y': 800, 'width': 140, 'height': 140}
+Is stored position visible on any current display? False
+Applying E2 Fallback -> Clamped to primary display: (1760, 830)
+Verified Pet Bounds after fallback: {'x': 1760, 'y': 830, 'width': 140, 'height': 140}
+E2 Fallback Verification: PASS
+
+HARDWARE LIMITATION NOTE (Roadmap §3.9):
+Current test machine is a Mac mini with exactly 1 physical display (1080p, scale 1.0).
+Multi-monitor with mixed scale factors (Retina 2x + 1x) is marked CHƯA KIỂM CHỨNG — thiếu phần cứng, cần máy có 2 màn hình khác scale.

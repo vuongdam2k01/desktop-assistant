@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 540" width="100%" height="100%">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="600" height="540" fill="#f1f3f4"/>
+  <rect x="75" y="30" width="450" height="480" rx="12" fill="#ffffff" filter="url(#shadow)"/>
+  
+  <!-- Header Google -->
+  <circle cx="115" cy="65" r="12" fill="#ea4335"/>
+  <text x="135" y="70" style="font-family:sans-serif;font-size:16px;font-weight:bold;fill:#5f6368;">Sign in with Google</text>
+
+  <!-- Warning Icon -->
+  <path d="M 115 115 L 132 145 L 98 145 Z" fill="#d93025"/>
+  <text x="113" y="141" style="font-family:sans-serif;font-size:16px;font-weight:bold;fill:#ffffff;">!</text>
+  
+  <text x="145" y="138" style="font-family:sans-serif;font-size:22px;font-weight:500;fill:#202124;">Google hasn't verified this app</text>
+  
+  <text x="100" y="180" style="font-family:sans-serif;font-size:13px;fill:#3c4043;line-height:1.5;">
+    The app is requesting access to sensitive info in your Google Account.
+  </text>
+  <text x="100" y="200" style="font-family:sans-serif;font-size:13px;fill:#3c4043;">
+    Until the developer verifies this app, you shouldn't use it.
+  </text>
+
+  <!-- Primary Button: Back to safety -->
+  <rect x="360" y="240" width="130" height="38" rx="6" fill="#1a73e8"/>
+  <text x="382" y="264" style="font-family:sans-serif;font-size:13px;font-weight:bold;fill:#ffffff;">Back to safety</text>
+
+  <!-- Link: Advanced -->
+  <text x="100" y="264" style="font-family:sans-serif;font-size:14px;font-weight:bold;fill:#1a73e8;cursor:pointer;">Advanced</text>
+  <rect x="95" y="248" width="80" height="26" fill="none" stroke="#d93025" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="100" y="295" style="font-family:sans-serif;font-size:11px;font-weight:bold;fill:#d93025;">← Bước 1: Click Advanced ở đây</text>
+
+  <!-- Expanded section -->
+  <rect x="100" y="320" width="390" height="150" rx="8" fill="#f8f9fa" stroke="#e8eaed"/>
+  <text x="115" y="348" style="font-family:sans-serif;font-size:12px;fill:#5f6368;">If you understand the risks to your security, you may continue</text>
+  <text x="115" y="366" style="font-family:sans-serif;font-size:12px;fill:#5f6368;">to the app at your own risk.</text>
+  
+  <!-- Link: Go to Desktop Assistant (unsafe) -->
+  <text x="115" y="410" style="font-family:sans-serif;font-size:13px;font-weight:bold;fill:#1a73e8;text-decoration:underline;cursor:pointer;">Go to Desktop Assistant (unsafe)</text>
+  <rect x="110" y="394" width="220" height="24" fill="none" stroke="#d93025" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="115" y="445" style="font-family:sans-serif;font-size:11px;font-weight:bold;fill:#d93025;">← Bước 2: Click "Go to ... (unsafe)" để tiếp tục</text>
+</svg>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Desktop Assistant - Auto Update Spike</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    .badge {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #0284c7;
+      color: #ffffff;
+    }
+    .badge.v101 {
+      background: #16a34a;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.6);
+    }
+    .card {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+      border: 1px solid #334155;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #94a3b8;
+    }
+    .status-val {
+      color: #f1f5f9;
+      font-family: monospace;
+    }
+    .progress-bar-bg {
+      background: #334155;
+      border-radius: 4px;
+      height: 12px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar-fill {
+      background: #38bdf8;
+      height: 100%;
+      width: 0%;
+      transition: width 0.2s;
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    button.warning {
+      background: #d97706;
+    }
+    button.warning:hover {
+      background: #b45309;
+    }
+    .log-box {
+      background: #090d16;
+      border-radius: 6px;
+      padding: 10px;
+      height: 180px;
+      overflow-y: auto;
+      font-family: 'Consolas', monospace;
+      font-size: 11px;
+      color: #a5f3fc;
+      border: 1px solid #1e293b;
+    }
+    .log-item {
+      margin-bottom: 4px;
+      line-height: 1.4;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">Desktop Assistant — Auto-Update Spike</div>
+    <div id="versionBadge" class="badge">v1.0.0</div>
+  </div>
+
+  <div class="card">
+    <div class="status-row">
+      <span>Trạng thái môi trường:</span>
+      <span id="envStatus" class="status-val">Đang khởi tạo...</span>
+    </div>
+    <div class="status-row">
+      <span>Tiến trình (PID):</span>
+      <span id="pidVal" class="status-val">-</span>
+    </div>
+    <div class="status-row">
+      <span>Đường dẫn cài đặt:</span>
+      <span id="execVal" class="status-val">-</span>
+    </div>
+
+    <div class="progress-bar-bg">
+      <div id="progressFill" class="progress-bar-fill"></div>
+    </div>
+
+    <div class="btn-group">
+      <button onclick="checkUpdate()">Kiểm tra bản mới ngay</button>
+      <button id="btnJob" class="warning" onclick="toggleJob()">Bật mô phỏng Job</button>
+      <button id="btnRestart" style="display:none; background:#16a34a;" onclick="confirmRestart()">Khởi động lại để cập nhật</button>
+    </div>
+  </div>
+
+  <div class="log-box" id="logBox">
+    <div class="log-item">Sẵn sàng nhận log từ main process...</div>
+  </div>
+
+  <script>
+    let isJobRunning = false;
+
+    window.api.onVersionInfo((info) => {
+      const badge = document.getElementById('versionBadge');
+      badge.textContent = 'v' + info.version;
+      if (info.version === '1.0.1') {
+        badge.classList.add('v101');
+        badge.textContent = 'v1.0.1 - ĐÃ CẬP NHẬT THÀNH CÔNG!';
+      }
+      document.getElementById('envStatus').textContent = info.isPackaged ? 'PACKAGED (Production binary)' : 'UNPACKED (Dev mode)';
+      document.getElementById('pidVal').textContent = info.pid;
+      document.getElementById('execVal').textContent = info.execPath;
+    });
+
+    window.api.onAppLog((line) => {
+      const logBox = document.getElementById('logBox');
+      const div = document.createElement('div');
+      div.className = 'log-item';
+      div.textContent = line;
+      logBox.appendChild(div);
+      logBox.scrollTop = logBox.scrollHeight;
+    });
+
+    window.api.onDownloadProgress((percent) => {
+      document.getElementById('progressFill').style.width = percent + '%';
+    });
+
+    window.api.onReadyToRestart((ver) => {
+      const btn = document.getElementById('btnRestart');
+      btn.style.display = 'inline-block';
+      btn.textContent = 'Khởi động lại ngay (v' + ver + ')';
+    });
+
+    window.api.onJobConflict((data) => {
+      alert(`[Xung đột FR-APP-06] Có job '${data.job.name}' đang chạy. Cập nhật được hoãn cho tới khi hoàn tất hoặc được xác nhận!`);
+      const btn = document.getElementById('btnRestart');
+      btn.style.display = 'inline-block';
+      btn.textContent = 'Buộc khởi động lại (Hủy job)';
+    });
+
+    function checkUpdate() {
+      window.api.checkUpdateManual();
+    }
+
+    function toggleJob() {
+      const btn = document.getElementById('btnJob');
+      if (!isJobRunning) {
+        window.api.startJob('Worker: Sync Notion Tasks');
+        btn.textContent = 'Dừng mô phỏng Job';
+        btn.style.background = '#dc2626';
+        isJobRunning = true;
+      } else {
+        window.api.stopJob();
+        btn.textContent = 'Bật mô phỏng Job';
+        btn.style.background = '#d97706';
+        isJobRunning = false;
+      }
+    }
+
+    function confirmRestart() {
+      window.api.confirmRestart();
+    }
+  </script>
+</body>
+</html>

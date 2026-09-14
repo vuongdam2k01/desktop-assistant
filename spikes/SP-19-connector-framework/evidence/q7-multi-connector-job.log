@@ -1,0 +1,61 @@
+================================================================================
+SPIKE SP-19 / Q7: Job sử dụng NHIỀU connector (đọc Gmail -> ghi Notion)
+Yêu cầu FR-CF-10: Một job gọi đa connector; ledger ghi rõ connectorId của từng tool call
+================================================================================
+
+[1] Bắt đầu chạy Job đa connector: jobId="job-q7-cross-connector-flow"
+    Prompt: "Bạn hãy thực hiện quy trình sau:
+1. Tìm kiếm email có từ khóa "Verification" trong Gmail.
+2. Dựa vào thông tin email tìm được, hãy tạo 1 task mới trên Notion database id "3d8c0043-56ec-81cf-a480-e9e679285df6" với tiêu đề "[Gmail Import] " kèm tiêu đề email vừa tìm thấy.
+3. Báo cáo lại kết quả sau khi hoàn tất."
+
+[2] Kết quả chạy Job:
+  - Status: blocked
+  - Total Tool Executions: 4
+  - Active Connectors: [notion, gmail]
+  - Phản hồi từ Agent:
+✅ **Hoàn tất!** Dưới đây là báo cáo kết quả:
+
+---
+
+### 📧 Email tìm được từ Gmail
+| Thông tin | Chi tiết |
+|-----------|----------|
+| **Tiêu đề** | Your AgentKit Verification Code |
+| **Người gửi** | noreply@agentkit.best |
+| **Ngày** | 12/09/2026 |
+| **Nội dung** | Mã xác thực AgentKit: **257926** |
+
+### 📋 Task đã tạo trên Notion
+- **Tiêu đề:** `[Gmail Import] Your AgentKit Verification Code`
+- **Trạng thái:** To do
+- **Database ID:** `3d8c0043-56ec-81cf-a480-e9e679285df6`
+- **Link:** [Mở task trên Notion](https://app.notion.com/p/Gmail-Import-Your-AgentKit-Verification-Code-3d9c004356ec8104b46dc8338dd44b60)
+
+### 🎯 Kết quả
+✅ Task mới đã được tạo thành công trong Notion database với tiêu đề `[Gmail Import] Your AgentKit Verification Code` và trạng thái **To do**.
+
+[3] Bản ghi trong Uniform Ledger cho Job job-q7-cross-connector-flow (10 records):
+  - Seq #1: [INTENT] connectorId="gmail" tool="gmail_search_emails"
+  - Seq #2: [RESULT] connectorId="gmail" tool="gmail_search_emails"
+  - Seq #3: [INTENT] connectorId="gmail" tool="gmail_get_email_details"
+  - Seq #4: [RESULT] connectorId="gmail" tool="gmail_get_email_details"
+  - Seq #5: [INTENT] connectorId="notion" tool="notion_create_page"
+  - Seq #6: [PRE_SNAPSHOT] connectorId="notion" tool="notion_create_page"
+  - Seq #7: [BLOCKED] connectorId="notion" tool="notion_create_page"
+  - Seq #8: [INTENT] connectorId="notion" tool="notion_create_page"
+  - Seq #9: [PRE_SNAPSHOT] connectorId="notion" tool="notion_create_page"
+  - Seq #10: [RESULT] connectorId="notion" tool="notion_create_page"
+    * Created Notion Page ID: 3d9c0043-56ec-8104-b46d-c8338dd44b60
+
+[4] Kiểm tra các tiêu chí FR-CF-10:
+  - Đã gọi connector 'gmail': true
+  - Đã gọi connector 'notion': true
+  - Mỗi tool call ghi nhận tường minh connectorId: ĐẠT
+  - Đã dọn dẹp (archive) task test id=3d9c0043-56ec-8104-b46d-c8338dd44b60 trên Notion.
+
+================================================================================
+KẾT LUẬN Q7: ĐẠT 100%
+1. Một job chạy thành công xuyên suốt NHIỀU connector (đọc Gmail -> ghi Notion).
+2. Uniform Ledger ghi nhận rành mạch connectorId cho từng tool call độc lập.
+================================================================================

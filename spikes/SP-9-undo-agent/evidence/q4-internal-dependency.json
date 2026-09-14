@@ -1,0 +1,68 @@
+{
+  "jobId": "job-07-internal-dep",
+  "originalSequence": [
+    "Create Task Z",
+    "Update Task Z"
+  ],
+  "llmCompensatingPlan": [
+    {
+      "original_seq": 4,
+      "original_tool": "notion_update_page_properties",
+      "target_object_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+      "classification": "reversible",
+      "reason": null,
+      "compensating_tool": "notion_update_page_properties",
+      "compensating_args": {
+        "page_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+        "properties": {
+          "Due date": {
+            "date": null
+          },
+          "Task Status": {
+            "status": {
+              "name": "Not started"
+            }
+          },
+          "Creator": {
+            "rich_text": [
+              {
+                "text": {
+                  "content": "bot"
+                }
+              }
+            ]
+          },
+          "Status": {
+            "select": {
+              "name": "Not started"
+            }
+          },
+          "Name": {
+            "title": [
+              {
+                "text": {
+                  "content": "Thử nghiệm payment sandbox"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "order_rationale": "Must revert property update before archiving the page, as archiving first would prevent property updates."
+    },
+    {
+      "original_seq": 2,
+      "original_tool": "notion_create_page",
+      "target_object_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+      "classification": "reversible",
+      "reason": null,
+      "compensating_tool": "notion_archive_page",
+      "compensating_args": {
+        "page_id": "3d8c0043-56ec-8160-abc8-cda251b85939"
+      },
+      "order_rationale": "Archive the page last, after its properties have been restored to the original state."
+    }
+  ],
+  "orderCorrect": true,
+  "executionSuccess": true
+}

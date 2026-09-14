@@ -1,0 +1,42 @@
+======================================================================
+SPIKE SP-12 / Q6: SCHEMA MIGRATION ON IMMUTABLE LEDGER TEST
+Database: /home/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/evidence/q6_migration_test.db
+Timestamp: 2026-09-11T12:10:47.817Z
+======================================================================
+
+[STEP 1] Initial Database initialized at user_version = 1
+         Inserted 1 v1 Job and 1 v1 ActionRecord.
+
+--- Test 6.1: Additive Migration (ALTER TABLE ADD COLUMN in v2) ---
+[SUCCESS] ALTER TABLE ADD COLUMN executed successfully!
+Database user_version updated to: 2
+Existing v1 row after schema migration:
+  actor_identity: 'agent', model_name: null
+
+--- Test 6.2: Immutability Guard during Migration ---
+[SUCCESS] Attempt to mutate existing historical record was BLOCKED by trigger:
+          "ActionRecord is append-only: UPDATE is forbidden (FR-LG-02)"
+
+--- Test 6.3: Breaking/Structural Migration (Atomic Recreation via Transaction) ---
+   1. Dropping immutability triggers temporarily inside transaction...
+   2. Renaming existing table to backup...
+   3. Creating new table structure for v3...
+   4. Copying historical records into new table (preserving original data)...
+   5. Dropping backup table...
+   6. Re-establishing immutability triggers on new table...
+   7. Updated PRAGMA user_version = 3.
+[SUCCESS] Database successfully migrated to v3! (user_version = 3)
+Migrated Record 1: id=1, schema_version=1, timestamp=2026-09-11T12:10:47.886Z
+[VERIFIED] Immutability triggers active on newly migrated table: "ActionRecord is append-only: UPDATE is forbidden (FR-LG-02)"
+
+--- Test 6.4: Backward Compatibility via Views ---
+Legacy View row count: 1 (Columns: id, job_id, seq, type, tool, args, result, timestamp)
+
+======================================================================
+Q6 CONCLUSION & MIGRATION STRATEGY:
+1. Use PRAGMA user_version for migration tracking at app startup.
+2. Prefer ADDITIVE evolution (ALTER TABLE ADD COLUMN): works seamlessly without tripping triggers.
+3. Historical records remain immutable: old records get NULL/defaults, maintaining audit veracity.
+4. For breaking structural changes, use atomic transaction migration: drop triggers -> rename -> create new -> copy -> recreate triggers -> commit.
+5. Use Views (e.g. v_legacy_action_records) if legacy code requires old column representations.
+======================================================================

@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReplicatedStoreDescriptor",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "descriptorVersion", "storeId", "version", "name",
+    "encryptionClass", "resolutionRule", "orderingBasis", "retention", "membership"
+  ],
+  "properties": {
+    "descriptorVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "storeId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,62}$" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "name": { "type": "string", "minLength": 1 },
+    "encryptionClass": { "enum": ["append-only", "mutable"] },
+    "resolutionRule": { "enum": ["append-and-reconcile", "last-writer-wins-with-preservation"] },
+    "orderingBasis": { "enum": ["device-sequence-causal"] },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimumDays", "userConfigurable", "deletionRequiresConfirmation"],
+      "properties": {
+        "minimumDays": { "type": "integer", "minimum": 1 },
+        "userConfigurable": { "type": "boolean" },
+        "deletionRequiresConfirmation": { "type": "boolean" }
+      }
+    },
+    "membership": { "type": "string", "minLength": 1 },
+    "supersededTarget": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,62}$" },
+    "eraseOnSignout": { "type": "boolean" },
+    "capabilities": {
+      "type": "array",
+      "items": { "enum": ["partial-transfer"] },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "encryptionClass": { "const": "append-only" } }, "required": ["encryptionClass"] },
+      "then": { "properties": { "resolutionRule": { "const": "append-and-reconcile" } } }
+    },
+    {
+      "if": {
+        "properties": { "resolutionRule": { "const": "last-writer-wins-with-preservation" } },
+        "required": ["resolutionRule"]
+      },
+      "then": { "required": ["supersededTarget"] }
+    }
+  ]
+}

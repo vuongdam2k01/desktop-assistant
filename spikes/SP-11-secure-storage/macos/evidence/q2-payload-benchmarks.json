@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-09-13T13:56:38.325Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "electronVersion": "44.3.0",
+  "chromeVersion": "152.0.7977.78",
+  "nodeVersion": "24.20.0",
+  "beforeReady": {
+    "isEncryptionAvailable": false,
+    "error": null
+  },
+  "afterReady": {
+    "isEncryptionAvailable": true
+  },
+  "benchmarks": [
+    {
+      "payloadName": "Notion Access Token (FR-NT-01)",
+      "plainBytes": 55,
+      "cipherBytes": 67,
+      "overheadBytes": 12,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 0.354,
+      "decTimeMs": 0.167,
+      "match": true
+    },
+    {
+      "payloadName": "Google Refresh Token (FR-CF-11)",
+      "plainBytes": 94,
+      "cipherBytes": 99,
+      "overheadBytes": 5,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 0.008,
+      "decTimeMs": 0.002,
+      "match": true
+    },
+    {
+      "payloadName": "Google BYO Client JSON (FR-CF-11)",
+      "plainBytes": 500,
+      "cipherBytes": 515,
+      "overheadBytes": 15,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 0.007,
+      "decTimeMs": 0.002,
+      "match": true
+    },
+    {
+      "payloadName": "Combined Connector State Bundle",
+      "plainBytes": 551,
+      "cipherBytes": 563,
+      "overheadBytes": 12,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 0.002,
+      "decTimeMs": 0.001,
+      "match": true
+    },
+    {
+      "payloadName": "Intentional Stress 10 KB",
+      "plainBytes": 10240,
+      "cipherBytes": 10259,
+      "overheadBytes": 19,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 0.015,
+      "decTimeMs": 0.006,
+      "match": true
+    },
+    {
+      "payloadName": "Intentional Stress 64 KB (Q2 requirement)",
+      "plainBytes": 65536,
+      "cipherBytes": 65555,
+      "overheadBytes": 19,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 0.085,
+      "decTimeMs": 0.05,
+      "match": true
+    },
+    {
+      "payloadName": "Intentional Stress 1 MB (1024 KB)",
+      "plainBytes": 1048576,
+      "cipherBytes": 1048595,
+      "overheadBytes": 19,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 1.514,
+      "decTimeMs": 2.525,
+      "match": true
+    },
+    {
+      "payloadName": "Intentional Stress 5 MB (5120 KB)",
+      "plainBytes": 5242880,
+      "cipherBytes": 5242899,
+      "overheadBytes": 19,
+      "headerStr": "v10",
+      "headerHex": "763130",
+      "encTimeMs": 7.053,
+      "decTimeMs": 4.121,
+      "match": true
+    }
+  ]
+}

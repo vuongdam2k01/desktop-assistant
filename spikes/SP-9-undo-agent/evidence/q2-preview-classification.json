@@ -1,0 +1,719 @@
+{
+  "metrics": {
+    "errRev": 0,
+    "errIrr": 0,
+    "errConf": 0,
+    "totalReversible": 13,
+    "totalIrreversible": 1,
+    "totalConflict": 1
+  },
+  "details": [
+    {
+      "job": 1,
+      "preview": {
+        "job_id": "job-01-create-single",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 2,
+            "original_tool": "notion_create_page",
+            "target_object_id": "3d8c0043-56ec-8150-bba0-e52c4b9670b0",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_archive_page",
+            "compensating_args": {
+              "page_id": "3d8c0043-56ec-8150-bba0-e52c4b9670b0"
+            },
+            "order_rationale": "Single action; reverse order is itself."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 1
+      },
+      "expected": {
+        "rev": 1,
+        "irr": 0,
+        "conf": 0
+      }
+    },
+    {
+      "job": 2,
+      "preview": {
+        "job_id": "job-02-update-status",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 2,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8329bf-3814-815b-bbe9-cde812ef0b56",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8329bf-3814-815b-bbe9-cde812ef0b56",
+              "properties": {
+                "Order": {
+                  "number": 1
+                },
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-12",
+                    "end": null
+                  }
+                },
+                "Status": {
+                  "select": {
+                    "name": "In progress"
+                  }
+                },
+                "Priority": {
+                  "select": {
+                    "name": "High"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "user"
+                      }
+                    }
+                  ]
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Fix crash màn thanh toán"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Single action in the ledger; no dependency inversion required. Placed as the sole compensating step."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 1
+      },
+      "expected": {
+        "rev": 1,
+        "irr": 0,
+        "conf": 0
+      }
+    },
+    {
+      "job": 3,
+      "preview": {
+        "job_id": "job-03-create-and-reorder",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 6,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8329bf-3814-814e-bfb8-d3f5a7f2cefb",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8329bf-3814-814e-bfb8-d3f5a7f2cefb",
+              "properties": {
+                "Order": {
+                  "number": 3
+                },
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-11",
+                    "end": null
+                  }
+                },
+                "Status": {
+                  "select": {
+                    "name": "Not started"
+                  }
+                },
+                "Priority": {
+                  "select": {
+                    "name": "Medium"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "user"
+                      }
+                    }
+                  ]
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Review PR #212 của Hùng"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Reverse chronological order: undo the last property update first."
+          },
+          {
+            "original_seq": 4,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8329bf-3814-8137-99c4-fedaeee5f434",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8329bf-3814-8137-99c4-fedaeee5f434",
+              "properties": {
+                "Order": {
+                  "number": 2
+                },
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-18",
+                    "end": null
+                  }
+                },
+                "Status": {
+                  "select": {
+                    "name": "Not started"
+                  }
+                },
+                "Priority": {
+                  "select": {
+                    "name": "Medium"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "user"
+                      }
+                    }
+                  ]
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Viết docs onboarding"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Reverse chronological order: undo the second property update after the third."
+          },
+          {
+            "original_seq": 2,
+            "original_tool": "notion_create_page",
+            "target_object_id": "3d8329bf-3814-81e5-b6ad-ede5ae3f49e8",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_archive_page",
+            "compensating_args": {
+              "page_id": "3d8329bf-3814-81e5-b6ad-ede5ae3f49e8"
+            },
+            "order_rationale": "Reverse chronological order: archive the created page last, after reverting all property updates on other pages."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 3
+      },
+      "expected": {
+        "rev": 3,
+        "irr": 0,
+        "conf": 0
+      }
+    },
+    {
+      "job": 4,
+      "preview": {
+        "job_id": "job-04-update-assignee",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 2,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8d409b-f710-81f8-ab02-f55279826f41",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8d409b-f710-81f8-ab02-f55279826f41",
+              "properties": {
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-14",
+                    "end": null
+                  }
+                },
+                "Assignee": {
+                  "people": []
+                },
+                "Status": {
+                  "select": {
+                    "name": "In progress"
+                  }
+                },
+                "Assignee Name": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "Trang"
+                      }
+                    }
+                  ]
+                },
+                "Tags": {
+                  "multi_select": [
+                    {
+                      "name": "feature"
+                    }
+                  ]
+                },
+                "Project": {
+                  "relation": [
+                    {
+                      "id": "3d8d409b-f710-816b-86fb-ecad565aea0c"
+                    }
+                  ]
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "Linh"
+                      }
+                    }
+                  ]
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Design review màn checkout"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Single action in ledger; placed first in reverse order."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 1
+      },
+      "expected": {
+        "rev": 1,
+        "irr": 0,
+        "conf": 0
+      }
+    },
+    {
+      "job": 5,
+      "preview": {
+        "job_id": "job-05-reorder-multi",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 4,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8329bf-3814-810d-a8b7-e82c5840fc33",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8329bf-3814-810d-a8b7-e82c5840fc33",
+              "properties": {
+                "Order": {
+                  "number": 1
+                },
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-12",
+                    "end": null
+                  }
+                },
+                "Status": {
+                  "select": {
+                    "name": "In progress"
+                  }
+                },
+                "Priority": {
+                  "select": {
+                    "name": "High"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "user"
+                      }
+                    }
+                  ]
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Fix crash màn thanh toán"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Reverse chronological order: seq 4 occurred after seq 2, so it must be undone first."
+          },
+          {
+            "original_seq": 2,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8329bf-3814-819b-af6a-f6a28bd5eaab",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8329bf-3814-819b-af6a-f6a28bd5eaab",
+              "properties": {
+                "Order": {
+                  "number": 3
+                },
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-11",
+                    "end": null
+                  }
+                },
+                "Status": {
+                  "select": {
+                    "name": "Not started"
+                  }
+                },
+                "Priority": {
+                  "select": {
+                    "name": "Medium"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "user"
+                      }
+                    }
+                  ]
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Review PR #212 của Hùng"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Undo seq 2 after seq 4, as it was earlier in the original sequence."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 2
+      },
+      "expected": {
+        "rev": 2,
+        "irr": 0,
+        "conf": 0
+      }
+    },
+    {
+      "job": 6,
+      "preview": {
+        "job_id": "job-06-multi-create",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 4,
+            "original_tool": "notion_create_page",
+            "target_object_id": "3d8c0043-56ec-81af-b9b0-dbf178ace44b",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_archive_page",
+            "compensating_args": {
+              "page_id": "3d8c0043-56ec-81af-b9b0-dbf178ace44b"
+            },
+            "order_rationale": "Reverse chronological order: undo the most recent creation first."
+          },
+          {
+            "original_seq": 2,
+            "original_tool": "notion_create_page",
+            "target_object_id": "3d8c0043-56ec-81b0-8ce4-df920df9f6d2",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_archive_page",
+            "compensating_args": {
+              "page_id": "3d8c0043-56ec-81b0-8ce4-df920df9f6d2"
+            },
+            "order_rationale": "Reverse chronological order: undo the earlier creation after the later one."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 2
+      },
+      "expected": {
+        "rev": 2,
+        "irr": 0,
+        "conf": 0
+      }
+    },
+    {
+      "job": 7,
+      "preview": {
+        "job_id": "job-07-internal-dep",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 4,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+              "properties": {
+                "Due date": {
+                  "date": null
+                },
+                "Task Status": {
+                  "status": {
+                    "name": "Not started"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "bot"
+                      }
+                    }
+                  ]
+                },
+                "Status": {
+                  "select": {
+                    "name": "Not started"
+                  }
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Thử nghiệm payment sandbox"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Must revert property update before archiving the page, as archiving first would prevent property updates."
+          },
+          {
+            "original_seq": 2,
+            "original_tool": "notion_create_page",
+            "target_object_id": "3d8c0043-56ec-8160-abc8-cda251b85939",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_archive_page",
+            "compensating_args": {
+              "page_id": "3d8c0043-56ec-8160-abc8-cda251b85939"
+            },
+            "order_rationale": "Archive the page last, after its properties have been restored to the original state."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 2
+      },
+      "expected": {
+        "rev": 2,
+        "irr": 0,
+        "conf": 0
+      }
+    },
+    {
+      "job": 8,
+      "preview": {
+        "job_id": "job-08-conflict-target",
+        "can_undo": false,
+        "disabled_reason": "Tất cả các thao tác đều bị xung đột do bên thứ ba đã sửa đổi hoặc xoá đối tượng. Không thể tự động hoàn nguyên.",
+        "reversible_items": [],
+        "irreversible_items": [],
+        "conflict_items": [
+          {
+            "original_seq": 2,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8c0043-56ec-8135-b0c2-fcdcc2575226",
+            "classification": "conflict",
+            "reason": "Thuộc tính 'Status' đã bị bên thứ ba sửa (hiện tại: {\"select\":{\"name\":\"Done\"}}, sau job: {\"select\":{\"name\":\"In progress\"}})",
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8c0043-56ec-8135-b0c2-fcdcc2575226",
+              "properties": {
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-12",
+                    "end": null
+                  }
+                },
+                "Task Status": {
+                  "status": {
+                    "name": "Not started"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "user"
+                      }
+                    }
+                  ]
+                },
+                "Status": {
+                  "select": {
+                    "name": "Not started"
+                  }
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Gửi report tuần cho Linh"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Single action in ledger; placed as the sole compensating step in reverse order."
+          }
+        ],
+        "total_items": 1
+      },
+      "expected": {
+        "rev": 0,
+        "irr": 0,
+        "conf": 1
+      }
+    },
+    {
+      "job": 9,
+      "preview": {
+        "job_id": "job-09-irreversible",
+        "can_undo": false,
+        "disabled_reason": "Tất cả các thao tác trong job này đều không thể hoàn nguyên qua API (100% irreversible). Nút Undo bị vô hiệu hóa (FR-UD-06).",
+        "reversible_items": [],
+        "irreversible_items": [
+          {
+            "original_seq": 2,
+            "original_tool": "notion_create_comment",
+            "target_object_id": "3d8c0043-56ec-81f8-b7f2-c566bca74d31",
+            "classification": "irreversible",
+            "reason": "Notion API does not support deleting or modifying comments.",
+            "compensating_tool": null,
+            "compensating_args": null,
+            "order_rationale": "Only one action; no reverse order needed."
+          }
+        ],
+        "conflict_items": [],
+        "total_items": 1
+      },
+      "expected": {
+        "rev": 0,
+        "irr": 1,
+        "conf": 0
+      }
+    },
+    {
+      "job": 10,
+      "preview": {
+        "job_id": "job-10-undo-of-undo",
+        "can_undo": true,
+        "reversible_items": [
+          {
+            "original_seq": 2,
+            "original_tool": "notion_update_page_properties",
+            "target_object_id": "3d8c0043-56ec-8156-82cd-f9f6540515fe",
+            "classification": "reversible",
+            "reason": null,
+            "compensating_tool": "notion_update_page_properties",
+            "compensating_args": {
+              "page_id": "3d8c0043-56ec-8156-82cd-f9f6540515fe",
+              "properties": {
+                "Due date": {
+                  "date": {
+                    "start": "2026-09-11",
+                    "end": null
+                  }
+                },
+                "Task Status": {
+                  "status": {
+                    "name": "Not started"
+                  }
+                },
+                "Creator": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "user"
+                      }
+                    }
+                  ]
+                },
+                "Status": {
+                  "select": {
+                    "name": "Not started"
+                  }
+                },
+                "Name": {
+                  "title": [
+                    {
+                      "text": {
+                        "content": "Review PR #212 của Hùng"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "order_rationale": "Single action; placed as the sole compensating step in reverse order."
+          }
+        ],
+        "irreversible_items": [],
+        "conflict_items": [],
+        "total_items": 1
+      },
+      "expected": {
+        "rev": 1,
+        "irr": 0,
+        "conf": 0
+      }
+    }
+  ]
+}

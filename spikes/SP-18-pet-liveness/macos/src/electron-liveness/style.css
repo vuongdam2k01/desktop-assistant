@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+}
+
+/* Architecture A container (200x200) */
+#container-a {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+}
+
+#rive-canvas-a {
+  width: 180px;
+  height: 180px;
+  background: transparent !important;
+  display: block;
+}
+
+/* Architecture B container (fullscreen overlay) */
+#container-b {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: transparent !important;
+  pointer-events: none;
+}
+
+#rive-canvas-b {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent !important;
+  display: block;
+}
+
+#pet-b-proxy {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  pointer-events: auto;
+  cursor: grab;
+  /* subtle debug ring when hovered if enabled */
+}
+
+/* Dialogue Card (Comic speech bubble) */
+.card-bubble {
+  position: relative;
+  width: 320px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #1e293b;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.card-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.card-body {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #334155;
+  margin: 6px 0;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.card-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 12px;
+  outline: none;
+}
+
+.card-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Arrow pointer for speech bubble */
+.bubble-arrow-left {
+  position: absolute;
+  top: 30px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid rgba(255, 255, 255, 0.95);
+}
+
+.bubble-arrow-right {
+  position: absolute;
+  top: 30px;
+  right: -8px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid rgba(255, 255, 255, 0.95);
+}

@@ -1,0 +1,121 @@
+{
+  "call_id": "1789128378883_0012_GET_pages_3d8c0043-56ec-8161-b5c5-e7a4d9dd3c56",
+  "category": "q2_get_final_after_rollback",
+  "timestamp": "2026-09-11T12:06:19Z",
+  "duration_ms": 503,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8161-b5c5-e7a4d9dd3c56",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:19 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968bb16c246a84-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=pz7SOplFhiZ4ZchcxyW40UDHgRcsEMIhe7A_bGWN9Gs-1789128379.107308-1.0.1.1-ClXr0nVKVfV.2E_jPVUR44m.5nU4JGp8lz0T612hJDgrA5BjWDPCjnql4cnbcO2p5.L6uEGcMuRYUdX._zjYnVZ.Ys0jShhaXIfiMDC47Ar8jhW2iIVufBCSMpEYyrV1; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:19 GMT",
+      "ETag": "W/\"560-Yf+mSjwqBw3ATNR0L9AxXRd3av4\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "a1765dd4-7b4c-49fa-8f33-c12a3363613d",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8161-b5c5-e7a4d9dd3c56",
+      "created_time": "2026-09-11T12:06:00.000Z",
+      "last_edited_time": "2026-09-11T12:06:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": {
+            "start": "2026-09-20",
+            "end": null,
+            "time_zone": null
+          }
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "5f9885ba-7007-4fbb-a946-70324a88bfc6",
+            "name": "Not started",
+            "color": "default"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": {
+            "id": "108827de-b2e1-4444-ba38-fcd37b77626d",
+            "name": "Backlog",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q1 Test Task 2026-09-11T12:06:10.606651",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q1 Test Task 2026-09-11T12:06:10.606651",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q1-Test-Task-2026-09-11T12-06-10-606651-3d8c004356ec8161b5c5e7a4d9dd3c56",
+      "public_url": null,
+      "archived": false,
+      "request_id": "a1765dd4-7b4c-49fa-8f33-c12a3363613d"
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,6 @@
+﻿SP-7 Q3 Fullscreen Overlay Verification Log - 2026-09-11 22:32:39
+Fullscreen active: True
+Pet window visible: True
+Card window visible: True
+Screenshot captured: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-7-pet-window-os\evidence\q3-fullscreen.png
+Result: PASS (Pet and Card windows remain visible over fullscreen application)

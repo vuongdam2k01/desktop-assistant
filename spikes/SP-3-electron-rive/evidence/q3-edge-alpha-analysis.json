@@ -1,0 +1,150 @@
+{
+    "ImagePath":  "D:\\projects\\desktop-assistant\\spikes\\SP-3-electron-rive\\evidence\\q2-state-idle-rgba.png",
+    "TotalTransitionsFound":  3,
+    "SemiTransparentPixelCount":  0,
+    "HasDarkFringing":  false,
+    "Verdict":  "CLEAN_ANTI_ALIASING",
+    "SampleTransitions":  [
+                              {
+                                  "ScanY":  168,
+                                  "EdgeX":  30,
+                                  "Pixels":  [
+                                                 {
+                                                     "X":  28,
+                                                     "Y":  168,
+                                                     "R":  0,
+                                                     "G":  0,
+                                                     "B":  0,
+                                                     "A":  0
+                                                 },
+                                                 {
+                                                     "X":  29,
+                                                     "Y":  168,
+                                                     "R":  0,
+                                                     "G":  0,
+                                                     "B":  0,
+                                                     "A":  0
+                                                 },
+                                                 {
+                                                     "X":  30,
+                                                     "Y":  168,
+                                                     "R":  199,
+                                                     "G":  1,
+                                                     "B":  80,
+                                                     "A":  255
+                                                 },
+                                                 {
+                                                     "X":  31,
+                                                     "Y":  168,
+                                                     "R":  200,
+                                                     "G":  1,
+                                                     "B":  81,
+                                                     "A":  255
+                                                 },
+                                                 {
+                                                     "X":  32,
+                                                     "Y":  168,
+                                                     "R":  200,
+                                                     "G":  1,
+                                                     "B":  81,
+                                                     "A":  255
+                                                 }
+                                             ],
+                                  "Type":  "EnteringBody"
+                              },
+                              {
+                                  "ScanY":  240,
+                                  "EdgeX":  30,
+                                  "Pixels":  [
+                                                 {
+                                                     "X":  28,
+                                                     "Y":  240,
+                                                     "R":  0,
+                                                     "G":  0,
+                                                     "B":  0,
+                                                     "A":  0
+                                                 },
+                                                 {
+                                                     "X":  29,
+                                                     "Y":  240,
+                                                     "R":  0,
+                                                     "G":  0,
+                                                     "B":  0,
+                                                     "A":  0
+                                                 },
+                                                 {
+                                                     "X":  30,
+                                                     "Y":  240,
+                                                     "R":  143,
+                                                     "G":  0,
+                                                     "B":  80,
+                                                     "A":  255
+                                                 },
+                                                 {
+                                                     "X":  31,
+                                                     "Y":  240,
+                                                     "R":  143,
+                                                     "G":  1,
+                                                     "B":  80,
+                                                     "A":  255
+                                                 },
+                                                 {
+                                                     "X":  32,
+                                                     "Y":  240,
+                                                     "R":  143,
+                                                     "G":  1,
+                                                     "B":  80,
+                                                     "A":  255
+                                                 }
+                                             ],
+                                  "Type":  "EnteringBody"
+                              },
+                              {
+                                  "ScanY":  312,
+                                  "EdgeX":  30,
+                                  "Pixels":  [
+                                                 {
+                                                     "X":  28,
+                                                     "Y":  312,
+                                                     "R":  0,
+                                                     "G":  0,
+                                                     "B":  0,
+                                                     "A":  0
+                                                 },
+                                                 {
+                                                     "X":  29,
+                                                     "Y":  312,
+                                                     "R":  0,
+                                                     "G":  0,
+                                                     "B":  0,
+                                                     "A":  0
+                                                 },
+                                                 {
+                                                     "X":  30,
+                                                     "Y":  312,
+                                                     "R":  40,
+                                                     "G":  0,
+                                                     "B":  30,
+                                                     "A":  255
+                                                 },
+                                                 {
+                                                     "X":  31,
+                                                     "Y":  312,
+                                                     "R":  41,
+                                                     "G":  0,
+                                                     "B":  30,
+                                                     "A":  255
+                                                 },
+                                                 {
+                                                     "X":  32,
+                                                     "Y":  312,
+                                                     "R":  41,
+                                                     "G":  0,
+                                                     "B":  30,
+                                                     "A":  255
+                                                 }
+                                             ],
+                                  "Type":  "EnteringBody"
+                              }
+                          ]
+}

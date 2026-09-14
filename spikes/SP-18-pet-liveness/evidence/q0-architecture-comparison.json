@@ -1,0 +1,87 @@
+﻿{
+    "Timestamp":  "2026-09-12 10:56:54",
+    "ArchitectureA":  [
+                          "\n\u003e\u003e\u003e Starting Benchmark for arch-a...",
+                          "[arch-a] Measuring Idle Baseline (5s)...",
+                          "[arch-a] Starting 60fps Motion @ 0% CPU load (10s)...",
+                          "[arch-a] Capturing burst screenshots during motion...",
+                          "[arch-a] Starting 70% CPU stress during motion (10s)...",
+                          {
+                              "Mode":  "arch-a",
+                              "Idle":  {
+                                           "FPS":  60,
+                                           "WorkingSetMb":  96.52,
+                                           "PrivateMb":  40.75,
+                                           "GdiHandles":  24,
+                                           "UserHandles":  49,
+                                           "CpuSec":  1.094
+                                       },
+                              "Motion0Pct":  {
+                                                 "FPS":  60,
+                                                 "AvgFPS":  60,
+                                                 "MinFPS":  60,
+                                                 "MaxFPS":  60,
+                                                 "P95FPS":  60,
+                                                 "WorkingSetMb":  97.79,
+                                                 "PrivateMb":  41.38,
+                                                 "GdiHandles":  24,
+                                                 "UserHandles":  48,
+                                                 "CpuSec":  1.891
+                                             },
+                              "Motion70Pct":  {
+                                                  "FPS":  60,
+                                                  "AvgFPS":  60,
+                                                  "MinFPS":  60,
+                                                  "MaxFPS":  60,
+                                                  "P95FPS":  60,
+                                                  "WorkingSetMb":  97.74,
+                                                  "PrivateMb":  40.84,
+                                                  "GdiHandles":  24,
+                                                  "UserHandles":  48,
+                                                  "CpuSec":  2.281
+                                              }
+                          }
+                      ],
+    "ArchitectureB":  [
+                          "\n\u003e\u003e\u003e Starting Benchmark for arch-b...",
+                          "[arch-b] Measuring Idle Baseline (5s)...",
+                          "[arch-b] Starting 60fps Motion @ 0% CPU load (10s)...",
+                          "[arch-b] Capturing burst screenshots during motion...",
+                          "[arch-b] Starting 70% CPU stress during motion (10s)...",
+                          {
+                              "Mode":  "arch-b",
+                              "Idle":  {
+                                           "FPS":  60,
+                                           "WorkingSetMb":  97.56,
+                                           "PrivateMb":  40.33,
+                                           "GdiHandles":  23,
+                                           "UserHandles":  46,
+                                           "CpuSec":  1.500
+                                       },
+                              "Motion0Pct":  {
+                                                 "FPS":  60,
+                                                 "AvgFPS":  60,
+                                                 "MinFPS":  60,
+                                                 "MaxFPS":  60,
+                                                 "P95FPS":  60,
+                                                 "WorkingSetMb":  98.79,
+                                                 "PrivateMb":  41.69,
+                                                 "GdiHandles":  23,
+                                                 "UserHandles":  46,
+                                                 "CpuSec":  2.453
+                                             },
+                              "Motion70Pct":  {
+                                                  "FPS":  60,
+                                                  "AvgFPS":  60,
+                                                  "MinFPS":  60,
+                                                  "MaxFPS":  60,
+                                                  "P95FPS":  60,
+                                                  "WorkingSetMb":  98.86,
+                                                  "PrivateMb":  41.38,
+                                                  "GdiHandles":  23,
+                                                  "UserHandles":  46,
+                                                  "CpuSec":  2.516
+                                              }
+                          }
+                      ]
+}

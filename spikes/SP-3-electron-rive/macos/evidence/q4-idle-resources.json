@@ -1,0 +1,169 @@
+{
+  "metrics": {
+    "currentFps": 60,
+    "avgFps": 60,
+    "minFps": 60,
+    "maxFps": 61,
+    "p95Fps": 61,
+    "sampleCount": 17,
+    "fpsHistory": [
+      61,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60
+    ],
+    "activeState": "idle",
+    "lastTransitionMs": 1.2,
+    "transitions": [
+      {
+        "state": "idle",
+        "animation": "Beginner_idle",
+        "latencyMs": 6.9,
+        "timestamp": 1789309277444
+      },
+      {
+        "state": "receiving_order",
+        "animation": "Intermediate_hover",
+        "latencyMs": 2.8,
+        "timestamp": 1789309277796
+      },
+      {
+        "state": "working",
+        "animation": "Intermediate_idle",
+        "latencyMs": 15.1,
+        "timestamp": 1789309278161
+      },
+      {
+        "state": "waiting_approval",
+        "animation": "Beginner_hover",
+        "latencyMs": 10.7,
+        "timestamp": 1789309278512
+      },
+      {
+        "state": "has_result",
+        "animation": "Expert_idle",
+        "latencyMs": 12.7,
+        "timestamp": 1789309278878
+      },
+      {
+        "state": "idle",
+        "animation": "Beginner_idle",
+        "latencyMs": 15.8,
+        "timestamp": 1789309279244
+      },
+      {
+        "state": "receiving_order",
+        "animation": "Intermediate_hover",
+        "latencyMs": 1.3,
+        "timestamp": 1789309279562
+      },
+      {
+        "state": "working",
+        "animation": "Intermediate_idle",
+        "latencyMs": 15.7,
+        "timestamp": 1789309279912
+      },
+      {
+        "state": "waiting_approval",
+        "animation": "Beginner_hover",
+        "latencyMs": 14.3,
+        "timestamp": 1789309280245
+      },
+      {
+        "state": "has_result",
+        "animation": "Expert_idle",
+        "latencyMs": 12.9,
+        "timestamp": 1789309280578
+      },
+      {
+        "state": "idle",
+        "animation": "Beginner_idle",
+        "latencyMs": 12.3,
+        "timestamp": 1789309280912
+      },
+      {
+        "state": "receiving_order",
+        "animation": "Intermediate_hover",
+        "latencyMs": 11.4,
+        "timestamp": 1789309281244
+      },
+      {
+        "state": "working",
+        "animation": "Intermediate_idle",
+        "latencyMs": 12.1,
+        "timestamp": 1789309281578
+      },
+      {
+        "state": "waiting_approval",
+        "animation": "Beginner_hover",
+        "latencyMs": 11.2,
+        "timestamp": 1789309281911
+      },
+      {
+        "state": "has_result",
+        "animation": "Expert_idle",
+        "latencyMs": 10.7,
+        "timestamp": 1789309282245
+      },
+      {
+        "state": "idle",
+        "animation": "Beginner_idle",
+        "latencyMs": 1.2,
+        "timestamp": 1789309282611
+      }
+    ],
+    "totalFramesRendered": 6262,
+    "processMemory": {
+      "rssMb": "141.45",
+      "heapTotalMb": "5.69",
+      "heapUsedMb": "4.55"
+    },
+    "clusterProcesses": [
+      {
+        "pid": 12414,
+        "type": "Browser",
+        "cpuPercent": 0.16120517338932938,
+        "workingSetSizeKb": 144848,
+        "peakWorkingSetSizeKb": 158368
+      },
+      {
+        "pid": 12415,
+        "type": "GPU",
+        "cpuPercent": 0.6099873547271127,
+        "workingSetSizeKb": 76656,
+        "peakWorkingSetSizeKb": 99200
+      },
+      {
+        "pid": 12416,
+        "type": "Utility",
+        "cpuPercent": 0.00021180798886007076,
+        "workingSetSizeKb": 43760,
+        "peakWorkingSetSizeKb": 53008
+      },
+      {
+        "pid": 12418,
+        "type": "Tab",
+        "cpuPercent": 0.7763985850937809,
+        "workingSetSizeKb": 128432,
+        "peakWorkingSetSizeKb": 153760
+      }
+    ],
+    "powerEvents": []
+  },
+  "systemPowerTelemetry": "\"PowerTelemetryData\" = {\"AccumulatedWallEnergyEstimate\"=16143250,\"SystemEnergyConsumed\"=4444,\"SystemPowerInAccumulatorCount\"=10203,\"AdapterEfficiencyLoss\"=571,\"SystemLoad\"=16001,\"AccumulatedSystemLoad\"=41113218,\"AccumulatedSystemEnergyConsumed\"=11415559,\"SystemCurrentIn\"=1315,\"WallEnergyEstimate\"=5015,\"SystemLoadAccumulatorCount\"=10217,\"AdapterEfficiencyLossAccumulatorCount\"=10203,\"SystemVoltageIn\"=12160,\"SystemPowerIn\"=16001,\"AccumulatedBatteryPower\"=0,\"PowerTelemetryErrorCount\"=0,\"AccumulatedAdapterEfficiencyLoss\"=4727691,\"BatteryPowerAccumulatorCount\"=0,\"AccumulatedSystemPowerIn\"=41113218,\"BatteryPower\"=0,\"AccumulatedBatteryDischarge\"=0,\"BatteryDischargeAccumulatorCount\"=0}",
+  "topPowerSnapshot": "PID    COMMAND          %CPU POWER\n12418  Electron Helper  0.0  0.0  \n12416  Electron Helper  0.0  0.0  \n12415  Electron Helper  0.0  0.0  \n12414  Electron         0.0  0.0",
+  "timestamp": "2026-09-13T14:21:24.985Z"
+}

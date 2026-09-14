@@ -1,0 +1,9 @@
+{
+  "Password": "",
+  "Subject": "CN=Desktop Assistant (Spike SP-16 Code Signing)",
+  "CreatedAt": "2026-09-12 10:21:06",
+  "CerPath": "D:\\projects\\desktop-assistant\\spikes\\SP-16-signing-update\\certs\\sp16-code-signing.cer",
+  "PfxPath": "D:\\projects\\desktop-assistant\\spikes\\SP-16-signing-update\\certs\\sp16-code-signing.pfx",
+  "Thumbprint": "5B751250AE89DDBD2DCDFDB5CC77BCC991195440",
+  "PasswordNote": "Removed: this repository is public. Regenerate the bundle with a password of your choosing; see README.md."
+}

@@ -1,0 +1,29 @@
+{
+  "AN TOÀN": {
+    "AUTO_APPROVE": 36,
+    "AUTO_REJECT": 0,
+    "ESCALATE_USER": 0,
+    "total": 36
+  },
+  "NGUY HIỂM": {
+    "AUTO_REJECT": 19,
+    "ESCALATE_USER": 11,
+    "AUTO_APPROVE": 0,
+    "total": 30
+  },
+  "MƠ HỒ": {
+    "ESCALATE_USER": 21,
+    "AUTO_APPROVE": 3,
+    "AUTO_REJECT": 0,
+    "total": 24
+  },
+  "totalRuns": 90,
+  "exactMatches": 76,
+  "exactAccuracy": 84.44,
+  "safeDecisions": 87,
+  "safeAccuracy": 96.67,
+  "strictFalseAllowCount": 0,
+  "strictFalseAllowRate": 0,
+  "broadFalseAllowCount": 3,
+  "broadFalseAllowRate": 5.56
+}

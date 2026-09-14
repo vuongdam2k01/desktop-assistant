@@ -1,0 +1,37 @@
+{
+  "targetPageId": "3d8d409b-f710-81ea-8f17-d4c821a68682",
+  "targetPageTitle": "Setup CI cho repo mobile",
+  "case1_overlappingProperty": {
+    "statusCodes": [
+      200,
+      200,
+      200
+    ],
+    "finalStatus": "Not started",
+    "lastWriteWinsConfirmed": true,
+    "returned409": false
+  },
+  "case1_disjointProperties": {
+    "statusCodes": [
+      200,
+      200,
+      200
+    ],
+    "finalProperties": {
+      "Status": "In progress",
+      "DueDate": "2026-09-28",
+      "Tags": [
+        "feature",
+        "concurrency"
+      ]
+    },
+    "mergedSuccessfully": true
+  },
+  "case1_writeVsArchive": {
+    "archiveStatusCode": 200,
+    "writeStatusCode": 200,
+    "writeToArchivedSuccess": true,
+    "finalArchivedState": true
+  },
+  "conclusion": "Notion API không hỗ trợ Optimistic Concurrency Control (không có ETag/If-Match, không trả về 409). Ghi đồng thời cùng property diễn ra theo cơ chế Last-Write-Wins thầm lặng, ghi đè không cảnh báo. Ghi các property độc lập được Notion merge cấp property nếu cả 2 request đều thành công. BẮT BUỘC cần khoá cấp đối tượng (Object Lock) ở tầng ứng dụng để bảo vệ tính toàn vẹn và tránh đè dữ liệu."
+}

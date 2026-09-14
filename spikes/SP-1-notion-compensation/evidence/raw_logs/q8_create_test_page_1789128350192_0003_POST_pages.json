@@ -1,0 +1,128 @@
+{
+  "call_id": "1789128350192_0003_POST_pages",
+  "category": "q8_create_test_page",
+  "timestamp": "2026-09-11T12:05:50Z",
+  "duration_ms": 581,
+  "request": {
+    "method": "POST",
+    "url": "https://api.notion.com/v1/pages",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "parent": {
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "properties": {
+        "Name": {
+          "title": [
+            {
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:50 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968afe3c8f77f1-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=c9.t70zehBLsKSMFKgWIEwn6Amg6sXXw1rXJ2CwMYkE-1789128350.4361598-1.0.1.1-LEsOmI5WzMkJ0ZgGtOSX9O7E7mkVa98MN7Exxsqq8sITBQwEzWQ36kKGTnNbGjOnuZ6bZHylZw4L9BPoFTk_AtRSBXbIONHagMyQGS1TNkwPUykklnaf3nNia55Xge97; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:50 GMT",
+      "ETag": "W/\"4b9-KVP0jPi0so8OqeJ0l4CLmImjdqQ\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "149bf4ff-4913-4255-b11d-84dfa867f1b1",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+      "created_time": "2026-09-11T12:05:00.000Z",
+      "last_edited_time": "2026-09-11T12:05:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "5f9885ba-7007-4fbb-a946-70324a88bfc6",
+            "name": "Not started",
+            "color": "default"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": null
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q8 Status vs Select Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q8-Status-vs-Select-Test-3d8c004356ec81589fdde55f81a08a81",
+      "public_url": null,
+      "archived": false,
+      "request_id": "149bf4ff-4913-4255-b11d-84dfa867f1b1"
+    },
+    "error": null
+  }
+}

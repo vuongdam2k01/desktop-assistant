@@ -1,0 +1,10 @@
+{
+  "name": "sp3-electron-rive",
+  "version": "1.0.0",
+  "description": "SP-3 Pet Render Verification (Electron + Rive on Windows)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {}
+}

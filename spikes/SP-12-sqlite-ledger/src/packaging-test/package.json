@@ -1,0 +1,23 @@
+{
+  "name": "sp12-packaging-test",
+  "version": "1.0.0",
+  "description": "Packaging test for better-sqlite3 in Electron on Windows",
+  "main": "main.js",
+  "author": "Desktop Assistant Team",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  },
+  "devDependencies": {
+    "electron": "44.3.0"
+  },
+  "build": {
+    "appId": "com.desktopassistant.sp12packagetest",
+    "win": {
+      "target": "dir"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "**/*.node"
+    ]
+  }
+}

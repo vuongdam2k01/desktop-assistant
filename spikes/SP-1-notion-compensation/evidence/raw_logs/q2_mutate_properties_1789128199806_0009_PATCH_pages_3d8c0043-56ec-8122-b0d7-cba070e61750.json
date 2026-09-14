@@ -1,0 +1,134 @@
+{
+  "call_id": "1789128199806_0009_PATCH_pages_3d8c0043-56ec-8122-b0d7-cba070e61750",
+  "category": "q2_mutate_properties",
+  "timestamp": "2026-09-11T12:03:20Z",
+  "duration_ms": 574,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8122-b0d7-cba070e61750",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Name": {
+          "title": [
+            {
+              "text": {
+                "content": "Tên đã bị thay đổi bởi Agent"
+              }
+            }
+          ]
+        },
+        "Status": {
+          "select": {
+            "name": "Đang làm"
+          }
+        },
+        "Due date": {
+          "date": {
+            "start": "2026-10-31"
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:03:20 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968751a980de67-KHH",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=22cWPiGFuHEqk8onQhHv82SP14X5Hckj_JnAOAlrxMQ-1789128199.9465606-1.0.1.1-BfQaDBVnRBAk00BZPypY0_TmR3COwp3Q_MN8_Lo0eVJhpisMSPV8O3Iaib17zXNjsuF1cqv7dqbRULWd5EX.oC30BvyWFYmLLEKsQDSLqumNsbE53hJcuBo_nkMvz3lS; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:33:20 GMT",
+      "ETag": "W/\"4ba-ox0fjbh7qtxMKA13CnNN8RyqSUQ\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "7dd95ace-c751-4d88-aeeb-f28a47bfa011",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8122-b0d7-cba070e61750",
+      "created_time": "2026-09-11T12:03:00.000Z",
+      "last_edited_time": "2026-09-11T12:03:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": {
+            "start": "2026-10-31",
+            "end": null,
+            "time_zone": null
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": {
+            "id": "898c7412-5994-49d4-aa4f-9b9c4b8f3f45",
+            "name": "Đang làm",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Tên đã bị thay đổi bởi Agent",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Tên đã bị thay đổi bởi Agent",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/T-n-b-thay-i-b-i-Agent-3d8c004356ec8122b0d7cba070e61750",
+      "public_url": null,
+      "archived": false,
+      "request_id": "7dd95ace-c751-4d88-aeeb-f28a47bfa011"
+    },
+    "error": null
+  }
+}

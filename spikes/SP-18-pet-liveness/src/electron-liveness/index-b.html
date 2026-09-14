@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=\"UTF-8\">
+  <title>SP18-Pet-ArchB-Overlay</title>
+  <link rel=\"stylesheet\" href=\"style.css\">
+</head>
+<body>
+  <div id=\"overlay-b\">
+    <div id=\"pet-container-b\">
+      <canvas id=\"rive-canvas\" class=\"rive-canvas\" width=\"200\" height=\"200\"></canvas>
+      <div id=\"pet-fallback\" class=\"pet-avatar\" style=\"display: none;\">
+        <div class=\"pet-eyes\">
+          <div class=\"pet-eye\"></div>
+          <div class=\"pet-eye\"></div>
+        </div>
+      </div>
+      <div id=\"state-badge\" class=\"pet-state-badge\">IDLE</div>
+      <div id=\"fps-badge\" class=\"fps-badge\"><span id=\"fps-val\">60</span> fps</div>
+    </div>
+
+    <div id=\"inline-card-b\">
+      <div class=\"card-title\">
+        <span id=\"card-type\">APPROVAL REQUIRED</span>
+        <span style=\"font-size: 10px; color: #94a3b8;\">#JOB-18</span>
+      </div>
+      <div class=\"card-body\" id=\"card-text\">
+        Agent muốn xóa 3 task quá hạn trong Notion Task List.
+      </div>
+      <div class=\"card-buttons\">
+        <button class=\"btn btn-primary\">Chấp thuận</button>
+        <button class=\"btn btn-secondary\">Từ chối</button>
+      </div>
+    </div>
+  </div>
+
+  <script src=\"assets/rive.js\"></script>
+  <script src=\"renderer-b.js\"></script>
+</body>
+</html>

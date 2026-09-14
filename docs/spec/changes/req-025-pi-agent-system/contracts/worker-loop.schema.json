@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/worker-loop/0.2.0.json",
+  "title": "StandardToolResult",
+  "description": "Normative shape of what every tool implementation returns to the worker loop, for agent/contracts/worker-loop@0.2.0. The envelope exists because the reasoning engine reads the content array and nothing else: a tool that returns a plain object is serialised into an empty content array, and the model then plans against output it cannot see - measured in spikes/SP-4-agent-loop/REPORT.md section 1 Q5. The typed payload therefore travels twice, once as text the model reads and once as the details object the product's own code reads, and neither side is allowed to be the only copy. The shape is unchanged from 0.1.0: not one member, constraint or description moves, and only the identifier above tracks the contract's version. Modifying this envelope is MAJOR, because a tool set built against the previous shape fails silently rather than loudly.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["content", "details"],
+  "properties": {
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "description": "What the model is shown. An empty array is refused by this file rather than accepted as an empty result, because an empty array is indistinguishable to the model from a tool that returned nothing and is the exact failure the envelope exists to prevent.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "text"],
+        "properties": {
+          "type": {
+            "const": "text",
+            "description": "The only content kind a tool result may carry. A tool does not return an image, a file handle or a reference the model would have to resolve by acting."
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The result rendered as text. It is data the model reads, never an instruction it obeys: text originating on an external platform is untrusted, as model.md section Trust Boundary states."
+          }
+        }
+      }
+    },
+    "details": {
+      "description": "The same result as a structured value, preserving the types the text rendering flattens. Read by the product - the ledger record, the self-verification comparison, the job report - and never by the model. Any JSON value is admissible, including null for a tool whose outcome is fully carried by the text."
+    }
+  }
+}

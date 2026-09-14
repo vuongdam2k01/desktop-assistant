@@ -1,0 +1,14 @@
+==========================================================
+SP-7 / Q3 FULLSCREEN & SPACES TEST (macOS)
+Timestamp: 2026-09-13T13:34:12Z
+==========================================================
+
+[Step 1] Opening Fullscreen Test Window via Electron...
+Screenshot captured: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q3-fullscreen.png
+
+[Step 2] Testing Mission Control behavior...
+Screenshot captured: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q3-mission-control.png
+
+[Step 3] Testing Spaces Collection Behavior...
+Pet status: {"petVisible":true,"petFocused":false,"petBounds":{"x":1760,"y":830,"width":140,"height":140},"cardVisible":true,"cardFocused":false,"cardBounds":{"x":1410,"y":750,"width":340,"height":220},"petClicks":0,"cardClicks":0,"currentMode":"normal","dockHidden":false}
+Q3 Test Completed Successfully.

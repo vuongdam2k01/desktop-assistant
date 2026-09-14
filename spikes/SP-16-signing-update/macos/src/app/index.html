@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Desktop Assistant macOS - Auto Update Spike</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #0f172a;
+      color: #f8fafc;
+      user-select: none;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    .badge {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #0284c7;
+      color: #ffffff;
+    }
+    .badge.v101 {
+      background: #16a34a;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.6);
+    }
+    .card {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+      border: 1px solid #334155;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #94a3b8;
+    }
+    .status-val {
+      color: #f1f5f9;
+      font-family: monospace;
+    }
+    .progress-bar-bg {
+      background: #334155;
+      border-radius: 4px;
+      height: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar-fill {
+      background: #38bdf8;
+      height: 100%;
+      width: 0%;
+      transition: width 0.2s ease;
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0369a1;
+    }
+    button.btn-warn {
+      background: #eab308;
+      color: #0f172a;
+    }
+    button.btn-danger {
+      background: #ef4444;
+    }
+    button.btn-success {
+      background: #22c55e;
+    }
+    .log-box {
+      background: #090d16;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 11px;
+      height: 180px;
+      overflow-y: auto;
+      border: 1px solid #1e293b;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .alert-box {
+      display: none;
+      background: #7f1d1d;
+      border: 1px solid #f87171;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="title">Desktop Assistant Spike (SP-16/mac)</div>
+    <div id="versionBadge" class="badge">v1.0.0</div>
+  </div>
+
+  <div id="alertBox" class="alert-box"></div>
+
+  <div class="card">
+    <div class="status-row">
+      <span>Trạng thái ứng dụng:</span>
+      <span id="appStatus" class="status-val">Đang khởi tạo...</span>
+    </div>
+    <div class="status-row">
+      <span>Đã đóng gói (isPackaged):</span>
+      <span id="isPackaged" class="status-val">-</span>
+    </div>
+    <div class="status-row">
+      <span>PID / Exec:</span>
+      <span id="procInfo" class="status-val">-</span>
+    </div>
+    <div class="status-row">
+      <span>Tiến trình tải cập nhật:</span>
+      <span id="downloadStatus" class="status-val">Chưa có</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div id="progressBar" class="progress-bar-fill"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #38bdf8;">
+      Điều khiển thử nghiệm Q4 & Q6 (FR-APP-06 Job Conflict)
+    </div>
+    <div class="btn-group">
+      <button id="btnCheckUpdate">Kiểm tra cập nhật ngay</button>
+      <button id="btnStartJob" class="btn-warn">Bật Mock Job ("Sync Notion")</button>
+      <button id="btnStopJob" class="btn-danger" style="display: none;">Dừng Mock Job</button>
+      <button id="btnConfirmRestart" class="btn-success" style="display: none;">Khởi động lại cài đặt</button>
+    </div>
+  </div>
+
+  <div style="font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #94a3b8;">
+    App Log (Đồng bộ với evidence/updater-app.log):
+  </div>
+  <div id="logBox" class="log-box"></div>
+
+  <script>
+    const versionBadge = document.getElementById('versionBadge');
+    const appStatus = document.getElementById('appStatus');
+    const isPackaged = document.getElementById('isPackaged');
+    const procInfo = document.getElementById('procInfo');
+    const downloadStatus = document.getElementById('downloadStatus');
+    const progressBar = document.getElementById('progressBar');
+    const logBox = document.getElementById('logBox');
+    const alertBox = document.getElementById('alertBox');
+
+    const btnCheckUpdate = document.getElementById('btnCheckUpdate');
+    const btnStartJob = document.getElementById('btnStartJob');
+    const btnStopJob = document.getElementById('btnStopJob');
+    const btnConfirmRestart = document.getElementById('btnConfirmRestart');
+
+    function appendLog(line) {
+      logBox.textContent += line + '\n';
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    window.api.onVersionInfo((info) => {
+      versionBadge.textContent = `v${info.version}`;
+      if (info.version === '1.0.1') {
+        versionBadge.classList.add('v101');
+      }
+      isPackaged.textContent = info.isPackaged ? 'true (Đạt chuẩn updater)' : 'false (Unpacked dev)';
+      procInfo.textContent = `PID ${info.pid}`;
+      appStatus.textContent = 'Đang chạy bình thường';
+    });
+
+    window.api.onAppLog((line) => {
+      appendLog(line);
+      if (line.includes('update-available')) {
+        appStatus.textContent = 'Phát hiện bản mới, đang tải...';
+      } else if (line.includes('update-not-available')) {
+        appStatus.textContent = 'Đang ở phiên bản mới nhất';
+      }
+    });
+
+    window.api.onDownloadProgress((percent) => {
+      downloadStatus.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+    });
+
+    window.api.onReadyToRestart((ver) => {
+      appStatus.textContent = `Đã tải xong v${ver}. Chuẩn bị khởi động lại...`;
+      progressBar.style.width = '100%';
+    });
+
+    window.api.onJobConflict((data) => {
+      alertBox.style.display = 'block';
+      alertBox.innerHTML = `⚠️ <b>FR-APP-06:</b> Bản v${data.version} đã sẵn sàng nhưng đang có Job <i>"${data.job.name}"</i> chạy.<br>Hoãn cài đặt để bảo vệ dữ liệu!`;
+      btnConfirmRestart.style.display = 'inline-block';
+    });
+
+    btnCheckUpdate.addEventListener('click', () => {
+      window.api.checkUpdateManual();
+    });
+
+    btnStartJob.addEventListener('click', () => {
+      window.api.startJob('Sync Notion Database (Background)');
+      btnStartJob.style.display = 'none';
+      btnStopJob.style.display = 'inline-block';
+    });
+
+    btnStopJob.addEventListener('click', () => {
+      window.api.stopJob();
+      btnStopJob.style.display = 'none';
+      btnStartJob.style.display = 'inline-block';
+      alertBox.style.display = 'none';
+    });
+
+    btnConfirmRestart.addEventListener('click', () => {
+      window.api.confirmRestart();
+    });
+  </script>
+</body>
+</html>

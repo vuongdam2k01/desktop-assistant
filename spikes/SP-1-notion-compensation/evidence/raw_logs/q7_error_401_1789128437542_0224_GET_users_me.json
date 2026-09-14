@@ -1,0 +1,49 @@
+{
+  "call_id": "1789128437542_0224_GET_users_me",
+  "category": "q7_error_401",
+  "timestamp": "2026-09-11T12:07:18Z",
+  "duration_ms": 659,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/users/me",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 401,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:18 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "139",
+      "Connection": "close",
+      "CF-Ray": "a3968d1f5fdd9688-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"8b-OJkQ81TQy3RgzAxcm/aNJpgJSEY\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "92b0c502-aa4b-4885-9e46-fd2d637cce2d",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=YZ7s.E4u.opAXjCIlf1CGxHtP.Tw9Y8F35nPBH_7mVw-1789128437.6566796-1.0.1.1-0JFKjLn38rfROfIzsDoZzdfJSSFl8OLVQp5VctItSa4HPiYNWj7lBoHDp1g83CvEnqE06fI.gx3.apiinhxM_KNTHZwrRDeNv3HelVA0.yZ1KqN6SXyVnxDutE81Vc7m; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:18 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 401,
+      "code": "unauthorized",
+      "message": "API token is invalid.",
+      "request_id": "92b0c502-aa4b-4885-9e46-fd2d637cce2d"
+    },
+    "error": "HTTP Error 401: Unauthorized"
+  }
+}

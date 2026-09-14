@@ -1,0 +1,12 @@
+﻿[2026-09-11 21:01:48.670] === STARTING Q4 MOUSE COORDINATE & CLICK TEST ===
+[2026-09-11 21:01:49.233] Initial cursor position: X=0, Y=0
+[2026-09-11 21:01:49.234] Moving cursor to target coordinates (450, 320)...
+[2026-09-11 21:01:49.564] Observed cursor position: X=450, Y=320
+[2026-09-11 21:01:49.569] Move 1 Success: True
+[2026-09-11 21:01:49.570] Moving cursor to target coordinates (680, 510) and executing Left Click...
+[2026-09-11 21:01:49.860] Observed cursor position: X=680, Y=510
+[2026-09-11 21:01:49.861] Move 2 Success: True
+[2026-09-11 21:01:49.861] Moving cursor to (500, 400) and executing Double Click...
+[2026-09-11 21:01:50.295] Observed cursor position: X=500, Y=400
+[2026-09-11 21:01:50.295] Move 3 Success: True
+[2026-09-11 21:01:50.296] Q4 Verification Overall Result: PASS

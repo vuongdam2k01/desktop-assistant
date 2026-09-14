@@ -1,0 +1,57 @@
+{
+  "call_id": "1789128308427_0003_PATCH_pages_3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+  "category": "q6_patch_rollup",
+  "timestamp": "2026-09-11T12:05:09Z",
+  "duration_ms": 635,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Project status": {
+          "rollup": {
+            "array": []
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 400,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:09 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a39689f90a948f06-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=_a6yJ3AZ7OkE8EaEprq3rxS8GBGL8VGsRoa9XkXHmBA-1789128308.6501968-1.0.1.1-P17Y5WzOMsY0_Pl67LokxST4ZzhiYj0uDuaxZHrf0njYzCa8fzRUnNOAL.W09rCxWMaD9sx6vuzwJ1kMbUmqAoZ9iaQJP5gjJvBQx.MMuqUg_54VVtWohONoEnHfhuDO; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:09 GMT",
+      "ETag": "W/\"76e-rG4wzA5J1U5yaK7HlonOGEqOyso\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "b326fac4-a778-49f5-a998-4bc126087305",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "body failed validation. Fix one:\nbody.properties.Project status.title should be defined, instead was `undefined`.\nbody.properties.Project status.rich_text should be defined, instead was `undefined`.\nbody.properties.Project status.number should be defined, instead was `undefined`.\nbody.properties.Project status.url should be defined, instead was `undefined`.\nbody.properties.Project status.select should be defined, instead was `undefined`.\nbody.properties.Project status.multi_select should be defined, instead was `undefined`.\nbody.properties.Project status.people should be defined, instead was `undefined`.\nbody.properties.Project status.email should be defined, instead was `undefined`.\nbody.properties.Project status.phone_number should be defined, instead was `undefined`.\nbody.properties.Project status.date should be defined, instead was `undefined`.\nbody.properties.Project status.checkbox should be defined, instead was `undefined`.\nbody.properties.Project status.relation should be defined, instead was `undefined`.\nbody.properties.Project status.files should be defined, instead was `undefined`.\nbody.properties.Project status.status should be defined, instead was `undefined`.\nbody.properties.Project status.place should be defined, instead was `undefined`.\nbody.properties.Project status.verification should be defined, instead was `undefined`.\nbody.properties.Project status.id should be defined, instead was `undefined`.\nbody.properties.Project status.name should be defined, instead was `undefined`.\nbody.properties.Project status.start should be defined, instead was `undefined`.\nbody.properties.Project status.lat should be defined, instead was `undefined`.\nbody.properties.Project status.state should be defined, instead was `undefined`.",
+      "request_id": "b326fac4-a778-49f5-a998-4bc126087305"
+    },
+    "error": "HTTP Error 400: Bad Request"
+  }
+}

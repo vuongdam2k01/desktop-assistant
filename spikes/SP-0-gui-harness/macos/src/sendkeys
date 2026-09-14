@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# spikes/SP-0-gui-harness/macos/src/sendkeys
+# Simulate keyboard keystrokes, shortcuts, mouse movement, and clicks.
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HELPER="$SCRIPT_DIR/bin/harness_helper"
+
+if [[ ! -x "$HELPER" ]]; then
+    clang -framework CoreGraphics -framework ApplicationServices -framework CoreFoundation -framework AppKit \
+          -o "$HELPER" "$SCRIPT_DIR/harness_helper.m"
+fi
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage:" >&2
+    echo "  sendkeys --text <string> [delay_ms]       (Unicode safe via CGEvent)" >&2
+    echo "  sendkeys --combo <cmd> <shift> <opt> <ctrl> <key> (e.g. 1 0 0 0 s)" >&2
+    echo "  sendkeys --key <key>                     (e.g. return, esc, tab)" >&2
+    echo "  sendkeys --mouse-move <x> <y>" >&2
+    echo "  sendkeys --mouse-click <x> <y>" >&2
+    echo "  sendkeys --mouse-dclick <x> <y>" >&2
+    echo "  sendkeys --osascript-text <string>       (via AppleScript keystroke)" >&2
+    exit 1
+fi
+
+MODE="$1"
+shift
+
+case "$MODE" in
+    --text)
+        "$HELPER" type "$1" "$2"
+        ;;
+    --combo)
+        "$HELPER" combo "$1" "$2" "$3" "$4" "$5"
+        ;;
+    --key)
+        "$HELPER" combo 0 0 0 0 "$1"
+        ;;
+    --mouse-move)
+        "$HELPER" move "$1" "$2"
+        ;;
+    --mouse-click)
+        "$HELPER" click "$1" "$2"
+        ;;
+    --mouse-dclick)
+        "$HELPER" dclick "$1" "$2"
+        ;;
+    --osascript-text)
+        ESCAPED=$(echo "$1" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g')
+        osascript -e "tell application \"System Events\" to keystroke \"$ESCAPED\""
+        ;;
+    *)
+        echo "Unknown option: $MODE" >&2
+        exit 1
+        ;;
+esac

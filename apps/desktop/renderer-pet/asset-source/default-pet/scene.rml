@@ -1,0 +1,327 @@
+<Rive version="1" kind="fragment">
+    <Artboard defaultStateMachineId="0:7" width="500" height="500" styleId="0:5" name="Pet" id="0:2">
+        <LayoutComponentStyle name="Artboard Style" id="0:5"/>
+        <Node x="250" y="320" name="MotionRoot" id="0:10">
+            <Shape name="BodyDisk" id="0:12">
+                <Ellipse width="240" height="240" originX="0.5" originY="0.5" name="DiskPath"/>
+                <Fill name="DiskFill">
+                    <SolidColor colorValue="FF334155" name="SlateColor"/>
+                </Fill>
+                <Stroke thickness="8" name="PerimeterStroke">
+                    <SolidColor colorValue="FFF1F5F9" name="PerimeterColor"/>
+                </Stroke>
+            </Shape>
+            <Node name="StatusRoot" id="0:20">
+                <!-- PipGroup0: 1 centered pip -->
+                <Node name="PipGroup0" id="0:30">
+                    <Shape x="0" y="0" name="Pip0_1">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+                <!-- PipGroup1: 2 horizontal pips -->
+                <Node opacity="0" name="PipGroup1" id="0:31">
+                    <Shape x="-28" y="0" name="Pip1_1">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="28" y="0" name="Pip1_2">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+                <!-- PipGroup2: 3 horizontal pips -->
+                <Node opacity="0" name="PipGroup2" id="0:32">
+                    <Shape x="-36" y="0" name="Pip2_1">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="0" y="0" name="Pip2_2">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="36" y="0" name="Pip2_3">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+                <!-- PipGroup3: 4 pips in 2x2 grid -->
+                <Node opacity="0" name="PipGroup3" id="0:33">
+                    <Shape x="-26" y="-26" name="Pip3_1">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="26" y="-26" name="Pip3_2">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="-26" y="26" name="Pip3_3">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="26" y="26" name="Pip3_4">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+                <!-- PipGroup4: 5-pip quincunx -->
+                <Node opacity="0" name="PipGroup4" id="0:34">
+                    <Shape x="-32" y="-32" name="Pip4_1">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="32" y="-32" name="Pip4_2">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="0" y="0" name="Pip4_3">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="-32" y="32" name="Pip4_4">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="32" y="32" name="Pip4_5">
+                        <Ellipse width="18" height="18" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+            </Node>
+            <!-- Locomotion Bars -->
+            <Node y="70" name="LocomotionIndicators" id="0:60">
+                <Node name="BarGroup0" id="0:70">
+                    <Shape x="0" y="0" name="Bar0_1">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+                <Node opacity="0" name="BarGroup1" id="0:71">
+                    <Shape x="-16" y="0" name="Bar1_1">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="16" y="0" name="Bar1_2">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+                <Node opacity="0" name="BarGroup2" id="0:72">
+                    <Shape x="-26" y="0" name="Bar2_1">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="0" y="0" name="Bar2_2">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="26" y="0" name="Bar2_3">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+                <Node opacity="0" name="BarGroup3" id="0:73">
+                    <Shape x="-36" y="0" name="Bar3_1">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="-12" y="0" name="Bar3_2">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="12" y="0" name="Bar3_3">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                    <Shape x="36" y="0" name="Bar3_4">
+                        <Rectangle width="18" height="6" cornerRadiusTL="3" cornerRadiusTR="3" cornerRadiusBL="3" cornerRadiusBR="3" originX="0.5" originY="0.5"/>
+                        <Fill><SolidColor colorValue="FFF1F5F9"/></Fill>
+                    </Shape>
+                </Node>
+            </Node>
+        </Node>
+        <StateMachine name="PetStateMachine" id="0:7">
+            <StateMachineNumber name="workStatus" value="0" id="0:101"/>
+            <StateMachineNumber name="locomotion" value="0" id="0:102"/>
+            <StateMachineLayer name="WorkStatus" id="0:110">
+                <AnyState x="0" y="-120"/>
+                <ExitState x="600" y="-120"/>
+                <EntryState x="-100" y="0">
+                    <StateTransition stateToId="0:800" duration="200"/>
+                </EntryState>
+                <AnimationState x="0" y="0" animationId="0:500" id="0:800">
+                    <StateTransition stateToId="0:801" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="1"/></StateTransition>
+                    <StateTransition stateToId="0:802" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="2"/></StateTransition>
+                    <StateTransition stateToId="0:803" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="3"/></StateTransition>
+                    <StateTransition stateToId="0:804" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="4"/></StateTransition>
+                </AnimationState>
+                <AnimationState x="120" y="0" animationId="0:501" id="0:801">
+                    <StateTransition stateToId="0:800" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="0"/></StateTransition>
+                    <StateTransition stateToId="0:802" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="2"/></StateTransition>
+                    <StateTransition stateToId="0:803" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="3"/></StateTransition>
+                    <StateTransition stateToId="0:804" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="4"/></StateTransition>
+                </AnimationState>
+                <AnimationState x="240" y="0" animationId="0:502" id="0:802">
+                    <StateTransition stateToId="0:800" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="0"/></StateTransition>
+                    <StateTransition stateToId="0:801" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="1"/></StateTransition>
+                    <StateTransition stateToId="0:803" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="3"/></StateTransition>
+                    <StateTransition stateToId="0:804" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="4"/></StateTransition>
+                </AnimationState>
+                <AnimationState x="360" y="0" animationId="0:503" id="0:803">
+                    <StateTransition stateToId="0:800" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="0"/></StateTransition>
+                    <StateTransition stateToId="0:801" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="1"/></StateTransition>
+                    <StateTransition stateToId="0:802" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="2"/></StateTransition>
+                    <StateTransition stateToId="0:804" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="4"/></StateTransition>
+                </AnimationState>
+                <AnimationState x="480" y="0" animationId="0:504" id="0:804">
+                    <StateTransition stateToId="0:800" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="0"/></StateTransition>
+                    <StateTransition stateToId="0:801" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="1"/></StateTransition>
+                    <StateTransition stateToId="0:802" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="2"/></StateTransition>
+                    <StateTransition stateToId="0:803" duration="200"><TransitionNumberCondition inputId="0:101" opValue="equal" value="3"/></StateTransition>
+                </AnimationState>
+            </StateMachineLayer>
+            <StateMachineLayer name="Locomotion" id="0:120">
+                <AnyState x="0" y="-120"/>
+                <ExitState x="500" y="-120"/>
+                <EntryState x="-100" y="0">
+                    <StateTransition stateToId="0:900" duration="200"/>
+                </EntryState>
+                <AnimationState x="0" y="0" animationId="0:600" id="0:900">
+                    <StateTransition stateToId="0:901" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="1"/></StateTransition>
+                    <StateTransition stateToId="0:902" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="2"/></StateTransition>
+                    <StateTransition stateToId="0:903" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="3"/></StateTransition>
+                </AnimationState>
+                <AnimationState x="120" y="0" animationId="0:601" id="0:901">
+                    <StateTransition stateToId="0:900" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="0"/></StateTransition>
+                    <StateTransition stateToId="0:902" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="2"/></StateTransition>
+                    <StateTransition stateToId="0:903" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="3"/></StateTransition>
+                </AnimationState>
+                <AnimationState x="240" y="0" animationId="0:602" id="0:902">
+                    <StateTransition stateToId="0:900" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="0"/></StateTransition>
+                    <StateTransition stateToId="0:901" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="1"/></StateTransition>
+                    <StateTransition stateToId="0:903" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="3"/></StateTransition>
+                </AnimationState>
+                <AnimationState x="360" y="0" animationId="0:603" id="0:903">
+                    <StateTransition stateToId="0:900" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="0"/></StateTransition>
+                    <StateTransition stateToId="0:901" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="1"/></StateTransition>
+                    <StateTransition stateToId="0:902" duration="200"><TransitionNumberCondition inputId="0:102" opValue="equal" value="2"/></StateTransition>
+                </AnimationState>
+            </StateMachineLayer>
+        </StateMachine>
+
+        <!-- Work status animations -->
+        <LinearAnimation loopValue="1" duration="60" name="Work_Idle" id="0:500">
+            <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:31"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:33"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+        </LinearAnimation>
+        <LinearAnimation loopValue="1" duration="60" name="Work_Receiving" id="0:501">
+            <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:31"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:33"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+        </LinearAnimation>
+        <LinearAnimation loopValue="1" duration="60" name="Work_Working" id="0:502">
+            <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:31"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:33"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+        </LinearAnimation>
+        <LinearAnimation loopValue="1" duration="60" name="Work_WaitingApproval" id="0:503">
+            <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:31"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:33"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+        </LinearAnimation>
+        <LinearAnimation loopValue="1" duration="60" name="Work_HoldingResult" id="0:504">
+            <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:31"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:33"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+        </LinearAnimation>
+
+        <!-- Locomotion animations -->
+        <LinearAnimation loopValue="1" duration="96" name="Loco_Standing" id="0:600">
+            <KeyedObject objectId="0:70"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:71"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:72"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:73"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:10">
+                <KeyedProperty propertyKey="13">
+                    <KeyFrameDouble value="250" frame="0"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="14">
+                    <KeyFrameDouble value="320" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="317.5" frame="48" interpolationType="1"/>
+                    <KeyFrameDouble value="320" frame="96" interpolationType="1"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="15">
+                    <KeyFrameDouble value="0" frame="0"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+        <LinearAnimation loopValue="1" duration="24" name="Loco_Walking" id="0:601">
+            <KeyedObject objectId="0:70"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:71"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:72"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:73"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:10">
+                <KeyedProperty propertyKey="13">
+                    <KeyFrameDouble value="250" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="265" frame="6" interpolationType="1"/>
+                    <KeyFrameDouble value="250" frame="12" interpolationType="1"/>
+                    <KeyFrameDouble value="235" frame="18" interpolationType="1"/>
+                    <KeyFrameDouble value="250" frame="24" interpolationType="1"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="14">
+                    <KeyFrameDouble value="320" frame="0"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="15">
+                    <KeyFrameDouble value="0" frame="0"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+        <LinearAnimation loopValue="1" duration="60" name="Loco_Dragged" id="0:602">
+            <KeyedObject objectId="0:70"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:71"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:72"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:73"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:10">
+                <KeyedProperty propertyKey="13">
+                    <KeyFrameDouble value="250" frame="0"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="14">
+                    <KeyFrameDouble value="300" frame="0"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="15">
+                    <KeyFrameDouble value="0.10472" frame="0"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+        <LinearAnimation loopValue="1" duration="36" name="Loco_Falling" id="0:603">
+            <KeyedObject objectId="0:70"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:71"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:72"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:73"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1" frame="0"/></KeyedProperty></KeyedObject>
+            <KeyedObject objectId="0:10">
+                <KeyedProperty propertyKey="13">
+                    <KeyFrameDouble value="250" frame="0"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="14">
+                    <KeyFrameDouble value="305" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="340" frame="18" interpolationType="1"/>
+                    <KeyFrameDouble value="305" frame="36" interpolationType="1"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="15">
+                    <KeyFrameDouble value="0" frame="0"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+    </Artboard>
+</Rive>

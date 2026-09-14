@@ -1,0 +1,68 @@
+{
+  "pages": {
+    "page_task_101": {
+      "id": "page_task_101",
+      "object": "page",
+      "created_time": "2026-09-11T10:00:00.000Z",
+      "last_edited_time": "2026-09-13T13:59:03.692Z",
+      "archived": false,
+      "properties": {
+        "Title": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Implement Q3 Fail-Closed Design"
+              }
+            }
+          ]
+        },
+        "Status": {
+          "id": "status",
+          "type": "status",
+          "status": {
+            "name": "In Progress",
+            "color": "yellow"
+          }
+        },
+        "Priority": {
+          "id": "priority",
+          "type": "select",
+          "select": {
+            "name": "P0",
+            "color": "red"
+          }
+        },
+        "Assignee": {
+          "id": "assignee",
+          "type": "people",
+          "people": [
+            {
+              "id": "user_01",
+              "name": "Product Owner"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "callHistory": [
+    {
+      "method": "updatePage",
+      "pageId": "page_task_101",
+      "properties": {
+        "Status": {
+          "id": "status",
+          "type": "status",
+          "status": {
+            "name": "In Progress",
+            "color": "yellow"
+          }
+        }
+      },
+      "timestamp": "2026-09-13T13:59:03.692Z"
+    }
+  ]
+}

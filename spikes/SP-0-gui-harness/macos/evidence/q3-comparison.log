@@ -1,0 +1,19 @@
+=== Q3 KEYSTROKE COMPARISON: CGEvent vs osascript ===
+Target length: 200
+
+[Method A: CGEvent (CoreGraphics)]
+Received length: 200
+Match 200/200: True
+Bit-by-bit exact match: True
+Content: [SP0-START]Windows11-Native: Tiếng Việt có dấu: Trăm năm trong cõi người ta, chữ tài chữ mệnh khéo là ghét nhau! Symbols: !@#$%^&*()_+~-={}|[]:;<>?,./ PADDING:01234567890123456789012345678901[SP0-END]
+
+[Method B: osascript keystroke (AppleScript/System Events)]
+Received length: 200
+Match 200/200: True
+Bit-by-bit exact match: False
+Content: [SP0-START]Windows11-Native: Tiang Viat ca dau: Tram nam trong cai ngaai ta, cha tai cha manh khao la ghat nhau! Symbols: !@#$%^&*()_+~-={}|[]:;<>?,./ PADDING:01234567890123456789012345678901[SP0-END]
+
+Observation:
+- CGEvent with CGEventKeyboardSetUnicodeString preserves 100% of Unicode characters.
+- osascript keystroke replaces accented Vietnamese characters with unaccented approximations
+  (e.g., Tiếng -> Tiang, Việt -> Viat, có dấu -> ca dau, Trăm -> Tram, chữ -> cha).

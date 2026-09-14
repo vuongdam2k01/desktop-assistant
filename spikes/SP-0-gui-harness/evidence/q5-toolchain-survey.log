@@ -1,0 +1,34 @@
+﻿=== SP-0 Q5: NATIVE BUILD TOOLCHAIN SURVEY (WINDOWS) ===
+Date: 2026-09-11 23:33:59 +07:00
+OS Version: Microsoft Windows NT 10.0.26200.0
+OS Architecture: 64-bit
+
+--- 1. Node.js & npm ---
+Node Path: C:\Program Files\nodejs\node.exe
+Node Version: v24.21.0
+Node Platform: win32
+Node Arch: x64
+npm Path: C:\Program Files\nodejs\npm.ps1
+npm Version: 11.19.0
+
+--- 2. Python ---
+Command 'python.exe' found at: C:\Program Files\Python311\python.exe -> Output: Python 3.11.9
+Command 'py.exe' found at: C:\WINDOWS\py.exe -> Output: Python 3.11.9
+Command 'python3.exe' found at: C:\Users\<user>\AppData\Local\Microsoft\WindowsApps\python3.exe -> Output: Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
+Registry found Python: 3.11 at HKLM:\Software\Python\PythonCore
+  InstallPath: C:\Program Files\Python311\
+Python Installed & Functional: YES
+
+--- 3. Visual Studio C++ Build Tools & MSBuild ---
+vswhere.exe found: C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe
+VS Instance: Visual Studio Build Tools 2022 (17.14.37628.2)
+VS Install Path: C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+cl.exe (MSVC Compiler): NOT FOUND in PATH
+msbuild.exe: NOT FOUND in PATH
+Visual Studio Build Tools Ready: YES
+
+--- 4. node-gyp ---
+node-gyp version via npx: v13.0.2
+
+--- 5. Conclusion for SP-12/Q1 Native Rebuild (better-sqlite3) ---
+STATUS: READY - All required components are installed.

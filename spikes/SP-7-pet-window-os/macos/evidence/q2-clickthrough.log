@@ -1,0 +1,22 @@
+==========================================================
+SP-7 / Q2 CLICK-THROUGH TEST (macOS)
+Timestamp: 2026-09-13T13:33:02Z
+==========================================================
+Pet bounds: x=1760, y=830, w=140, h=140
+
+[Test 1] Moving to Pet Center (1830, 900) and clicking...
+Pet clicks after center click: 1 (expected >= 1)
+
+[Test 2] Moving to Transparent Corner (1768, 838) and clicking...
+Pet clicks after transparent corner click: 1 (expected same: 1)
+
+[Test 3] Testing radial boundary hit-testing:
+  Distance 20px from center (x=1850, y=900): PASS_THROUGH
+  Distance 40px from center (x=1870, y=900): HIT_PET
+  Distance 50px from center (x=1880, y=900): HIT_PET
+  Distance 54px from center (x=1884, y=900): PASS_THROUGH
+  Distance 58px from center (x=1888, y=900): PASS_THROUGH
+  Distance 65px from center (x=1895, y=900): PASS_THROUGH
+  Distance 75px from center (x=1905, y=900): PASS_THROUGH
+
+Screenshot saved to /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q2-clickthrough.png

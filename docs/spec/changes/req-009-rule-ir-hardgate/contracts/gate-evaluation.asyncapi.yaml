@@ -1,0 +1,506 @@
+asyncapi: 3.0.0
+info:
+  title: Gate Evaluation Channels
+  version: 0.1.0
+  description: >-
+    Normative channel surface for approval/contracts/gate-evaluation@0.1.0 - the boundary between the process
+    that owns connectors, rules and the ledger, and the windows the user sees. What is frozen here is as much
+    what is absent as what is present: there is no channel that submits a call subject, no channel that returns
+    or injects a decision, and no channel that executes, retries or replays a tool. A compromised window can
+    annoy the user and cannot manufacture permission. Evaluation itself is not on this surface at all; it is a
+    synchronous, model-free, in-process decision, and its types live in the contract document.
+defaultContentType: application/json
+servers:
+  processBoundary:
+    host: in-process
+    protocol: ipc
+    description: >-
+      One application build, both ends shipping together. There is no mixed-version window at runtime; the
+      version exists so that a ledger record written by an older build can still be read and explained.
+channels:
+  approval/request:
+    address: approval/request
+    description: >-
+      An operation has stopped and the user is being asked. Raised only for an appealable verdict - a hardline
+      refusal carries unappealable and raises no request at all.
+    messages:
+      approvalRequest:
+        $ref: '#/components/messages/ApprovalRequest'
+  approval/decide:
+    address: approval/decide
+    description: The decision the user made on a pending request, carried back from the window that showed it.
+    messages:
+      approvalDecision:
+        $ref: '#/components/messages/ApprovalDecision'
+      approvalDecisionAccepted:
+        $ref: '#/components/messages/ApprovalDecisionAccepted'
+  approval/withdrawn:
+    address: approval/withdrawn
+    description: A pending request is no longer pending, and the window removes its card.
+    messages:
+      approvalWithdrawn:
+        $ref: '#/components/messages/ApprovalWithdrawn'
+  approval/refusal-notice:
+    address: approval/refusal-notice
+    description: >-
+      Something in this job was refused or held. The window attaches the notice to every question it shows for
+      that job thereafter, and the notice does not follow the user into another job.
+    messages:
+      refusalNotice:
+        $ref: '#/components/messages/RefusalNotice'
+  rules/list:
+    address: rules/list
+    description: The stored catalogue, for the rule list the application window renders.
+    messages:
+      rulesListRequest:
+        $ref: '#/components/messages/EmptyRequest'
+      rulesListResult:
+        $ref: '#/components/messages/RuleCatalogueResult'
+  rules/upsert:
+    address: rules/upsert
+    description: A rule the user created or edited, compiled and stored, or refused whole.
+    messages:
+      ruleUpsertRequest:
+        $ref: '#/components/messages/RuleUpsertRequest'
+      ruleUpsertResult:
+        $ref: '#/components/messages/RuleIdResult'
+  rules/delete:
+    address: rules/delete
+    description: >-
+      Deletion of a stored rule. Hardline rules and static patterns are not in a store a window can reach and
+      are never offered as deletable.
+    messages:
+      ruleDeleteRequest:
+        $ref: '#/components/messages/RuleIdRequest'
+      ruleDeleteResult:
+        $ref: '#/components/messages/DeletedResult'
+  allowlist/list:
+    address: allowlist/list
+    description: The permanent exceptions the user has made outside any one job.
+    messages:
+      allowlistListRequest:
+        $ref: '#/components/messages/EmptyRequest'
+      allowlistListResult:
+        $ref: '#/components/messages/AllowlistResult'
+  allowlist/delete:
+    address: allowlist/delete
+    description: Removal of one permanent exception.
+    messages:
+      allowlistDeleteRequest:
+        $ref: '#/components/messages/AllowlistIdRequest'
+      allowlistDeleteResult:
+        $ref: '#/components/messages/DeletedResult'
+  mode/set:
+    address: mode/set
+    description: >-
+      The approval mode the user chose. It takes effect for jobs created afterwards only, because the mode a
+      job is judged under is the one recorded on it at creation.
+    messages:
+      modeSetRequest:
+        $ref: '#/components/messages/ModeRequest'
+      modeSetResult:
+        $ref: '#/components/messages/ModeResult'
+  gate/health:
+    address: gate/health
+    description: >-
+      Whether the gate can decide at all. The stopped state is what drives the banner telling the user that
+      writes are halted; reads continue in every state.
+    messages:
+      gateHealth:
+        $ref: '#/components/messages/GateHealth'
+operations:
+  publishApprovalRequest:
+    action: send
+    channel:
+      $ref: '#/channels/approval~1request'
+    summary: Main to window, pub-sub. A window that cannot render it is a display fault and the request stays pending.
+  submitApprovalDecision:
+    action: receive
+    channel:
+      $ref: '#/channels/approval~1decide'
+    summary: >-
+      Window to main, request-response. Refused with APPROVAL_REQUEST_UNKNOWN, APPROVAL_REQUEST_EXPIRED,
+      APPROVAL_NOT_APPEALABLE or APPROVAL_LEVEL_FORBIDDEN. A decision submitted for a hardline refusal is
+      refused and recorded, because no window should hold that identifier.
+  publishApprovalWithdrawn:
+    action: send
+    channel:
+      $ref: '#/channels/approval~1withdrawn'
+    summary: Main to window, pub-sub. No error path; the window removes the card.
+  publishRefusalNotice:
+    action: send
+    channel:
+      $ref: '#/channels/approval~1refusal-notice'
+    summary: Main to window, pub-sub. No error path.
+  listRules:
+    action: receive
+    channel:
+      $ref: '#/channels/rules~1list'
+    summary: >-
+      Window to main, request-response. Fails with RULE_CATALOGUE_UNREADABLE, RULE_CATALOGUE_INVALID or
+      RULE_VERSION_AHEAD; a catalogue is never partially returned.
+  upsertRule:
+    action: receive
+    channel:
+      $ref: '#/channels/rules~1upsert'
+    summary: >-
+      Window to main, request-response. Fails with RULE_SCHEMA_INVALID, RULE_PATTERN_INVALID,
+      RULE_REFERENCE_UNKNOWN or RULE_ORIGIN_FORBIDDEN. A rule that cannot be expressed is reported to the user
+      and not stored in a weaker form.
+  deleteRule:
+    action: receive
+    channel:
+      $ref: '#/channels/rules~1delete'
+    summary: Window to main, request-response. Fails with RULE_UNKNOWN or RULE_NOT_DELETABLE.
+  listAllowlist:
+    action: receive
+    channel:
+      $ref: '#/channels/allowlist~1list'
+    summary: Window to main, request-response. Fails with RULE_CATALOGUE_UNREADABLE.
+  deleteAllowlistEntry:
+    action: receive
+    channel:
+      $ref: '#/channels/allowlist~1delete'
+    summary: Window to main, request-response. Fails with ALLOWLIST_ENTRY_UNKNOWN.
+  setMode:
+    action: receive
+    channel:
+      $ref: '#/channels/mode~1set'
+    summary: Window to main, request-response. No error path.
+  publishGateHealth:
+    action: send
+    channel:
+      $ref: '#/channels/gate~1health'
+    summary: Main to window, pub-sub. No error path.
+components:
+  messages:
+    ApprovalRequest:
+      name: ApprovalRequest
+      payload:
+        $ref: '#/components/schemas/ApprovalRequest'
+    ApprovalDecision:
+      name: ApprovalDecision
+      payload:
+        $ref: '#/components/schemas/ApprovalDecision'
+    ApprovalDecisionAccepted:
+      name: ApprovalDecisionAccepted
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - accepted
+        properties:
+          accepted:
+            const: true
+    ApprovalWithdrawn:
+      name: ApprovalWithdrawn
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - requestId
+          - reason
+        properties:
+          requestId:
+            type: string
+          reason:
+            enum:
+              - expired
+              - job-cancelled
+              - decided-elsewhere
+    RefusalNotice:
+      name: RefusalNotice
+      payload:
+        $ref: '#/components/schemas/RefusalNotice'
+    EmptyRequest:
+      name: EmptyRequest
+      payload:
+        type: object
+        additionalProperties: false
+    RuleCatalogueResult:
+      name: RuleCatalogueResult
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - representationVersion
+          - rules
+        properties:
+          representationVersion:
+            type: string
+            pattern: '^\d+\.\d+\.\d+$'
+          rules:
+            type: array
+            description: >-
+              Each member is a rule per rule-representation.schema.json, which owns the shape. It is not
+              restated here, because the two copies would drift and the copy a window read would be the one
+              that went stale.
+            items:
+              type: object
+    RuleUpsertRequest:
+      name: RuleUpsertRequest
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - rule
+        properties:
+          rule:
+            type: object
+            description: One rule per rule-representation.schema.json.
+    RuleIdRequest:
+      name: RuleIdRequest
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - ruleId
+        properties:
+          ruleId:
+            type: string
+    RuleIdResult:
+      name: RuleIdResult
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - ruleId
+        properties:
+          ruleId:
+            type: string
+    DeletedResult:
+      name: DeletedResult
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - deleted
+        properties:
+          deleted:
+            const: true
+    AllowlistResult:
+      name: AllowlistResult
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - entries
+        properties:
+          entries:
+            type: array
+            items:
+              $ref: '#/components/schemas/AllowlistEntry'
+    AllowlistIdRequest:
+      name: AllowlistIdRequest
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - entryId
+        properties:
+          entryId:
+            type: string
+    ModeRequest:
+      name: ModeRequest
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - mode
+        properties:
+          mode:
+            $ref: '#/components/schemas/ApprovalMode'
+    ModeResult:
+      name: ModeResult
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - mode
+        properties:
+          mode:
+            $ref: '#/components/schemas/ApprovalMode'
+    GateHealth:
+      name: GateHealth
+      payload:
+        type: object
+        additionalProperties: false
+        required:
+          - state
+        properties:
+          state:
+            enum:
+              - ready
+              - stopped
+          error:
+            $ref: '#/components/schemas/EvaluationErrorCode'
+          detail:
+            type: string
+  schemas:
+    ApprovalMode:
+      enum:
+        - 'on'
+        - smart
+        - 'off'
+    Verdict:
+      enum:
+        - allow
+        - hold
+        - refuse
+    EvaluationErrorCode:
+      description: >-
+        The codes that halt writes generally are the first three; the last three concern one call and hold that
+        call rather than halting every write. A failure is never a verdict.
+      enum:
+        - RULE_CATALOGUE_UNREADABLE
+        - RULE_CATALOGUE_INVALID
+        - RULE_VERSION_AHEAD
+        - MANIFEST_DECLARATION_MISSING
+        - FIELD_VALUE_UNEXTRACTABLE
+        - COUNT_UNAVAILABLE
+        - EVALUATION_FAILED
+    ObjectRef:
+      type: object
+      additionalProperties: false
+      required:
+        - type
+        - id
+      description: >-
+        A connector-declared type and the immutable identifier of the object. Never a display name: renaming an
+        object would otherwise step around the rule protecting it.
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+    MatchedRule:
+      type: object
+      additionalProperties: false
+      required:
+        - ruleId
+        - origin
+        - name
+        - verdict
+      properties:
+        ruleId:
+          type: string
+        origin:
+          enum:
+            - hardline
+            - static
+            - user
+        name:
+          type: string
+        verdict:
+          $ref: '#/components/schemas/Verdict'
+    ApprovalRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - requestId
+        - jobId
+        - tool
+        - matched
+        - reason
+        - expiresAt
+        - appealable
+      properties:
+        requestId:
+          type: string
+        jobId:
+          type: string
+        tool:
+          type: string
+        object:
+          $ref: '#/components/schemas/ObjectRef'
+        beforeAfter:
+          type: object
+          description: >-
+            What the operation would change, as the card shows it. Presentation of this member belongs to the
+            uix capability; the gate supplies the values it judged.
+        matched:
+          type: array
+          minItems: 1
+          description: >-
+            Every rule that matched, strictest first. The card shows all of them, so the user sees every reason
+            the operation stopped rather than only the first.
+          items:
+            $ref: '#/components/schemas/MatchedRule'
+        reason:
+          type: string
+          description: Stated in the language of the user, and kept in the ledger record of the decision.
+        expiresAt:
+          type: string
+        appealable:
+          const: true
+          description: >-
+            Always true on this channel. A hardline refusal carries unappealable and raises no request, so an
+            unappealable request is not a representable message.
+    ApprovalDecision:
+      type: object
+      additionalProperties: false
+      required:
+        - requestId
+        - level
+      properties:
+        requestId:
+          type: string
+        level:
+          enum:
+            - once
+            - job
+            - always
+            - deny
+          description: >-
+            A job-level grant creates a scoped approval over the job, rule, tool and object scope the user was
+            shown; all four must match a later call, and the grant is matched afresh each time rather than
+            spent. An always-level grant is refused with APPROVAL_LEVEL_FORBIDDEN when a stopping rule also
+            matches the operation, because the exception belongs inside that rule.
+    RefusalNotice:
+      type: object
+      additionalProperties: false
+      required:
+        - jobId
+        - tool
+        - ruleId
+        - ruleName
+        - reason
+        - at
+      properties:
+        jobId:
+          type: string
+        tool:
+          type: string
+        object:
+          $ref: '#/components/schemas/ObjectRef'
+        ruleId:
+          type: string
+        ruleName:
+          type: string
+        reason:
+          type: string
+        at:
+          type: string
+    AllowlistEntry:
+      type: object
+      additionalProperties: false
+      required:
+        - entryId
+        - connector
+        - tool
+        - object
+        - addedAt
+      description: >-
+        A permanent exception. Its stored shape is rule-representation.sql; this is how it crosses the
+        boundary.
+      properties:
+        entryId:
+          type: string
+        connector:
+          type: string
+        tool:
+          type: string
+        object:
+          $ref: '#/components/schemas/ObjectRef'
+        addedAt:
+          type: string

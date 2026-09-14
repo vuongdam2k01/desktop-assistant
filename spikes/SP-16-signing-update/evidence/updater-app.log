@@ -1,0 +1,44 @@
+[2026-09-12T03:41:21.589Z] [PID:25072] [v1.0.0] === ỨNG DỤNG KHỞI ĐỘNG ===
+[2026-09-12T03:41:21.592Z] [PID:25072] [v1.0.0] Phiên bản: 1.0.0
+[2026-09-12T03:41:21.593Z] [PID:25072] [v1.0.0] PID: 25072
+[2026-09-12T03:41:21.593Z] [PID:25072] [v1.0.0] Đường dẫn thực thi: C:\Users\<user>\AppData\Local\Programs\sp16-desktop-assistant\DesktopAssistantSpike.exe
+[2026-09-12T03:41:21.594Z] [PID:25072] [v1.0.0] isPackaged: true
+[2026-09-12T03:41:21.975Z] [PID:25072] [v1.0.0] Cửa sổ hiển thị hoàn tất. Phiên bản: 1.0.0
+[2026-09-12T03:41:23.990Z] [PID:25072] [v1.0.0] Bắt đầu kích hoạt kiểm tra cập nhật tự động...
+[2026-09-12T03:41:23.992Z] [PID:25072] [v1.0.0] Đang kiểm tra bản cập nhật từ http://127.0.0.1:8089/updates/latest.yml ...
+[2026-09-12T03:41:24.030Z] [PID:25072] [v1.0.0] Phát hiện bản mới khả dụng: v1.0.1 (ngày phát hành: 2026-09-12T03:39:28.410Z)
+[2026-09-12T03:41:25.536Z] [PID:25072] [v1.0.0] Tiến trình tải: 100% (125729 KB/s)
+[2026-09-12T03:41:36.673Z] [PID:25072] [v1.0.0] Tải thành công bản cập nhật v1.0.1!
+[2026-09-12T03:41:36.674Z] [PID:25072] [v1.0.0] File installer đã xác thực chữ ký: C:\Users\<user>\AppData\Local\sp16-desktop-assistant-updater\pending\DesktopAssistantSpike Setup 1.0.1.exe
+[2026-09-12T03:41:36.675Z] [PID:25072] [v1.0.0] Không có job đang chạy. Tiến hành quitAndInstall() sau 1.5s...
+[2026-09-12T03:41:38.178Z] [PID:25072] [v1.0.0] Thực thi autoUpdater.quitAndInstall(true, true)...
+[2026-09-12T03:42:04.226Z] [PID:25072] [v1.0.0] Sự kiện before-quit được kích hoạt.
+[2026-09-12T03:42:58.952Z] [PID:22292] [v1.0.1] === ỨNG DỤNG KHỞI ĐỘNG ===
+[2026-09-12T03:42:58.954Z] [PID:22292] [v1.0.1] Phiên bản: 1.0.1
+[2026-09-12T03:42:58.954Z] [PID:22292] [v1.0.1] PID: 22292
+[2026-09-12T03:42:58.954Z] [PID:22292] [v1.0.1] Đường dẫn thực thi: C:\Users\<user>\AppData\Local\Programs\sp16-desktop-assistant\DesktopAssistantSpike.exe
+[2026-09-12T03:42:58.955Z] [PID:22292] [v1.0.1] isPackaged: true
+[2026-09-12T03:42:59.401Z] [PID:22292] [v1.0.1] Cửa sổ hiển thị hoàn tất. Phiên bản: 1.0.1
+[2026-09-12T03:43:55.646Z] [PID:520] [v1.0.0] === ỨNG DỤNG KHỞI ĐỘNG ===
+[2026-09-12T03:43:55.649Z] [PID:520] [v1.0.0] Phiên bản: 1.0.0
+[2026-09-12T03:43:55.650Z] [PID:520] [v1.0.0] PID: 520
+[2026-09-12T03:43:55.651Z] [PID:520] [v1.0.0] Đường dẫn thực thi: C:\Users\<user>\AppData\Local\Programs\sp16-desktop-assistant\DesktopAssistantSpike.exe
+[2026-09-12T03:43:55.651Z] [PID:520] [v1.0.0] isPackaged: true
+[2026-09-12T03:43:55.964Z] [PID:520] [v1.0.0] Cửa sổ hiển thị hoàn tất. Phiên bản: 1.0.0
+[2026-09-12T03:43:57.974Z] [PID:520] [v1.0.0] Bắt đầu kích hoạt kiểm tra cập nhật tự động...
+[2026-09-12T03:43:57.977Z] [PID:520] [v1.0.0] Đang kiểm tra bản cập nhật từ http://127.0.0.1:8089/updates/latest.yml ...
+[2026-09-12T03:43:58.012Z] [PID:520] [v1.0.0] Phát hiện bản mới khả dụng: v1.0.1 (ngày phát hành: 2026-09-12T03:39:28.410Z)
+[2026-09-12T03:43:58.599Z] [PID:520] [v1.0.0] Tải thành công bản cập nhật v1.0.1!
+[2026-09-12T03:43:58.600Z] [PID:520] [v1.0.0] File installer đã xác thực chữ ký: C:\Users\<user>\AppData\Local\sp16-desktop-assistant-updater\pending\DesktopAssistantSpike Setup 1.0.1.exe
+[2026-09-12T03:43:58.600Z] [PID:520] [v1.0.0] Không có job đang chạy. Tiến hành quitAndInstall() sau 1.5s...
+[2026-09-12T03:44:00.106Z] [PID:520] [v1.0.0] Thực thi autoUpdater.quitAndInstall(true, true)...
+[2026-09-12T03:44:00.129Z] [PID:520] [v1.0.0] Sự kiện before-quit được kích hoạt.
+[2026-09-12T03:44:26.892Z] [PID:25340] [v1.0.1] === ỨNG DỤNG KHỞI ĐỘNG ===
+[2026-09-12T03:44:26.894Z] [PID:25340] [v1.0.1] Phiên bản: 1.0.1
+[2026-09-12T03:44:26.894Z] [PID:25340] [v1.0.1] PID: 25340
+[2026-09-12T03:44:26.895Z] [PID:25340] [v1.0.1] Đường dẫn thực thi: C:\Users\<user>\AppData\Local\Programs\sp16-desktop-assistant\DesktopAssistantSpike.exe
+[2026-09-12T03:44:26.895Z] [PID:25340] [v1.0.1] isPackaged: true
+[2026-09-12T03:44:27.208Z] [PID:25340] [v1.0.1] Cửa sổ hiển thị hoàn tất. Phiên bản: 1.0.1
+[2026-09-12T03:44:29.219Z] [PID:25340] [v1.0.1] Bắt đầu kích hoạt kiểm tra cập nhật tự động...
+[2026-09-12T03:44:29.220Z] [PID:25340] [v1.0.1] Đang kiểm tra bản cập nhật từ http://127.0.0.1:8089/updates/latest.yml ...
+[2026-09-12T03:44:29.256Z] [PID:25340] [v1.0.1] Không có bản mới. Bản hiện tại v1.0.1 là mới nhất.

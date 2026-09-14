@@ -1,0 +1,60 @@
+{
+  "call_id": "1789128438201_0225_POST_comments",
+  "category": "q7_error_403",
+  "timestamp": "2026-09-11T12:07:18Z",
+  "duration_ms": 455,
+  "request": {
+    "method": "POST",
+    "url": "https://api.notion.com/v1/comments",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "parent": {
+        "page_id": "fe318d0c-92d1-41e0-8def-b12f2c389072"
+      },
+      "rich_text": [
+        {
+          "text": {
+            "content": "hi"
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "status_code": 403,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:18 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "168",
+      "Connection": "close",
+      "CF-Ray": "a3968d2419506e87-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"a8-HRnQaOKuU2JkyeFbJ1S5ArJO7G4\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "c062ba1f-0fc3-433d-b1c2-25636492ed18",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=8AMyCeqI75UQJBbGrolq2sk4z43kEx_fNnHBV7QrYl8-1789128438.4162762-1.0.1.1-j2l7xzjUhAbeEQY.x_yam2VcCz3Nkm4SoV4YGapwLdlRjZfGygrpEsz9V6qWQCGBWUXwvqnJtLlZmzSistOuGXhgEZNCaeHcnoDSG3f3Nu8OLNhrmI0noBit7Mw0g1Fr; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:18 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 403,
+      "code": "restricted_resource",
+      "message": "Insufficient permissions for this endpoint.",
+      "request_id": "c062ba1f-0fc3-433d-b1c2-25636492ed18"
+    },
+    "error": "HTTP Error 403: Forbidden"
+  }
+}

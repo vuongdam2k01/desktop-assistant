@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SP-18 Dialogue Card</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card-bubble" id="card">
+    <div id="arrow" class="bubble-arrow-left"></div>
+    <div class="card-header">
+      <div class="card-title">Desktop Assistant</div>
+      <div class="card-status" id="status-tag">Ready</div>
+    </div>
+    <div class="card-body" id="card-message">
+      How can I assist you with your work today? Drop a screenshot or type a command below.
+    </div>
+    <div class="card-footer">
+      <input type="text" class="card-input" id="card-input" placeholder="Type a task and hit Enter (Esc to dismiss)...">
+    </div>
+  </div>
+
+  <script>
+    const cardInput = document.getElementById('card-input');
+    const arrow = document.getElementById('arrow');
+    const statusTag = document.getElementById('status-tag');
+    const cardMessage = document.getElementById('card-message');
+
+    cardInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.electronAPI.dismissCard();
+      } else if (e.key === 'Enter') {
+        cardMessage.innerText = "Processing task: " + cardInput.value;
+        cardInput.value = '';
+      }
+    });
+
+    window.electronAPI.onCardUpdate((data) => {
+      if (data.orientation === 'left') {
+        arrow.className = 'bubble-arrow-right';
+      } else {
+        arrow.className = 'bubble-arrow-left';
+      }
+      if (data.status) statusTag.innerText = data.status;
+      if (data.message) cardMessage.innerText = data.message;
+    });
+  </script>
+</body>
+</html>

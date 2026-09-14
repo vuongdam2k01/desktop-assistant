@@ -1,0 +1,12 @@
+{
+  "name": "sp7-pet-window-macos",
+  "version": "1.0.0",
+  "description": "SP-7 Pet Window OS Spike on macOS",
+  "main": "src/electron-pet/main.js",
+  "scripts": {
+    "start": "electron src/electron-pet/main.js"
+  },
+  "dependencies": {
+    "electron": "^44.3.0"
+  }
+}

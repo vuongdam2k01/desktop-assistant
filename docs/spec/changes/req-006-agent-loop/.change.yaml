@@ -1,0 +1,8 @@
+schema: design
+created: 2026-09-12
+kind: B
+skip_specs: false
+depends_on:
+  - req-017-provider-matrix
+  - req-021-ask-user-offline
+synced_at: "2026-09-12T20:58:28.958Z"

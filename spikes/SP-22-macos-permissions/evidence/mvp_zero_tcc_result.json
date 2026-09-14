@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-09-13T14:30:42.872Z",
+  "environment": {
+    "os": "darwin",
+    "arch": "arm64",
+    "electronVersion": "44.3.0",
+    "nodeVersion": "24.20.0"
+  },
+  "tests": {
+    "tccPermissionsRequired": false,
+    "petWindowCreated": true,
+    "cardWindowCreated": true,
+    "trayCreated": true,
+    "sqliteLedgerFunctional": true,
+    "safeStorageFunctional": true,
+    "jobLifecycleCompleted": true,
+    "zeroTccVerified": true
+  },
+  "details": {
+    "safeStorage": {
+      "available": true,
+      "plainLength": 46,
+      "cipherLength": 51,
+      "decryptedMatch": true
+    }
+  }
+}

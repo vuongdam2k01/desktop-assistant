@@ -1,0 +1,38 @@
+======================================================================
+🔴 Q3: WRITE DURABILITY & THROUGHPUT BENCHMARK (macOS APFS + FileVault)
+======================================================================
+
+--- PART 1: Multi-Trial Crash Stress Test (20 iterations x 5 points) ---
+
+Testing Mode A: Default fsync (fullfsync=0, sync=NORMAL) (SQLITE_FULLFSYNC=0, SQLITE_SYNCHRONOUS=NORMAL)...
+Summary for Mode A: Default fsync (fullfsync=0, sync=NORMAL):
+  Total Trials: 100
+  Passed Trials: 100
+  Lost/Corrupted Records: 0
+  Pass Rate: 100.0%
+
+Testing Mode B: F_FULLFSYNC Safe (fullfsync=1, sync=FULL) (SQLITE_FULLFSYNC=1, SQLITE_SYNCHRONOUS=FULL)...
+Summary for Mode B: F_FULLFSYNC Safe (fullfsync=1, sync=FULL):
+  Total Trials: 100
+  Passed Trials: 100
+  Lost/Corrupted Records: 0
+  Pass Rate: 100.0%
+
+--- PART 2: Write Throughput & Latency Benchmark (500 ledger commits each) ---
+Result: 1. WAL + NORMAL + fullfsync=0 (Default)
+  -> 28314.9 writes/sec | Total: 17.7ms
+  -> Latency: min=0.018ms, p50=0.028ms, p95=0.041ms, p99=0.089ms, max=1.885ms
+Result: 2. WAL + NORMAL + fullfsync=1
+  -> 17021.3 writes/sec | Total: 29.4ms
+  -> Latency: min=0.021ms, p50=0.025ms, p95=0.038ms, p99=0.135ms, max=10.428ms
+Result: 3. WAL + FULL + fullfsync=0
+  -> 14389.8 writes/sec | Total: 34.7ms
+  -> Latency: min=0.041ms, p50=0.066ms, p95=0.086ms, p99=0.173ms, max=0.372ms
+Result: 4. WAL + FULL + fullfsync=1 (Full Safe)
+  -> 241.1 writes/sec | Total: 2074.0ms
+  -> Latency: min=1.516ms, p50=4.033ms, p95=5.086ms, p99=6.149ms, max=13.299ms
+Result: 5. WAL + EXTRA + fullfsync=1 (Max Paranoid)
+  -> 249.4 writes/sec | Total: 2004.9ms
+  -> Latency: min=1.300ms, p50=3.980ms, p95=5.064ms, p99=6.889ms, max=23.118ms
+
+Saved benchmark data to evidence/q3-durability-benchmark.json

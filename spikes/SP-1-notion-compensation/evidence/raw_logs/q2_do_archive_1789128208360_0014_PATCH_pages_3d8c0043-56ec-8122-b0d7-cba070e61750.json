@@ -1,0 +1,114 @@
+{
+  "call_id": "1789128208360_0014_PATCH_pages_3d8c0043-56ec-8122-b0d7-cba070e61750",
+  "category": "q2_do_archive",
+  "timestamp": "2026-09-11T12:03:29Z",
+  "duration_ms": 661,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8122-b0d7-cba070e61750",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "archived": true
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:03:28 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968787affbb856-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=j4bhvd0BRLPAw6fTqC49Cne0iDfNaTPgNZgxhXruzM0-1789128208.5867326-1.0.1.1-Tn5pM9JISIWtuBZOOjUf6Hv9nEuuqsdPHAtjdsKSXx42Nf7ff1sn2J45jAdeQ2MizksPjyOJ30wkm_beRVwiAvQFqyIxI2DJ84qTfs3kFn.8iqm.0wMkr1LU.1vW4WF9; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:33:28 GMT",
+      "ETag": "W/\"4d4-WbsBBquNOJV1tnWB1OBOLrcjywg\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "9cc1a36a-c6f7-4010-9d88-8a7419a4fe41",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8122-b0d7-cba070e61750",
+      "created_time": "2026-09-11T12:03:00.000Z",
+      "last_edited_time": "2026-09-11T12:03:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": true,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": {
+            "start": "2026-09-20",
+            "end": null,
+            "time_zone": null
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": {
+            "id": "108827de-b2e1-4444-ba38-fcd37b77626d",
+            "name": "Backlog",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q1 Test Task 2026-09-11T12:03:14.834881",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q1 Test Task 2026-09-11T12:03:14.834881",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q1-Test-Task-2026-09-11T12-03-14-834881-3d8c004356ec8122b0d7cba070e61750",
+      "public_url": null,
+      "archived": true,
+      "request_id": "9cc1a36a-c6f7-4010-9d88-8a7419a4fe41"
+    },
+    "error": null
+  }
+}

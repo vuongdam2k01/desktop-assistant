@@ -1,0 +1,24 @@
+================================================================================
+SPIKE SP-19 / Q5: Thao tác gắn cờ irreversible tự động thuộc diện phê duyệt
+Yêu cầu FR-AP-05, FR-CF-07: Ở mode smart/on, thao tác irreversible mặc định cần phê duyệt
+================================================================================
+
+[1] Thử gọi tool có cờ 'irreversible: true' ở mode 'smart' (không có rule nào nhắc đến):
+  - Kết quả trả về: {"blocked":true,"verdict":"APPROVAL_REQUIRED","ruleId":"FR-AP-05-IRREVERSIBLE","reason":"Tool 'service_purge_permanent_logs' được gắn cờ irreversible trong manifest và cần người dùng phê duyệt trước khi thực thi.","isIrreversible":true}
+  - Adapter có bị gọi lén không? executionAttempted = false
+  ✅ ĐẠT: Hook tự động chặn và yêu cầu phê duyệt [FR-AP-05-IRREVERSIBLE] mà KHÔNG cần khai thêm ở nơi khác.
+
+[2] Thử gọi tool KHÔNG gắn cờ irreversible ở mode 'smart':
+  - Kết quả trả về: success=true
+  - Adapter có được gọi không? executionAttempted = true
+  ✅ ĐẠT: Tool reversible chạy bình thường, chứng minh cờ irreversible được phân biệt chính xác.
+
+[3] Thử nghiệm khi người dùng ĐÃ BẤM PHÊ DUYỆT (Active Job Approval token tồn tại):
+  - Kết quả sau phê duyệt: executionAttempted = true
+  ✅ ĐẠT: Sau khi người dùng duyệt, tool irreversible thực thi an toàn.
+
+================================================================================
+KẾT LUẬN Q5: ĐẠT 100%
+Thao tác gắn cờ `irreversible: true` trong manifest TỰ ĐỘNG thuộc diện phê duyệt
+(FR-AP-05 / FR-CF-07) ở mode smart/on mà KHÔNG CẦN khai thêm ở bất kỳ đâu khác.
+================================================================================

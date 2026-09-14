@@ -1,0 +1,7 @@
+﻿SP-7 Q6 Tray Icon & OS Notification Log - 2026-09-11 22:34:34
+Pet window hidden while card pending: True => PASS
+Windows OS Notification dispatched: True => PASS
+  Screenshot: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-7-pet-window-os\evidence\q6-tray-notification.png
+Pet restored successfully: True => PASS
+
+Q6 OVERALL RESULT: PASS

@@ -1,0 +1,9 @@
+schema: design
+created: 2026-09-12
+kind: B
+skip_specs: false
+depends_on:
+  - req-013-sqlite-ledger
+  - req-003-notion-compensation
+  - req-017-provider-matrix
+synced_at: "2026-09-12T21:04:20.338Z"

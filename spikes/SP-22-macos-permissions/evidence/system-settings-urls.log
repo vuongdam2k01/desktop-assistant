@@ -1,0 +1,8 @@
+=== Testing System Settings Deep Links ===
+Testing URL: x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture ... SUCCESS (exit 0)
+Testing URL: x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility ... SUCCESS (exit 0)
+Testing URL: x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent ... SUCCESS (exit 0)
+Testing URL: x-apple.systempreferences:com.apple.preference.security?Privacy_Automation ... SUCCESS (exit 0)
+Testing URL: x-apple.systempreferences:com.apple.preference.notifications ... SUCCESS (exit 0)
+Testing URL: x-apple.systempreferences:com.apple.preference.general?LoginItems ... SUCCESS (exit 0)
+All URL schemes tested successfully.

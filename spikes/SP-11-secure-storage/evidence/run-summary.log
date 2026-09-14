@@ -1,0 +1,38 @@
+﻿[2026-09-12 08:58:26.740] =================================================================
+[2026-09-12 08:58:26.763]    SP-11 MASTER SUITE: SECURE STORAGE ON WINDOWS
+[2026-09-12 08:58:26.765] =================================================================
+[2026-09-12 08:58:26.770] Spike Directory:    C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-11-secure-storage
+[2026-09-12 08:58:26.772] Evidence Directory: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-11-secure-storage\evidence
+[2026-09-12 08:58:26.782] OS Platform:        Windows NT 10.0.26200.0
+[2026-09-12 08:58:26.785] Active User:        BEO-LAP\vuong
+[2026-09-12 08:58:26.854] Electron Executable: C:\Users\<user>\AppData\Local\npm-cache\_npx\1323dbbc85759269\node_modules\electron\dist\electron.exe
+[2026-09-12 08:58:26.863] 
+>>> [STEP 1/4] Running Windows Credential Manager Benchmark...
+[2026-09-12 08:58:28.546] >>> Step 1 Complete: Win32 CredWrite 2560-byte boundary confirmed.
+[2026-09-12 08:58:28.549] 
+>>> [STEP 2/4] Running Electron safeStorage Capacity & Tamper Tests...
+[2026-09-12 08:58:29.599] >>> Step 2 Complete: safeStorage payloads (52B to 1MB) and tamper resistance verified.
+[2026-09-12 08:58:29.601] 
+>>> [STEP 3/4] Running DPAPI Cross-User Profile Isolation Test...
+[2026-09-12 08:58:34.110] >>> Step 3 Complete: DPAPI NTE_BAD_KEY_STATE (0x8009000B) verified across Windows user profiles.
+[2026-09-12 08:58:34.112] 
+>>> [STEP 4/4] Running SecureStorageService Key Taxonomy & FR-BE-12 Account Wipe...
+[2026-09-12 08:58:35.156] >>> Step 4 Complete: Key taxonomy CRUD and 100% clean account wipe verified.
+[2026-09-12 08:58:35.163] 
+=================================================================
+[2026-09-12 08:58:35.167]    SUITE VERIFICATION AUDIT & EVIDENCE CHECKLIST
+[2026-09-12 08:58:35.170] =================================================================
+[2026-09-12 08:58:35.197] Evidence file: q1-library-status.json         [PASS] (2368 bytes)
+[2026-09-12 08:58:35.204] Evidence file: q2-payload-capacity.json       [PASS] (2957 bytes)
+[2026-09-12 08:58:35.232] Evidence file: q2-wincred-limit.log           [PASS] (2116 bytes)
+[2026-09-12 08:58:35.238] Evidence file: q2-wincred-results.json        [PASS] (7737 bytes)
+[2026-09-12 08:58:35.244] Evidence file: q3-error-system-cards.json     [PASS] (2570 bytes)
+[2026-09-12 08:58:35.250] Evidence file: q4-cross-user-dpapi.json       [PASS] (1510 bytes)
+[2026-09-12 08:58:35.255] Evidence file: q4-cross-user-dpapi.log        [PASS] (1301 bytes)
+[2026-09-12 08:58:35.261] Evidence file: q5-key-taxonomy.json           [PASS] (2101 bytes)
+[2026-09-12 08:58:35.268] Evidence file: q6-account-wipe.json           [PASS] (595 bytes)
+[2026-09-12 08:58:35.274] Evidence file: q6-account-wipe.log            [PASS] (3150 bytes)
+[2026-09-12 08:58:35.300] 
+Total Suite Execution Time: 8.3 seconds
+[2026-09-12 08:58:35.304] OVERALL STATUS: PASS (ALL TESTS VERIFIED)
+[2026-09-12 08:58:35.306] =================================================================

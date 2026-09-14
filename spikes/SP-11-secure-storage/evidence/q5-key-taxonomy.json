@@ -1,0 +1,65 @@
+{
+  "taxonomyModel": {
+    "schema": "<domain>:<subdomain>:<id>[:field]",
+    "domains": {
+      "connector": "External service integration credentials (OAuth tokens, refresh tokens, BYO client secrets)",
+      "llm": "LLM provider API keys, custom endpoint configurations (ADR-007, FR-AG-11)",
+      "auth": "Application user session tokens, device authorization keys (FR-BE-01/02)",
+      "system": "Internal application secrets, encryption salt"
+    },
+    "standardKeysCatalog": [
+      {
+        "key": "connector:notion:default:token",
+        "name": "Notion Connector Token",
+        "specRequirement": "NFR-SEC-01, FR-NT-01",
+        "metadataStructure": {
+          "domain": "connector",
+          "connector": "notion"
+        }
+      },
+      {
+        "key": "connector:google:byo:client_credentials",
+        "name": "Google BYO OAuth Client Credentials",
+        "specRequirement": "FR-CF-11",
+        "metadataStructure": {
+          "domain": "connector",
+          "connector": "google",
+          "mode": "byo"
+        }
+      },
+      {
+        "key": "connector:google:account:owner@example.com:tokens",
+        "name": "Google Account OAuth Access & Refresh Tokens",
+        "specRequirement": "FR-BE-02, FR-GM-02, FR-DR-02",
+        "metadataStructure": {
+          "domain": "connector",
+          "connector": "google",
+          "account": "owner@example.com"
+        }
+      },
+      {
+        "key": "llm:provider:byteplus:api_key",
+        "name": "LLM BytePlus Provider API Key",
+        "specRequirement": "FR-AG-11, ADR-007",
+        "metadataStructure": {
+          "domain": "llm",
+          "provider": "byteplus"
+        }
+      },
+      {
+        "key": "auth:session:main",
+        "name": "Application User Session & Device Authorization",
+        "specRequirement": "FR-BE-01, FR-BE-02, FR-BE-12",
+        "metadataStructure": {
+          "domain": "auth",
+          "scope": "app_session"
+        }
+      }
+    ]
+  },
+  "verification": {
+    "totalKeysRegistered": 5,
+    "allKeysMatch": true,
+    "diskPlaintextLeakage": false
+  }
+}

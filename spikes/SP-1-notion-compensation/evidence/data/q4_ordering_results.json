@@ -1,0 +1,59 @@
+{
+  "workspace_a_schema_detection": {
+    "order_property": null,
+    "priority_property": null,
+    "status_property": {
+      "name": "Status",
+      "type": "select",
+      "id": "~iuF"
+    },
+    "reorder_capability": "status_group_move_only"
+  },
+  "workspace_c_schema_detection": {
+    "order_property": {
+      "name": "Order",
+      "type": "number",
+      "id": "BCK%3B"
+    },
+    "priority_property": {
+      "name": "Priority",
+      "type": "select",
+      "id": "qJ%3CJ"
+    },
+    "status_property": {
+      "name": "Status",
+      "type": "select",
+      "id": "WIcO"
+    },
+    "reorder_capability": "numeric_order_property"
+  },
+  "native_order_patch_attempt": {
+    "status": 400,
+    "response": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "body failed validation: body.position should be not present, instead was `{\"after\":\"3d8c0043-56ec-81be-8b7c-e8b798c18377\"}`.",
+      "request_id": "6e169fbf-8c25-4487-b47a-8ecf6c1c03e4"
+    },
+    "conclusion": "Notion API không có thuộc tính hoặc endpoint native nào cho phép đổi vị trí hiển thị (row position) của page trong view."
+  },
+  "workspace_c_reorder_test": {
+    "task1_id": "3d8329bf-3814-81eb-9c2d-e2085395af59",
+    "task2_id": "3d8329bf-3814-81f5-8ab3-e35b300dad74",
+    "initial_orders": [
+      13,
+      12
+    ],
+    "swapped_orders": [
+      12,
+      13
+    ],
+    "restored_orders": [
+      13,
+      12
+    ],
+    "reorder_successful": true,
+    "undo_successful": true
+  }
+}

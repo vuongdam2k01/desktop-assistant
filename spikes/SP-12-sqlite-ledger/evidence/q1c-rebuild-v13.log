@@ -1,0 +1,15 @@
+﻿=== Q1c: @electron/rebuild ON better-sqlite3@13.0.3 ===
+Target Electron Version: 44.3.0
+Module: better-sqlite3@13.0.3
+Elapsed Time: 10.2635514 seconds (00:00:10.2635514)
+Output:
+node.exe : Searching dependency tree
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Searching dependency tree:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Building modules: better-sqlite3
+Γ£ö Rebuild Complete
+

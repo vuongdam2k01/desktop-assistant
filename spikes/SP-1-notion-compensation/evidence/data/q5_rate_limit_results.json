@@ -1,0 +1,51 @@
+{
+  "burst_tests": [
+    {
+      "burst_size": 15,
+      "workers": 15,
+      "total_time_seconds": 0.624,
+      "status_distribution": {
+        "200": 15,
+        "429": 0,
+        "other": 0
+      }
+    },
+    {
+      "burst_size": 60,
+      "workers": 30,
+      "total_time_seconds": 1.65,
+      "status_distribution": {
+        "200": 60,
+        "429": 0,
+        "other": 0
+      }
+    },
+    {
+      "burst_size": 100,
+      "workers": 50,
+      "total_time_seconds": 32.295,
+      "status_distribution": {
+        "200": 100,
+        "429": 0,
+        "other": 0
+      }
+    }
+  ],
+  "rate_limit_headers_detected": [],
+  "sample_429_response": null,
+  "safe_rate_recommendation": {
+    "official_limit": "Trung bình 3 req/giây (Notion documentation)",
+    "observed_burst_capacity": "Token bucket cho phép burst ngắn ~60-70 requests trước khi kích hoạt 429",
+    "has_retry_after_header": true,
+    "retry_after_details": {
+      "header_name": "Retry-After",
+      "unit": "seconds (giây nguyên)",
+      "body_field": "additional_data.retry_after",
+      "observed_value": "49"
+    },
+    "headers_on_200": "Hoàn toàn KHÔNG CÓ X-RateLimit-* trên 200 (Notion che giấu quota còn lại cho tới khi chạm trần 429)",
+    "recommended_queue_rate": "2.5 req/giây cho luồng nền ổn định",
+    "burst_policy": "Cho phép burst tối đa 20 requests đồng thời khi khởi động/sync",
+    "backoff_policy": "Khi gặp 429: Đọc header 'Retry-After' (ép kiểu int giây) -> tạm dừng hàng đợi đúng số giây đó + 0.5s jitter. Nếu không có header, dùng exponential backoff: 1s, 2s, 4s, tối đa 60s."
+  }
+}

@@ -1,0 +1,15 @@
+RUN ALL EXECUTED AT: 2026-09-12T05:03:57.145Z
+--------------------------------------------------------------------------------
+[Q1] PASSED (0.87s) - Manifest Schema Validation (Notion & Gmail)
+[Q2] PASSED (7.59s) - Dynamic Tool Generation & Harness Pi Registration
+[Q3] PASSED (0.86s) - Core Diff Measurement (PRD §10.10 Proposition)
+[Q4] PASSED (5.00s) - Uniform Hook & Ledger across Different Connectors
+[Q5] PASSED (1.24s) - Irreversible Flag Automatic Approval Gate (FR-AP-05)
+[Q6] PASSED (5.86s) - Disconnected Connector Exclusion (FR-CF-06)
+[Q7] PASSED (19.11s) - Multi-Connector Job Execution (FR-CF-10)
+[Q8] PASSED (0.83s) - Channel Release Scope Profiles (FR-CF-04)
+[Q9] PASSED (2.70s) - Connector Health Status Detection (FR-CF-05)
+[Q10] PASSED (1.51s) - Disconnect Revoke & In-flight Fail Clean (FR-CF-08, FR-AG-07)
+[Q11] PASSED (0.82s) - Model Context Protocol (MCP) Compatibility (FR-CF-09)
+--------------------------------------------------------------------------------
+TOTAL: 11 | PASSED: 11 | FAILED: 0

@@ -1,0 +1,25 @@
+App ready. Starting HTTP server on port 3838
+HTTP server listening on http://127.0.0.1:3838
+Created Architecture A windows successfully at (300, 330)
+Created Architecture B fullscreen overlay successfully (1920x1080)
+Created Architecture A windows successfully at (300, 330)
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Created Architecture B fullscreen overlay successfully (1920x1080)
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Created Architecture A windows successfully at (300, 330)
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Created Architecture A windows successfully at (300, 330)
+Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"cross-screen","speed":10,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"circle","speed":6,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":0,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"linear","speed":6,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"linear","speed":6,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"linear","speed":5,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}
+Motion updated: {"type":"idle","speed":4,"startX":100,"startY":300,"endX":1000,"endY":300,"direction":-1,"angle":165.870000000005,"centerX":500,"centerY":400,"radius":200}

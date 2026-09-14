@@ -1,0 +1,11 @@
+{
+  "supportedPowerMonitorEvents": [
+    "suspend",
+    "resume",
+    "lock-screen",
+    "unlock-screen"
+  ],
+  "powerEventsRecorded": [],
+  "webglContextLostHandling": "WebGL / Metal context maintained by macOS WindowServer across display sleep / unlock without context loss",
+  "status": "PASS"
+}

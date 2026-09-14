@@ -1,0 +1,126 @@
+{
+  "call_id": "1789128395624_0036_GET_pages_3d8329bf-3814-81eb-9c2d-e2085395af59",
+  "category": "q4_check_undo_order1",
+  "timestamp": "2026-09-11T12:06:35Z",
+  "duration_ms": 367,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/pages/3d8329bf-3814-81eb-9c2d-e2085395af59",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:35 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968c196fc38265-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=MYk09XHgj.5_HzsXW0ysW7kFzRrQ_2hG8n1bHu6drAU-1789128395.7449427-1.0.1.1-9bouH9_PpFjNNaRJdTLZLyBmglp0KbJY1d7eG188ixXyzB2DLK5RnF_pXwJeb7nIelz1TF_MDbuZYORGCDN0x.dYKTv6_qQT78l5qfVCuhdG4LagdzxFL9f1xV73BU6W; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:35 GMT",
+      "ETag": "W/\"554-O6pvh4vOc31duVw6yAMF8br+kfg\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "c32e7b6e-e11b-4ef1-8835-0f67e6e2d3d6",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8329bf-3814-81eb-9c2d-e2085395af59",
+      "created_time": "2026-09-11T10:55:00.000Z",
+      "last_edited_time": "2026-09-11T12:06:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8329bf-3814-8188-ab92-da5ccbd249be"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Order": {
+          "id": "BCK%3B",
+          "type": "number",
+          "number": 13
+        },
+        "Due date": {
+          "id": "Kxlr",
+          "type": "date",
+          "date": {
+            "start": "2026-09-20",
+            "end": null,
+            "time_zone": null
+          }
+        },
+        "Status": {
+          "id": "WIcO",
+          "type": "select",
+          "select": {
+            "id": "5fe9b184-a61a-440d-93ad-55a5c1155dd7",
+            "name": "Backlog",
+            "color": "default"
+          }
+        },
+        "Priority": {
+          "id": "qJ%3CJ",
+          "type": "select",
+          "select": {
+            "id": "1d857aef-82e9-402d-9778-fc16a63120bc",
+            "name": "Cao",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Đàm phán gia hạn license",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Đàm phán gia hạn license",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/m-ph-n-gia-h-n-license-3d8329bf381481eb9c2de2085395af59",
+      "public_url": null,
+      "archived": false,
+      "request_id": "c32e7b6e-e11b-4ef1-8835-0f67e6e2d3d6"
+    },
+    "error": null
+  }
+}

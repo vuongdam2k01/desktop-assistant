@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-09-13T14:45:26.176Z",
+  "os": "macOS 26.5.2 (Darwin 25.5.0 arm64)",
+  "hardware": "Mac mini (Apple M1 8-core, Metal 4, 1920x1080 @ 60Hz)",
+  "arch_a": {
+    "name": "Architecture A — Small Self-Moving Window",
+    "window_size": "200x200 px",
+    "texture_buffer_per_frame": "160 KB (640 KB on 2x Retina)",
+    "fps_motion": {
+      "current": 60,
+      "avg": 64,
+      "min": 60,
+      "max": 143,
+      "p95": 63
+    },
+    "ram_idle_mb": 120.05,
+    "ram_moving_mb": 119.34,
+    "mouse_clickthrough_latency_ms": "0ms (OS AppKit NSView hitTest / setIgnoreMouseEvents window-level)",
+    "cross_display_scaling": "PASS (Each window adapts scaleFactor on target display cleanly)",
+    "spaces_and_stage_manager": "PASS (NSWindowCollectionBehaviorCanJoinAllSpaces, non-intrusive panel)",
+    "tearing_or_flicker": "None (Metal / Quartz WindowServer VSync guaranteed)"
+  },
+  "arch_b": {
+    "name": "Architecture B — Fullscreen Transparent Overlay",
+    "window_size": "1920x1080 px",
+    "texture_buffer_per_frame": "8.29 MB (33.17 MB on 2x Retina)",
+    "fps_motion": {
+      "current": 60,
+      "avg": 65,
+      "min": 60,
+      "max": 163,
+      "p95": 60
+    },
+    "ram_idle_mb": 120.3,
+    "ram_moving_mb": 120.41,
+    "mouse_clickthrough_latency_ms": "16–30ms (IPC round-trip between Renderer and Main process)",
+    "cross_display_scaling": "FAIL (Single overlay window cannot support differing scale factors on two halves)",
+    "spaces_and_stage_manager": "POOR (Fullscreen window captures global space gestures, conflicts with Stage Manager)",
+    "tearing_or_flicker": "None (Metal VSync)"
+  },
+  "recommendation": {
+    "chosen": "Architecture A (Cửa sổ nhỏ tự di chuyển)",
+    "rejected": "Architecture B (Fullscreen Overlay)",
+    "concurrence_with_windows": "GIỐNG Windows — Cả hai hệ điều hành đều bắt buộc chọn Kiến trúc A",
+    "rationale": [
+      "Swapchain/VRAM footprint: Arch A chỉ tốn 160 KB/frame vs Arch B ngốn 8.29 MB/frame (gấp 52 lần).",
+      "Mouse latency: Arch A cô lập vùng hit-test trong 200x200; Arch B bắt buộc chuyển mọi sự kiện chuột toàn màn hình qua IPC Chromium gây vi trễ ~20ms.",
+      "Đa màn hình khác scale: Arch A thích ứng tự nhiên theo từng display; Arch B vỡ layout hoàn toàn khi span 2 màn hình.",
+      "Spaces & Stage Manager: Arch A là panel di động nhẹ; Arch B chiếm toàn bộ desktop gây cản trở cử chỉ Space và nhóm cửa sổ Stage Manager."
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "raw_task_inspection": {
+    "task_id": "3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+    "relation_format": {
+      "id": "b%3Ax%7B",
+      "type": "relation",
+      "relation": [
+        {
+          "id": "3d8d409b-f710-81b0-94a0-d3122e5b622e"
+        }
+      ],
+      "has_more": false
+    },
+    "rollup_format": {
+      "id": "cZsp",
+      "type": "rollup",
+      "rollup": {
+        "type": "array",
+        "array": [
+          {
+            "type": "select",
+            "select": {
+              "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+              "name": "Đang chạy",
+              "color": "default"
+            }
+          }
+        ],
+        "function": "show_original"
+      }
+    },
+    "formula_format": {
+      "id": "Yv~c",
+      "type": "formula",
+      "formula": {
+        "type": "number",
+        "number": 8
+      }
+    }
+  },
+  "write_formula_attempt": {
+    "status": 400,
+    "code": "validation_error",
+    "message": "body failed validation. Fix one:\nbody.properties.Days left.title should be defined, instead was `undefined`.\nbody.properties.Days left.rich_text should be defined, instead was `undefined`.\nbody.properties.Days left.number should be defined, instead was `undefined`.\nbody.properties.Days left.url should be defined, instead was `undefined`.\nbody.properties.Days left.select should be defined, instead was `undefined`.\nbody.properties.Days left.multi_select should be defined, instead was `undefined`.\nbody.properties.Days left.people should be defined, instead was `undefined`.\nbody.properties.Days left.email should be defined, instead was `undefined`.\nbody.properties.Days left.phone_number should be defined, instead was `undefined`.\nbody.properties.Days left.date should be defined, instead was `undefined`.\nbody.properties.Days left.checkbox should be defined, instead was `undefined`.\nbody.properties.Days left.relation should be defined, instead was `undefined`.\nbody.properties.Days left.files should be defined, instead was `undefined`.\nbody.properties.Days left.status should be defined, instead was `undefined`.\nbody.properties.Days left.place should be defined, instead was `undefined`.\nbody.properties.Days left.verification should be defined, instead was `undefined`.\nbody.properties.Days left.id should be defined, instead was `undefined`.\nbody.properties.Days left.name should be defined, instead was `undefined`.\nbody.properties.Days left.start should be defined, instead was `undefined`.\nbody.properties.Days left.lat should be defined, instead was `undefined`.\nbody.properties.Days left.state should be defined, instead was `undefined`."
+  },
+  "write_rollup_attempt": {
+    "status": 400,
+    "code": "validation_error",
+    "message": "body failed validation. Fix one:\nbody.properties.Project status.title should be defined, instead was `undefined`.\nbody.properties.Project status.rich_text should be defined, instead was `undefined`.\nbody.properties.Project status.number should be defined, instead was `undefined`.\nbody.properties.Project status.url should be defined, instead was `undefined`.\nbody.properties.Project status.select should be defined, instead was `undefined`.\nbody.properties.Project status.multi_select should be defined, instead was `undefined`.\nbody.properties.Project status.people should be defined, instead was `undefined`.\nbody.properties.Project status.email should be defined, instead was `undefined`.\nbody.properties.Project status.phone_number should be defined, instead was `undefined`.\nbody.properties.Project status.date should be defined, instead was `undefined`.\nbody.properties.Project status.checkbox should be defined, instead was `undefined`.\nbody.properties.Project status.relation should be defined, instead was `undefined`.\nbody.properties.Project status.files should be defined, instead was `undefined`.\nbody.properties.Project status.status should be defined, instead was `undefined`.\nbody.properties.Project status.place should be defined, instead was `undefined`.\nbody.properties.Project status.verification should be defined, instead was `undefined`.\nbody.properties.Project status.id should be defined, instead was `undefined`.\nbody.properties.Project status.name should be defined, instead was `undefined`.\nbody.properties.Project status.start should be defined, instead was `undefined`.\nbody.properties.Project status.lat should be defined, instead was `undefined`.\nbody.properties.Project status.state should be defined, instead was `undefined`."
+  },
+  "relation_update_rollup_reactivity": {
+    "original_project_id": "3d8d409b-f710-81b0-94a0-d3122e5b622e",
+    "target_project_id": "3d8d409b-f710-8157-9121-c2fc870aaa27",
+    "target_project_expected_status": "Đang chạy",
+    "observed_rollup_after_update": {
+      "type": "array",
+      "array": [
+        {
+          "type": "select",
+          "select": {
+            "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+            "name": "Đang chạy",
+            "color": "default"
+          }
+        }
+      ],
+      "function": "show_original"
+    },
+    "reactivity_conclusion": "Rollup tự động cập nhật ngay lập tức trong API response khi Relation thay đổi, không có độ trễ."
+  },
+  "formula_reactivity_on_date_change": {},
+  "sanitized_snapshot_roundtrip": {
+    "raw_patch_status": 400,
+    "raw_patch_error": "body failed validation: body.properties.Assignee.people[0].object should be `\"group\"` or `undefined`, instead was `\"user\"`.",
+    "sanitized_patch_status": 200,
+    "clean_snapshot_keys": [
+      "Due date",
+      "Assignee",
+      "Status",
+      "Tags",
+      "Project",
+      "Name"
+    ],
+    "sanitization_rule": "BẮT BUỘC lọc bỏ formula, rollup, created_time, created_by, last_edited_time, last_edited_by trước khi gửi PATCH rollback."
+  }
+}

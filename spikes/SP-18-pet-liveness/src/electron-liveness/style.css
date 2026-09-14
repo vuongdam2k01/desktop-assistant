@@ -1,0 +1,187 @@
+﻿* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Architecture A: 200x200 window */
+#pet-container-a {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+
+#pet-container-a:active {
+  cursor: grabbing;
+}
+
+/* Architecture B: Full screen overlay with movable pet */
+#overlay-b {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  pointer-events: none;
+}
+
+#pet-container-b {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  pointer-events: auto;
+  will-change: transform;
+}
+
+#pet-container-b:active {
+  cursor: grabbing;
+}
+
+.rive-canvas {
+  width: 160px;
+  height: 160px;
+  display: block;
+}
+
+/* Fallback/Overlay stylized pet */
+.pet-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #4f46e5, #312e81);
+  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5), inset 0 -4px 10px rgba(0,0,0,0.4);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.pet-eyes {
+  display: flex;
+  gap: 24px;
+}
+
+.pet-eye {
+  width: 16px;
+  height: 22px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.pet-eye::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 7px;
+  height: 9px;
+  background: #0f172a;
+  border-radius: 50%;
+}
+
+.pet-state-badge {
+  position: absolute;
+  bottom: 8px;
+  padding: 2px 8px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #38bdf8;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+.fps-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #10b981;
+  font-size: 9px;
+  font-family: monospace;
+  padding: 1px 4px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Card in Architecture B (Inline floating card) */
+#inline-card-b {
+  position: absolute;
+  width: 320px;
+  padding: 14px 18px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 12px;
+  color: #f8fafc;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: none;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #818cf8;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-body {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: white;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #cbd5e1;
+}

@@ -1,0 +1,16 @@
+SP-3/mac Q1 FPS Summary
+====================================
+Platform: macOS (arm64, Apple M1)
+Display: 1920x1080 @ 60.00Hz
+Baseline (10s):
+  Average FPS: 60
+  Min FPS:     60
+  Max FPS:     60
+  P95 FPS:     60
+
+Stress Load (10s under ~70-80% CPU):
+  Average FPS: 60
+  Min FPS:     60
+  Max FPS:     61
+  P95 FPS:     61
+Verdict: PASS (>= 30 FPS floor requirement NFR-PF-04 satisfied; achieved solid 60 FPS).

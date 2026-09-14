@@ -1,0 +1,177 @@
+﻿=== ĐỢT B: WINDOWS NATIVE BUILD TOOLCHAIN INSTALLATION & VERIFICATION LOG ===
+Date: 2026-09-11 23:37:00 +07:00
+OS: Microsoft Windows NT 10.0.26200.0 (64-bit)
+
+=======================================================================
+BƯỚC 1: XÁC NHẬN QUYỀN ADMINISTRATOR
+=======================================================================
+Command:
+([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+Output:
+True
+
+=======================================================================
+BƯỚC 2: QUÁ TRÌNH CÀI ĐẶT
+=======================================================================
+--- 1. Cài đặt Python 3.11 ---
+Command:
+winget install Python.Python.3.11 --scope machine --accept-package-agreements --accept-source-agreements
+
+Output:
+Found Python 3.11 [Python.Python.3.11] Version 3.11.9
+This application is licensed to you by its owner.
+Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Successfully verified installer hash
+Starting package install...
+Successfully installed
+
+--- 2. Cài đặt Microsoft Visual Studio 2022 Build Tools ---
+Command:
+winget install Microsoft.VisualStudio.2022.BuildTools --accept-package-agreements --accept-source-agreements --override "--passive --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+
+Output:
+Found Visual Studio BuildTools 2022 [Microsoft.VisualStudio.2022.BuildTools] Version 17.14.40
+This application is licensed to you by its owner.
+Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Downloading https://download.visualstudio.microsoft.com/download/pr/f8d58e41-102a-4347-a567-60d7235da3b5/aac092d0d839fd078e86b301d886130f1605891061242b36facf55ccbdd5a0a7/vs_BuildTools.exe
+Successfully verified installer hash
+Starting package install...
+Successfully installed
+
+* Ghi chú xử lý socket timeout: Lần gọi đầu tiên tải được 345/346 gói (~1.8 GB) vào cache cục bộ C:\ProgramData\Microsoft\VisualStudio\Packages thì bị stall socket tải gói VSIX CRT Redist. Sau khi hết 30 phút, tiến trình cũ được dọn dẹp và gọi lệnh force install với cache có sẵn. Trình cài đặt hoàn tất toàn bộ quá trình cài đặt thành công.
+
+=======================================================================
+BƯỚC 3: NẠP LẠI BIẾN MÔI TRƯỜNG PATH
+=======================================================================
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+=======================================================================
+BƯỚC 4: XÁC MINH THẬT BỘ CÔNG CỤ
+=======================================================================
+--- 1. Python version & binary path ---
+> python --version
+Python 3.11.9
+> Get-Command python
+C:\Program Files\Python311\python.exe
+
+--- 2. vswhere.exe query ---
+> & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -format json
+[
+  {
+    "instanceId": "bcdf07b2",
+    "installDate": "2026-09-11T15:46:15Z",
+    "installationName": "VisualStudio/17.14.40+37628.2",
+    "installationPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools",
+    "installationVersion": "17.14.37628.2",
+    "productId": "Microsoft.VisualStudio.Product.BuildTools",
+    "productPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\LaunchDevCmd.bat",
+    "state": 4294967295,
+    "isComplete": true,
+    "isLaunchable": true,
+    "isPrerelease": false,
+    "isRebootRequired": false,
+    "displayName": "Visual Studio Build Tools 2022"
+  }
+]
+
+--- 3. cl.exe MSVC Compiler ---
+VS DevCmd path: C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat
+Execution command: cmd.exe /c "call `"$vsDevCmd`" -arch=x64 && cl"
+Output:
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.40
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35228 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+usage: cl [ option... ] filename... [ /link linkoption... ]
+
+--- 4. survey-toolchain.ps1 Kết quả khảo sát toàn diện ---
+=== SP-0 Q5: NATIVE BUILD TOOLCHAIN SURVEY (WINDOWS) ===
+Date: 2026-09-11 23:33:59 +07:00
+OS Version: Microsoft Windows NT 10.0.26200.0
+OS Architecture: 64-bit
+
+--- 1. Node.js & npm ---
+Node Path: C:\Program Files\nodejs\node.exe
+Node Version: v24.21.0
+Node Platform: win32
+Node Arch: x64
+npm Path: C:\Program Files\nodejs\npm.ps1
+npm Version: 11.19.0
+
+--- 2. Python ---
+Command 'python.exe' found at: C:\Program Files\Python311\python.exe -> Output: Python 3.11.9
+Command 'py.exe' found at: C:\WINDOWS\py.exe -> Output: Python 3.11.9
+Registry found Python: 3.11 at HKLM:\Software\Python\PythonCore
+  InstallPath: C:\Program Files\Python311\
+Python Installed & Functional: YES
+
+--- 3. Visual Studio C++ Build Tools & MSBuild ---
+vswhere.exe found: C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe
+VS Instance: Visual Studio Build Tools 2022 (17.14.37628.2)
+VS Install Path: C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+cl.exe (MSVC Compiler): NOT FOUND in default PATH (Accessible via VsDevCmd.bat / node-gyp auto-discovery)
+msbuild.exe: NOT FOUND in default PATH (Accessible via VsDevCmd.bat / node-gyp auto-discovery)
+Visual Studio Build Tools Ready: YES
+
+--- 4. node-gyp ---
+node-gyp version via npx: v13.0.2
+
+--- 5. Conclusion for SP-12/Q1 Native Rebuild (better-sqlite3) ---
+STATUS: READY - All required components are installed.
+
+=======================================================================
+BƯỚC 5: SMOKE TEST BIÊN DỊCH THẬT BETTER-SQLITE3 (BUILD-FROM-SOURCE)
+=======================================================================
+Working Directory: C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3
+
+--- 1. npm init & install ---
+npm init -y
+npm install better-sqlite3 --build-from-source
+
+--- 2. node-gyp rebuild (ép buộc biên dịch từ mã nguồn C/C++) ---
+Command:
+npx node-gyp rebuild --release --force_build=1
+
+Output:
+gyp info it worked if it ends with ok
+gyp info using node-gyp@13.0.2
+gyp info using node@24.21.0 | win32 | x64
+gyp info find Python using Python version 3.11.9 found at "C:\Program Files\Python311\python.exe"
+gyp info find VS using VS2022 (17.14.37628.2) found at:
+gyp info find VS "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"
+gyp info spawn C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe
+  copy_builtin_sqlite3
+  sqlite3.c
+  win_delay_load_hook.cc
+  sqlite3.vcxproj -> C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3\node_modules\better-sqlite3\build\Release\\sqlite3.lib
+  better_sqlite3.cpp
+  win_delay_load_hook.cc
+     Creating library C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3\node_modules\better-sqlite3\build\Release\better_sqlite3.lib and object C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3\node_modules\better-sqlite3\build\Release\better_sqlite3.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 5351 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  better_sqlite3.vcxproj -> C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3\node_modules\better-sqlite3\build\Release\\better_sqlite3.node
+  test_extension.c
+  win_delay_load_hook.cc
+     Creating library C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3\node_modules\better-sqlite3\build\Release\test_extension.lib and object C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3\node_modules\better-sqlite3\build\Release\test_extension.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 3 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  test_extension.vcxproj -> C:\Users\<user>\AppData\Local\Temp\smoke-test-sqlite3\node_modules\better-sqlite3\build\Release\\test_extension.node
+gyp info ok 
+
+--- 3. Thực thi kiểm chứng trong bộ nhớ Node.js ---
+Command:
+node -e "const db=require('better-sqlite3')(':memory:'); db.exec('create table t(a)'); console.log('OK', db.prepare('select 1 as x').get())"
+
+Output:
+OK { x: 1 }
+
+KẾT LUẬN SMOKE TEST: ĐẠT 100%
+=======================================================================

@@ -1,0 +1,49 @@
+{
+  "call_id": "1789128326887_0001_GET_pages_invalid-uuid-12345",
+  "category": "q7_error_400",
+  "timestamp": "2026-09-11T12:05:27Z",
+  "duration_ms": 365,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/pages/invalid-uuid-12345",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 400,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:27 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "220",
+      "Connection": "close",
+      "CF-Ray": "a3968a6bfc874a28-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"dc-98VKka/H/pijLrEmwm8PvdyzVNE\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "cce2f609-9bb2-4096-94be-03856b9538c8",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=b2scuXjd6Pz0wQa363ZEmUHR0KBFiQfZCkWqt61CpYY-1789128327.035644-1.0.1.1-1B37behQFde_cqf1jRe4WV2BYnkkN97Htyr6nMAv8r2rJgnHTQw5UTnwVT1VdKG0zZ8aA6ljV5TkkxxP1ZYO5k3sHgCoY07P1jwm4Mx0ZxhzHe1rkun0b.dJiVLkAGii; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:27 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "path failed validation: path.page_id should be a valid uuid, instead was `\"invalid-uuid-12345\"`.",
+      "request_id": "cce2f609-9bb2-4096-94be-03856b9538c8"
+    },
+    "error": "HTTP Error 400: Bad Request"
+  }
+}

@@ -1,0 +1,34 @@
+================================================================================
+SPIKE SP-21 / Q8: HÀNG CHỜ LỆNH NGOẠI TUYẾN KHI BACKEND GIÁN ĐOẠN (ca E8)
+Tiêu chí phát hành #10: Lệnh gửi khi backend không phản hồi có vào hàng chờ cục bộ không?
+================================================================================
+
+1. KIỂM TRA GỬI LỆNH KHI BACKEND ĐANG BẬT (ONLINE):
+  - Backend stub đã khởi động trên cổng 3991
+  - Trạng thái gửi trực tiếp: THÀNH CÔNG ✅
+  - queuedOffline: false (Kỳ vọng: false - gửi thẳng, không cần xếp hàng)
+  - Backend nhận được: 1 lệnh
+
+2. MÔ PHỎNG BACKEND GIÁN ĐOẠN (TẮT SERVER BACKEND):
+  - Backend đã tắt hoàn toàn (Mô phỏng sập server / mất kết nối)
+
+3. NGƯỜI DÙNG GỬI 2 LỆNH TRONG COMPOSER KHI BACKEND MẤT KẾT NỐI:
+  - Gửi lệnh 1: "Tạo task 'Sync Q4 Marketing Campaign' trong database Tasks"
+    -> Composer nhận lệnh: CÓ ✅
+    -> queuedOffline: true (Kỳ vọng: true)
+    -> Command ID: aa644967-17bd-4b39-8eca-d682ec31f5ff
+  - Gửi lệnh 2: "Cập nhật status task-1 sang Done"
+    -> Composer nhận lệnh: CÓ ✅
+    -> queuedOffline: true (Kỳ vọng: true)
+    -> Command ID: 0a8e3de9-06f2-4c0b-a9da-d07d06d718c5
+
+4. KIỂM TRA TÍNH TOÀN VẸN CỦA HÀNG CHỜ CỤC BỘ TRONG SQLITE:
+  - Tổng số lệnh đang lưu trong SQLite offline_command_queue: 2 (Kỳ vọng = 2)
+  [Mục #1] ID: aa644967-17bd-4b39-8eca-d682ec31f5ff, Status: QUEUED_OFFLINE, Text: "Tạo task 'Sync Q4 Marketing Campaign' trong database Tasks", IdempotencyKey: idemp-86662da8-917f-4fa0-9e5b-08e35cd63f74
+  [Mục #2] ID: 0a8e3de9-06f2-4c0b-a9da-d07d06d718c5, Status: QUEUED_OFFLINE, Text: "Cập nhật status task-1 sang Done", IdempotencyKey: idemp-d8de12ec-837d-4d5e-8cba-8ffdc69fcb65
+  - Toàn bộ lệnh mang trạng thái 'QUEUED_OFFLINE': ĐẠT ✅
+
+5. KẾT LUẬN Q8:
+  - Lệnh gửi khi backend không phản hồi KHÔNG BAO GIỜ BỊ MẤT.
+  - Composer lập tức ghi nhận vào hàng chờ cục bộ (SQLite table offline_command_queue) với trạng thái QUEUED_OFFLINE.
+  - Đáp ứng trọn vẹn yêu cầu Ca E8 và tiêu chí phát hành #10.

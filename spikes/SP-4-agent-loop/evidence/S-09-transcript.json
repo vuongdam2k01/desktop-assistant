@@ -1,0 +1,541 @@
+{
+  "scenarioId": "S-09",
+  "instruction": "cái trả lời feedback QA khẩn lắm, đẩy lên đầu đi, còn lại lùi hết xuống",
+  "hasImage": false,
+  "stats": {
+    "turns": 4,
+    "toolCallsCount": 8,
+    "writeCallsCount": 6,
+    "readCallsCount": 2,
+    "hasSelfVerified": true,
+    "askUserRecords": [],
+    "totalInputTokens": 7034,
+    "totalOutputTokens": 1728,
+    "totalReasoningTokens": 808,
+    "totalTokens": 20026,
+    "durationMs": 33020
+  },
+  "clarificationStatus": "CORRECT",
+  "success": true,
+  "reasons": [],
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "cái trả lời feedback QA khẩn lắm, đẩy lên đầu đi, còn lại lùi hết xuống"
+        }
+      ],
+      "timestamp": 1789140786699
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Người dùng muốn đẩy task \"trả lời feedback QA\" lên đầu (tức là order nhỏ nhất) và tất cả các task còn lại lùi xuống sau.\n\nTrước tiên, tôi cần query database để tìm task \"trả lời feedback QA\" và xem tất cả các task hiện có trong Workspace C.",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "text",
+          "text": "Để tôi tìm task \"trả lời feedback QA\" và xem toàn bộ danh sách hiện tại nhé.\n\n"
+        },
+        {
+          "type": "toolCall",
+          "id": "call_4njiqaekexhn26dx0zx9ye78",
+          "name": "notion_query_database",
+          "arguments": {
+            "database_role": "tasks"
+          }
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "deepseek-v4-pro-ga-260813",
+      "usage": {
+        "input": 1088,
+        "output": 164,
+        "cacheRead": 2048,
+        "cacheWrite": 0,
+        "reasoning": 86,
+        "totalTokens": 3300,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "toolUse",
+      "timestamp": 1789140786700,
+      "responseId": "02178914078693251d9d16403af386b151f4b49e6685515d0e19b",
+      "responseModel": "deepseek-v4-pro",
+      "rawStopReason": "tool_calls"
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_4njiqaekexhn26dx0zx9ye78",
+      "toolName": "notion_query_database",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"database_role\": \"tasks\",\n  \"count\": 6,\n  \"pages\": [\n    {\n      \"id\": \"3d8329bf-3814-8180-9109-e24186e2175a\",\n      \"title\": \"Update thư viện lên RN 0.80\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-10-02\",\n      \"priority\": \"Low\",\n      \"order\": 6,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-81f4-851a-dac34ce797a1\",\n      \"title\": \"Trả lời feedback QA round 2\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-15\",\n      \"priority\": \"High\",\n      \"order\": 5,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-811c-bb57-e75df9587ed4\",\n      \"title\": \"Refactor module auth\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-25\",\n      \"priority\": \"Low\",\n      \"order\": 4,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-8157-848c-d29c7258e625\",\n      \"title\": \"Review PR #212 của Hùng\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-11\",\n      \"priority\": \"Medium\",\n      \"order\": 3,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-8155-9a74-cb6c0b4ca4a9\",\n      \"title\": \"Viết docs onboarding\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-18\",\n      \"priority\": \"Medium\",\n      \"order\": 2,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-8188-a432-ea26312bce92\",\n      \"title\": \"Fix crash màn thanh toán\",\n      \"status\": \"In progress\",\n      \"due_date\": \"2026-09-12\",\n      \"priority\": \"High\",\n      \"order\": 1,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    }\n  ]\n}"
+        }
+      ],
+      "details": {
+        "database_role": "tasks",
+        "count": 6,
+        "pages": [
+          {
+            "id": "3d8329bf-3814-8180-9109-e24186e2175a",
+            "title": "Update thư viện lên RN 0.80",
+            "status": "Not started",
+            "due_date": "2026-10-02",
+            "priority": "Low",
+            "order": 6,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-81f4-851a-dac34ce797a1",
+            "title": "Trả lời feedback QA round 2",
+            "status": "Not started",
+            "due_date": "2026-09-15",
+            "priority": "High",
+            "order": 5,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-811c-bb57-e75df9587ed4",
+            "title": "Refactor module auth",
+            "status": "Not started",
+            "due_date": "2026-09-25",
+            "priority": "Low",
+            "order": 4,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-8157-848c-d29c7258e625",
+            "title": "Review PR #212 của Hùng",
+            "status": "Not started",
+            "due_date": "2026-09-11",
+            "priority": "Medium",
+            "order": 3,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-8155-9a74-cb6c0b4ca4a9",
+            "title": "Viết docs onboarding",
+            "status": "Not started",
+            "due_date": "2026-09-18",
+            "priority": "Medium",
+            "order": 2,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-8188-a432-ea26312bce92",
+            "title": "Fix crash màn thanh toán",
+            "status": "In progress",
+            "due_date": "2026-09-12",
+            "priority": "High",
+            "order": 1,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          }
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140790791
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Tôi đã tìm thấy task \"Trả lời feedback QA round 2\" (id: 3d8329bf-3814-81f4-851a-dac34ce797a1), hiện có order = 5.\n\nYêu cầu: đẩy task này lên đầu (order = 1), và tất cả các task còn lại lùi xuống. Tức là:\n- \"Trả lời feedback QA round 2\" → order = 1\n- Các task khác cần được đánh lại order từ 2 trở đi, giữ nguyên thứ tự tương đối hiện tại.\n\nThứ tự hiện tại (theo order):\n1. Fix crash màn thanh toán (order 1)\n2. Viết docs onboarding (order 2)\n3. Review PR #212 của Hùng (order 3)\n4. Refactor module auth (order 4)\n5. Trả lời feedback QA round 2 (order 5)\n6. Update thư viện lên RN 0.80 (order 6)\n\nSau khi đẩy \"Trả lời feedback QA round 2\" lên đầu:\n1. Trả lời feedback QA round 2 → order = 1\n2. Fix crash màn thanh toán → order = 2\n3. Viết docs onboarding → order = 3\n4. Review PR #212 của Hùng → order = 4\n5. Refactor module auth → order = 5\n6. Update thư viện lên RN 0.80 → order = 6\n\nTôi sẽ cập nhật task \"Trả lời feedback QA round 2\" lên order = 1, và các task còn lại lần lượt tăng order lên 1.\n\nĐể thực hiện:\n- \"Trả lời feedback QA round 2\": order 1\n- \"Fix crash màn thanh toán\": order 2\n- \"Viết docs onboarding\": order 3\n- \"Review PR #212 của Hùng\": order 4\n- \"Refactor module auth\": order 5\n- \"Update thư viện lên RN 0.80\": order 6\n\nTôi cần gọi 6 lần update.",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "text",
+          "text": "Đã tìm thấy task **\"Trả lời feedback QA round 2\"** (hiện order 5). Giờ tôi sẽ đẩy nó lên đầu (order = 1) và lùi tất cả các task còn lại xuống 1 bậc.\n\n"
+        },
+        {
+          "type": "toolCall",
+          "id": "call_y7dwgtpurlo37ff22sseci4z",
+          "name": "notion_update_page_properties",
+          "arguments": {
+            "page_id": "3d8329bf-3814-81f4-851a-dac34ce797a1",
+            "order": 1
+          }
+        },
+        {
+          "type": "toolCall",
+          "id": "call_clybbbudxiqoml86xeme12ub",
+          "name": "notion_update_page_properties",
+          "arguments": {
+            "page_id": "3d8329bf-3814-8188-a432-ea26312bce92",
+            "order": 2
+          }
+        },
+        {
+          "type": "toolCall",
+          "id": "call_zfzdgmp3t82b375cz3p7jb16",
+          "name": "notion_update_page_properties",
+          "arguments": {
+            "page_id": "3d8329bf-3814-8155-9a74-cb6c0b4ca4a9",
+            "order": 3
+          }
+        },
+        {
+          "type": "toolCall",
+          "id": "call_qc9zmdxuj42f45zuz4yufjuc",
+          "name": "notion_update_page_properties",
+          "arguments": {
+            "page_id": "3d8329bf-3814-8157-848c-d29c7258e625",
+            "order": 4
+          }
+        },
+        {
+          "type": "toolCall",
+          "id": "call_6f5hlly5tmv9sfddio6plh7p",
+          "name": "notion_update_page_properties",
+          "arguments": {
+            "page_id": "3d8329bf-3814-811c-bb57-e75df9587ed4",
+            "order": 5
+          }
+        },
+        {
+          "type": "toolCall",
+          "id": "call_srlp7kkt5wm82c96tnt417k7",
+          "name": "notion_update_page_properties",
+          "arguments": {
+            "page_id": "3d8329bf-3814-8180-9109-e24186e2175a",
+            "order": 6
+          }
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "deepseek-v4-pro-ga-260813",
+      "usage": {
+        "input": 1863,
+        "output": 1012,
+        "cacheRead": 2048,
+        "cacheWrite": 0,
+        "reasoning": 503,
+        "totalTokens": 4923,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "toolUse",
+      "timestamp": 1789140790792,
+      "responseId": "02178914079081951d9d16403af386b151f4b49e66855156ab945",
+      "responseModel": "deepseek-v4-pro",
+      "rawStopReason": "tool_calls"
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_y7dwgtpurlo37ff22sseci4z",
+      "toolName": "notion_update_page_properties",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"page_id\": \"3d8329bf-3814-81f4-851a-dac34ce797a1\",\n  \"updated_properties\": [\n    \"Order\"\n  ]\n}"
+        }
+      ],
+      "details": {
+        "success": true,
+        "page_id": "3d8329bf-3814-81f4-851a-dac34ce797a1",
+        "updated_properties": [
+          "Order"
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140808440
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_clybbbudxiqoml86xeme12ub",
+      "toolName": "notion_update_page_properties",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"page_id\": \"3d8329bf-3814-8188-a432-ea26312bce92\",\n  \"updated_properties\": [\n    \"Order\"\n  ]\n}"
+        }
+      ],
+      "details": {
+        "success": true,
+        "page_id": "3d8329bf-3814-8188-a432-ea26312bce92",
+        "updated_properties": [
+          "Order"
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140808440
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_zfzdgmp3t82b375cz3p7jb16",
+      "toolName": "notion_update_page_properties",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"page_id\": \"3d8329bf-3814-8155-9a74-cb6c0b4ca4a9\",\n  \"updated_properties\": [\n    \"Order\"\n  ]\n}"
+        }
+      ],
+      "details": {
+        "success": true,
+        "page_id": "3d8329bf-3814-8155-9a74-cb6c0b4ca4a9",
+        "updated_properties": [
+          "Order"
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140808440
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_qc9zmdxuj42f45zuz4yufjuc",
+      "toolName": "notion_update_page_properties",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"page_id\": \"3d8329bf-3814-8157-848c-d29c7258e625\",\n  \"updated_properties\": [\n    \"Order\"\n  ]\n}"
+        }
+      ],
+      "details": {
+        "success": true,
+        "page_id": "3d8329bf-3814-8157-848c-d29c7258e625",
+        "updated_properties": [
+          "Order"
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140808440
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_6f5hlly5tmv9sfddio6plh7p",
+      "toolName": "notion_update_page_properties",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"page_id\": \"3d8329bf-3814-811c-bb57-e75df9587ed4\",\n  \"updated_properties\": [\n    \"Order\"\n  ]\n}"
+        }
+      ],
+      "details": {
+        "success": true,
+        "page_id": "3d8329bf-3814-811c-bb57-e75df9587ed4",
+        "updated_properties": [
+          "Order"
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140808440
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_srlp7kkt5wm82c96tnt417k7",
+      "toolName": "notion_update_page_properties",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"page_id\": \"3d8329bf-3814-8180-9109-e24186e2175a\",\n  \"updated_properties\": [\n    \"Order\"\n  ]\n}"
+        }
+      ],
+      "details": {
+        "success": true,
+        "page_id": "3d8329bf-3814-8180-9109-e24186e2175a",
+        "updated_properties": [
+          "Order"
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140808440
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Tất cả 6 task đã được cập nhật. Giờ tôi cần kiểm chứng lại bằng cách query database.",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "text",
+          "text": "Đã cập nhật xong. Giờ tôi kiểm chứng lại danh sách cho chắc.\n\n\n\n"
+        },
+        {
+          "type": "toolCall",
+          "id": "call_8gv9gs3qnfht4pdwsradma18",
+          "name": "notion_query_database",
+          "arguments": {
+            "database_role": "tasks"
+          }
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "deepseek-v4-pro-ga-260813",
+      "usage": {
+        "input": 3220,
+        "output": 103,
+        "cacheRead": 2048,
+        "cacheWrite": 0,
+        "reasoning": 31,
+        "totalTokens": 5371,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "toolUse",
+      "timestamp": 1789140808440,
+      "responseId": "02178914080851451d9d16403af386b151f4b49e66855154f91d1",
+      "responseModel": "deepseek-v4-pro",
+      "rawStopReason": "tool_calls"
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_8gv9gs3qnfht4pdwsradma18",
+      "toolName": "notion_query_database",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"database_role\": \"tasks\",\n  \"count\": 6,\n  \"pages\": [\n    {\n      \"id\": \"3d8329bf-3814-8180-9109-e24186e2175a\",\n      \"title\": \"Update thư viện lên RN 0.80\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-10-02\",\n      \"priority\": \"Low\",\n      \"order\": 6,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-81f4-851a-dac34ce797a1\",\n      \"title\": \"Trả lời feedback QA round 2\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-15\",\n      \"priority\": \"High\",\n      \"order\": 1,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-811c-bb57-e75df9587ed4\",\n      \"title\": \"Refactor module auth\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-25\",\n      \"priority\": \"Low\",\n      \"order\": 5,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-8157-848c-d29c7258e625\",\n      \"title\": \"Review PR #212 của Hùng\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-11\",\n      \"priority\": \"Medium\",\n      \"order\": 4,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-8155-9a74-cb6c0b4ca4a9\",\n      \"title\": \"Viết docs onboarding\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-18\",\n      \"priority\": \"Medium\",\n      \"order\": 3,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    },\n    {\n      \"id\": \"3d8329bf-3814-8188-a432-ea26312bce92\",\n      \"title\": \"Fix crash màn thanh toán\",\n      \"status\": \"In progress\",\n      \"due_date\": \"2026-09-12\",\n      \"priority\": \"High\",\n      \"order\": 2,\n      \"assignee\": \"\",\n      \"tags\": [],\n      \"project\": []\n    }\n  ]\n}"
+        }
+      ],
+      "details": {
+        "database_role": "tasks",
+        "count": 6,
+        "pages": [
+          {
+            "id": "3d8329bf-3814-8180-9109-e24186e2175a",
+            "title": "Update thư viện lên RN 0.80",
+            "status": "Not started",
+            "due_date": "2026-10-02",
+            "priority": "Low",
+            "order": 6,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-81f4-851a-dac34ce797a1",
+            "title": "Trả lời feedback QA round 2",
+            "status": "Not started",
+            "due_date": "2026-09-15",
+            "priority": "High",
+            "order": 1,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-811c-bb57-e75df9587ed4",
+            "title": "Refactor module auth",
+            "status": "Not started",
+            "due_date": "2026-09-25",
+            "priority": "Low",
+            "order": 5,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-8157-848c-d29c7258e625",
+            "title": "Review PR #212 của Hùng",
+            "status": "Not started",
+            "due_date": "2026-09-11",
+            "priority": "Medium",
+            "order": 4,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-8155-9a74-cb6c0b4ca4a9",
+            "title": "Viết docs onboarding",
+            "status": "Not started",
+            "due_date": "2026-09-18",
+            "priority": "Medium",
+            "order": 3,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          },
+          {
+            "id": "3d8329bf-3814-8188-a432-ea26312bce92",
+            "title": "Fix crash màn thanh toán",
+            "status": "In progress",
+            "due_date": "2026-09-12",
+            "priority": "High",
+            "order": 2,
+            "assignee": "",
+            "tags": [],
+            "project": []
+          }
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789140811528
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Kiểm chứng kết quả:\n\nThứ tự mới (theo order):\n1. Trả lời feedback QA round 2 (order 1) ✅ — đã lên đầu\n2. Fix crash màn thanh toán (order 2) ✅ — lùi 1 bậc\n3. Viết docs onboarding (order 3) ✅ — lùi 1 bậc\n4. Review PR #212 của Hùng (order 4) ✅ — lùi 1 bậc\n5. Refactor module auth (order 5) ✅ — lùi 1 bậc\n6. Update thư viện lên RN 0.80 (order 6) ✅ — lùi 1 bậc\n\nTất cả khớp hoàn toàn! Không có gì sai sót.",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "text",
+          "text": "✅ **Đã xong!** Kiểm chứng khớp 100%. Đây là thứ tự mới:\n\n| # | Task | Priority | Deadline | Status |\n|---|------|----------|----------|--------|\n| **1** | **Trả lời feedback QA round 2** | 🔴 High | 15/09 | Not started |\n| 2 | Fix crash màn thanh toán | 🔴 High | 12/09 | In progress |\n| 3 | Viết docs onboarding | 🟡 Medium | 18/09 | Not started |\n| 4 | Review PR #212 của Hùng | 🟡 Medium | 11/09 | Not started |\n| 5 | Refactor module auth | 🟢 Low | 25/09 | Not started |\n| 6 | Update thư viện lên RN 0.80 | 🟢 Low | 02/10 | Not started |\n\n**\"Trả lời feedback QA round 2\"** đã được đẩy lên đầu (order 1), tất cả các task còn lại lùi đều 1 bậc. Làm ngay cái QA feedback này thôi! 🔥"
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "deepseek-v4-pro-ga-260813",
+      "usage": {
+        "input": 863,
+        "output": 449,
+        "cacheRead": 5120,
+        "cacheWrite": 0,
+        "reasoning": 188,
+        "totalTokens": 6432,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "stop",
+      "timestamp": 1789140811528,
+      "responseId": "02178914081160251d9d16403af386b151f4b49e6685515341ee0",
+      "responseModel": "deepseek-v4-pro",
+      "rawStopReason": "stop"
+    }
+  ]
+}

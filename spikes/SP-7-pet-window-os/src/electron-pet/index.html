@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SP7-Pet-Window</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="pet-body">
+  <div id="pet-container" class="pet-container">
+    <div id="pet-avatar" class="pet-avatar interactive">
+      <div class="pet-face">
+        <div class="pet-eye left"></div>
+        <div class="pet-eye right"></div>
+        <div class="pet-mouth"></div>
+      </div>
+      <div id="pet-badge" class="pet-badge">1</div>
+    </div>
+  </div>
+
+  <script>
+    const petAvatar = document.getElementById('pet-avatar');
+    
+    // Dynamic hit-testing for click-through (Q2)
+    window.addEventListener('mousemove', (e) => {
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const isInteractive = el && (el.closest('.interactive') !== null);
+      if (isInteractive) {
+        window.api.setIgnoreMouseEvents(false);
+      } else {
+        window.api.setIgnoreMouseEvents(true, true);
+      }
+    });
+
+    petAvatar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.api.onPetClicked();
+    });
+  </script>
+</body>
+</html>

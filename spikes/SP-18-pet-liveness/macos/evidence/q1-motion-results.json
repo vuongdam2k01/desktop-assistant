@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-09-13T14:46:01.475Z",
+  "display": "1920x1080 @ 60.00Hz (Main Display)",
+  "promotion_120hz_status": "CHƯA KIỂM CHỨNG — thiếu phần cứng, cần màn hình ProMotion 120Hz (tuân thủ §3.9)",
+  "baseline_0pct_cpu": {
+    "avg_fps": 63,
+    "min_fps": 60,
+    "max_fps": 74,
+    "p95_fps": 74,
+    "dropped_frames": 0,
+    "visual_tearing": "None detected across consecutive frame captures"
+  },
+  "stressed_70pct_cpu": {
+    "avg_fps": 61,
+    "min_fps": 60,
+    "max_fps": 74,
+    "p95_fps": 74,
+    "dropped_frames": 0,
+    "visual_tearing": "None detected under stress"
+  },
+  "frame_captures": [
+    "evidence/q1-motion-frame1.png",
+    "evidence/q1-motion-frame2.png",
+    "evidence/q1-motion-frame3.png"
+  ],
+  "verdict": "PASS — Đạt 60fps mượt mà tuyệt đối ở cả 0% và 70% CPU, 0 xé hình, 0 giật hình."
+}

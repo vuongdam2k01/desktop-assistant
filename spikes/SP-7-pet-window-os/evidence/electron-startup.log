@@ -1,0 +1,86 @@
+
+[2026-09-11T14:37:30.855Z] app.whenReady reached
+[2026-09-11T14:37:30.976Z] Tray icon created successfully
+[2026-09-11T14:37:30.977Z] createWindows finished
+[2026-09-11T14:37:30.989Z] startHttpControlServer finished
+[2026-09-11T14:37:30.995Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T14:38:10.045Z] app.whenReady reached
+[2026-09-11T14:38:10.158Z] Tray icon created successfully
+[2026-09-11T14:38:10.158Z] createWindows finished
+[2026-09-11T14:38:10.167Z] startHttpControlServer finished
+[2026-09-11T14:38:10.171Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T14:39:25.554Z] app.whenReady reached
+[2026-09-11T14:39:25.850Z] Tray icon created successfully
+[2026-09-11T14:39:25.852Z] createWindows finished
+[2026-09-11T14:39:25.866Z] startHttpControlServer finished
+[2026-09-11T14:39:25.876Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T14:42:56.508Z] app.whenReady reached
+[2026-09-11T14:42:56.666Z] Tray icon created successfully
+[2026-09-11T14:42:56.667Z] createWindows finished
+[2026-09-11T14:42:56.678Z] startHttpControlServer finished
+[2026-09-11T14:42:56.684Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:07:12.276Z] app.whenReady reached
+[2026-09-11T15:07:12.428Z] Tray icon created successfully
+[2026-09-11T15:07:12.429Z] createWindows finished
+[2026-09-11T15:07:12.440Z] startHttpControlServer finished
+[2026-09-11T15:07:12.446Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:16:50.840Z] app.whenReady reached
+[2026-09-11T15:16:51.013Z] Tray icon created successfully
+[2026-09-11T15:16:51.014Z] createWindows finished
+[2026-09-11T15:16:51.027Z] startHttpControlServer finished
+[2026-09-11T15:16:51.034Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:26:52.469Z] app.whenReady reached
+[2026-09-11T15:26:52.635Z] Tray icon created successfully
+[2026-09-11T15:26:52.636Z] createWindows finished
+[2026-09-11T15:26:52.649Z] startHttpControlServer finished
+[2026-09-11T15:26:52.655Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:28:40.938Z] app.whenReady reached
+[2026-09-11T15:28:41.100Z] Tray icon created successfully
+[2026-09-11T15:28:41.101Z] createWindows finished
+[2026-09-11T15:28:41.112Z] startHttpControlServer finished
+[2026-09-11T15:28:41.118Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:29:06.329Z] app.whenReady reached
+[2026-09-11T15:29:06.488Z] Tray icon created successfully
+[2026-09-11T15:29:06.489Z] createWindows finished
+[2026-09-11T15:29:06.500Z] startHttpControlServer finished
+[2026-09-11T15:29:06.506Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:31:53.423Z] app.whenReady reached
+[2026-09-11T15:31:53.579Z] Tray icon created successfully
+[2026-09-11T15:31:53.581Z] createWindows finished
+[2026-09-11T15:31:53.594Z] startHttpControlServer finished
+[2026-09-11T15:31:53.600Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:32:37.411Z] app.whenReady reached
+[2026-09-11T15:32:37.567Z] Tray icon created successfully
+[2026-09-11T15:32:37.569Z] createWindows finished
+[2026-09-11T15:32:37.580Z] startHttpControlServer finished
+[2026-09-11T15:32:37.586Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:33:03.052Z] app.whenReady reached
+[2026-09-11T15:33:03.220Z] Tray icon created successfully
+[2026-09-11T15:33:03.222Z] createWindows finished
+[2026-09-11T15:33:03.233Z] startHttpControlServer finished
+[2026-09-11T15:33:03.240Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:33:29.028Z] app.whenReady reached
+[2026-09-11T15:33:29.191Z] Tray icon created successfully
+[2026-09-11T15:33:29.192Z] createWindows finished
+[2026-09-11T15:33:29.205Z] startHttpControlServer finished
+[2026-09-11T15:33:29.212Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-11T15:34:33.408Z] app.whenReady reached
+[2026-09-11T15:34:33.570Z] Tray icon created successfully
+[2026-09-11T15:34:33.571Z] createWindows finished
+[2026-09-11T15:34:33.584Z] startHttpControlServer finished
+[2026-09-11T15:34:33.590Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-12T03:47:50.672Z] app.whenReady reached
+[2026-09-12T03:47:50.885Z] Tray icon created successfully
+[2026-09-12T03:47:50.886Z] createWindows finished
+[2026-09-12T03:47:50.898Z] startHttpControlServer finished
+[2026-09-12T03:47:50.904Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-12T03:54:53.965Z] app.whenReady reached
+[2026-09-12T03:54:54.226Z] Tray icon created successfully
+[2026-09-12T03:54:54.227Z] createWindows finished
+[2026-09-12T03:54:54.240Z] startHttpControlServer finished
+[2026-09-12T03:54:54.247Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-12T04:44:33.272Z] app.whenReady reached
+[2026-09-12T04:44:33.455Z] Tray icon created successfully
+[2026-09-12T04:44:33.456Z] createWindows finished
+[2026-09-12T04:44:33.467Z] startHttpControlServer finished
+[2026-09-12T04:44:33.473Z] SP-7 HTTP Control Server listening on http://127.0.0.1:18923

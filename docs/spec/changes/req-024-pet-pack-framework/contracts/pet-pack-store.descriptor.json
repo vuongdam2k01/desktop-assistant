@@ -1,0 +1,18 @@
+{
+  "descriptorVersion": "0.1.0",
+  "storeId": "pet-pack",
+  "version": "1.0.0",
+  "name": "Pet packs",
+  "encryptionClass": "mutable",
+  "resolutionRule": "last-writer-wins-with-preservation",
+  "orderingBasis": "device-sequence-causal",
+  "retention": {
+    "minimumDays": 1,
+    "userConfigurable": false,
+    "deletionRequiresConfirmation": true
+  },
+  "membership": "The account's own pet packs: for each, the manifest document, the persona it contains, and the animation asset the manifest names. Built-in templates are excluded — they are the product's data, identical for every account, and reach a device through the product's own distribution. The choice of which pack is active is excluded too: it is a value in the configuration store, not a record here.",
+  "supersededTarget": "pet-pack",
+  "eraseOnSignout": true,
+  "capabilities": ["partial-transfer"]
+}

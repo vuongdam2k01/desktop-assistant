@@ -1,0 +1,9 @@
+{
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t26.5.2\nBuildVersion:\t\t25F84",
+  "kernel": "Darwin arm64",
+  "rosetta": "sysctl.proc_translated: 0",
+  "display": "Graphics/Displays:\n\n    Apple M1:\n\n      Chipset Model: Apple M1\n      Type: GPU\n      Bus: Built-In\n      Total Number of Cores: 8\n      Vendor: Apple (0x106b)\n      Metal Support: Metal 4\n      Displays:\n        Display:\n          Resolution: 1920 x 1080 (1080p FHD - Full High Definition)\n          UI Looks like: 1920 x 1080 @ 60.00Hz\n          Main Display: Yes\n          Mirror: Off\n          Online: Yes\n          Rotation: Supported",
+  "nodeVersion": "v26.8.2",
+  "electronPid": 12414,
+  "timestamp": "2026-09-13T14:20:57.111Z"
+}

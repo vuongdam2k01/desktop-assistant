@@ -1,0 +1,53 @@
+[RUNNER] Launching worker with CRASH_POINT=5, FULLFSYNC=1, SYNC=FULL...
+
+--- Worker Output (pre-crash) ---
+[WORKER 19195] Started with CrashPoint=5, JobId=job_crash_pt5
+
+▶ [ENGINE] Starting Job job_crash_pt5 (Mode: smart, CrashPoint: 5)...
+✔ [ENGINE] Job job_crash_pt5 created with status 'pending'
+⏳ [ENGINE] Approval required for Notion update.
+✔ [ENGINE] Job job_crash_pt5 transitioned to 'waiting_approval'. Approval card posted.
+👤 [USER ACTION] User approves tool execution for Job job_crash_pt5.
+✔ [ENGINE] Approval recorded. Job job_crash_pt5 set to 'running'.
+🔍 [ENGINE] Fetching pre-execution snapshot from Notion for page_task_101...
+📝 [ENGINE] Committing 'tool_intent' to SQLite Ledger (Correlation: corr_533acb4a-d20c-4fdc-b282-1f699dacbd8a)...
+✔ [ENGINE] 'tool_intent' successfully committed to WAL.
+🌐 [ENGINE] Calling external Notion API updatePage(page_task_101)...
+✔ [ENGINE] External Notion API call returned HTTP 200 OK.
+📝 [ENGINE] Committing 'tool_result' to SQLite Ledger...
+✔ [ENGINE] 'tool_result' successfully committed to WAL.
+💥 [CRASH INJECTOR] TRIGGERING SIGKILL at Point 5: After tool_result committed, BEFORE job status marked completed
+💥 Process PID 19195 terminating immediately...
+
+--- Crash Exit Status ---
+Exit Code: null
+Signal: SIGKILL
+
+--- SQLite WAL Integrity Check ---
+PRAGMA integrity_check: [{"integrity_check":"ok"}]
+
+--- Running Recovery Protocol ---
+
+======================================================
+🔄 [RECOVERY MANAGER] Starting crash recovery protocol...
+======================================================
+📋 Found 1 active/unfinalized job(s) in SQLite database.
+
+🔍 Inspecting Job job_crash_pt5 (Status: running)...
+   Last Ledger Record: [seq=3, type=tool_result]
+   ✅ Last record is 'tool_result'. Advancing job status to 'completed'.
+
+======================================================
+🗂️ RECONSTRUCTED CARD QUEUE (Priority Order per PRD A.4):
+   [1] Type: RESULT   | Job: job_crash_pt5 | Title: Hoàn thành
+======================================================
+
+
+--- Post-Recovery Verification ---
+Job ID: job_crash_pt5
+Job Status: completed
+Ledger Records Count: 3
+  - seq=1 | type=approval | tool=notion_update_page
+  - seq=2 | type=tool_intent | tool=notion_update_page
+  - seq=3 | type=tool_result | tool=notion_update_page
+✔ Point 5 PASSED: Job marked completed, RESULT card displayed.

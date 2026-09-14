@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "truePositives": 3,
+    "falseNegatives": 0,
+    "trueNegatives": 4,
+    "falsePositives": 0
+  },
+  "tests": [
+    {
+      "test_id": "C-01",
+      "description": "Đối tượng bị bên thứ ba đổi Title và Status qua API",
+      "is_actually_modified": true,
+      "detected_as_conflict": true,
+      "reason": "Thuộc tính 'Status' đã bị bên thứ ba sửa (hiện tại: {\"select\":{\"name\":\"Done\"}}, sau job: {\"select\":{\"name\":\"In progress\"}})"
+    },
+    {
+      "test_id": "C-02",
+      "description": "Đối tượng Job 2 sạch không bị ai sửa (Clean item)",
+      "is_actually_modified": false,
+      "detected_as_conflict": false
+    },
+    {
+      "test_id": "C-03",
+      "description": "Đối tượng bị bên thứ ba đưa vào thùng rác (archived: true) trước khi undo",
+      "is_actually_modified": true,
+      "detected_as_conflict": true,
+      "reason": "Trạng thái archived bị thay đổi bên ngoài: hiện tại archived=true, sau job archived=false"
+    },
+    {
+      "test_id": "C-04",
+      "description": "Đối tượng bị xoá vĩnh viễn hoặc bot mất quyền (HTTP 404 object_not_found)",
+      "is_actually_modified": true,
+      "detected_as_conflict": true,
+      "reason": "Đối tượng không tồn tại hoặc đã bị xoá vĩnh viễn / gỡ quyền truy cập (HTTP 404 object_not_found)."
+    },
+    {
+      "test_id": "C-05",
+      "description": "Đối tượng Job 1 sạch (Clean)",
+      "is_actually_modified": false,
+      "detected_as_conflict": false
+    },
+    {
+      "test_id": "C-06",
+      "description": "Đối tượng Job 3 sạch (Clean)",
+      "is_actually_modified": false,
+      "detected_as_conflict": false
+    },
+    {
+      "test_id": "C-07",
+      "description": "Đối tượng Job 6 sạch (Clean)",
+      "is_actually_modified": false,
+      "detected_as_conflict": false
+    }
+  ]
+}

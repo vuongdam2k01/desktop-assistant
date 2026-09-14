@@ -1,0 +1,26 @@
+﻿[2026-09-12 08:58:27.830] === START WINDOWS CREDENTIAL MANAGER BENCHMARK ===
+[2026-09-12 08:58:27.951] Size    50 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:27.977] Size   100 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.004] Size   256 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.033] Size   400 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.060] Size   512 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.096] Size  1000 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.128] Size  2000 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.161] Size  2500 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.187] Size  2560 B -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.202] Size  2561 B -> FAIL (Win32 Error 1783: The stub received bad data)
+[2026-09-12 08:58:28.219] Size  3000 B -> FAIL (Win32 Error 1783: The stub received bad data)
+[2026-09-12 08:58:28.236] Size  4000 B -> FAIL (Win32 Error 1783: The stub received bad data)
+[2026-09-12 08:58:28.262] Size  5000 B -> FAIL (Win32 Error 1783: The stub received bad data)
+[2026-09-12 08:58:28.265] 
+=== TESTING REAL PAYLOADS ON WINDOWS CREDENTIAL MANAGER ===
+[2026-09-12 08:58:28.302] Notion Internal Token (52 B) -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.318] Google Refresh Token (103 B) -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.333] Google BYO Client JSON (396 B) -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.349] Combined Connector State (JSON) (752 B) -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.368] Full Multi-Connector Bundle (Google + Notion + LLM) (2261 B) -> SUCCESS (readback match=True)
+[2026-09-12 08:58:28.370] 
+=== SUMMARY & HARD LIMIT CONCLUSION ===
+[2026-09-12 08:58:28.372] Windows Credential Manager (Generic Credential) Hard Limit: EXACTLY 2560 BYTES (CRED_MAX_GENERIC_CREDENTIAL_BLOB_SIZE).
+[2026-09-12 08:58:28.374] Paylod <= 2560 bytes: Writes successfully.
+[2026-09-12 08:58:28.377] Payload >= 2561 bytes: Fails with Win32 Error 1783 (The stub received bad data / ERROR_UNRECOGNIZED_MEDIA).

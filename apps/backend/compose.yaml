@@ -1,0 +1,32 @@
+name: da-f00
+
+services:
+  postgres:
+    image: postgres:18.3-alpine
+    container_name: da-f00-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_DB: desktop_assistant_dev
+    ports:
+      - "54320:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d desktop_assistant_dev"]
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis:8.2-alpine
+    container_name: da-f00-redis
+    ports:
+      - "63790:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres_data:

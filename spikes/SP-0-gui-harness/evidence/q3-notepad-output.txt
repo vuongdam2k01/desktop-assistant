@@ -1,0 +1,1 @@
+﻿[SP0-START]Windows11-Native: Tiếng Việt có dấu: Trăm năm trong cõi người ta, chữ tài chữ mệnh khéo là ghét nhau! Symbols: !@#$%^&*()_+~-={}|[]:;<>?,./ PADDING:01234567890123456789012345678901[SP0-END]

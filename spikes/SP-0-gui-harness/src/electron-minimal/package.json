@@ -1,0 +1,9 @@
+{
+  "name": "sp0-electron-minimal",
+  "version": "1.0.0",
+  "description": "Minimal Electron window (transparent, frameless, always-on-top)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
+}

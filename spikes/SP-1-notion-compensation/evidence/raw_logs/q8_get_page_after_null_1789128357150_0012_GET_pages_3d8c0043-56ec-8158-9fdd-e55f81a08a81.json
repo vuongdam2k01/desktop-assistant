@@ -1,0 +1,113 @@
+{
+  "call_id": "1789128357150_0012_GET_pages_3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+  "category": "q8_get_page_after_null",
+  "timestamp": "2026-09-11T12:05:57Z",
+  "duration_ms": 475,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:57 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968b28fd294a28-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=xYLnT3ErsBujLDSoL84lZ9dHJKqTufG9lZJvhGwi5is-1789128357.2816727-1.0.1.1-JGXup.uQPveQ84Yb.TS8rRTra0D_QiznvXUAyTK7cswOpYPoM5bGVaDHeCDyJDf4JH8skwMe75hKyXt8fHzobwitadQ.MgHbyh9IFRQmCN0X_gQYWnks5O6Qs2TseX7C; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:57 GMT",
+      "ETag": "W/\"4b9-ozYBs8WSvrnzfymvO0Zd72wK+Ug\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "ca8fd76c-e2fb-4418-b8fd-90988e56a0e4",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+      "created_time": "2026-09-11T12:05:00.000Z",
+      "last_edited_time": "2026-09-11T12:05:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "5f9885ba-7007-4fbb-a946-70324a88bfc6",
+            "name": "Not started",
+            "color": "default"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": null
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q8 Status vs Select Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q8-Status-vs-Select-Test-3d8c004356ec81589fdde55f81a08a81",
+      "public_url": null,
+      "archived": false,
+      "request_id": "ca8fd76c-e2fb-4418-b8fd-90988e56a0e4"
+    },
+    "error": null
+  }
+}

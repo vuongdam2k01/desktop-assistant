@@ -1,0 +1,25 @@
+=== KIỂM CHỨNG GATEKEEPER VÀ QUARANTINE TRÊN MACOS (Q5) ===
+Thời gian: Sun Sep 13 21:43:49 +07 2026
+macOS: 26.5.2 (25F84)
+
+1. THUỘC TÍNH MỞ RỘNG (XATTR):
+-> CleanApp:
+com.apple.provenance: 
+-> QuarantinedApp:
+com.apple.provenance: 
+com.apple.quarantine: 0181;66e44b80;Safari;D7C91910-1234-5678-ABCD-0123456789AB
+
+2. ĐÁNH GIÁ SPCTL GATEKEEPER:
+-> spctl --assess trên CleanApp (không có quarantine):
+/tmp/test-gatekeeper/CleanApp.app: rejected
+origin=DesktopAssistant Dev Test A
+-> spctl --assess trên QuarantinedApp (có quarantine):
+/tmp/test-gatekeeper/QuarantinedApp.app: rejected
+origin=DesktopAssistant Dev Test A
+
+3. THỰC NGHIỆM MỞ APP CÓ QUARANTINE QUA HỆ THỐNG (OPEN LỆNH):
+Khởi chạy open QuarantinedApp...
+Output của lệnh open: 
+Đã chụp ảnh màn hình hộp thoại Gatekeeper: /Users/<user>/projects/desktop-assistant/spikes/SP-16-signing-update/macos/src/../evidence/gatekeeper-quarantine-prompt.png
+
+=== HOÀN TẤT THỬ NGHIỆM GATEKEEPER ===

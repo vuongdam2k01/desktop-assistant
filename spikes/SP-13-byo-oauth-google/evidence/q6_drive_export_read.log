@@ -1,0 +1,87 @@
+=== SP-13 Q6: KIỂM TRA ĐỌC GOOGLE DRIVE VỚI drive.readonly ===
+✓ Đã lấy access token hợp lệ thành công.
+
+1. Đang liệt kê file trong Drive qua endpoint: https://www.googleapis.com/drive/v3/files?pageSize=50&fields=files(id,name,mimeType,size,capabilities,exportLinks,createdTime,modifiedTime)
+✓ Tìm thấy 50 file/folder trong Drive:
+
+| ID                                 | Tên                                 | MIME Type                                | Kích thước |
+|------------------------------------|-------------------------------------|------------------------------------------|------------|
+| 1s5btRYBlJsBLxhovvzEhQsvGcnhorN-mQnphLE7MfVU | theo dõi thói quen                  | application/vnd.google-apps.spreadshee   | 2081       |
+| 1LJquwLPy7CmI6713hYS9jcrJieIt8Q0r  | kỷ luật                             | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 14Aj0XxvltxRJq821DxVI1qdtht5mzHph  | clickup                             | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 1ZA3EoxZeher9owu9K0Jr2AN1ZfYYF_DA  | Destination.C1.and.C2_Grammar.and   | application/pdf                          | 20880847   |
+| 1YamnHSQa-ZbeSDT3OY8cHVGwoXYpS2Ui  | Destination-B1-Grammar-and-Vocabu   | application/pdf                          | 27709920   |
+| 1XlZCFAzCVVa-n5krEcatM-248vRZ2LwR  | Destination B2 Grammar and Vocabu   | application/pdf                          | 30749685   |
+| 1EMwrVRepikOXWZ4JrlaaqsDUCiYdqm8d  | English                             | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 1Qqf4d0wV2-ErJkGt70EOWmLJewhlHYTB  | 1. Định nghĩa ý tưởng               | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 1Mf1ZA_AzH1dAjPNV0v_5YnscXIMKhhkF  | dinh-nghia-nen-tang.md              | text/markdown                            | 16133      |
+| 1Y7HLTQ4EQbVVzecayI8u5xgdpBt1LEUw  | dinh-nghia-day-du.md                | text/markdown                            | 31181      |
+| 196SqMMgHBF72kZWX3P6VP32V4GC3SDLV  | Idea2Web                            | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 10J24x8axeZ1C35SRwjj4dv7-n4pto7Q3  | fb_avatar.png                       | image/png                                | 4539424    |
+| 1VpzTHRZbjy7tFi3ETpyVA9WFbTY11Non  | fb_background.png                   | image/png                                | 5953603    |
+| 1J12HbR_Enn0NVuxjocDR-A0Hd4d5xZhn  | logo.png                            | image/png                                | 4010683    |
+| 1XyYxbtFSzGQ4f1mn-XLtbG_OPEI91b28  | GuideMeToSpeak-DatabaseSchema.md    | text/markdown                            | 46056      |
+| 1IWxtgBzv-D3_p5S-0w6__VtDGwFQHhEc  | GuideMeToSpeak-AI-Integration-Spe   | text/markdown                            | 44242      |
+| 1MBu9HQmPCBXYVRL8_ACN6UcR9RaVVNXr  | GuideMeToSpeak-API-Specification.   | text/markdown                            | 42798      |
+| 1JvRpzNFFrGPQjzb4390lpcPt_hCD1i6L  | GuideMeToSpeak-UISpec-Part3-Compo   | text/markdown                            | 43485      |
+| 1VUFpJk9RHlmbIUPxC2SpyQ_0BFjFeNlU  | GuideMeToSpeak-UISpec-Part2-Scree   | text/markdown                            | 43444      |
+| 17Sq6nwkgNPdEVeJ5cKFoGF_8xyoh1dxv  | GuideMeToSpeak-UISpec-Part1-Desig   | text/markdown                            | 32874      |
+| 1PR6jxETfyg1_ZA1k-OQitwITqEvWiOHd  | GuideMeToSpeak-DetailedUserFlows.   | text/markdown                            | 47526      |
+| 1TZ-w-0h3x5vNbXmu8KAQZW-Jtbi0FHYD  | GuideMeToSpeak                      | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 1NPnzswCIlZr-vM5kvqRnZzJ5AEsb4YjC  | GuideMeToSpeak-Technical-Architec   | text/markdown                            | 41088      |
+| 1a1a_Oxq78tT-6CpdU2Krb11LvujSGbf1  | GuideMeToSpeak-CoreFeatures-Speci   | text/markdown                            | 47148      |
+| 1PzHRa0dWus1jAR6ipSZEdLC-SlDEctdM  | GuideMeToSpeak-MVP-Planning.md      | text/markdown                            | 34793      |
+| 1T2lzrkzNQZTwFRIQh6YiBz4Ycxh4W8jq  | GuideMeToSpeak-ImageryStyle.md      | text/markdown                            | 22352      |
+| 1ApaiW5fPCgkfm0P4jiwvc980CDcqd2Zm  | GuideMeToSpeak-TypographySpacing.   | text/markdown                            | 22412      |
+| 10vP9r-VeIvJqlZz81-Y5Nr5SSYVsn9cj  | GuideMeToSpeak-ColorPalette.md      | text/markdown                            | 16739      |
+| 1HFFn_TA-lvs37QYkXx4AEvUgXTM2GyiM  | GuideMeToSpeak-BrandVoice.md        | text/markdown                            | 14067      |
+| 1cWQT9jVzw39R_v46AbYkQm_pvKoDTPjJ  | GuideMeToSpeak-BrandPersonality.m   | text/markdown                            | 11386      |
+| 1zzjmbGwWeJ0pJJ3m_RD0Lp_ulzTqcgHP  | GuideMeToSpeak-BrandCore.md         | text/markdown                            | 7172       |
+| 1HFeaF5a9mW-y0oMVJJ9R8dtJ3Et11XJ-  | Validate the Demand-2025120722481   | text/markdown                            | 18670      |
+| 1qgbyrEUrV_Jcd9hok9nvn17nAma-Af1t  | Research Existing Solutions-20251   | text/markdown                            | 16800      |
+| 1U4m-ddXTnCjWNJPt_k_rHESxE0rT2n_i  | typography-spacing.md-20251207122   | text/markdown                            | 17230      |
+| 1JpMQ2LFK3OKQIVVO7AloenVVCmpMEUu9  | colors.md-20251207122631.md         | text/markdown                            | 13731      |
+| 1eRyT7gKY8SqbHlzlMHa2m4e00FUxVgX9  | Định nghĩa ý tưởng-20251207122306   | text/markdown                            | 6116       |
+| 1GxhU0KGdxv-D512PBzTMzDEcZtwkYnu0  | Ezysite-Detailed-User-Flows-v2.md   | text/markdown                            | 84913      |
+| 12cQZd-doCO2jeQdBrRSLmu7tfpD1Og5D  | EZYSITE-Technical-Architecture-v2   | text/markdown                            | 64317      |
+| 1vCGiYa1-eaJ-7WE6kZJ2zjg68RSlD77P  | ezysite-ui-spec-screens-5-7-updat   | text/markdown                            | 66898      |
+| 1jtj-txpwgqtxF4_9ph_yfHtdcSm_zdtK  | api-specification-v2.md             | text/markdown                            | 59230      |
+| 1gnMJrIW6ef8pqpSAWH9i_TJDk1CCBIpT  | ai-integration-spec-v2.md           | text/markdown                            | 51556      |
+| 1JPVLx6NM_VwgKp56ye1ItXlV5GQNNkNB  | database-schema.md                  | text/markdown                            | 47025      |
+| 16uYzRSakJlR4WeQGxpppO3QPZaWl9Di3  | ui-specification-modals-popups.md   | text/markdown                            | 57012      |
+| 1-HVBQfvPpIAtx81eYaWmfjgmbycPrdVw  | ezysite-ui-spec-part1-screens-1-4   | text/markdown                            | 69480      |
+| 1SxIGpysqWHnux9G5c1-qJwwMMJ_SsPaf  | Tài liệu tăng cường                 | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 1yWQbamERsntd5LkUagW0PQfAZOaiYFJc  | planMVP.pdf                         | application/pdf                          | 14633479   |
+| 1tdpXOyTtg3ivUy54hwyfs-Xi0BWCre8b  | media                               | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 1SlYIs1oAUtwxgiJW9YoAm0sZX36YDpw7  | Ezysite                             | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 11NGITQcN7yqv3AzMykOGCXjUZPaiREX8  | For Developer(s)                    | application/vnd.google-apps.folder       | N/A (Doc)  |
+| 1MhzAxC7OK8IbV1j7OX81uCYJhQrq3qe5  | A Handbook of Applied Cryptograph   | application/pdf                          | 4628454    |
+
+Tổng kết phân loại: 0 Google Docs, 1 Google Sheets, 39 file nhị phân/ngoài.
+
+2. Không có file Google Doc có sẵn trong Drive. Ghi nhận khả năng API export theo đặc tả chuẩn.
+
+3. Test export Google Sheet 'theo dõi thói quen' (ID: 1s5btRYBlJsBLxhovvzEhQsvGcnhorN-mQnphLE7MfVU):
+  ✓ Export text/csv thành công: nhận 696 bytes
+    Xem trước nội dung CSV: thói quen,dậy 6h sáng,"bỏ nghe nhạc, video link tinh",bỏ cafe và nước ngọt 2/8/2026,FALSE,TRUE,FALSE 2/9/2026,FALSE,FALSE,FALSE 2/10/2026,FALSE,FALSE,FALSE 2/11/2026,FALSE,FALSE,FALSE 2/12/2026,F...
+  ✓ Export Sheet sang PDF thành công: nhận 32275 bytes
+
+4. Test tải file nhị phân 'Destination.C1.and.C2_Grammar.and.Vocabulary.pdf' (MIME: application/pdf, Size: 20880847 bytes):
+  ✓ Tải alt=media thành công: 20880847 bytes nhận được, Content-Type: application/pdf
+
+4. Test tải file nhị phân 'Destination-B1-Grammar-and-Vocabulary.pdf' (MIME: application/pdf, Size: 27709920 bytes):
+  ✓ Tải alt=media thành công: 27709920 bytes nhận được, Content-Type: application/pdf
+
+4. Test tải file nhị phân 'Destination B2 Grammar and Vocabulary with Answer key.pdf' (MIME: application/pdf, Size: 30749685 bytes):
+  ✓ Tải alt=media thành công: 30749685 bytes nhận được, Content-Type: application/pdf
+
+4. Test tải file nhị phân 'dinh-nghia-nen-tang.md' (MIME: text/markdown, Size: 16133 bytes):
+  ✓ Tải alt=media thành công: 16133 bytes nhận được, Content-Type: text/markdown
+
+4. Test tải file nhị phân 'dinh-nghia-day-du.md' (MIME: text/markdown, Size: 31181 bytes):
+  ✓ Tải alt=media thành công: 31181 bytes nhận được, Content-Type: text/markdown
+
+5. Phân tích giới hạn kích thước file thực tế (Google Drive API v3):
+  - Google Docs / Sheets files.export: Giới hạn cứng 10 MB (10,485,760 bytes). Nếu tài liệu export vượt quá 10MB, API trả về lỗi 403 exportSizeLimitExceeded.
+  - Google Drive binary files.get?alt=media: Không giới hạn API nhân tạo nhỏ; hỗ trợ kích thước tối đa của file trên Drive (lên tới 5TB theo dung lượng Drive của người dùng).
+  - Giới hạn với Agent/LLM ngữ cảnh: Giới hạn thực tế nằm ở bộ nhớ RAM của Desktop app và context window của LLM (ví dụ 128k - 1M token; 10MB text ~ 2.5 triệu tokens vượt context window thông thường). Do đó client cần giới hạn tải tối đa (khuyến nghị <= 20MB cho binary, và cắt lát văn bản khi đưa vào prompt theo FR-GM-03 / FR-DR-01).

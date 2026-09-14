@@ -1,0 +1,19 @@
+{
+  "name": "@desktop-assistant/win32-window",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./loader.cjs",
+  "types": "./index.d.ts",
+  "files": [
+    "dist",
+    "loader.cjs",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "native:build": "node scripts/build.mjs",
+    "native:test": "node scripts/test.mjs"
+  },
+  "dependencies": {
+    "@desktop-assistant/contracts": "workspace:*"
+  }
+}

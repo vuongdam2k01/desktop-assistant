@@ -1,0 +1,68 @@
+[
+  {
+    "id": "HL-01-DATABASE-DELETION",
+    "name": "Hardline: Cấm xoá hoặc archive toàn bộ database / workspace",
+    "description": "Cấm tuyệt đối thao tác xoá hoặc archive toàn bộ database hoặc workspace gốc (FR-AP-10).",
+    "action": "DENY",
+    "priority": 1000,
+    "predicate": {
+      "kind": "or",
+      "predicates": [
+        {
+          "kind": "tool",
+          "tool_name": ["archive_database", "delete_database"]
+        },
+        {
+          "kind": "and",
+          "predicates": [
+            {
+              "kind": "tool",
+              "tool_name": ["update_database"]
+            },
+            {
+              "kind": "property",
+              "property_transition": {
+                "property": "archived",
+                "to": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "HL-02-LEDGER-CONFIG-TAMPERING",
+    "name": "Hardline: Cấm can thiệp cấu hình bảo mật hoặc ledger hệ thống",
+    "description": "Cấm tuyệt đối thao tác sửa/xoá cấu hình phê duyệt, ledger, hoặc rule files của app.",
+    "action": "DENY",
+    "priority": 1000,
+    "predicate": {
+      "kind": "or",
+      "predicates": [
+        {
+          "kind": "tool",
+          "tool_name": ["modify_approval_config", "clear_ledger", "modify_rules", "delete_audit_logs"]
+        },
+        {
+          "kind": "target_scope",
+          "target_type": "workspace",
+          "database_id": "system_config"
+        }
+      ]
+    }
+  },
+  {
+    "id": "HL-03-OUT-OF-SCOPE-OPERATIONS",
+    "name": "Hardline: Cấm thao tác vượt ra ngoài scope quyền đã cấp",
+    "description": "Cấm tuyệt đối thao tác tác động lên resource nằm ngoài workspace scope được uỷ quyền.",
+    "action": "DENY",
+    "priority": 1000,
+    "predicate": {
+      "kind": "target_scope",
+      "database_id": {
+        "in": ["unauthorized_root", "forbidden_external_tenant"]
+      }
+    }
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "name": "@desktop-assistant/desktop",
+  "version": "0.0.0",
+  "productName": "DesktopAssistant",
+  "private": true,
+  "type": "module",
+  "main": "./dist/main/index.cjs",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:credential-store:os": "electron --no-sandbox scripts/credential-store-electron-smoke.cjs",
+    "test:e2e": "playwright test",
+    "test:e2e:window-integration": "node tests/e2e/run-e2e.mjs",
+    "test:soak": "node scripts/run-soak.mjs",
+    "package:unsigned": "node scripts/package-unsigned.mjs"
+  },
+  "dependencies": {
+    "@desktop-assistant/contracts": "workspace:*",
+    "@desktop-assistant/credential-store": "workspace:*",
+    "@desktop-assistant/macos-window": "workspace:*",
+    "@desktop-assistant/win32-window": "workspace:*",
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "@rive-app/canvas": "2.42.1",
+    "better-sqlite3": "13.0.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/better-sqlite3": "7.6.12",
+    "@types/node": "24.13.4",
+    "@types/pngjs": "6.0.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "electron": "44.3.0",
+    "electron-builder": "26.15.3",
+    "electron-updater": "6.8.9",
+    "pngjs": "7.0.0",
+    "react": "19.3.0",
+    "playwright-core": "1.63.0",
+    "react-dom": "19.3.0",
+    "tailwindcss": "4.3.3",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.0",
+    "vitest": "5.0.0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/pet/rive-state-machine/1.0.0.json",
+  "title": "PetAssetDescriptor",
+  "description": "Shape of the descriptor a pet animation asset must satisfy, for pet/contracts/rive-state-machine@1.0.0. It is the boundary between a designed .riv file and the runtime that drives it: the artboard the runtime loads, the single state machine it runs, and the one numeric input it writes. What this file cannot express is stated by the contract document and is a property of the binary asset rather than of the descriptor: that the named artboard and state machine are actually present in the file, and that every declared state resolves to a transition the asset can play. An asset whose descriptor is satisfied and whose artboard is missing is refused at load and the shipped default is used instead.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artboardName", "stateMachineName", "inputs", "transitionBlendDurationMs"],
+  "properties": {
+    "artboardName": {
+      "const": "Pet",
+      "description": "The root artboard carrying the character meshes, skeletons and animation hierarchy. Renaming it is a MAJOR change, because every asset already produced would stop loading."
+    },
+    "stateMachineName": {
+      "const": "PetStateMachine",
+      "description": "The single state machine the canvas runtime loads and executes. The runtime plays no animation by name; driving one directly is forbidden, because it would bypass the blend curves the asset declares."
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "description": "The inputs the runtime writes. Exactly one exists at this version: the numeric state controller. An asset may declare further optional triggers of its own, which the runtime never writes.",
+      "properties": {
+        "state": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "name", "default"],
+          "properties": {
+            "type": { "const": "Number" },
+            "name": { "const": "state" },
+            "default": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4,
+              "description": "The state the pet holds before the application has said anything. It is 0, the idle state, so an asset that fails to receive a first value still renders a resting character rather than a blank canvas."
+            }
+          }
+        }
+      }
+    },
+    "transitionBlendDurationMs": {
+      "type": "number",
+      "minimum": 150,
+      "maximum": 250,
+      "description": "The blend duration configured in the asset between two states. The measured latency from writing the input to the first blended frame was 2.9 ms to 15.1 ms, well inside this window — VERIFIED (spikes/SP-3-electron-rive/REPORT.md#0-ket-luan). A duration outside the window is refused at load because the character reads either as snapping or as unresponsive."
+    }
+  }
+}

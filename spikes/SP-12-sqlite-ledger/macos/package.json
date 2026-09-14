@@ -1,0 +1,23 @@
+{
+  "name": "sp-12-sqlite-ledger-macos",
+  "version": "1.0.0",
+  "description": "SPIKE SP-12/mac: SQLite Ledger on macOS - ABI, Packaging, Durability",
+  "main": "src/engine.js",
+  "scripts": {
+    "test:q1": "node src/test-q1-prebuild.js",
+    "test:q2": "node src/test-q2-rebuild.js",
+    "test:q3": "node src/test-q3-durability-benchmark.js",
+    "test:q4": "node src/test-q4-apfs-locking.js",
+    "test:q5": "node src/test-q5-packaging.js",
+    "test:crash": "node src/crash-runner.js",
+    "test:all": "node src/crash-runner.js && node src/test-q3-durability-benchmark.js && node src/test-q4-apfs-locking.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.2.0",
+    "electron": "44.3.0",
+    "electron-builder": "^26.15.3"
+  }
+}

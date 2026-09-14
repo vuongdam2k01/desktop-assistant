@@ -1,0 +1,23 @@
+=== Testing Electron Login Item Settings ===
+Initial settings: {
+  "status": "not-found",
+  "executableWillLaunchAtLogin": false,
+  "openAtLogin": false,
+  "wasOpenedAtLogin": false
+}
+
+Setting openAtLogin = true...
+Updated settings: {
+  "status": "enabled",
+  "executableWillLaunchAtLogin": false,
+  "openAtLogin": true,
+  "wasOpenedAtLogin": false
+}
+
+Resetting openAtLogin = false...
+Cleaned settings: {
+  "status": "not-registered",
+  "executableWillLaunchAtLogin": false,
+  "openAtLogin": false,
+  "wasOpenedAtLogin": false
+}

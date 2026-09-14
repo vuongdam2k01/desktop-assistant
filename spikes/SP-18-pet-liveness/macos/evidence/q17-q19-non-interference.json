@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-09-13T14:51:25.555Z",
+  "q17_dynamic_motion_typing": {
+    "requirement": "FR-INT-04 (Zero dropped keystrokes while pet moves at 60fps)",
+    "total_runs": 10,
+    "pass_count": 10,
+    "fail_count": 0,
+    "pass_rate_pct": 100,
+    "dropped_keystrokes": 0,
+    "run_details": [
+      {
+        "run": 1,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 2,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 3,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 4,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 5,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 6,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 7,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 8,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 9,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      },
+      {
+        "run": 10,
+        "expected_len": 200,
+        "received_len": 200,
+        "match": true,
+        "pass": true
+      }
+    ],
+    "screenshot": "evidence/q17-motion-typing-pass.png",
+    "verdict": "PASS 100% TUYỆT ĐỐI (10/10 PASS) — Toàn bộ 10 lần chạy đều nhận trọn vẹn 200/200 ký tự trong lúc pet di chuyển 60fps. Tỉ lệ mất phím = 0.0%."
+  },
+  "q18_caret_evasion": {
+    "status": "PASS",
+    "evasion_latency_ms": 2.9,
+    "threshold_ms": 20,
+    "safe_buffer_distance_px": 150,
+    "verdict": "Kích hoạt né tránh trong vòng < 15ms khi con trỏ tiến vào vùng đệm 150px."
+  },
+  "q19_accidental_input_interception": {
+    "status": "PASS",
+    "click_penetrated": true,
+    "verdict": "Pet hoàn toàn không nuốt sự kiện chuột hay phím khi đi qua vùng làm việc của người dùng nhờ NSPanel non-activating kết hợp setIgnoreMouseEvents."
+  }
+}

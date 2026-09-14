@@ -1,0 +1,14 @@
+Q2 VERIFICATION LOG — 2026-09-12T05:10:33.153Z
+
+Test 1: Call protected endpoint with NO token
+HTTP Status: 401 (Expected: 401)
+Body: {"statusCode":401,"error":"Unauthorized","message":"Missing or invalid Authorization header (Bearer token required)"}
+
+Test 2: Call protected endpoint with EXPIRED token
+HTTP Status: 401 (Expected: 401)
+Body: {"statusCode":401,"error":"Unauthorized","message":"JWT token has expired","code":"TOKEN_EXPIRED"}
+
+Test 3: Call protected endpoint with INVALID SIGNATURE token
+HTTP Status: 401 (Expected: 401)
+Body: {"statusCode":401,"error":"Unauthorized","message":"Invalid JWT token or signature","code":"INVALID_TOKEN"}
+

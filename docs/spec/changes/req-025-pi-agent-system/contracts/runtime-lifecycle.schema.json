@@ -1,0 +1,495 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/runtime-lifecycle/1.0.0.json",
+  "title": "HandlerRegistration",
+  "description": "Normative shape of one handler registration for agent/contracts/runtime-lifecycle@1.0.0, and - under $defs - of every interception point's event payload and return payload. A registration is what the product makes at start-up and what a capability pack's manifest 'handlers' member carries, so the shape a pack author writes is the shape the bus enforces. Read the return payloads under $defs for the property this whole contract exists to hold: every point's return is a closed union whose members are 'unchanged', 'observed', 'blocked' or a named transformation, and no member at any point means allow, proceed, approve, permit or authorise. A handler can therefore block, observe and transform, and has no value with which to cause a call to execute (INV-AG-40). The approval gate and the ledger write are steps of the tool wrapper and are absent from the point enumeration, so they cannot be registered at, replaced or unregistered (INV-AG-41). VERIFIED that the wrapper's guarantee holds with the engine's own call-interception facility deliberately unconfigured (spikes/SP-6-pi-sdk/REPORT.md §1 Q2, bypass vector 2) and that eleven bypass routes failed (spikes/SP-8-rule-ir-hardgate/REPORT.md §1 Q2). The budget figures below are UNVERIFIED declared ceilings, not measurements.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["handlerId", "point", "owner", "budgetMs", "description"],
+  "properties": {
+    "handlerId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*(\\.[a-z][a-z0-9-]*)*$",
+      "maxLength": 128,
+      "description": "Unique across the whole registration set, not only within one point. A duplicate is refused (HANDLER_ID_DUPLICATE) rather than silently won by one owner, because a silent win makes the dispatch order unreadable in the job's account."
+    },
+    "point": {
+      "$ref": "#/$defs/InterceptionPoint",
+      "description": "Which of the six points this handler attaches to. A value outside the enumeration is refused (POINT_UNKNOWN); the approval gate and the ledger write are deliberately absent from the enumeration and are refused with their own code (POINT_NOT_REGISTRABLE)."
+    },
+    "owner": {
+      "$ref": "#/$defs/HandlerOwner",
+      "description": "Who attached this handler. First-party only: the product itself, or a capability pack that has activated. There is no third kind, and none meaning 'third party'."
+    },
+    "budgetMs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2000,
+      "default": 250,
+      "description": "Wall-clock ceiling for one dispatch of this handler, in milliseconds. Required rather than defaulted by omission, so that a registration which cannot state a budget fails at load where a pack author sees it. Exceeding it refuses the call at the before-a-tool-call point (fail-closed) and drops the handler at every other point. The default of 250 and the maximum of 2000 are UNVERIFIED declared ceilings; no spike has measured handler latency."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "description": "What this handler does, in the words used in the job's account of a run and in the system card when the handler blocks a call or is dropped."
+    }
+  },
+  "$defs": {
+    "InterceptionPoint": {
+      "$anchor": "InterceptionPoint",
+      "title": "InterceptionPoint",
+      "description": "The closed set of six places where the runtime may be observed or its data transformed, named for what happens at each. A seventh member is a MAJOR revision of this contract, because a new place to stand is a new place constitution principle II must be re-argued. The approval gate and the ledger write are not members and cannot become members: they are steps of the tool wrapper (INV-AG-41). The names requested for this change - before_tool, after_tool, on_message, on_error, pre_compact - were not adopted; two of them name nothing that exists in the reference architecture either, whose surface is tool_call / tool_result / the message family / the compaction family, with failures surfacing through a result's error flag rather than an on_error event (https://omp.sh/docs/hooks, UNVERIFIED).",
+      "enum": [
+        "before-a-tool-call",
+        "after-a-tool-result",
+        "when-a-message-is-recorded",
+        "when-context-is-assembled",
+        "when-context-is-reduced",
+        "when-a-job-reaches-a-terminal-state"
+      ]
+    },
+    "HandlerOwner": {
+      "$anchor": "HandlerOwner",
+      "title": "HandlerOwner",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "description": "The product module or the activated capability pack that registered this handler. Carries no priority member: a priority would be a way for a pack to place its code ahead of the product's own handlers, and dispatch order is instead declared (the product's registrations first, then packs in ascending pack-identifier order, each owner's in registration order).",
+      "properties": {
+        "kind": {
+          "enum": ["product", "pack"],
+          "description": "Whether the product itself or an activated capability pack registered this handler. An inactive pack registers nothing, as it contributes nothing else (INV-AG-45)."
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{1,62}$",
+          "description": "The product module identifier, or the pack identifier. For a pack this is also the key its dispatch position is ordered by, so the order is reproducible on a second device holding the same packs."
+        }
+      }
+    },
+    "ToolArguments": {
+      "$anchor": "ToolArguments",
+      "title": "ToolArguments",
+      "type": "object",
+      "description": "One tool call's arguments, in the tool's own declared parameter shape. This file cannot close that shape, because it belongs to the tool declaration in a connector or pack manifest; the wrapper validates transformed arguments against it and refuses the call with PRECALL_TRANSFORM_INVALID when they no longer fit."
+    },
+    "JobIdentifier": {
+      "$anchor": "JobIdentifier",
+      "title": "JobIdentifier",
+      "type": "string",
+      "minLength": 1,
+      "description": "The job this event belongs to. Every event carries one: there is no point that fires outside a job."
+    },
+    "CallIdentifier": {
+      "$anchor": "CallIdentifier",
+      "title": "CallIdentifier",
+      "type": "string",
+      "minLength": 1,
+      "description": "The wrapper's identifier for one tool call, which is also the ledger correlation identifier for that call's intent and result records (INV-AG-05)."
+    },
+    "ContextSectionKind": {
+      "$anchor": "ContextSectionKind",
+      "title": "ContextSectionKind",
+      "description": "What one section of an assembled context is. Six of these are protected from reduction and from any transformation at the when-context-is-assembled point: command, attachments-in-use, temporal-anchor, tool-set, open-question and most-recent-turn.",
+      "enum": [
+        "role-instructions",
+        "temporal-anchor",
+        "tool-set",
+        "rules-advisory",
+        "loaded-skill",
+        "command",
+        "attachments-in-use",
+        "transcript",
+        "most-recent-turn",
+        "open-question"
+      ]
+    },
+    "ContextSection": {
+      "$anchor": "ContextSection",
+      "title": "ContextSection",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ordinal", "protected", "tokenEstimate"],
+      "description": "One section of an assembled context, as the composer built it and as a handler must return it.",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ContextSectionKind",
+          "description": "Which declared source this section came from."
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The section's position in the assembled context. Assembly order is declared, so an ordinal is a fact about the context rather than a preference."
+        },
+        "protected": {
+          "type": "boolean",
+          "description": "True when this section belongs to the closed protected set that neither reduction nor a transformation may remove. A returned context missing a section the event marked protected is refused with CONTEXT_TRANSFORM_INVALID."
+        },
+        "tokenEstimate": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The composer's estimate of what this section costs against the job's context budget."
+        }
+      }
+    },
+    "Event.BeforeAToolCall": {
+      "$anchor": "Event.BeforeAToolCall",
+      "title": "BeforeAToolCallEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["point", "jobId", "callId", "roleId", "toolName", "origin", "arguments", "declarations", "budgetMs"],
+      "description": "Dispatched once per handler before a tool call is recorded, evaluated or executed. It sits outside the wrapper's four steps rather than between them: whatever the last handler returns is the value the redaction boundary projects, the ledger intent record records, the gate's call subject is built from, and the platform receives, so what was approved and what was recorded are the same thing that ran.",
+      "properties": {
+        "point": {
+          "const": "before-a-tool-call",
+          "description": "Which point this event belongs to, so a handler registered at several points can tell them apart."
+        },
+        "jobId": { "$ref": "#/$defs/JobIdentifier", "description": "The job whose agent issued the call." },
+        "callId": { "$ref": "#/$defs/CallIdentifier", "description": "The call about to be recorded, evaluated and possibly executed." },
+        "roleId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The role entry the issuing agent runs under, so a handler can distinguish a parent's call from a child's."
+        },
+        "toolName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The wrapped tool being called, as the session holds it."
+        },
+        "origin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "description": "Where the tool came from, as tool-wrapping@0.2.0 declares it. There is no value meaning 'trusted'.",
+          "properties": {
+            "kind": {
+              "enum": ["connector", "internal", "pack"],
+              "description": "Whether the tool was generated from a connector manifest, is an internal product tool, or was contributed by a capability pack. All three are produced by the same wrapping factory (INV-AG-44)."
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The connector or pack identifier. Absent for an internal tool."
+            }
+          }
+        },
+        "arguments": { "$ref": "#/$defs/ToolArguments", "description": "The call's arguments as the previous handler in the chain left them, or as the agent issued them for the first handler." },
+        "declarations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["writes", "isIrreversible", "changesPermission"],
+          "description": "What the tool's manifest declares about the call, read from the manifest and never from the call's own arguments. Present so a handler can act on the kind of call without re-deriving it.",
+          "properties": {
+            "writes": { "type": "boolean", "description": "Whether this tool changes state on a platform." },
+            "isIrreversible": { "type": "boolean", "description": "Whether the write declares itself irreversible under constitution principle IV." },
+            "changesPermission": { "type": "boolean", "description": "Whether the call alters who may do what on the platform." }
+          }
+        },
+        "budgetMs": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The budget this dispatch is bounded by, restated from the registration so a handler can pace itself. Exceeding it refuses the call (PRECALL_HANDLER_TIMEOUT)."
+        }
+      }
+    },
+    "Return.BeforeAToolCall": {
+      "$anchor": "Return.BeforeAToolCall",
+      "title": "BeforeAToolCallReturn",
+      "description": "What a handler at the before-a-tool-call point may return. Three members, and none of them causes the call to execute: 'unchanged' is the handler stating it has nothing to say, after which the wrapper proceeds to the ledger and the gate exactly as it would with no handler registered; 'arguments-transformed' replaces the value everything downstream is built from; 'blocked' refuses the call. There is no member meaning allow, proceed, approve, permit or authorise, and adding one would be a MAJOR revision (INV-AG-40). Only the gate decides that a call may run, and the gate is not reachable from here (INV-AG-41).",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outcome"],
+          "title": "Unchanged",
+          "description": "This handler has nothing to change. Not a verdict, not an authorisation: the ledger write and the gate still follow.",
+          "properties": {
+            "outcome": { "const": "unchanged", "description": "The sole member. It carries no payload, because there is nothing a handler that changed nothing needs to say." }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outcome", "arguments"],
+          "title": "ArgumentsTransformed",
+          "description": "Replaces the call's arguments. The replacement is what the redaction boundary projects, what the intent record records, what the gate evaluates and what the platform receives - one value, never re-derived from the original. It is validated against the tool's declared parameter shape first; a replacement that no longer fits refuses the call (PRECALL_TRANSFORM_INVALID).",
+          "properties": {
+            "outcome": { "const": "arguments-transformed", "description": "Discriminator: the handler is replacing the arguments." },
+            "arguments": { "$ref": "#/$defs/ToolArguments", "description": "The complete replacement arguments. Not a patch: a partial value would leave the record and the call disagreeing about what was omitted." },
+            "note": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "What the handler changed and why, recorded in the job's account of the run. Not shown to the model."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outcome", "reason"],
+          "title": "Blocked",
+          "description": "Refuses the call. Blocking ends the chain: later handlers are not consulted, because nothing they could return would undo a block. Nothing was recorded as intended and nothing executed, because this point sits before the intent record - which is not a gap in constitution principle III, since that principle binds the record to the act and there was no act. The block is recorded against the job's account.",
+          "properties": {
+            "outcome": { "const": "blocked", "description": "Discriminator: the handler is refusing the call. This is the only negative outcome; there is no positive counterpart." },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500,
+              "description": "Why the call was refused, in the words the agent is given and the user is shown. The refusal also names the handler."
+            },
+            "detail": {
+              "type": "string",
+              "maxLength": 2000,
+              "description": "Further explanation recorded in the job's account and not given to the model."
+            }
+          }
+        }
+      ]
+    },
+    "Event.AfterAToolResult": {
+      "$anchor": "Event.AfterAToolResult",
+      "title": "AfterAToolResultEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["point", "jobId", "callId", "toolName", "status", "value", "resultRecordId", "budgetMs"],
+      "description": "Dispatched once per handler after the call has executed, after the redaction boundary has projected its result and after the ledger result record has been written. Everything this point can touch is what the agent reads; nothing it can touch is what happened.",
+      "properties": {
+        "point": { "const": "after-a-tool-result", "description": "Which point this event belongs to." },
+        "jobId": { "$ref": "#/$defs/JobIdentifier", "description": "The job whose agent will receive the result." },
+        "callId": { "$ref": "#/$defs/CallIdentifier", "description": "The call that produced this result, the same identifier the before-a-tool-call event carried." },
+        "toolName": { "type": "string", "minLength": 1, "description": "The wrapped tool that was called." },
+        "status": {
+          "enum": ["ok", "failed"],
+          "description": "Whether the call succeeded. Readable here and absent from the return, so a handler can act on a failure and can never turn one into a success."
+        },
+        "value": {
+          "description": "The result as the redaction boundary projected it, and as the previous handler in the chain left it. Any JSON value, because a tool's result shape is the tool's own."
+        },
+        "resultRecordId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The ledger result record already written for this call. It is written before this point, so nothing a handler does here can alter the history of the call."
+        },
+        "budgetMs": { "type": "integer", "minimum": 1, "description": "The budget this dispatch is bounded by. Exceeding it drops this handler and leaves the result unchanged by it; the run continues." }
+      }
+    },
+    "Return.AfterAToolResult": {
+      "$anchor": "Return.AfterAToolResult",
+      "title": "AfterAToolResultReturn",
+      "description": "What a handler at the after-a-tool-result point may return. Two members, neither of which can re-run the call or change what happened: there is no tool name and no arguments to ask the call for again, and no status member, so success and failure are untouchable. There is no member meaning allow: the call has already been decided and already run (INV-AG-40).",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outcome"],
+          "title": "Unchanged",
+          "description": "This handler leaves the result as it found it.",
+          "properties": {
+            "outcome": { "const": "unchanged", "description": "The sole member." }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outcome", "value"],
+          "title": "ResultTransformed",
+          "description": "Replaces what the agent reads of the result. The ledger record is untouched, because it was written before this point.",
+          "properties": {
+            "outcome": { "const": "result-transformed", "description": "Discriminator: the handler is replacing the value the agent sees." },
+            "value": { "description": "The replacement value the agent will read. Any JSON value." },
+            "note": { "type": "string", "maxLength": 500, "description": "What the handler changed and why, recorded in the job's account. Not shown to the model." }
+          }
+        }
+      ]
+    },
+    "Event.MessageRecorded": {
+      "$anchor": "Event.MessageRecorded",
+      "title": "MessageRecordedEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["point", "jobId", "messageOrdinal", "author", "content", "recordedAt"],
+      "description": "Dispatched when one message is appended to a job's transcript. Observation only: the transcript is append-only, so there is nothing here a handler could be permitted to change without contradicting constitution principle III.",
+      "properties": {
+        "point": { "const": "when-a-message-is-recorded", "description": "Which point this event belongs to." },
+        "jobId": { "$ref": "#/$defs/JobIdentifier", "description": "The job whose transcript grew." },
+        "messageOrdinal": { "type": "integer", "minimum": 0, "description": "The message's position in that job's transcript." },
+        "author": {
+          "enum": ["user", "agent", "tool", "system"],
+          "description": "Who the message is from. A tool message is a result the agent read; a system message is the product speaking."
+        },
+        "content": {
+          "type": "string",
+          "description": "The message as recorded - already past the redaction boundary, so this is the stored form and never the unredacted one (INV-AG-42)."
+        },
+        "recordedAt": { "type": "string", "minLength": 1, "description": "When the message was appended." }
+      }
+    },
+    "Event.ContextAssembled": {
+      "$anchor": "Event.ContextAssembled",
+      "title": "ContextAssembledEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["point", "jobId", "requestOrdinal", "budget", "sections", "budgetMs"],
+      "description": "Dispatched after the composer has assembled one model request's context from its declared sources in their declared order, and before the request is sent. Assembly itself consults no model and is a pure function of its inputs (INV-AG-36); a handler here may reshape the result and may never drop a protected section.",
+      "properties": {
+        "point": { "const": "when-context-is-assembled", "description": "Which point this event belongs to." },
+        "jobId": { "$ref": "#/$defs/JobIdentifier", "description": "The job this context was assembled for." },
+        "requestOrdinal": { "type": "integer", "minimum": 0, "description": "Which request of that job this context serves." },
+        "budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ceiling", "reserve", "isFallback"],
+          "description": "The context budget this assembly was built against, derived from the declared window of the model the job's tier resolves to.",
+          "properties": {
+            "ceiling": { "type": "integer", "minimum": 1, "description": "The job's derived ceiling." },
+            "reserve": { "type": "integer", "minimum": 0, "description": "The headroom held back for the next turn; crossing it begins the reduction ladder." },
+            "isFallback": { "type": "boolean", "description": "True when the assigned model declares no context window and the declared fallback budget was used instead of a derived figure." }
+          }
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "description": "The assembled context's sections in order, each flagged with whether it is protected. A handler compares its own return against these flags.",
+          "items": { "$ref": "#/$defs/ContextSection" }
+        },
+        "budgetMs": { "type": "integer", "minimum": 1, "description": "The budget this dispatch is bounded by. Exceeding it drops this handler and the untransformed context is used; the run continues." }
+      }
+    },
+    "Return.ContextAssembled": {
+      "$anchor": "Return.ContextAssembled",
+      "title": "ContextAssembledReturn",
+      "description": "What a handler at the when-context-is-assembled point may return. Two members. This is the one transforming point that is not on the tool path, so it can reach no call, no verdict and no record - and it carries no member meaning allow, like every other point (INV-AG-40). A transformed context must still contain every protected section: the four that exist in every context are required below, and the two that exist only sometimes - attachments in use and an open question - are compared by the composer against the event's own protected flags, which a schema cannot do. A transformation that drops either is refused with CONTEXT_TRANSFORM_INVALID, discarded, and recorded; the untransformed context is used.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outcome"],
+          "title": "Unchanged",
+          "description": "This handler leaves the assembled context as the composer built it.",
+          "properties": {
+            "outcome": { "const": "unchanged", "description": "The sole member." }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outcome", "sections"],
+          "title": "ContextTransformed",
+          "description": "Replaces the assembled context's sections. The replacement is complete rather than a patch, so what the model receives is exactly what the job's account records.",
+          "properties": {
+            "outcome": { "const": "context-transformed", "description": "Discriminator: the handler is replacing the section list." },
+            "sections": {
+              "type": "array",
+              "minItems": 1,
+              "description": "The replacement sections in order. Must contain the four unconditionally protected kinds; the conditional two are checked by the composer.",
+              "items": { "$ref": "#/$defs/ContextSection" },
+              "allOf": [
+                {
+                  "description": "The job's command survives every transformation: a context without the command is a run without its instruction.",
+                  "contains": { "type": "object", "required": ["kind"], "properties": { "kind": { "const": "command" } } }
+                },
+                {
+                  "description": "The temporal anchor survives: removing it is what produces date drift, VERIFIED (spikes/SP-4-agent-loop/REPORT.md §1 Q1, case S-16).",
+                  "contains": { "type": "object", "required": ["kind"], "properties": { "kind": { "const": "temporal-anchor" } } }
+                },
+                {
+                  "description": "The tool set survives: an agent that cannot see what it holds re-plans around tools it has.",
+                  "contains": { "type": "object", "required": ["kind"], "properties": { "kind": { "const": "tool-set" } } }
+                },
+                {
+                  "description": "The most recent turn survives: removing it makes the next request answer a question nobody just asked.",
+                  "contains": { "type": "object", "required": ["kind"], "properties": { "kind": { "const": "most-recent-turn" } } }
+                }
+              ]
+            },
+            "note": { "type": "string", "maxLength": 500, "description": "What the handler changed and why, recorded against the job. Not part of the context." }
+          }
+        }
+      ]
+    },
+    "Event.ContextReduced": {
+      "$anchor": "Event.ContextReduced",
+      "title": "ContextReducedEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["point", "jobId", "requestOrdinal", "stepOrdinal", "step", "removed", "replacedWith"],
+      "description": "Dispatched once for each step of the reduction ladder that runs. Observation only: the ladder is four steps in one closed order, and a handler that could alter what a step removed would be a step nobody declared. Reduction acts only on what is sent to a model; the ledger and the stored transcript are untouched (INV-AG-38).",
+      "properties": {
+        "point": { "const": "when-context-is-reduced", "description": "Which point this event belongs to." },
+        "jobId": { "$ref": "#/$defs/JobIdentifier", "description": "The job whose context was reduced." },
+        "requestOrdinal": { "type": "integer", "minimum": 0, "description": "Which request of that job the reduction was preparing." },
+        "stepOrdinal": { "type": "integer", "minimum": 1, "maximum": 4, "description": "The ladder position of the step that ran, from 1 to 4. The order is closed and a pack cannot insert a step." },
+        "step": {
+          "enum": ["drop-superseded-reads", "drop-empty-results", "replace-bulky-results", "summarise-older-transcript"],
+          "description": "Which declared step ran. The first three lose nothing - what they remove is superseded, empty, or still readable in the ledger - and only the fourth summarises, and only the older part."
+        },
+        "removed": {
+          "type": "array",
+          "description": "What this step took out of the context. Empty is meaningful: a step that found nothing to remove still ran.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "ordinal", "tokenEstimate"],
+            "description": "One removed section.",
+            "properties": {
+              "kind": { "$ref": "#/$defs/ContextSectionKind", "description": "What kind of section was removed. Never one of the protected kinds." },
+              "ordinal": { "type": "integer", "minimum": 0, "description": "Its position in the context before the step ran." },
+              "tokenEstimate": { "type": "integer", "minimum": 0, "description": "What its removal recovered against the budget." }
+            }
+          }
+        },
+        "replacedWith": {
+          "type": "array",
+          "description": "What stands where the removed material was: a ledger reference, a summary, or nothing at all.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "tokenEstimate"],
+            "description": "One replacement section.",
+            "properties": {
+              "kind": { "$ref": "#/$defs/ContextSectionKind", "description": "What kind of section was put in place of the removed material." },
+              "ledgerRecordId": { "type": "string", "minLength": 1, "description": "The ledger record holding what was removed, present when a bulky result was replaced by a reference so a later investigation can still read what the agent saw." },
+              "tokenEstimate": { "type": "integer", "minimum": 0, "description": "What the replacement costs against the budget." }
+            }
+          }
+        }
+      }
+    },
+    "Event.JobTerminal": {
+      "$anchor": "Event.JobTerminal",
+      "title": "JobTerminalEvent",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["point", "jobId", "roleId", "terminalState", "completedOperations", "reachedAt"],
+      "description": "Dispatched when a job reaches a terminal state, after the job manager has recorded the transition. Observation only: the transition belongs to the job manager, and a handler that could alter it would be a component holding a control loop over jobs, which constitution principle I forbids.",
+      "properties": {
+        "point": { "const": "when-a-job-reaches-a-terminal-state", "description": "Which point this event belongs to." },
+        "jobId": { "$ref": "#/$defs/JobIdentifier", "description": "The job that concluded." },
+        "parentJobId": {
+          "$ref": "#/$defs/JobIdentifier",
+          "description": "The parent that created this job, present only for a child job. A job record without a parent reads as top-level, which is also the migration posture for every job written before this change."
+        },
+        "roleId": { "type": "string", "minLength": 1, "description": "The role entry the job ran under, which is what its usage and its ledger records are attributed to." },
+        "terminalState": {
+          "enum": ["succeeded", "failed", "cancelled", "refused"],
+          "description": "How the job concluded, as the job manager recorded it."
+        },
+        "completedOperations": { "type": "integer", "minimum": 0, "description": "How many operations the job completed before concluding - the list a failed job still offers to undo." },
+        "reason": { "type": "string", "maxLength": 2000, "description": "Why the job concluded as it did, when the state carries a reason: the budget it could not meet, the refusal it received, the cancellation it honoured." },
+        "reachedAt": { "type": "string", "minLength": 1, "description": "When the terminal state was recorded." }
+      }
+    },
+    "Return.Observation": {
+      "$anchor": "Return.Observation",
+      "title": "Observation",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome"],
+      "description": "The only return the four observation points accept: when a message is recorded, when context is reduced, when a job reaches a terminal state, and any future dispatch that observes. One member, carrying nothing. A handler at these points can change nothing at all, which is why there is no transformation member here and no member meaning allow (INV-AG-40). A handler that throws or exceeds its budget at these points is dropped and recorded, and the run continues.",
+      "properties": {
+        "outcome": { "const": "observed", "description": "The sole member. It exists so that a handler that completed and a handler that was dropped are distinguishable in the job's account." }
+      }
+    }
+  }
+}

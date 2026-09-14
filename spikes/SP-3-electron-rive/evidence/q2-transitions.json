@@ -1,0 +1,37 @@
+﻿[
+    {
+        "State":  "idle",
+        "LatencyMs":  13,
+        "PassLatency":  true,
+        "Screenshot":  "evidence/q2-state-idle.png",
+        "RgbaScreenshot":  "evidence/q2-state-idle-rgba.png"
+    },
+    {
+        "State":  "receiving_order",
+        "LatencyMs":  15.1,
+        "PassLatency":  true,
+        "Screenshot":  "evidence/q2-state-receiving_order.png",
+        "RgbaScreenshot":  "evidence/q2-state-receiving_order-rgba.png"
+    },
+    {
+        "State":  "working",
+        "LatencyMs":  2.9,
+        "PassLatency":  true,
+        "Screenshot":  "evidence/q2-state-working.png",
+        "RgbaScreenshot":  "evidence/q2-state-working-rgba.png"
+    },
+    {
+        "State":  "waiting_approval",
+        "LatencyMs":  5,
+        "PassLatency":  true,
+        "Screenshot":  "evidence/q2-state-waiting_approval.png",
+        "RgbaScreenshot":  "evidence/q2-state-waiting_approval-rgba.png"
+    },
+    {
+        "State":  "has_result",
+        "LatencyMs":  8.2,
+        "PassLatency":  true,
+        "Screenshot":  "evidence/q2-state-has_result.png",
+        "RgbaScreenshot":  "evidence/q2-state-has_result-rgba.png"
+    }
+]

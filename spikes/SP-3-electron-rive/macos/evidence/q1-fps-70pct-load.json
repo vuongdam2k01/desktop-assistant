@@ -1,0 +1,103 @@
+{
+  "test": "High CPU Stress Load (~70-80% CPU target across 8 M1 cores)",
+  "durationSec": 10,
+  "averageFps": 60,
+  "minFps": 60,
+  "maxFps": 61,
+  "p95Fps": 61,
+  "sampleCount": 10,
+  "history": [
+    61,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60
+  ],
+  "samples": [
+    {
+      "second": 1,
+      "currentFps": 61,
+      "avgFps": 61,
+      "minFps": 61,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "624.4"
+    },
+    {
+      "second": 2,
+      "currentFps": 60,
+      "avgFps": 61,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "629.6"
+    },
+    {
+      "second": 3,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "583.9"
+    },
+    {
+      "second": 4,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "645.3"
+    },
+    {
+      "second": 5,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "753"
+    },
+    {
+      "second": 6,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "760.3"
+    },
+    {
+      "second": 7,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "714.4"
+    },
+    {
+      "second": 8,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "688.5"
+    },
+    {
+      "second": 9,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "703.8"
+    },
+    {
+      "second": 10,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61,
+      "totalCpuUsagePercent": "201.5"
+    }
+  ]
+}

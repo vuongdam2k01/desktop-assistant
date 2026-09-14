@@ -1,0 +1,27 @@
+================================================================================
+SPIKE SP-19 / Q8: Manifest hỗ trợ Scope Profile theo kênh phát hành (FR-CF-04)
+Mục tiêu: Đổi kênh phát hành (BYO vs Central) chỉ bằng chọn profile, không sửa manifest hay lõi
+================================================================================
+
+[1] Kênh 1: BYO OAuth Client (Người dùng tự cấp credentials từ GCP cá nhân):
+  - Active Profile: "byo"
+  - Requested capabilities: [email_read]
+  - Resolved OAuth Scopes: [https://www.googleapis.com/auth/gmail.readonly]
+  ✅ Kênh BYO nhận scope 'gmail.readonly' (đọc toàn bộ message/body không vướng CASA).
+
+[2] Kênh 2: Central Mass Distribution (Ứng dụng tập trung phát hành đại trà):
+  - Active Profile: "central_mass_distribution"
+  - Requested capabilities: [email_read]
+  - Resolved OAuth Scopes: [https://www.googleapis.com/auth/gmail.metadata]
+  ✅ Kênh Đại Trà nhận scope hẹp 'gmail.metadata' (chỉ đọc metadata, tránh kiểm duyệt CASA AL2).
+
+[3] Kiểm tra tính nguyên vẹn của Manifest & Adapter:
+  - Manifest ID: gmail (giữ nguyên không đổi)
+  - Tool definitions count: 2 (giữ nguyên không đổi)
+  - Adapter interface: không cần sửa đổi khi chuyển kênh phát hành.
+
+================================================================================
+KẾT LUẬN Q8: ĐẠT 100%
+Manifest schema hỗ trợ hoàn hảo cấu hình `scope_profiles` theo kênh phát hành (FR-CF-04).
+Chuyển kênh phát hành hoàn toàn là việc chọn key trong profile, không làm đổi lõi manifest.
+================================================================================

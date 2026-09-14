@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/platform/privacy-filter/1.0.0.json",
+  "title": "ScreenContextEvent",
+  "description": "Shape of everything the native screen-context filter is permitted to hand to the application runtime, for platform/contracts/privacy-filter@1.0.0. The file is written closed on purpose: no member carries text a person wrote or a document is called, and no member may be added that does, so a payload carrying a window title is not a policy violation to be detected later but a document this file refuses. What the file cannot express is where the title went — that the raw string is read, matched against the category patterns and cleared inside native memory, never crossing into the runtime at all, is a property of the native module and is judged by inspecting what leaves it (spikes/SP-18-pet-liveness/REPORT.md#1-tra-loi-tung-cau-hoi Q15).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["timestamp", "displayId", "foregroundWindow"],
+  "properties": {
+    "timestamp": {
+      "type": "integer",
+      "description": "When the observation was made. The event is a snapshot overwritten on the next tick, never a record: nothing here is written to the local store, to the ledger, or to a model provider."
+    },
+    "displayId": {
+      "type": "integer",
+      "description": "Which display the foreground window is on, so the pet can reason about the seam between displays of different scaling."
+    },
+    "foregroundWindow": { "$ref": "#/$defs/sanitizedWindowContext" },
+    "caret": {
+      "$ref": "#/$defs/caretCoordinate",
+      "description": "Absent whenever the foreground application exposes no caret, which is the ordinary case for many applications. Absence is not an error: the pet holds its stationary safety margin instead of approaching."
+    }
+  },
+  "$defs": {
+    "sanitizedWindowContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processName", "category", "bounds", "isFullscreen"],
+      "description": "What remains of a window after the filter. A process name, a category and a rectangle — nothing a person typed, named or opened.",
+      "properties": {
+        "processName": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._-]+$",
+          "description": "The executable's own file name, such as notepad.exe. It identifies a program, never a document: a path is refused, because a path carries folder and file names the user chose."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["EDITOR", "BROWSER", "TERMINAL", "DOCUMENT", "COMMUNICATION", "MEDIA", "SYSTEM", "OTHER"],
+          "description": "The classification the native filter assigned by matching the raw title against fixed patterns before discarding it. An unrecognised program is OTHER, which is why the set is closed and needs no free-text fallback."
+        },
+        "bounds": { "$ref": "#/$defs/rectangle" },
+        "isFullscreen": {
+          "type": "boolean",
+          "description": "Whether the window occupies the display. The pet reads it to stay clear rather than to describe what the user is doing."
+        }
+      }
+    },
+    "rectangle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "integer" },
+        "y": { "type": "integer" },
+        "width": { "type": "integer", "minimum": 0 },
+        "height": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "caretCoordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "description": "Where the text cursor is, so the pet can leave that area alone. Geometry only: what is being typed is never read, and the caret rectangle carries no content.",
+      "properties": {
+        "x": { "type": "integer" },
+        "y": { "type": "integer" },
+        "width": { "type": "integer", "minimum": 0 },
+        "height": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

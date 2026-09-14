@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "row": {
+    "id": 1,
+    "correlation_id": "corr_packaged_001",
+    "payload": "{\"action\":\"packaged_native_check\",\"timestamp\":\"2026-09-12T02:05:51.326Z\"}"
+  },
+  "dbPath": "C:\\Users\\vuong\\AppData\\Roaming\\sp12-packaging-test\\packaged-test.db",
+  "electronVersion": "44.3.0",
+  "nodeVersion": "24.20.0",
+  "modulesVersion": "149",
+  "arch": "x64",
+  "platform": "win32",
+  "isAsar": true
+}

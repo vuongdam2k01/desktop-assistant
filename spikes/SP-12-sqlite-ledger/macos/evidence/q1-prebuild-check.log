@@ -1,0 +1,25 @@
+=== Q1: PREBUILD & ABI COMPATIBILITY VERIFICATION (macOS) ===
+OS platform: darwin
+Architecture: arm64
+Node version: v26.8.2
+
+Prebuilds in better-sqlite3:
+  - darwin-arm64.node (1.89 MB)
+  - darwin-x64.node (1.89 MB)
+  - linux-arm64.node (1.97 MB)
+  - linux-x64.node (2.12 MB)
+  - linuxmusl-arm64.node (2.21 MB)
+  - linuxmusl-x64.node (2.32 MB)
+  - win32-arm64.node (1.81 MB)
+  - win32-x64.node (1.90 MB)
+
+Does darwin-arm64.node exist? YES
+
+Testing require and query in Node.js host:
+Node Host Query Result: {"answer":42,"sqlite_ver":"3.53.4"}
+
+Testing require and query in Electron runtime:
+ELECTRON_RESULT: {"answer":42,"sqlite_ver":"3.53.4"}
+ELECTRON_VERSIONS: {"electron":"44.3.0","modules":"149","node":"24.20.0","arch":"arm64"}
+
+=== Q1 VERIFICATION COMPLETE: PASS ===

@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConnectorManifest",
+  "description": "Standard manifest schema for desktop assistant connectors (PRD §10.10, FR-CF-01, FR-CF-04, FR-CF-07, FR-AP-05)",
+  "type": "object",
+  "required": ["schema_version", "id", "name", "version", "icon", "auth", "tools"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["v0", "1.0.0"]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "auth": {
+      "type": "object",
+      "required": ["type", "endpoints", "capabilities"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["oauth2", "bearer_token", "api_key"]
+        },
+        "endpoints": {
+          "type": "object",
+          "properties": {
+            "authorize_url": { "type": "string", "format": "uri" },
+            "token_url": { "type": "string", "format": "uri" },
+            "revoke_url": { "type": "string", "format": "uri" },
+            "api_base_url": { "type": "string", "format": "uri" }
+          }
+        },
+        "pkce": { "type": "boolean" },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["name", "description"],
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "default_scopes": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "scope_profiles": {
+          "type": "object",
+          "description": "FR-CF-04: Channel release scope profiles (e.g. BYO vs Central)",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "label", "description", "category", "parameters"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "label": { "type": "string" },
+          "description": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["read", "write"]
+          },
+          "required_capability": { "type": "string" },
+          "parameters": {
+            "type": "object",
+            "required": ["type", "properties"],
+            "properties": {
+              "type": { "type": "string", "enum": ["object"] },
+              "properties": { "type": "object" },
+              "required": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "additionalProperties": { "type": "boolean" }
+            }
+          },
+          "snapshot": {
+            "type": "object",
+            "required": ["enabled"],
+            "properties": {
+              "enabled": { "type": "boolean" },
+              "target_id_param": { "type": "string" },
+              "operation": { "type": "string" },
+              "sanitization": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Read-only property keys stripped before compensation rollback (FR-NT-04, SP-1)"
+              }
+            }
+          },
+          "compensation": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": { "type": "string", "enum": ["static_formula", "none"] },
+              "formula_type": {
+                "type": "string",
+                "enum": ["restore_properties", "archive_page", "unarchive_page", "custom"]
+              },
+              "target_operation": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          },
+          "irreversible": {
+            "type": "boolean",
+            "description": "FR-CF-01, FR-AP-05: True if operation cannot be undone. Triggers approval gate automatically."
+          },
+          "changes_permission": {
+            "type": "boolean",
+            "description": "True if operation modifies permissions / access control."
+          }
+        }
+      }
+    }
+  }
+}

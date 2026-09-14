@@ -1,0 +1,44 @@
+[RUNNER] Launching worker with CRASH_POINT=2...
+
+--- Worker Output (pre-crash) ---
+[WORKER 108008] Started with CrashPoint=2, JobId=job_crash_pt2
+
+▶ [ENGINE] Starting Job job_crash_pt2 (Mode: smart, CrashPoint: 2)...
+✔ [ENGINE] Job job_crash_pt2 created with status 'pending'
+⏳ [ENGINE] Approval required for Notion update.
+✔ [ENGINE] Job job_crash_pt2 transitioned to 'waiting_approval'. Approval card posted.
+👤 [USER ACTION] User approves tool execution for Job job_crash_pt2.
+✔ [ENGINE] Approval recorded. Job job_crash_pt2 set to 'running'.
+💥 [CRASH INJECTOR] TRIGGERING SIGKILL at Point 2: After approval recorded, BEFORE tool_intent is written
+💥 Process PID 108008 terminating immediately...
+
+--- Crash Exit Status ---
+Exit Code: null
+Signal: SIGKILL
+
+--- SQLite WAL Integrity Check ---
+PRAGMA integrity_check: [{"integrity_check":"ok"}]
+
+--- Running Recovery Protocol ---
+
+======================================================
+🔄 [RECOVERY MANAGER] Starting crash recovery protocol...
+======================================================
+📋 Found 1 active/unfinalized job(s) in SQLite database.
+
+🔍 Inspecting Job job_crash_pt2 (Status: running)...
+   Last Ledger Record: [seq=1, type=approval]
+   ℹ️ Job was approved before crash. Resetting to 'waiting_approval' or re-triggering intent.
+
+======================================================
+🗂️ RECONSTRUCTED CARD QUEUE (Priority Order per PRD A.4):
+   [1] Type: APPROVAL | Job: job_crash_pt2 | Title: Yêu cầu phê duyệt lại sau crash
+======================================================
+
+
+--- Post-Recovery Verification ---
+Job ID: job_crash_pt2
+Job Status: waiting_approval
+Ledger Records Count: 1
+  - seq=1 | type=approval | tool=notion_update_page
+✔ Point 2 PASSED: Approved state preserved, prompt restored.

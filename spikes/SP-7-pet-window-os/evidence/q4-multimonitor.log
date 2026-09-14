@@ -1,0 +1,9 @@
+﻿SP-7 Q4 Multi-Monitor & DPI Verification Log - 2026-09-11 22:33:04
+Total Displays Detected: 2
+Primary Display ID: 3737660811, Bounds: 1280x720 at (0, 0), ScaleFactor: 1.5
+  Display [0] ID=3737660811: Bounds=(0, 0, 1280x720), WorkArea=(0, 0, 1280x672), ScaleFactor=1.5
+  Display [1] ID=2884746797: Bounds=(1280, 0, 1920x1080), WorkArea=(1280, 0, 1920x1032), ScaleFactor=1
+Placement on Secondary Display: True
+Case A (Coordinates on active display): RestoredTo=SavedLocation, Pos=(100, 100) => PASS
+Case B (Coordinates on disconnected display E2): RestoredTo=PrimaryWorkAreaFallback, Pos=(1120, 512) => PASS
+Screenshot: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-7-pet-window-os\evidence\q4-multimonitor.png

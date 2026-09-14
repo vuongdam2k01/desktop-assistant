@@ -1,0 +1,17 @@
+{
+  "descriptorVersion": "0.1.0",
+  "storeId": "skill-catalogue",
+  "version": "1.0.0",
+  "name": "Skill catalogue state",
+  "encryptionClass": "mutable",
+  "resolutionRule": "last-writer-wins-with-preservation",
+  "orderingBasis": "device-sequence-causal",
+  "retention": {
+    "minimumDays": 1,
+    "userConfigurable": false,
+    "deletionRequiresConfirmation": false
+  },
+  "membership": "One record per skill identifier the account has an opinion about: whether the user enabled it, when that was decided, and the precedence resolution the account carries for that identifier — the origin that wins and the origin that is shadowed. The skill packages themselves are excluded, and deliberately: a package arrives with the product or with a capability pack, it is content of the installed assembly rather than a record of the account, and replicating it would make the account a distribution channel for text it never authored. A device therefore reconciles this record against what it actually discovered: an identifier the record enables and this device does not hold is inert until the assembly that carries it arrives, and an identifier this device discovered with no record reads as enabled, because a skill the user has never ruled on is available like every other skill the product ships.",
+  "supersededTarget": "skill-catalogue",
+  "eraseOnSignout": true
+}

@@ -1,0 +1,38 @@
+﻿=== SP-0 Q6: UAC & PRIVILEGE ELEVATION SURVEY (WINDOWS) ===
+Date: 2026-09-11 21:05:50 +07:00
+
+--- 1. Current Session & Process Token Status ---
+Current User: BEO-LAP\vuong
+User SID: S-1-5-21-1178315341-3605247408-1704538237-1001
+Is Elevated (Administrator): False
+Token Elevation Type: TokenElevationTypeLimited (Process is filtered standard token; Administrator elevation is available via UAC)
+
+--- 2. Windows UAC System Policies (Registry) ---
+EnableLUA (UAC Enabled): 1 (Enabled)
+ConsentPromptBehaviorAdmin: 5 (0=Elevate without prompting, 5=Prompt for consent on secure desktop)
+ConsentPromptBehaviorUser: 3 (0=Automatically deny, 1=Prompt for credentials on secure desktop, 3=Prompt for credentials)
+PromptOnSecureDesktop: 1 (Enabled - dims desktop and blocks SendInput/screenshots)
+
+--- 3. Audit of Operations: Requiring UAC vs Non-UAC ---
+
+[OPERATIONS REQUIRING ELEVATION (ADMINISTRATOR)]:
+  1. Installing Visual Studio Build Tools / MSVC C++ compiler (for SP-12/Q1 better-sqlite3 rebuild).
+  2. Machine-wide software installation (winget system installs, msi packages affecting %ProgramFiles%).
+  3. Code signing root certificate installation into LocalMachine root store (SP-16).
+  4. Firewall rule creation (netsh advfirewall) if external incoming port binding is required.
+  5. Low-level keyboard hook injection into elevated processes (UIPI blocks SendInput to elevated windows).
+
+[OPERATIONS NOT REQUIRING ELEVATION (STANDARD USER)]:
+  1. All GUI automation within user session: launch GUI apps (Notepad, Electron), capture screenshot, SendInput, mouse move/click (SP-0, SP-3, SP-7).
+  2. Transparent, frameless, always-on-top window rendering (SP-7).
+  3. Local loopback HTTP server (http://localhost:port) for Google BYO OAuth redirect (SP-13).
+  4. Windows Credential Manager storage and DPAPI (Data Protection API) for secure token storage (SP-11).
+  5. Local SQLite file operations and in-memory ledger (SP-12).
+  6. User-scope software installations (winget install ... --scope user).
+  7. Python user install or portable/embeddable Python zip.
+
+[CRITICAL CONCLUSION & STRATEGY FOR AGENT AUTOMATION]:
+  - The Agent CANNOT click the Windows UAC consent prompt because UAC runs on the 'Consent.exe' isolated Secure Desktop (WinSta0\\Winlogon or isolated secure desktop), which explicitly isolates SendInput and screen capture for security.
+  - Therefore, for spikes that require machine-wide installations (SP-12/Q1 Build Tools, SP-16 root cert):
+    THE USER MUST LAUNCH THE CLAUDE CODE / AGENT TERMINAL IN 'RUN AS ADMINISTRATOR' MODE PRIOR TO RUNNING THOSE SPIKES.
+  - For normal day-to-day spikes (SP-0, SP-3, SP-7, SP-11, SP-13), standard user privileges are 100% sufficient.

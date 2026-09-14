@@ -1,0 +1,204 @@
+﻿=== Q1c: @electron/rebuild EXECUTION LOG ===
+Target Electron Version: 44.3.0
+Module: better-sqlite3
+Time Elapsed: 28.5660302 seconds (00:00:28.5660302)
+Output:
+node.exe : Searching dependency tree
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Searching dependency tree:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Building modules: better-sqlite3
+(node:7596) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security 
+vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+  copy_builtin_sqlite3
+  sqlite3.c
+  win_delay_load_hook.cc
+  sqlite3.vcxproj -> C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules
+\better-sqlite3\build\Release\\sqlite3.lib
+  better_sqlite3.cpp
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\util\macros.lzz(173,28): error C2668: 'v8::Template::SetNativeDataProperty': ambiguous call to overloaded 
+function [C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sql
+ite3\build\better_sqlite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-template.h(119,8):
+      could be 'void v8::Template::SetNativeDataProperty(v8::Local<v8::Name>,v8::AccessorNameGetterCallback,std::nullpt
+r_t,v8::Local<v8::Value>,v8::PropertyAttribute,v8::SideEffectType,v8::SideEffectType)'
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-template.h(111,8):
+      or       'void v8::Template::SetNativeDataProperty(v8::Local<v8::Name>,v8::AccessorNameGetterCallback,v8::Accesso
+rNameSetterCallback,v8::Local<v8::Value>,v8::PropertyAttribute,v8::SideEffectType,v8::SideEffectType)'
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-template.h(104,8):
+      or       'void v8::Template::SetNativeDataProperty(v8::Local<v8::Name>,v8::AccessorNameGetterCallback,v8::Accesso
+rNameSetterCallbackV2,v8::Local<v8::Value>,v8::PropertyAttribute,v8::SideEffectType,v8::SideEffectType)'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\util\macros.lzz(173,28):
+      while trying to match the argument list '(v8::Local<v8::String>, v8::AccessorNameGetterCallback, int, 
+v8::Local<v8::External>)'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\better_sqlite3.lzz(68,34): error C2039: 'GetIsolate': is not a member of 'v8::Context' [C:\Users\<user>\OneDrive\De
+sktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sqlite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-context.h(48,17):
+      see declaration of 'v8::Context'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\better_sqlite3.lzz(73,47): error C2660: 'v8::External::New': function does not take 2 arguments [C:\Users\<user>\On
+eDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sqlite3.v
+cxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(52,26):
+      see declaration of 'v8::External::New'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\better_sqlite3.lzz(73,47):
+      while trying to match the argument list '(v8::Isolate *, Addon *)'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\database.lzz(160,106): error C2660: 'v8::External::Value': function does not take 0 arguments [C:\Users\vu
+ong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sql
+ite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\objects\database.lzz(160,106):
+      while trying to match the argument list '()'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\database.lzz(208,106): error C2660: 'v8::External::Value': function does not take 0 arguments [C:\Users\vu
+ong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sql
+ite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\objects\database.lzz(208,106):
+      while trying to match the argument list '()'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\database.lzz(266,106): error C2660: 'v8::External::Value': function does not take 0 arguments [C:\Users\vu
+ong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sql
+ite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\objects\database.lzz(266,106):
+      while trying to match the argument list '()'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\database.lzz(416,89): error C2039: 'This': is not a member of 'v8::PropertyCallbackInfo<v8::Value>' [C:\Us
+ers\vuong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\bett
+er_sqlite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-function-callback.h(224,7):
+      see declaration of 'v8::PropertyCallbackInfo<v8::Value>'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\database.lzz(420,77): error C2039: 'This': is not a member of 'v8::PropertyCallbackInfo<v8::Value>' [C:\Us
+ers\vuong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\bett
+er_sqlite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-function-callback.h(224,7):
+      see declaration of 'v8::PropertyCallbackInfo<v8::Value>'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\statement.lzz(86,106): error C2660: 'v8::External::Value': function does not take 0 arguments [C:\Users\vu
+ong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sql
+ite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\objects\statement.lzz(86,106):
+      while trying to match the argument list '()'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\statement.lzz(216,106): error C2660: 'v8::External::Value': function does not take 0 arguments [C:\Users\v
+uong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sq
+lite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\objects\statement.lzz(216,106):
+      while trying to match the argument list '()'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\statement.lzz(322,81): error C2039: 'This': is not a member of 'v8::PropertyCallbackInfo<v8::Value>' [C:\U
+sers\vuong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\bet
+ter_sqlite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-function-callback.h(224,7):
+      see declaration of 'v8::PropertyCallbackInfo<v8::Value>'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\statement-iterator.lzz(39,106): error C2660: 'v8::External::Value': function does not take 0 arguments [C:
+\Users\vuong\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\b
+etter_sqlite3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\objects\statement-iterator.lzz(39,106):
+      while trying to match the argument list '()'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\objects\backup.lzz(56,106): error C2660: 'v8::External::Value': function does not take 0 arguments [C:\Users\<user>
+\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sqlite
+3.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\objects\backup.lzz(56,106):
+      while trying to match the argument list '()'
+  
+C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build
+\src\better_sqlite3.lzz(37,90): error C2660: 'v8::External::Value': function does not take 0 arguments [C:\Users\<user>\
+OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\better_sqlite3
+.vcxproj]
+  (compiling source file '../src/better_sqlite3.cpp')
+      C:\Users\<user>\.electron-gyp\44.3.0\include\node\v8-external.h(69,9):
+      see declaration of 'v8::External::Value'
+      C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3
+\build\src\better_sqlite3.lzz(37,90):
+      while trying to match the argument list '()'
+  
+  test_extension.c
+  win_delay_load_hook.cc
+     Creating library C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_module
+s\better-sqlite3\build\Release\test_extension.lib and object C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant
+\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3\build\Release\test_extension.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 3 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  test_extension.vcxproj -> C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_
+modules\better-sqlite3\build\Release\\test_extension.node
+Error: `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe` failed with 
+exit code: 1
+    at ChildProcess.<anonymous> 
+(C:\Users\<user>\AppData\Local\npm-cache\_npx\b9c1f36dbb73a030\node_modules\node-gyp\lib\build.js:219:23)
+    at ChildProcess.emit (node:events:514:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+
+Γ£û Rebuild Failed
+
+An unhandled error occurred inside electron-rebuild
+node-gyp failed to rebuild 
+'C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3'
+
+Error: node-gyp failed to rebuild 
+'C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-12-sqlite-ledger\node_modules\better-sqlite3'
+    at ChildProcess.<anonymous> (file:///C:/Users/<user>/AppData/Local/npm-cache/_npx/b9c1f36dbb73a030/node_modules/@ele
+ctron/rebuild/lib/module-type/node-gyp/node-gyp.js:120:24)
+    at ChildProcess.emit (node:events:514:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+

@@ -1,0 +1,53 @@
+{
+  "call_id": "1789128388398_0027_PATCH_pages_3d8c0043-56ec-81be-8b7c-e8b798c18377",
+  "category": "q4_patch_native_position",
+  "timestamp": "2026-09-11T12:06:28Z",
+  "duration_ms": 379,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-81be-8b7c-e8b798c18377",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "position": {
+        "after": "3d8c0043-56ec-81be-8b7c-e8b798c18377"
+      }
+    }
+  },
+  "response": {
+    "status_code": 400,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:28 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "250",
+      "Connection": "close",
+      "CF-Ray": "a3968bec4ae64a51-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"fa-0qevpT9r8UwLO+iLEz99THIBEFs\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "6e169fbf-8c25-4487-b47a-8ecf6c1c03e4",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=pVd1qRWKvdz66InO.a6N2jdQE4KuRLTLHu2OeYVHEJw-1789128388.5241842-1.0.1.1-p4HWdxHtAde0_ZDiHeFTIrQ3SKqliwsLp2q4AylTKwVD5enZ4xWG1aexTkC..quE6LawSUD_7e8QFLtfS2l5L1Zmn0CZwqC1Qv1qsk1reNJiTgC5hUT6y8eG1JHIWshy; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:28 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "body failed validation: body.position should be not present, instead was `{\"after\":\"3d8c0043-56ec-81be-8b7c-e8b798c18377\"}`.",
+      "request_id": "6e169fbf-8c25-4487-b47a-8ecf6c1c03e4"
+    },
+    "error": "HTTP Error 400: Bad Request"
+  }
+}

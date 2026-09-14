@@ -1,0 +1,78 @@
+=== macOS Keychain User Isolation & Sync Analysis ===
+Current User: <user> (UID: 501)
+Login Keychain Path: /Users/<user>/Library/Keychains/login.keychain-db
+Permissions: -rw-r--r--@ 1 <user>  staff  66404 Sep 13 21:03 /Users/<user>/Library/Keychains/login.keychain-db
+Directory Permissions: drwxr-xr-x (Other users cannot read/traverse)
+--- Checking Synchronizable / Cloud Status ---
+Item dump extract:
+    0x00000007 <blob>="DesktopAssistant-Q3-Test"
+    0x00000008 <blob>=<NULL>
+    "acct"<blob>="account_token"
+    "cdat"<timedate>=0x32303236303931333134303030335A00  "20260913140003Z\000"
+    "crtr"<uint32>="aapl"
+    "cusi"<sint32>=<NULL>
+    "desc"<blob>=<NULL>
+    "gena"<blob>=<NULL>
+    "icmt"<blob>=<NULL>
+    "invi"<sint32>=<NULL>
+    "mdat"<timedate>=0x32303236303931333134303030335A00  "20260913140003Z\000"
+    "nega"<sint32>=<NULL>
+    "prot"<blob>=<NULL>
+    "scrp"<sint32>=<NULL>
+    "svce"<blob>="DesktopAssistant-Q3-Test"
+    "type"<uint32>=<NULL>
+keychain: "/Users/<user>/Library/Keychains/login.keychain-db"
+version: 512
+class: "genp"
+attributes:
+    0x00000007 <blob>="DesktopAssistant-Q3-Adhoc"
+    0x00000008 <blob>=<NULL>
+    "acct"<blob>="token"
+    "cdat"<timedate>=0x32303236303931333134303130325A00  "20260913140102Z\000"
+    "crtr"<uint32>="aapl"
+    "cusi"<sint32>=<NULL>
+    "desc"<blob>=<NULL>
+    "gena"<blob>=<NULL>
+    "icmt"<blob>=<NULL>
+    "invi"<sint32>=<NULL>
+    "mdat"<timedate>=0x32303236303931333134303130325A00  "20260913140102Z\000"
+    "nega"<sint32>=<NULL>
+    "prot"<blob>=<NULL>
+    "scrp"<sint32>=<NULL>
+    "svce"<blob>="DesktopAssistant-Q3-Adhoc"
+    "type"<uint32>=<NULL>
+keychain: "/Users/<user>/Library/Keychains/login.keychain-db"
+version: 512
+class: "genp"
+attributes:
+    0x00000007 <blob>="DesktopAssistant-Spike Safe Storage"
+    0x00000008 <blob>=<NULL>
+    "acct"<blob>="DesktopAssistant-Spike Key"
+    "cdat"<timedate>=0x32303236303931333134303335315A00  "20260913140351Z\000"
+    "crtr"<uint32>=<NULL>
+    "cusi"<sint32>=<NULL>
+    "desc"<blob>=<NULL>
+    "gena"<blob>=<NULL>
+    "icmt"<blob>=<NULL>
+    "invi"<sint32>=<NULL>
+    "mdat"<timedate>=0x32303236303931333134303335315A00  "20260913140351Z\000"
+    "nega"<sint32>=<NULL>
+    "prot"<blob>=<NULL>
+    "scrp"<sint32>=<NULL>
+    "svce"<blob>="DesktopAssistant-Spike Safe Storage"
+    "type"<uint32>=<NULL>
+keychain: "/Users/<user>/Library/Keychains/login.keychain-db"
+version: 512
+class: 0x80001000 
+attributes:
+    "alis"<blob>="DesktopAssistant Dev Test A"
+    "cenc"<uint32>=0x00000003 
+    "ctyp"<uint32>=0x00000001 
+    "hpky"<blob>=0x1CE9108EDEE441A1C36AA56EF0AE84D12EC12250  "\034\351\020\216\336\344A\241\303j\245n\360\256\204\321.\301"P"
+    "issu"<blob>=0x30463124302206035504030C1B4465736B746F70417373697374616E742044657620546573742041311E301C060355040A0C154465736B746F70417373697374616E7420436F7270  "0F1$0"\006\003U\004\003\014\033DesktopAssistant Dev Test A1\0360\034\006\003U\004\012\014\025DesktopAssistant Corp"
+    "labl"<blob>="DesktopAssistant Dev Test A"
+    "skid"<blob>=0x1CE9108EDEE441A1C36AA56EF0AE84D12EC12250  "\034\351\020\216\336\344A\241\303j\245n\360\256\204\321.\301"P"
+    "snbr"<blob>=0x56915FA8CF092C716682F56EC681C7B386B66E18  "V\221_\250\317\011,qf\202\365n\306\201\307\263\206\266n\030"
+    "subj"<blob>=0x30463124302206035504030C1B4465736B746F70417373697374616E742044657620546573742041311E301C060355040A0C154465736B746F70417373697374616E7420436F7270  "0F1$0"\006\003U\004\003\014\033DesktopAssistant Dev Test A1\0360\034\006\003U\004\012\014\025DesktopAssistant Corp"
+Analysis: prot=<NULL>, no kSecAttrSynchronizable flag. Item is 100% device-local.
+=== Done ===

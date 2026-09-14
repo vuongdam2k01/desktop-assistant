@@ -1,0 +1,19 @@
+=== Investigating macOS TCC Code Identity & Designated Requirements ===
+1. Reading Designated Requirement of TestPermissions.app:
+Executable=/Users/<user>/projects/desktop-assistant/spikes/SP-22-macos-permissions/src/TestPermissions.app/Contents/MacOS/probe_tcc_apis
+# designated => cdhash H"c83e52a4b1defbca01178e8dab95837e92e6fadd"
+
+2. Analyzing CDHash:
+Identifier=com.desktopassistant.spike22.test
+Format=app bundle with Mach-O thin (arm64)
+CodeDirectory v=20400 size=346 flags=0x2(adhoc) hashes=4+3 location=embedded
+CandidateCDHash sha256=c83e52a4b1defbca01178e8dab95837e92e6fadd
+CandidateCDHashFull sha256=c83e52a4b1defbca01178e8dab95837e92e6fadd8773a41e177a8869f1d49c41
+CDHash=c83e52a4b1defbca01178e8dab95837e92e6fadd
+Signature=adhoc
+TeamIdentifier=not set
+
+3. Testing requirement compilation with csreq:
+Extracted requirement: Executable=/Users/<user>/projects/desktop-assistant/spikes/SP-22-macos-permissions/src/TestPermissions.app/Contents/MacOS/probe_tcc_apis
+# cdhash H"c83e52a4b1defbca01178e8dab95837e92e6fadd"
+Done.

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/approval/rule-elicitation/turn/0.1.0.json",
+  "title": "ElicitationTurnResponse",
+  "description": "Normative shape of one turn the elicitation agent returns, for approval/contracts/rule-elicitation@0.1.0. The four-turn ceiling is held in the file as a bound on turnIndex rather than left to the agent's own discipline, because the failure it prevents is a conversation that never ends: the measured sessions reached turn 6 before converging (spikes/SP-2-rule-elicitation/REPORT.md section 1 Q4). By turn 3 the agent states the safest fail-closed reading rather than asking again, so a session that has run out of turns still leaves the user with something to accept or reject.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sessionId", "turnIndex", "isComplete", "isRefused"],
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The elicitation session this turn belongs to. Sessions are separate from jobs: nothing said here reaches a connector."
+    },
+    "turnIndex": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Which turn this is. The ceiling is in the file, so a fifth turn is not a long conversation but an inadmissible response (INV-AP-15)."
+    },
+    "agentInquiry": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The question put to the user, carrying at most two points to clarify. Absent on a turn that presents a summary instead of asking."
+    },
+    "summaryTable": {
+      "$ref": "https://desktop-assistant.local/schemas/approval/rule-elicitation/0.1.0.json",
+      "description": "The restatement offered for confirmation, shaped by rule-elicitation.schema.json. Present from turn 3 onward, and required on any turn that reports the conversation complete."
+    },
+    "isComplete": {
+      "type": "boolean",
+      "description": "Whether a summary is ready for the user to confirm. It does not mean a rule exists: a rule exists only once the user confirms what this turn showed them."
+    },
+    "isRefused": {
+      "type": "boolean",
+      "description": "Whether the intention as a whole could not be compiled. True here is a stated outcome, not a failure to answer: the user is told no hard rule can express what they said, and is pointed at smart approval mode instead of being given a rule that protects nothing."
+    },
+    "refusalReason": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Why the intention could not be compiled, in the user's own language. Required when isRefused is true, so a refusal is never a bare 'no'."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "isComplete": { "const": true } },
+        "required": ["isComplete"]
+      },
+      "then": { "required": ["summaryTable"] }
+    },
+    {
+      "if": {
+        "properties": { "isRefused": { "const": true } },
+        "required": ["isRefused"]
+      },
+      "then": {
+        "required": ["refusalReason"],
+        "properties": { "isComplete": { "const": false } }
+      }
+    }
+  ]
+}

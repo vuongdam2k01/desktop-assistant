@@ -1,0 +1,27 @@
+# Bí mật của spike — KHÔNG BAO GIỜ commit
+.env.local
+.env.*.local
+secrets/*
+!secrets/README.md
+
+# Dữ liệu thô nặng trong evidence — không commit
+**/evidence/**/*.db
+**/evidence/**/*.db-wal
+**/evidence/**/*.db-shm
+**/evidence/**/*.mp4
+**/evidence/**/*.zip
+
+# File .md trong evidence là DELIVERABLE (compensation-matrix, transcript
+# đọc được, rule-patterns-for-ir...) → GIỮ LẠI, spike sau đọc trực tiếp.
+
+# Môi trường build
+node_modules/
+__pycache__/
+*.pyc
+dist/
+out/
+*.exe
+*.dmg
+*.pkg
+*.zip
+*.app/

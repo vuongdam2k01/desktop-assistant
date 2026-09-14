@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/role-registry/1.0.0.json",
+  "title": "RoleRegistryDocument",
+  "description": "Normative shape of the role registry for agent/contracts/role-registry@1.0.0 - one registry per account, holding the entries an agent's identity is read from. The root of this file is the registry document; the entry document that registry/upsert carries, and that a capability pack contributes, is $defs/RoleEntry and is addressable as .../1.0.0.json#role-entry. Two properties survive the opening of what used to be a closed six-member role union, and the shape here is what preserves them. No substitution: an entry names a routing tier and carries no member from which a provider, a model or a credential could be resolved, so there is exactly one path from a role to a model and it is the one the user's settings control (INV-AG-31, INV-AG-23). No implicit default: the document admits no registry-wide default entry and no inheritance value, and tier, requiredCapabilities and tools are required on every entry, so silence is never read as a default (INV-AG-24). The measured reason both matter is that a wrong model in a role fails silently rather than loudly - the cheap model downgraded a quarter of uncompilable rules without complaint, VERIFIED (spikes/SP-2-rule-elicitation/REPORT.md#0-ket-luan).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "The version of the role-registry contract this registry document was written against. The registry replicates between devices on different assemblies: a newer assembly reads an older document unchanged, and an older assembly meeting a newer version refuses the whole document (REGISTRY_VERSION_AHEAD) rather than reading around a member it does not recognise, because reading around one here would mean running an agent under an allowlist or a tier the user never assigned."
+    },
+    "entries": {
+      "type": "array",
+      "description": "The account's role entries. Unique by roleId - a duplicate identifier is ENTRY_INVALID rather than a later entry winning, because two identities behind one identifier is the implicit-default state INV-AG-24 forbids. The array may be empty: a device whose account has added no role of its own still resolves the six entries the product materialises at every start, and those are not carried here.",
+      "items": { "$ref": "#/$defs/RoleEntry" }
+    }
+  },
+  "$defs": {
+    "RoleEntry": {
+      "$anchor": "role-entry",
+      "title": "RoleEntry",
+      "description": "The whole of what the product knows about an agent's identity before it starts (INV-AG-30). It is data rather than code: adding a role is an entry, not a release. This is also the document registry/upsert carries and the document a capability pack contributes, which is why it declares its own schemaVersion rather than inheriting the registry's - an entry travels alone as often as it travels in the catalogue.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "roleId", "name", "instructions", "tier", "requiredCapabilities", "tools", "origin"],
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "The version of the role-registry contract this entry was written against. An entry ahead of the assembly reading it is refused rather than partly applied, because a half-applied role is an identity nobody declared."
+        },
+        "roleId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{1,62}$",
+          "description": "Stable for the life of the product. Changing it produces a different role rather than a new version of one, because work, job records and transcripts resolve to this value. The six identifiers the product materialises - pet-text, pet-image, worker, rule-elicitation, undo, risk-judge - are overwritten at every start, so an account or pack entry claiming one of them is refused with BUILT_IN_IMMUTABLE."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "description": "What the user sees in the role list and wherever a job names the identity it ran under. Display only: nothing resolves by name."
+        },
+        "instructions": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384,
+          "description": "The role's durable instructions, placed into every assembled context this role's agent builds. Advisory to the model and nothing more: instructions cannot widen an allowlist, answer the approval gate or alter the ledger obligation, all of which sit outside the model loop (constitution principle II). The 16 KiB ceiling is a declared budget from clarifications.md session 2026-09-13, chosen so that the registry can be listed without paging, and is UNVERIFIED."
+        },
+        "tier": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{1,62}$",
+          "description": "The routing tier this role's requests resolve through, per agent/contracts/role-routing@1.0.0. Never a provider, a model or a credential (INV-AG-31): a value that is not a tier is TIER_MALFORMED. Naming a tier the routing table has not seen before is accepted and is a different state entirely - the table gains an assignment in the explicitly unassigned state and the user is asked to make it, and until they do, work for this role fails naming the tier rather than borrowing another one. Several entries may name one tier, which is how reassigning a model moves every role that shares it without editing a single entry."
+        },
+        "requiredCapabilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "What this role's requests need the assigned model to declare, drawn from the closed vocabulary a provider profile can express (INV-AG-32). A value outside it is CAPABILITY_UNKNOWN, because a requirement nothing can check mechanically is a requirement that is not enforced. These are protocol facts rather than judgements about how well a model performs a role: VERIFIED that both text models rejected an image with an explicit protocol error in every attempt while the vision model accepted the same image (spikes/SP-17-provider-matrix/REPORT.md#1-tra-loi-tung-cau-hoi Q1). The vocabulary is owned by agent/contracts/provider-profile@0.1.0; adding a member there is a MINOR change here.",
+          "items": {
+            "enum": ["text", "images", "reasoning", "tools"],
+            "description": "One capability a provider profile can declare for a model."
+          }
+        },
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 256,
+          "description": "The allowlist: the whole of what this role's agent may hold. Required on every entry, and an empty array is meaningful and permitted - an agent that holds no tool is a complete identity, and an entry silent about its allowlist is not. The list is resolved once against the tools that exist when the session is built and is frozen for the life of that session (INV-AG-33), so nothing that happens during a run can widen it. A named tool that no connected connector or activated pack generates does not invalidate the entry: the agent starts with the tools that do exist and the absent one is reported as unavailable. Being listed here is permission to hold and never permission to call - every call still crosses the ledger write and the approval gate.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,126}$",
+            "description": "The name of a tool as the wrapping factory produces it. Every tool in this product comes from that one factory - VERIFIED, including with the engine's own interception facility deliberately left unconfigured (spikes/SP-6-pi-sdk/REPORT.md §1 Q1, Q2) - so a name here can only ever refer to a wrapped, gated, ledger-recording tool."
+          }
+        },
+        "delegation": {
+          "$ref": "#/$defs/DelegationGrant"
+        },
+        "preloadSkills": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 32,
+          "description": "Skill identifiers whose bodies are placed in the context before the first turn, whether or not the job's work matches them. The one declaration in this document that may go unsatisfied without failing the start: an identifier the catalogue does not hold is recorded and skipped, because a missing playbook degrades the work while a missing tier would mean running against something the user never assigned. Absent means the role preloads nothing and matches skills by applicability like any other.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{1,62}$",
+            "description": "A skill identifier as agent/contracts/skill-manifest@1.0.0 declares it."
+          }
+        },
+        "origin": {
+          "enum": ["built-in", "account", "pack"],
+          "description": "Where the entry came from, and therefore who may write it. built-in: the product materialises it at every start, overwriting whatever stands in that identifier, so a replicated record can never redefine one; an edit or removal is BUILT_IN_IMMUTABLE. account: the user's own, written through registry/upsert and replicated under role-registry.descriptor.json. pack: contributed by a capability pack when it activates and withdrawn when it deactivates (INV-AG-45), jobs already running keeping the tool set they started with. Origin decides mutability and nothing else - all three resolve identically, which is what makes adding a role an entry rather than a release."
+        }
+      }
+    },
+    "DelegationGrant": {
+      "title": "DelegationGrant",
+      "description": "The permission, carried by a role entry, to obtain additional work by creating a job. Present or absent: the five shipped roles that cannot delegate omit this member entirely rather than carrying an empty grant, because absent and 'permitted but to nobody' are different statements. The grant is read by the delegation gateway when it asks the job manager for a child job, and by nothing else. It confers no handle on the child, no ability to steer or stop it and no authority over the agent that runs it - the whole channel between a parent and a child is the pair of job records (INV-JOB-08), which is how constitution principle I stays a property of the shape rather than a rule anyone has to follow.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mayCreateJobsUnder"],
+      "properties": {
+        "mayCreateJobsUnder": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "maxItems": 16,
+          "description": "The role identifiers this role may create child jobs under, enumerated rather than implied by both entries existing. A grant naming an identifier the registry does not hold, or naming the granting role itself, is ENTRY_INVALID - checks this file cannot make, because each compares two members of one document rather than validating either alone. A self-grant in particular is the first step of the recursion the one-level depth bound exists to prevent; that bound rests on a measured pacing budget, where eight concurrent jobs on one account crossed into platform refusals and three completed cleanly - VERIFIED (spikes/SP-15-concurrency/REPORT.md §1 Q4).",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{1,62}$",
+            "description": "A role identifier that must resolve to an entry in this same registry at the moment the child job is created."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+=== SHIPIT STDOUT & STDERR ===
+total 16
+drwxr-xr-x@  5 <user>  staff   160 Sep 13 21:43 .
+drwx------+ 72 <user>  staff  2304 Sep 13 21:43 ..
+-rw-r--r--@  1 <user>  staff   338 Sep 13 21:43 ShipItState.plist
+-rw-r--r--   1 <user>  staff  2919 Sep 13 21:43 ShipIt_stderr.log
+-rw-r--r--   1 <user>  staff     0 Sep 13 21:43 ShipIt_stdout.log
+--- File: ShipIt_stderr.log ---
+2026-09-13 21:43:06.210 ShipIt[71017:437374] Detected this as an install request
+ERROR: Unrecognized attribute string flag '?' in attribute string "T@"NSString",?,R,C" for property debugDescription
+ERROR: Unrecognized attribute string flag '?' in attribute string "T@"NSString",?,R,C" for property debugDescription
+2026-09-13 21:43:06.349 ShipIt[71017:437379] Beginning installation
+2026-09-13 21:43:07.970 ShipIt[71017:437379] Moving bundle from file:///tmp/sp16-running-app/DesktopAssistantSpikeMac.app/ to file:///var/folders/l6/zs2pr3y150g84bpy598j0pbc0000gn/T/com.desktopassistant.sp16mac.ShipIt.hTOEsB7i/DesktopAssistantSpikeMac.app
+2026-09-13 21:43:07.971 ShipIt[71017:437379] Moving bundles directly as SquirrelMacEnableDirectContentsWrite is disabled for app: com.desktopassistant.sp16mac.ShipIt
+2026-09-13 21:43:07.972 ShipIt[71017:437379] Moved bundle contents from file:///tmp/sp16-running-app/DesktopAssistantSpikeMac.app/ to file:///var/folders/l6/zs2pr3y150g84bpy598j0pbc0000gn/T/com.desktopassistant.sp16mac.ShipIt.hTOEsB7i/DesktopAssistantSpikeMac.app
+2026-09-13 21:43:07.973 ShipIt[71017:437379] Moving bundle from file:///var/folders/l6/zs2pr3y150g84bpy598j0pbc0000gn/T/com.desktopassistant.sp16mac.ShipIt.2uy5dx0v/DesktopAssistantSpikeMac.app to file:///tmp/sp16-running-app/DesktopAssistantSpikeMac.app/
+2026-09-13 21:43:07.973 ShipIt[71017:437379] Moving bundles directly as SquirrelMacEnableDirectContentsWrite is disabled for app: com.desktopassistant.sp16mac.ShipIt
+2026-09-13 21:43:07.973 ShipIt[71017:437379] Moved bundle contents from file:///var/folders/l6/zs2pr3y150g84bpy598j0pbc0000gn/T/com.desktopassistant.sp16mac.ShipIt.2uy5dx0v/DesktopAssistantSpikeMac.app to file:///tmp/sp16-running-app/DesktopAssistantSpikeMac.app/
+2026-09-13 21:43:08.056 ShipIt[71017:437425] On main thread and launching: file:///tmp/sp16-running-app/DesktopAssistantSpikeMac.app/
+2026-09-13 21:43:08.056 ShipIt[71017:437425] Bundle URL is valid
+2026-09-13 21:43:08.056 ShipIt[71017:437425] Attempting to launch app on 11.0 or higher
+2026-09-13 21:43:08.056 ShipIt[71017:437425] Launching new ShipIt at /tmp/sp16-running-app/DesktopAssistantSpikeMac.app/Contents/Frameworks/Squirrel.framework/Resources/ShipIt with instructions to launch file:///tmp/sp16-running-app/DesktopAssistantSpikeMac.app/
+2026-09-13 21:43:08.057 ShipIt[71017:437379] Installation completed successfully
+2026-09-13 21:43:08.060 ShipIt[71017:437425] New ShipIt pid: 71023
+2026-09-13 21:43:11.126 ShipIt[71023:437481] Detected this as a launch request
+2026-09-13 21:43:11.206 ShipIt[71023:437481] Successfully launched application at file:///tmp/sp16-running-app/DesktopAssistantSpikeMac.app/
+2026-09-13 21:43:11.206 ShipIt[71023:437481] ShipIt quitting
+2026-09-13 21:43:11.208 ShipIt[71017:437425] ShipIt status 0
+2026-09-13 21:43:11.208 ShipIt[71017:437425] New ShipIt exited
+2026-09-13 21:43:11.209 ShipIt[71017:437425] ShipIt quitting
+--- File: ShipIt_stdout.log ---

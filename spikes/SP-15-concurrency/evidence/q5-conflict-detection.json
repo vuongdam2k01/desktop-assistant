@@ -1,0 +1,42 @@
+{
+  "targetPageId": "3d8d409b-f710-81ea-8f17-d4c821a68682",
+  "case1_overlappingField": {
+    "jobA_modification": {
+      "Status": "In progress"
+    },
+    "jobB_modification": {
+      "Status": "Done"
+    },
+    "conflictDetectedByTimestamp": false,
+    "conflictDetectedByPropertyDiff": true,
+    "diffs": [
+      {
+        "property": "Status",
+        "expectedAfterJobA": "In progress",
+        "currentLiveValue": "Done",
+        "hasConflict": true
+      }
+    ],
+    "actionTaken": "Conflict Detection (FR-UD-02) BẮT ĐƯỢC 100%. Khi live.Status = \"Done\" khác với snapshot_after.Status = \"In progress\", hệ thống chặn đứng việc ghi đè mù (False-Negative = 0), chuyển trạng thái sang CONFLICT và yêu cầu người dùng quyết định."
+  },
+  "case2_disjointFields": {
+    "jobA_modification": {
+      "Status": "In progress"
+    },
+    "jobB_modification": {
+      "DueDate": "2026-09-30"
+    },
+    "coarseGrainedPageConflictDetected": true,
+    "fineGrainedFieldConflictDetected": false,
+    "disjointDiffs": [
+      {
+        "property": "Due date",
+        "expectedAfterJobA": "2026-09-20",
+        "currentLiveValue": "2026-09-30",
+        "hasConflict": true
+      }
+    ],
+    "architecturalTradeoff": "Khảo sát chỉ ra sự khác biệt lớn giữa 2 chiến lược: (1) Coarse-grained (Page-level): An toàn tối đa nhưng gây phiền người dùng vì Job B chỉ sửa Due date cũng làm Undo Status của Job A bị báo xung đột; (2) Fine-grained (Field-level): Cho phép Undo Job A mượt mà (chỉ revert Status về Not started, giữ nguyên Due date mới của Job B). Khuyến nghị cho MVP: Áp dụng Field-level Conflict Detection cho các trường rời nhau, chỉ kích hoạt blocking modal khi có Overlapping Field Conflict."
+  },
+  "conclusion": "Cơ chế Conflict Detection (FR-UD-02) hoàn toàn bắt được 100% các ca đối tượng bị sửa sau khi job chạy. Để tránh False-Positive khi các job sửa các trường khác nhau trên cùng một page, thuật toán nên đối chiếu theo từng trường thuộc tính (Property-level Diff) thay vì coi cả page là một khối nguyên tử cứng nhắc."
+}

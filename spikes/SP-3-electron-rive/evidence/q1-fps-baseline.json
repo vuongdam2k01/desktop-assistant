@@ -1,0 +1,30 @@
+﻿{
+    "currentFps":  60,
+    "avgFps":  60,
+    "minFps":  60,
+    "maxFps":  60,
+    "p95Fps":  60,
+    "sampleCount":  10,
+    "fpsHistory":  [
+                       60,
+                       60,
+                       60,
+                       60,
+                       60,
+                       60,
+                       60,
+                       60,
+                       60,
+                       60
+                   ],
+    "activeState":  "idle",
+    "lastTransitionMs":  0,
+    "transitions":  [
+
+                    ],
+    "processMemory":  {
+                          "rssMb":  "93.27",
+                          "heapTotalMb":  "6.90",
+                          "heapUsedMb":  "4.61"
+                      }
+}

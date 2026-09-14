@@ -1,0 +1,88 @@
+{
+  "call_id": "1789128384475_0022_DELETE_blocks_3d8c0043-56ec-8168-b348-ea81d412d10a",
+  "category": "q3_delete_block",
+  "timestamp": "2026-09-11T12:06:25Z",
+  "duration_ms": 975,
+  "request": {
+    "method": "DELETE",
+    "url": "https://api.notion.com/v1/blocks/3d8c0043-56ec-8168-b348-ea81d412d10a",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:25 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "802",
+      "Connection": "close",
+      "CF-Ray": "a3968bd44c0a6e87-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"322-QS6Y76wjP61a18DcZHmAXSLs3bs\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "0f26493b-896a-4a9d-9a69-b91c306fadec",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=RTsLT94xYPJ44Ycn2wt.k9vmKq_CG_bxXjKdJOxLr7g-1789128384.6898508-1.0.1.1-1PzBTaxBQZ_eBxdHjU.8CFfla7Jsllu8ldgGbXKEH2msKnk1eJ9wlQDGmtmeaP7ylPRzNjxY0599TuTcDXupAaNqUR6ywvRrLLUvoZk6P4EwUhqsi41t.bRo9yexzj1I; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:25 GMT"
+    },
+    "body": {
+      "object": "block",
+      "id": "3d8c0043-56ec-8168-b348-ea81d412d10a",
+      "parent": {
+        "type": "page_id",
+        "page_id": "3d8c0043-56ec-81de-a42f-cedbbae9389f"
+      },
+      "created_time": "2026-09-11T12:06:00.000Z",
+      "last_edited_time": "2026-09-11T12:06:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "has_children": false,
+      "in_trash": true,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Test block for archival",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "Test block for archival",
+            "href": null
+          }
+        ],
+        "icon": null,
+        "color": "default"
+      },
+      "archived": true,
+      "request_id": "0f26493b-896a-4a9d-9a69-b91c306fadec"
+    },
+    "error": null
+  }
+}

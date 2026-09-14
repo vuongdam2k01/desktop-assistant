@@ -1,0 +1,447 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/connector/connector-manifest/1.1.0.json",
+  "title": "ConnectorManifest",
+  "description": "Normative shape of a connector manifest, for connector/contracts/connector-manifest@1.1.0. A manifest is what makes a connector data rather than code: the tool set the agent is given, the approval classification of each operation, the compensating action undo replays and what an interrupted call meant are all read from here and from nowhere else (INV-CN-06). Validation is whole-manifest - a manifest that breaks any rule expressed here yields no tool at all. This version adds two optional members to a tool declaration, both measured against one real platform: side_effects, which records an effect that leaves the platform's data and that no compensation withdraws, and compensation.arguments_source, which says whether a compensating action is built from the recorded snapshot or from the result of the call. A manifest written against 1.0 means exactly what it meant. The rules this file cannot express are relations between members and are held by the contract document: that every tool names a capability this manifest declares, that no scope profile grants scope for a capability no tool requires, that snapshot.read_operation and compensation.tool name tools this manifest declares, that no two manifests share an id, and that an adapter is registered under the same id.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "version",
+    "auth",
+    "capabilities",
+    "scope_profiles",
+    "tools"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "1.0",
+        "1.1"
+      ],
+      "description": "The major.minor of the connector-manifest contract this manifest was written against, never the version of the connector. A build loads a manifest sharing its major number; a manifest whose major number exceeds the build's is refused naming the application version it needs."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$",
+      "description": "Identifies the connector for the lifetime of the product (INV-CN-04). Ledger records, approval rules and stored authorisations all refer to it, so changing it creates a different connector rather than a new version of this one."
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of this manifest's own content, independent of schema_version."
+    },
+    "icon": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "auth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "endpoints",
+        "revocation"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "oauth2",
+            "bearer_token",
+            "api_key"
+          ]
+        },
+        "provider_id": {
+          "type": "string"
+        },
+        "proof_key": {
+          "type": "boolean"
+        },
+        "endpoints": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "authorize_url": {
+              "type": "string"
+            },
+            "token_url": {
+              "type": "string"
+            },
+            "api_base_url": {
+              "type": "string"
+            }
+          }
+        },
+        "revocation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supported"
+          ],
+          "properties": {
+            "supported": {
+              "type": "boolean"
+            },
+            "endpoint": {
+              "type": "string"
+            },
+            "settings_url": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "byo_client": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supported"
+          ],
+          "properties": {
+            "supported": {
+              "type": "boolean"
+            },
+            "guidance_steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "refresh_lifetime_caveat": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "description"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "What a user enables and what a tool belongs to. Scopes are one consequence of a capability rather than its definition."
+    },
+    "scope_profiles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Profile to capability to scopes. Selecting a different profile changes what is requested of the user and nothing else; the profile in force is recorded with the authorisation it produced."
+    },
+    "rate_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requests_per_second": {
+          "type": "number"
+        },
+        "burst": {
+          "type": "integer"
+        }
+      }
+    },
+    "content_sanitization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strip_instructions"
+      ],
+      "properties": {
+        "strip_instructions": {
+          "type": "boolean"
+        },
+        "max_inline_content_bytes": {
+          "type": "integer"
+        }
+      },
+      "description": "Required of any connector that returns document, message or file content: fetched content is untrusted data, and this declares how it is neutralised before it reaches an agent's context."
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "direction"
+              ],
+              "properties": {
+                "direction": {
+                  "const": "write"
+                }
+              }
+            },
+            "then": {
+              "oneOf": [
+                {
+                  "required": [
+                    "compensation"
+                  ],
+                  "not": {
+                    "required": [
+                      "irreversible"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "irreversible"
+                  ],
+                  "properties": {
+                    "irreversible": {
+                      "const": true
+                    }
+                  },
+                  "not": {
+                    "required": [
+                      "compensation"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "label",
+          "description",
+          "direction",
+          "capability",
+          "parameters",
+          "reconciliation"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "The public tool name, carrying the connector id (INV-CN-05)."
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "read",
+              "write"
+            ],
+            "description": "A read tool carrying snapshot, compensation, irreversible or side_effects is refused as a contradiction rather than silently reclassified."
+          },
+          "capability": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object",
+            "required": [
+              "type",
+              "properties"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "object"
+                ]
+              },
+              "properties": {
+                "type": "object"
+              },
+              "required": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": {
+                "type": "boolean"
+              }
+            }
+          },
+          "reconciliation": {
+            "type": "object",
+            "required": [
+              "method"
+            ],
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "readback",
+                  "none"
+                ]
+              },
+              "read_operation": {
+                "type": "string"
+              },
+              "comparison": {
+                "type": "object"
+              },
+              "ambiguous_outcome": {
+                "type": "string",
+                "enum": [
+                  "ask_user",
+                  "treat_as_unperformed"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "description": "Required on every tool, read or write. Its shape is job/contracts/tool-reconciliation@0.1.0, embedded here verbatim and not redefined."
+          },
+          "snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "read_operation",
+              "target_param",
+              "exclude_computed"
+            ],
+            "properties": {
+              "read_operation": {
+                "type": "string"
+              },
+              "target_param": {
+                "type": "string"
+              },
+              "exclude_computed": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The values the platform computes and refuses on write. Required, and may be empty: an empty array is the author stating that the platform computes none of this object's values, while an absent field is the author having not considered the question."
+              }
+            }
+          },
+          "compensation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tool",
+              "arguments_from"
+            ],
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "arguments_source": {
+                "type": "string",
+                "enum": [
+                  "snapshot",
+                  "result"
+                ],
+                "description": "Where the compensating action's arguments come from: the recorded snapshot, or the result the call returned. Absent means snapshot, which is what every 1.0 manifest meant. A creation has no prior state to build from, and result is the only honest answer for it."
+              },
+              "arguments_from": {
+                "type": "string"
+              }
+            },
+            "description": "Write tools only, and exclusive with irreversible (INV-CN-07). Requires a snapshot, because a compensating action is built from recorded prior state."
+          },
+          "irreversible": {
+            "type": "boolean",
+            "description": "Write tools only, and exclusive with compensation. Declares that no operation of this platform reverses this one."
+          },
+          "side_effects": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "required": [
+                      "recallable"
+                    ],
+                    "properties": {
+                      "recallable": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "withdrawn_by"
+                    ]
+                  }
+                }
+              ],
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "effect",
+                "recipient",
+                "recallable",
+                "user_text"
+              ],
+              "properties": {
+                "effect": {
+                  "type": "string"
+                },
+                "recipient": {
+                  "type": "string"
+                },
+                "recallable": {
+                  "type": "boolean"
+                },
+                "withdrawn_by": {
+                  "type": "string"
+                },
+                "user_text": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Effects this operation has outside the platform's own data - a message, a notification - each with whether anything withdraws it. Declared at authoring time, because an effect discovered at undo time is an effect the user was never warned about. An effect recorded as recallable must name what withdraws it."
+          },
+          "changes_permission": {
+            "type": "boolean",
+            "description": "Read by the approval gate. Never read from a call's arguments."
+          },
+          "bulk_threshold_param": {
+            "type": "string",
+            "description": "The argument whose size makes a call bulk, for the gate's bulk classification."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-11",
+  "spike": "SP-9",
+  "q1_reverse_order_rate": "100.0%",
+  "q2_misclassification": {
+    "reversible": "0.0%",
+    "irreversible": "0.0%",
+    "conflict": "0.0%"
+  },
+  "q3_conflict_detection": {
+    "false_negative": 0,
+    "false_positive": 0,
+    "pass_zero_fn": true,
+    "true_positive": 3,
+    "true_negative": 4
+  },
+  "q4_internal_dependency_preserved": true,
+  "q5_undo_of_undo_verified": true,
+  "q6_irreversible_disabled_verified": true
+}

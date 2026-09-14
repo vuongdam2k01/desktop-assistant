@@ -1,0 +1,155 @@
+{
+  "Height" : 320,
+  "TotalTransitionsFound" : 3,
+  "SampleTransitions" : [
+    {
+      "Pixels" : [
+        {
+          "A" : 0,
+          "Y" : 112,
+          "R" : 0,
+          "G" : 0,
+          "B" : 0,
+          "X" : 18
+        },
+        {
+          "A" : 0,
+          "Y" : 112,
+          "R" : 0,
+          "G" : 0,
+          "B" : 0,
+          "X" : 19
+        },
+        {
+          "A" : 255,
+          "Y" : 112,
+          "R" : 212,
+          "G" : 35,
+          "B" : 98,
+          "X" : 20
+        },
+        {
+          "A" : 255,
+          "Y" : 112,
+          "R" : 213,
+          "G" : 35,
+          "B" : 100,
+          "X" : 21
+        },
+        {
+          "A" : 255,
+          "Y" : 112,
+          "R" : 212,
+          "G" : 35,
+          "B" : 98,
+          "X" : 22
+        }
+      ],
+      "EdgeX" : 20,
+      "Type" : "EnteringBody",
+      "ScanY" : 112
+    },
+    {
+      "Pixels" : [
+        {
+          "A" : 0,
+          "Y" : 160,
+          "R" : 0,
+          "G" : 0,
+          "B" : 0,
+          "X" : 18
+        },
+        {
+          "A" : 0,
+          "Y" : 160,
+          "R" : 0,
+          "G" : 0,
+          "B" : 0,
+          "X" : 19
+        },
+        {
+          "A" : 255,
+          "Y" : 160,
+          "R" : 162,
+          "G" : 27,
+          "B" : 99,
+          "X" : 20
+        },
+        {
+          "A" : 255,
+          "Y" : 160,
+          "R" : 162,
+          "G" : 27,
+          "B" : 99,
+          "X" : 21
+        },
+        {
+          "A" : 255,
+          "Y" : 160,
+          "R" : 162,
+          "G" : 27,
+          "B" : 99,
+          "X" : 22
+        }
+      ],
+      "EdgeX" : 20,
+      "Type" : "EnteringBody",
+      "ScanY" : 160
+    },
+    {
+      "Pixels" : [
+        {
+          "A" : 0,
+          "Y" : 208,
+          "R" : 0,
+          "G" : 0,
+          "B" : 0,
+          "X" : 18
+        },
+        {
+          "A" : 0,
+          "Y" : 208,
+          "R" : 0,
+          "G" : 0,
+          "B" : 0,
+          "X" : 19
+        },
+        {
+          "A" : 255,
+          "Y" : 208,
+          "R" : 54,
+          "G" : 5,
+          "B" : 40,
+          "X" : 20
+        },
+        {
+          "A" : 255,
+          "Y" : 208,
+          "R" : 55,
+          "G" : 5,
+          "B" : 40,
+          "X" : 21
+        },
+        {
+          "A" : 255,
+          "Y" : 208,
+          "R" : 54,
+          "G" : 5,
+          "B" : 40,
+          "X" : 22
+        }
+      ],
+      "EdgeX" : 20,
+      "Type" : "EnteringBody",
+      "ScanY" : 208
+    }
+  ],
+  "HasDarkFringing" : false,
+  "FringeSamples" : [
+
+  ],
+  "Width" : 320,
+  "Verdict" : "CLEAN_ANTI_ALIASING",
+  "ImagePath" : "\/Users\/<user>\/projects\/desktop-assistant\/spikes\/SP-3-electron-rive\/macos\/evidence\/q2-state-idle-rgba.png",
+  "SemiTransparentPixelCount" : 0
+}

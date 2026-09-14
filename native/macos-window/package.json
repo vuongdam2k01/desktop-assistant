@@ -1,0 +1,20 @@
+{
+  "name": "@desktop-assistant/macos-window",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./loader.cjs",
+  "types": "./index.d.ts",
+  "files": [
+    "dist",
+    "loader.cjs",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "install": "node -e \"process.exit(0)\"",
+    "native:build": "node scripts/build.mjs",
+    "native:test": "node scripts/test.mjs"
+  },
+  "devDependencies": {
+    "node-gyp": "13.0.2"
+  }
+}

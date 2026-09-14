@@ -1,0 +1,31 @@
+{
+  "name": "sp-19-connector-framework",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:all": "tsx src/runner/run-all.ts",
+    "test:q1": "tsx src/tests/test-q1-schema.ts",
+    "test:q2": "tsx src/tests/test-q2-tool-generation.ts",
+    "test:q3": "tsx src/tests/test-q3-core-diff.ts",
+    "test:q4": "tsx src/tests/test-q4-uniform-ledger.ts",
+    "test:q5": "tsx src/tests/test-q5-irreversible-gate.ts",
+    "test:q6": "tsx src/tests/test-q6-disconnected-filtering.ts",
+    "test:q7": "tsx src/tests/test-q7-multi-connector-job.ts",
+    "test:q8": "tsx src/tests/test-q8-scope-profiles.ts",
+    "test:q9": "tsx src/tests/test-q9-status-detection.ts",
+    "test:q10": "tsx src/tests/test-q10-disconnect-revoke.ts",
+    "test:q11": "tsx src/tests/test-q11-mcp-compat.ts"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "dotenv": "^17.4.2",
+    "typebox": "^1.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
+  }
+}

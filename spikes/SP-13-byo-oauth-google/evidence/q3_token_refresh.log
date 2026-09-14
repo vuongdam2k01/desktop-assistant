@@ -1,0 +1,20 @@
+=== SP-13 Q3: KIỂM TRA REFRESH TOKEN & HẠN 7 NGÀY TESTING MODE ===
+Thời điểm kiểm tra hiện tại (UTC): 2026-09-12T02:29:18.970754+00:00
+__granted_at trong google-tokens.json: 2026-09-11T09:24:39.422869+00:00
+Thời gian đã trôi qua kể từ khi cấp: 17:04:39.547885 (61479.5 giây, 0.71 ngày)
+Mốc hết hạn 7 ngày dự kiến: 2026-09-18T09:24:39.422869+00:00
+Thời gian còn lại tới mốc 7 ngày: 6 days, 6:55:20.452115 (6.29 ngày)
+Refresh token hiện hữu: 1//0eBON...8NRf_o (đã che bớt)
+
+Đang gửi request refresh token tới Google OAuth token endpoint...
+✓ REFRESH TOKEN THÀNH CÔNG! HTTP 200 OK
+  token_type: Bearer
+  expires_in: 3599 giây
+  scope: https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/drive.readonly
+  access_token mới: ya29.a0AdM...o3-g0207
+
+Kiểm tra access token mới với Gmail API...
+✓ Gmail API phản hồi HTTP 200: Đọc thành công 2 messages
+
+Kiểm tra access token mới với Google Drive API...
+✓ Google Drive API phản hồi HTTP 200: Đọc thành công 2 files

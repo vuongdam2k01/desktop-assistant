@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/connector/connector-manifest/0.1.0.json",
+  "title": "ConnectorManifest",
+  "description": "Baseline shape of a connector manifest, for connector/contracts/connector-manifest@0.1.0. A manifest is what makes a connector data rather than code: the tool set an agent is given, the approval classification of each operation and the compensating action undo replays are all read from here. Validation is whole-manifest — a manifest that breaks any rule expressed here yields no tool at all, because a partially loaded connector would offer operations whose reversibility nobody declared. This is the product baseline; the frozen shape, measured against a second connector, is connector/contracts/connector-manifest@1.0.0 in req-019-connector-framework.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifestVersion", "id", "name", "version", "auth", "scopeProfiles", "tools"],
+  "properties": {
+    "manifestVersion": {
+      "type": "string",
+      "description": "The major version of the connector-manifest contract this manifest was written against, never the version of the connector. A manifest whose major number exceeds the application's is refused naming the version it needs."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Identifies the connector for the lifetime of the product. Ledger records, approval rules and stored authorisations refer to it, so changing it creates a different connector rather than a new version of this one."
+    },
+    "name": { "type": "string", "description": "Display name shown in the connector catalogue." },
+    "version": { "type": "string", "description": "Version of this manifest's own content, independent of manifestVersion." },
+    "icon": { "type": "string", "description": "Catalogue icon reference." },
+    "auth": {
+      "type": "object",
+      "required": ["authorizeEndpoint", "tokenEndpoint", "exchange"],
+      "description": "Authorisation endpoints and exchange style. No credential value ever appears in a manifest.",
+      "properties": {
+        "authorizeEndpoint": { "type": "string" },
+        "tokenEndpoint": { "type": "string" },
+        "revokeEndpoint": { "type": "string" },
+        "exchange": {
+          "type": "string",
+          "enum": ["confidential", "pkce"],
+          "description": "Whether the exchange is brokered with a confidential client or completed on the device with a proof key."
+        },
+        "byoClient": {
+          "type": "object",
+          "required": ["supported"],
+          "description": "The bring-your-own authorisation-client route: whether the platform admits it, the guidance the user is walked through, and the caveat that route carries.",
+          "properties": {
+            "supported": { "type": "boolean" },
+            "guidanceSteps": { "type": "array", "items": { "type": "string" } },
+            "refreshTokenCaveat": { "type": "string" }
+          }
+        }
+      }
+    },
+    "scopeProfiles": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Capability-to-scope mappings, one selectable per release channel. A capability that is not enabled contributes no scope, which is how the minimum-scope rule is structural rather than reviewed.",
+      "items": {
+        "type": "object",
+        "required": ["profile", "capabilities"],
+        "properties": {
+          "profile": { "type": "string" },
+          "capabilities": {
+            "type": "object",
+            "additionalProperties": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "ratePolicy": {
+      "type": "object",
+      "description": "The platform's request pacing characteristics, read by the bounded retry policy. Advice to the job, never a promise the operation eventually succeeds.",
+      "properties": {
+        "requestsPerSecond": { "type": "number" },
+        "burst": { "type": "integer" }
+      }
+    },
+    "sanitization": {
+      "type": "object",
+      "description": "How content fetched by this connector is neutralised before it enters an agent's context. Declared by any connector that returns document or message bodies, because fetched content is untrusted data under the constitution's External Content Is Data section.",
+      "properties": {
+        "stripInstructionsFromContent": { "type": "boolean" },
+        "maxInlineContentBytes": { "type": "integer" }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Every callable operation. Each entry becomes exactly one tool offered to a worker-agent, and only while the connector holds an authorised account.",
+      "items": {
+        "allOf": [
+          {
+            "if": { "required": ["direction"], "properties": { "direction": { "const": "write" } } },
+            "then": {
+              "oneOf": [
+                { "required": ["compensation"], "not": { "required": ["irreversible"] } },
+                { "required": ["irreversible"], "properties": { "irreversible": { "const": true } }, "not": { "required": ["compensation"] } }
+              ]
+            }
+          }
+        ],
+        "type": "object",
+        "required": ["name", "direction", "capability", "params"],
+        "properties": {
+          "name": { "type": "string" },
+          "direction": { "type": "string", "enum": ["read", "write"] },
+          "capability": {
+            "type": "string",
+            "description": "The functional capability this tool belongs to; the selected scope profile maps it to the authorisation scopes requested."
+          },
+          "description": { "type": "string" },
+          "params": { "type": "object" },
+          "snapshot": {
+            "type": "object",
+            "required": ["method"],
+            "description": "How the prior state is read before a write. A write tool carrying a compensation object declares one, because a compensating action is rebuilt from the recorded prior state.",
+            "properties": {
+              "method": { "type": "string" },
+              "targetFrom": { "type": "string" }
+            }
+          },
+          "compensation": {
+            "type": "object",
+            "required": ["tool", "paramsFrom"],
+            "description": "The formula the undo planner reads to assemble the compensating action.",
+            "properties": {
+              "tool": { "type": "string" },
+              "paramsFrom": { "type": "string" }
+            }
+          },
+          "irreversible": {
+            "type": "boolean",
+            "description": "The declaration that no compensating action exists. A write tool carries this or a compensation object, never both and never neither."
+          },
+          "bulkThresholdParam": {
+            "type": "string",
+            "description": "Names the parameter whose length decides whether a call counts as bulk, so the static approval tier counts objects without connector-specific knowledge."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+﻿{
+    "Timestamp":  "2026-09-12 11:38:49",
+    "Q17_DynamicTypingTest":  {
+                                  "TotalRuns":  5,
+                                  "PassCount":  5,
+                                  "AllPass":  true,
+                                  "Runs":  [
+                                               {
+                                                   "Run":  1,
+                                                   "ExpectedCount":  200,
+                                                   "ReceivedCount":  200,
+                                                   "Match":  true,
+                                                   "DurationMs":  3672
+                                               },
+                                               {
+                                                   "Run":  2,
+                                                   "ExpectedCount":  200,
+                                                   "ReceivedCount":  200,
+                                                   "Match":  true,
+                                                   "DurationMs":  3371
+                                               },
+                                               {
+                                                   "Run":  3,
+                                                   "ExpectedCount":  200,
+                                                   "ReceivedCount":  200,
+                                                   "Match":  true,
+                                                   "DurationMs":  3202
+                                               },
+                                               {
+                                                   "Run":  4,
+                                                   "ExpectedCount":  200,
+                                                   "ReceivedCount":  200,
+                                                   "Match":  true,
+                                                   "DurationMs":  3222
+                                               },
+                                               {
+                                                   "Run":  5,
+                                                   "ExpectedCount":  200,
+                                                   "ReceivedCount":  200,
+                                                   "Match":  true,
+                                                   "DurationMs":  3197
+                                               }
+                                           ]
+                              },
+    "Q16_Evasion":  {
+                        "LatencyMs":  8.4,
+                        "SafeDistancePx":  150,
+                        "Status":  "PASS"
+                    },
+    "Q18_InputInterception":  {
+                                  "AccidentalFocusSteal":  false,
+                                  "ClicksThroughToBackground":  true,
+                                  "Status":  "PASS"
+                              }
+}

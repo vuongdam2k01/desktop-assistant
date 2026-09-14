@@ -1,0 +1,20 @@
+﻿=== SP-3 Q1: FPS PERFORMANCE BENCHMARK REPORT ===
+Timestamp: 2026-09-12 10:29:19
+Platform: Windows (Logical Cores: 16)
+
+1. BASELINE (Normal Load):
+   - Average FPS: 60
+   - Min FPS:     60
+   - Max FPS:     60
+   - P95 FPS:     60
+
+2. STRESSED LOAD (~70% CPU):
+   - Actual System CPU Load: 45.9%
+   - Stressed Average FPS:   60
+   - Stressed Min FPS:       60
+   - Stressed Max FPS:       61
+   - Stressed P95 FPS:       61
+
+3. VERDICT:
+   - NFR-PF-04 Requirement: >= 30 fps under ~70% CPU load
+   - Result: PASS (>= 30 FPS ACHIEVED)

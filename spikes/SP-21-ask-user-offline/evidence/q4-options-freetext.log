@@ -1,0 +1,36 @@
+================================================================================
+SPIKE SP-21 / Q4: XỬ LÝ OPTION ID VÀ FREE TEXT (ĐẶC BIỆT CA E9)
+Phụ lục A.10 ca E9: Người dùng gõ tự do MÂU THUẪN với mọi option -> Câu trả lời tự do là nguồn chuẩn.
+================================================================================
+
+--------------------------------------------------------------------------------
+1. TEST 4A: TRẢ LỜI BẰNG OPTION ID
+--------------------------------------------------------------------------------
+Prompt agent: 'Tạo task 'Optimize DB Queries', hỏi tôi priority qua ask_user'
+Agent hỏi: "Bạn muốn đặt độ ưu tiên cho task "Optimize DB Queries" là gì?"
+Options: [{"id":"high","label":"Cao (High)","description":"Cần hoàn thành sớm, ưu tiên hàng đầu"},{"id":"medium","label":"Trung bình (Medium)","description":"Quan trọng nhưng không khẩn cấp"},{"id":"low","label":"Thấp (Low)","description":"Có thể làm sau, ít khẩn cấp"}]
+
+Người dùng chọn option_id: 'high'
+Task tạo được trong store: {"id":"task-3","title":"Optimize DB Queries","status":"Todo","priority":"high","dbId":"db-tasks"}
+writeCallCount: 1
+✅ Test 4A THÀNH CÔNG: Option ID được xử lý chính xác.
+
+--------------------------------------------------------------------------------
+2. TEST 4B: CA E9 — GÕ TỰ DO MÂU THUẪN VỚI MỌI OPTIONS
+--------------------------------------------------------------------------------
+Prompt agent: 'Lưu task 'Migrate Auth Service', hỏi tôi chọn giữa database 'db-tasks' hay 'db-backlog''
+Agent hỏi: "Bạn muốn tạo task 'Migrate Auth Service' trong database nào?"
+Options gợi ý của agent: [{"id":"db_tasks","label":"Tasks","description":"Tạo trong database Tasks"},{"id":"db_backlog","label":"Backlog","description":"Tạo trong database Backlog"}]
+
+Người dùng gõ text tự do (MÂU THUẪN HOÀN TOÀN với options):
+"Tôi không muốn lưu vào Tasks hay Backlog đâu. Hãy lưu task này vào database có ID 'db-core-system' với mức ưu tiên 'Critical'!"
+
+Kết quả sau khi agent xử lý câu trả lời tự do:
+Task tạo được: {"id":"task-3","title":"Migrate Auth Service","status":"Todo","priority":"Critical","dbId":"db-core-system"}
+- Agent có tôn trọng free text làm nguồn chuẩn không: CÓ ✅
+✅ Test 4B (Ca E9) THÀNH CÔNG: Free text được tôn trọng làm nguồn chuẩn tối thượng.
+
+3. KẾT LUẬN Q4:
+  - Trả lời bằng option_id: xử lý nhanh gọn, ánh xạ chuẩn vào luồng thực thi.
+  - Trả lời bằng free text (Ca E9): hệ thống xem câu trả lời tự do là nguồn chuẩn (authoritative source).
+  - Agent cập nhật ngữ cảnh mới, ghi đè toàn bộ các giả định trước đó từ option và thi hành đúng ý người dùng.

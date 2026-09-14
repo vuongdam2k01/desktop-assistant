@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #202124; }
+      .desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #5f6368; }
+      .card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 14px; fill: #1a73e8; }
+      .card-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11.5px; fill: #3c4043; }
+      .num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 11px; fill: #ffffff; }
+      .code { font-family: "Cascadia Code", Consolas, monospace; font-size: 11px; fill: #d93025; background: #fce8e6; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="520" fill="#f8f9fa" rx="12"/>
+
+  <text x="40" y="45" class="title">CÁC BƯỚC THIẾT LẬP GOOGLE CLOUD CONSOLE (BYO OAUTH CLIENT)</text>
+  <text x="40" y="70" class="desc">Hướng dẫn chuẩn cho FR-CF-11 — Tạo dự án, bật API, cấu hình màn hình đồng ý, test user và tải client JSON</text>
+
+  <!-- Hàng 1: Bước 1, 2, 3 -->
+  <!-- Bước 1 -->
+  <g transform="translate(40, 95)" filter="url(#shadow)">
+    <rect width="280" height="180" rx="8" fill="#ffffff" stroke="#dadce0"/>
+    <circle cx="24" cy="24" r="12" fill="#1a73e8"/>
+    <text x="21" y="28" class="num">1</text>
+    <text x="45" y="28" class="card-title">Tạo Google Cloud Project</text>
+    <line x1="15" y1="45" x2="265" y2="45" stroke="#f1f3f4"/>
+    
+    <text x="18" y="70" class="card-body">1. Truy cập: console.cloud.google.com</text>
+    <text x="18" y="92" class="card-body">2. Bấm dropdown chọn dự án ở top bar</text>
+    <text x="18" y="114" class="card-body">3. Bấm "New Project"</text>
+    <text x="18" y="136" class="card-body">4. Tên dự án: "Desktop Assistant"</text>
+    <text x="18" y="158" class="card-body">5. Bấm "Create" và đợi hoàn tất</text>
+  </g>
+
+  <!-- Bước 2 -->
+  <g transform="translate(360, 95)" filter="url(#shadow)">
+    <rect width="280" height="180" rx="8" fill="#ffffff" stroke="#dadce0"/>
+    <circle cx="24" cy="24" r="12" fill="#1a73e8"/>
+    <text x="21" y="28" class="num">2</text>
+    <text x="45" y="28" class="card-title">Bật Gmail &amp; Drive APIs</text>
+    <line x1="15" y1="45" x2="265" y2="45" stroke="#f1f3f4"/>
+    
+    <text x="18" y="70" class="card-body">1. Menu: APIs &amp; Services ➔ Library</text>
+    <text x="18" y="92" class="card-body">2. Tìm "Gmail API" ➔ Bấm Enable</text>
+    <text x="18" y="114" class="card-body">3. Tìm "Google Drive API" ➔ Bấm Enable</text>
+    <text x="18" y="145" class="card-body" style="fill:#137333;font-weight:bold;">✓ Cả 2 API bắt buộc phải bật để app</text>
+    <text x="18" y="163" class="card-body" style="fill:#137333;font-weight:bold;">  đọc được thư và tìm kiếm tài liệu.</text>
+  </g>
+
+  <!-- Bước 3 -->
+  <g transform="translate(680, 95)" filter="url(#shadow)">
+    <rect width="280" height="180" rx="8" fill="#ffffff" stroke="#dadce0"/>
+    <circle cx="24" cy="24" r="12" fill="#1a73e8"/>
+    <text x="21" y="28" class="num">3</text>
+    <text x="45" y="28" class="card-title">OAuth Consent Screen</text>
+    <line x1="15" y1="45" x2="265" y2="45" stroke="#f1f3f4"/>
+    
+    <text x="18" y="70" class="card-body">1. Menu: APIs &amp; Services ➔ Consent screen</text>
+    <text x="18" y="92" class="card-body">2. User Type: External (hoặc Internal nếu</text>
+    <text x="18" y="108" class="card-body">   có Google Workspace tổ chức)</text>
+    <text x="18" y="130" class="card-body">3. App name: "Desktop Assistant"</text>
+    <text x="18" y="152" class="card-body">4. User support &amp; developer email: nhập</text>
+    <text x="18" y="168" class="card-body">   email của bạn ➔ Save and Continue</text>
+  </g>
+
+  <!-- Hàng 2: Bước 4, 5, 6 -->
+  <!-- Bước 4 -->
+  <g transform="translate(40, 305)" filter="url(#shadow)">
+    <rect width="280" height="180" rx="8" fill="#ffffff" stroke="#dadce0"/>
+    <circle cx="24" cy="24" r="12" fill="#1a73e8"/>
+    <text x="21" y="28" class="num">4</text>
+    <text x="45" y="28" class="card-title">Khai Scopes &amp; Test Users</text>
+    <line x1="15" y1="45" x2="265" y2="45" stroke="#f1f3f4"/>
+    
+    <text x="18" y="68" class="card-body">1. Mục Scopes: bấm Add or Remove Scopes</text>
+    <text x="18" y="86" class="card-body">   Tích chọn gmail.readonly và drive.readonly</text>
+    <text x="18" y="112" class="card-body">2. Mục Test users (BẮT BUỘC):</text>
+    <text x="18" y="130" class="card-body">   Bấm "+ Add Users"</text>
+    <text x="18" y="148" class="card-body">   Nhập chính xác email của bạn</text>
+    <text x="18" y="168" class="card-body" style="fill:#d93025;font-weight:bold;">⚠️ Thiếu bước này sẽ gặp lỗi 403 access_denied</text>
+  </g>
+
+  <!-- Bước 5 -->
+  <g transform="translate(360, 305)" filter="url(#shadow)">
+    <rect width="280" height="180" rx="8" fill="#ffffff" stroke="#dadce0"/>
+    <circle cx="24" cy="24" r="12" fill="#1a73e8"/>
+    <text x="21" y="28" class="num">5</text>
+    <text x="45" y="28" class="card-title">Tạo OAuth Client ID</text>
+    <line x1="15" y1="45" x2="265" y2="45" stroke="#f1f3f4"/>
+    
+    <text x="18" y="68" class="card-body">1. Menu: APIs &amp; Services ➔ Credentials</text>
+    <text x="18" y="90" class="card-body">2. Bấm "+ Create Credentials"</text>
+    <text x="18" y="110" class="card-body">3. Chọn "OAuth client ID"</text>
+    <text x="18" y="132" class="card-body">4. Application type: BẮT BUỘC chọn</text>
+    <text x="18" y="150" class="card-body" style="fill:#d93025;font-weight:bold;">   "Desktop app" (KHÔNG chọn Web!)</text>
+    <text x="18" y="168" class="card-body">5. Name: "Desktop Assistant Client"</text>
+  </g>
+
+  <!-- Bước 6 -->
+  <g transform="translate(680, 305)" filter="url(#shadow)">
+    <rect width="280" height="180" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1.5"/>
+    <circle cx="24" cy="24" r="12" fill="#1a73e8"/>
+    <text x="21" y="28" class="num">6</text>
+    <text x="45" y="28" class="card-title">Tải JSON &amp; Nạp vào App</text>
+    <line x1="15" y1="45" x2="265" y2="45" stroke="#d2e3fc"/>
+    
+    <text x="18" y="68" class="card-body">1. Bấm nút Download ⬇️ (Download JSON)</text>
+    <text x="18" y="90" class="card-body">2. Mở Desktop Assistant ➔ Settings</text>
+    <text x="18" y="108" class="card-body">3. Chọn Connectors ➔ Google ➔ BYO Client</text>
+    <text x="18" y="130" class="card-body">4. Nạp file JSON vừa tải về</text>
+    <text x="18" y="152" class="card-body" style="fill:#137333;font-weight:bold;">5. Bấm Connect ➔ App tự mở trình duyệt</text>
+    <text x="18" y="168" class="card-body" style="fill:#137333;font-weight:bold;">   và hoàn tất cấp quyền qua loopback!</text>
+  </g>
+</svg>

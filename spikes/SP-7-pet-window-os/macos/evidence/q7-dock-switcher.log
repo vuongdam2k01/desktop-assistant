@@ -1,0 +1,12 @@
+==========================================================
+SP-7 / Q7 DOCK, APP SWITCHER & TWO-WINDOW TEST (macOS)
+Timestamp: 2026-09-13T13:40:21Z
+==========================================================
+
+[Step 2] Setting Dock Mode = HIDE (NSApplicationActivationPolicyAccessory)...
+Screenshot saved: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q7-dock-hidden.png
+
+[Step 3] Setting Dock Mode = SHOW (NSApplicationActivationPolicyRegular)...
+Screenshot saved: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q7-dock-visible.png
+
+Q7 Test Completed Successfully.

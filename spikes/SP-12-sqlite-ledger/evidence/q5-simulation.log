@@ -1,0 +1,40 @@
+
+======================================================================
+📊 RUNNING 90-DAY SIMULATION: NORMAL USER PROFILE (20 JOBS/DAY)
+   Days: 90 | Jobs/Day: 20 | Total Jobs: 1800
+======================================================================
+⏱️ Data Generation & Commit completed in: 3451ms
+📦 Total Jobs Created: 1,800
+📝 Total ActionRecords Created: 5,400
+💾 SQLite DB File Size (.db): 12,963,840 bytes (12.36 MB)
+📄 SQLite WAL Size (.db-wal): 0 bytes
+📏 Average Disk Size per Job: 7,202 bytes (~7.0 KB)
+📏 Average Disk Size per ActionRecord: 2,401 bytes (~2.3 KB)
+📉 Raw JSON Snapshot Total: 4.44 MB
+🗜️ Compressed (zlib) JSON Snapshot Total: 2.47 MB (44.4% reduction)
+
+--- Query Performance Benchmarks ---
+⚡ Single Job Ledger Retrieval (200 random samples):
+   p50: 0.128 ms | p95: 0.176 ms | p99: 0.473 ms
+⚡ Recent 50 ActionRecords Scan:
+   p50: 33.385 ms | p95: 41.980 ms
+
+======================================================================
+📊 RUNNING 90-DAY SIMULATION: HEAVY POWER USER PROFILE (50 JOBS/DAY)
+   Days: 90 | Jobs/Day: 50 | Total Jobs: 4500
+======================================================================
+⏱️ Data Generation & Commit completed in: 9444ms
+📦 Total Jobs Created: 4,500
+📝 Total ActionRecords Created: 13,500
+💾 SQLite DB File Size (.db): 32,329,728 bytes (30.83 MB)
+📄 SQLite WAL Size (.db-wal): 0 bytes
+📏 Average Disk Size per Job: 7,184 bytes (~7.0 KB)
+📏 Average Disk Size per ActionRecord: 2,395 bytes (~2.3 KB)
+📉 Raw JSON Snapshot Total: 11.11 MB
+🗜️ Compressed (zlib) JSON Snapshot Total: 6.17 MB (44.5% reduction)
+
+--- Query Performance Benchmarks ---
+⚡ Single Job Ledger Retrieval (200 random samples):
+   p50: 0.210 ms | p95: 0.451 ms | p99: 3.195 ms
+⚡ Recent 50 ActionRecords Scan:
+   p50: 79.374 ms | p95: 104.810 ms

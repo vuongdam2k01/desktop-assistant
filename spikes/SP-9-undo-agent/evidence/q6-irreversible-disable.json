@@ -1,0 +1,9 @@
+{
+  "jobId": "job-09-irreversible",
+  "name": "Job 9: 100% Irreversible (Create comment)",
+  "canUndo": false,
+  "disabledReason": "Tất cả các thao tác trong job này đều không thể hoàn nguyên qua API (100% irreversible). Nút Undo bị vô hiệu hóa (FR-UD-06).",
+  "irreversibleCount": 1,
+  "reversibleCount": 0,
+  "buttonCorrectlyDisabled": true
+}

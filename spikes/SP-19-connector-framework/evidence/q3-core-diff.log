@@ -1,0 +1,31 @@
+================================================================================
+SPIKE SP-19 / Q3: Đo lường số dòng lõi phải sửa khi thêm connector thứ 2 (Gmail)
+Mục tiêu: Kiểm chứng trực tiếp mệnh đề PRD §10.10: 'connector là dữ liệu + adapter'
+================================================================================
+
+[Kiểm tra] Job Manager (/home/<user>/projects/desktop-assistant/spikes/SP-19-connector-framework/src/core/job-manager.ts):
+  - Số dòng code logic lõi phải sửa khi thêm Gmail: 0 dòng
+  - Có rẽ nhánh theo connectorId cứng không: KHÔNG
+[Kiểm tra] Connector Registry (/home/<user>/projects/desktop-assistant/spikes/SP-19-connector-framework/src/core/connector-registry.ts):
+  - Số dòng code logic lõi phải sửa khi thêm Gmail: 0 dòng
+  - Có rẽ nhánh theo connectorId cứng không: KHÔNG
+[Kiểm tra] Evaluator (Pure) (/home/<user>/projects/desktop-assistant/spikes/SP-19-connector-framework/src/core/evaluator/evaluator.ts):
+  - Số dòng code logic lõi phải sửa khi thêm Gmail: 0 dòng
+  - Có rẽ nhánh theo connectorId cứng không: KHÔNG
+[Kiểm tra] Uniform Ledger (/home/<user>/projects/desktop-assistant/spikes/SP-19-connector-framework/src/core/ledger.ts):
+  - Số dòng code logic lõi phải sửa khi thêm Gmail: 0 dòng
+  - Có rẽ nhánh theo connectorId cứng không: KHÔNG
+[Kiểm tra] Wrap Layer (createHardGatedTool) (/home/<user>/projects/desktop-assistant/spikes/SP-19-connector-framework/src/core/wrapped-tool.ts):
+  - Số dòng code logic lõi phải sửa khi thêm Gmail: 0 dòng
+  - Có rẽ nhánh theo connectorId cứng không: KHÔNG
+[Kiểm tra] Tool Generator (/home/<user>/projects/desktop-assistant/spikes/SP-19-connector-framework/src/generator/tool-generator.ts):
+  - Số dòng code logic lõi phải sửa khi thêm Gmail: 0 dòng
+  - Có rẽ nhánh theo connectorId cứng không: KHÔNG
+
+[Báo cáo] Đã ghi nhận bằng chứng chi tiết vào /home/<user>/projects/desktop-assistant/spikes/SP-19-connector-framework/evidence/core-diff-report.md
+
+================================================================================
+KẾT LUẬN Q3: 0 DÒNG SỬA ĐỔI LÕI — MỆNH ĐỀ §10.10 ĐÚNG TUYỆT ĐỐI
+Thêm Gmail chỉ gồm: 1 manifest JSON + 1 adapter TS + 1 dòng đăng ký registry.
+Job Manager, Evaluator, Ledger, và Wrap Layer giữ nguyên 100% không đổi.
+================================================================================

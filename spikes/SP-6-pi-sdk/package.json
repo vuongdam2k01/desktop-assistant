@@ -1,0 +1,27 @@
+{
+  "name": "sp-6-pi-sdk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:q1": "tsx src/test-q1-tools.ts",
+    "test:q2": "tsx src/test-q2-hardgate.ts",
+    "test:q3": "tsx src/test-q3-pause-resume.ts",
+    "test:q4": "tsx src/test-q4-concurrency.ts",
+    "test:q5": "tsx src/test-q5-providers.ts",
+    "test:q6": "tsx src/test-q6-vision.ts",
+    "test:q7": "tsx src/test-q7-token-usage.ts",
+    "test:all": "tsx src/run-all.ts"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "dotenv": "^17.4.2",
+    "typebox": "^1.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sizes": {
+    "arm64MB": 313,
+    "x64MB": 320,
+    "universalMB": 536,
+    "universalOverheadMB": 223,
+    "universalOverheadPercent": "71.2%"
+  },
+  "binaries": {
+    "mainExecutable": "/Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/MacOS/SP12MacPackagingTest: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64:Mach-O 64-bit executable arm64]\n/Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/MacOS/SP12MacPackagingTest (for architecture x86_64):\tMach-O 64-bit executable x86_64\n/Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/MacOS/SP12MacPackagingTest (for architecture arm64):\tMach-O 64-bit executable arm64",
+    "nativeModules": [
+      {
+        "file": "darwin-arm64.node",
+        "type": "/Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-arm64.node: Mach-O 64-bit bundle arm64"
+      },
+      {
+        "file": "darwin-x64.node",
+        "type": "/Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-x64.node: Mach-O 64-bit bundle x86_64"
+      }
+    ]
+  },
+  "testResults": {
+    "arm64": "PACKAGED_TEST_SUCCESS: {\"success\":true,\"row\":{\"id\":1,\"correlation_id\":\"corr_packaged_mac_001\",\"payload\":\"{\\\"action\\\":\\\"packaged_native_check\\\",\\\"timestamp\\\":\\\"2026-09-13T14:13:49.255Z\\\"}\"},\"dbPath\":\"/Users/<user>/Library/Application Support/sp12-mac-packaging-test/packaged-test.db\",\"electronVersion\":\"44.3.0\",\"nodeVersion\":\"24.20.0\",\"modulesVersion\":\"149\",\"arch\":\"arm64\",\"platform\":\"darwin\",\"isAsar\":true}",
+    "universal": "PACKAGED_TEST_SUCCESS: {\"success\":true,\"row\":{\"id\":1,\"correlation_id\":\"corr_packaged_mac_001\",\"payload\":\"{\\\"action\\\":\\\"packaged_native_check\\\",\\\"timestamp\\\":\\\"2026-09-13T14:13:49.483Z\\\"}\"},\"dbPath\":\"/Users/<user>/Library/Application Support/sp12-mac-packaging-test/packaged-test.db\",\"electronVersion\":\"44.3.0\",\"nodeVersion\":\"24.20.0\",\"modulesVersion\":\"149\",\"arch\":\"arm64\",\"platform\":\"darwin\",\"isAsar\":true}"
+  }
+}

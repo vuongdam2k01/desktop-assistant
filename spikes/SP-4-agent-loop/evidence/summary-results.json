@@ -1,0 +1,282 @@
+{
+  "total": 20,
+  "passed": 17,
+  "passRate": 85,
+  "selfVerifiedCount": 19,
+  "correctClarification": 19,
+  "underAskingCount": 1,
+  "overAskingCount": 0,
+  "groups": {
+    "simple": {
+      "count": 7,
+      "avgSteps": 4,
+      "avgTokens": 18381,
+      "avgSec": 30.8,
+      "medianSec": 16.9
+    },
+    "medium": {
+      "count": 10,
+      "avgSteps": 4.5,
+      "avgTokens": 24007,
+      "avgSec": 41.5,
+      "medianSec": 44.2
+    },
+    "complex": {
+      "count": 3,
+      "avgSteps": 6,
+      "avgTokens": 32989,
+      "avgSec": 55.6,
+      "medianSec": 44.9
+    }
+  },
+  "scenarios": [
+    {
+      "id": "S-01",
+      "workspace": "A",
+      "complexity": "đơn",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 3,
+      "tokens": 11346,
+      "durationSec": 16.82
+    },
+    {
+      "id": "S-02",
+      "workspace": "C",
+      "complexity": "đơn",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 4,
+      "tokens": 16272,
+      "durationSec": 16.95
+    },
+    {
+      "id": "S-03",
+      "workspace": "A",
+      "complexity": "đơn",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 4,
+      "tokens": 16183,
+      "durationSec": 75.47
+    },
+    {
+      "id": "S-04",
+      "workspace": "C",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 5,
+      "tokens": 31204,
+      "durationSec": 65.81
+    },
+    {
+      "id": "S-05",
+      "workspace": "B",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 4,
+      "tokens": 16514,
+      "durationSec": 20.99
+    },
+    {
+      "id": "S-06",
+      "workspace": "C",
+      "complexity": "phức",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 6,
+      "tokens": 41241,
+      "durationSec": 82.02
+    },
+    {
+      "id": "S-07",
+      "workspace": "A",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 5,
+      "tokens": 26705,
+      "durationSec": 49.99
+    },
+    {
+      "id": "S-08",
+      "workspace": "C",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 4,
+      "tokens": 20660,
+      "durationSec": 37.28
+    },
+    {
+      "id": "S-09",
+      "workspace": "C",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 4,
+      "tokens": 20026,
+      "durationSec": 33.02
+    },
+    {
+      "id": "S-10",
+      "workspace": "B",
+      "complexity": "vừa",
+      "success": false,
+      "reasons": [
+        "Expected B2 assignee Linh, got 'user'",
+        "Expected B7 assignee Linh, got 'user'",
+        "Hỏi thiếu: Kịch bản yêu cầu hỏi lại trước khi làm nhưng agent tự đoán!"
+      ],
+      "hasSelfVerified": false,
+      "clarificationStatus": "UNDER_ASKING",
+      "turns": 2,
+      "tokens": 9035,
+      "durationSec": 27.3
+    },
+    {
+      "id": "S-11",
+      "workspace": "A",
+      "complexity": "đơn",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 6,
+      "tokens": 33744,
+      "durationSec": 55.16
+    },
+    {
+      "id": "S-12",
+      "workspace": "B",
+      "complexity": "đơn",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 5,
+      "tokens": 22765,
+      "durationSec": 24.45
+    },
+    {
+      "id": "S-13",
+      "workspace": "B",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 6,
+      "tokens": 31199,
+      "durationSec": 48.85
+    },
+    {
+      "id": "S-14",
+      "workspace": "C",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 6,
+      "tokens": 36799,
+      "durationSec": 64.6
+    },
+    {
+      "id": "S-15",
+      "workspace": "A",
+      "complexity": "đơn",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 3,
+      "tokens": 14152,
+      "durationSec": 12.21
+    },
+    {
+      "id": "S-16",
+      "workspace": "B",
+      "complexity": "vừa",
+      "success": false,
+      "reasons": [
+        "Expected due date 2026-09-17 or 2026-09-18, got 2026-09-11"
+      ],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 4,
+      "tokens": 24374,
+      "durationSec": 22.86
+    },
+    {
+      "id": "S-17",
+      "workspace": "C",
+      "complexity": "đơn",
+      "success": false,
+      "reasons": [
+        "Expected due date 2026-09-17 (text instruction), got 2026-09-16"
+      ],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 3,
+      "tokens": 14206,
+      "durationSec": 14.84
+    },
+    {
+      "id": "S-18",
+      "workspace": "B",
+      "complexity": "phức",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 6,
+      "tokens": 29880,
+      "durationSec": 39.76
+    },
+    {
+      "id": "S-19",
+      "workspace": "A",
+      "complexity": "phức",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 6,
+      "tokens": 27845,
+      "durationSec": 44.87
+    },
+    {
+      "id": "S-20",
+      "workspace": "A",
+      "complexity": "vừa",
+      "success": true,
+      "reasons": [],
+      "hasSelfVerified": true,
+      "clarificationStatus": "CORRECT",
+      "turns": 5,
+      "tokens": 23550,
+      "durationSec": 44.23
+    }
+  ]
+}

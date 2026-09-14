@@ -1,0 +1,45 @@
+{
+  "name": "@desktop-assistant/backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src/server.ts --format esm --out-dir dist && tsx scripts/scan-secrets.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "start": "node dist/server.js",
+    "db:up": "docker compose -p da-f00 up -d --wait",
+    "db:down": "docker compose -p da-f00 down",
+    "db:migrate": "tsx src/cli/migrate.ts",
+    "db:dump": "tsx src/cli/dump-auth-store.ts",
+    "allowlist": "tsx src/cli/allowlist.ts",
+    "backup:create": "tsx src/cli/backup-database.ts",
+    "backup:restore-rehearsal": "tsx src/cli/restore-rehearsal.ts",
+    "secrets:scan": "tsx scripts/scan-secrets.ts",
+    "load:test": "tsx scripts/run-load-test.ts",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration"
+  },
+  "dependencies": {
+    "@desktop-assistant/contracts": "workspace:*",
+    "@fastify/rate-limit": "11.2.0",
+    "@fastify/static": "10.1.3",
+    "ajv": "8.20.0",
+    "fastify": "5.12.4",
+    "fastify-plugin": "6.0.0",
+    "google-auth-library": "11.0.2",
+    "ioredis": "6.0.0",
+    "jose": "6.2.12",
+    "pg": "8.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.4",
+    "@types/pg": "8.11.11",
+    "tsup": "8.5.1",
+    "tsx": "4.23.13",
+    "typescript": "5.9.3",
+    "vitest": "5.0.0",
+    "autocannon": "8.0.0"
+  }
+}

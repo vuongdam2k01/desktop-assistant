@@ -1,0 +1,113 @@
+=== KIỂM CHỨNG HARDENED RUNTIME VÀ ENTITLEMENTS TRÊN MACOS (Q2) ===
+Thời gian: Sun Sep 13 21:28:00 +07 2026
+macOS: 26.5.2 (25F84) | Kiến trúc: arm64
+
+------------------------------------------------------------
+TEST CASE: case1-adhoc-no-runtime
+  Options: Runtime=no | Plist=empty.plist | Identity=-
+/tmp/test-apps/case1-adhoc-no-runtime/Electron.app/Contents/MacOS/Electron: replacing existing signature
+/tmp/test-apps/case1-adhoc-no-runtime/Electron.app: replacing existing signature
+  Kiểm tra chữ ký:
+CodeDirectory v=20400 size=428 flags=0x2(adhoc) hashes=3+7 location=embedded
+TeamIdentifier=not set
+  Khởi chạy tiến trình kiểm tra (timeout 5s)...
+  Exit code: 0
+  Output / Error: V8 JS executed successfully: 2
+  --> KẾT QUẢ: THÀNH CÔNG (Pass)
+------------------------------------------------------------
+TEST CASE: case2-runtime-no-entitlements
+  Options: Runtime=yes | Plist=empty.plist | Identity=-
+/tmp/test-apps/case2-runtime-no-entitlements/Electron.app/Contents/MacOS/Electron: replacing existing signature
+/tmp/test-apps/case2-runtime-no-entitlements/Electron.app: replacing existing signature
+  Kiểm tra chữ ký:
+CodeDirectory v=20500 size=436 flags=0x10002(adhoc,runtime) hashes=3+7 location=embedded
+TeamIdentifier=not set
+  Khởi chạy tiến trình kiểm tra (timeout 5s)...
+  Exit code: 134
+  Output / Error: dyld[14335]: Library not loaded: @rpath/Electron Framework.framework/Electron Framework
+  Referenced from: <4C4C447C-5555-3144-A122-BBB7749A7688> /private/tmp/test-apps/case2-runtime-no-entitlements/Electron.app/Contents/MacOS/Electron
+  Reason: tried: '/private/tmp/test-apps/case2-runtime-no-entitlements/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework' (code signature in <4C4C44E3-5555-3144-A193-1D6578CCBF56> '/private/tmp/test-apps/case2-runtime-no-entitlements/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework' not valid for use in process: mapping process and mapped file (non-platform) have different Team IDs), '/private/tmp/test-apps/case2-runtime-no-entitlements/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework' (code signature in <4C4C44E3-5555-3144-A193-1D6578CCBF56> '/private/tmp/test-apps/case2-runtime-no-entitlements/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework' not valid for use in process: mapping process and mapped file (non-platform) have different Team IDs)
+  --> KẾT QUẢ: GÃY / CRASH (Fail - Exit Code 134)
+------------------------------------------------------------
+TEST CASE: case3-runtime-no-jit
+  Options: Runtime=yes | Plist=no-jit.plist | Identity=-
+/tmp/test-apps/case3-runtime-no-jit/Electron.app/Contents/MacOS/Electron: replacing existing signature
+/tmp/test-apps/case3-runtime-no-jit/Electron.app: replacing existing signature
+  Kiểm tra chữ ký:
+CodeDirectory v=20500 size=436 flags=0x10002(adhoc,runtime) hashes=3+7 location=embedded
+TeamIdentifier=not set
+  Khởi chạy tiến trình kiểm tra (timeout 5s)...
+  Exit code: 134
+  Output / Error: dyld[14431]: Library not loaded: @rpath/Electron Framework.framework/Electron Framework
+  Referenced from: <4C4C447C-5555-3144-A122-BBB7749A7688> /private/tmp/test-apps/case3-runtime-no-jit/Electron.app/Contents/MacOS/Electron
+  Reason: tried: '/private/tmp/test-apps/case3-runtime-no-jit/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework' (code signature in <4C4C44E3-5555-3144-A193-1D6578CCBF56> '/private/tmp/test-apps/case3-runtime-no-jit/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework' not valid for use in process: mapping process and mapped file (non-platform) have different Team IDs), '/private/tmp/test-apps/case3-runtime-no-jit/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework' (code signature in <4C4C44E3-5555-3144-A193-1D6578CCBF56> '/private/tmp/test-apps/case3-runtime-no-jit/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework' not valid for use in process: mapping process and mapped file (non-platform) have different Team IDs)
+  --> KẾT QUẢ: GÃY / CRASH (Fail - Exit Code 134)
+------------------------------------------------------------
+TEST CASE: case4-runtime-no-unsigned-mem
+  Options: Runtime=yes | Plist=no-unsigned-mem.plist | Identity=-
+/tmp/test-apps/case4-runtime-no-unsigned-mem/Electron.app/Contents/MacOS/Electron: replacing existing signature
+/tmp/test-apps/case4-runtime-no-unsigned-mem/Electron.app: replacing existing signature
+  Kiểm tra chữ ký:
+CodeDirectory v=20500 size=436 flags=0x10002(adhoc,runtime) hashes=3+7 location=embedded
+TeamIdentifier=not set
+  Khởi chạy tiến trình kiểm tra (timeout 5s)...
+  Exit code: 134
+  Output / Error: dyld[14518]: Library not loaded: @rpath/Electron Framework.framework/Electron Framework
+  Referenced from: <4C4C447C-5555-3144-A122-BBB7749A7688> /private/tmp/test-apps/case4-runtime-no-unsigned-mem/Electron.app/Contents/MacOS/Electron
+  Reason: tried: '/private/tmp/test-apps/case4-runtime-no-unsigned-mem/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework' (code signature in <4C4C44E3-5555-3144-A193-1D6578CCBF56> '/private/tmp/test-apps/case4-runtime-no-unsigned-mem/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework' not valid for use in process: mapping process and mapped file (non-platform) have different Team IDs), '/private/tmp/test-apps/case4-runtime-no-unsigned-mem/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework' (code signature in <4C4C44E3-5555-3144-A193-1D6578CCBF56> '/private/tmp/test-apps/case4-runtime-no-unsigned-mem/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework' not valid for use in process: mapping process and mapped file (non-platform) have different Team IDs)
+  --> KẾT QUẢ: GÃY / CRASH (Fail - Exit Code 134)
+------------------------------------------------------------
+TEST CASE: case5-runtime-full-entitlements-adhoc
+  Options: Runtime=yes | Plist=full.plist | Identity=-
+/tmp/test-apps/case5-runtime-full-entitlements-adhoc/Electron.app/Contents/MacOS/Electron: replacing existing signature
+/tmp/test-apps/case5-runtime-full-entitlements-adhoc/Electron.app: replacing existing signature
+  Kiểm tra chữ ký:
+CodeDirectory v=20500 size=436 flags=0x10002(adhoc,runtime) hashes=3+7 location=embedded
+TeamIdentifier=not set
+  Khởi chạy tiến trình kiểm tra (timeout 5s)...
+  Exit code: 0
+  Output / Error: V8 JS executed successfully: 2
+  --> KẾT QUẢ: THÀNH CÔNG (Pass)
+------------------------------------------------------------
+TEST CASE: case6-runtime-full-selfsigned
+  Options: Runtime=yes | Plist=full.plist | Identity=DesktopAssistant Dev Test A
+/tmp/test-apps/case6-runtime-full-selfsigned/Electron.app/Contents/MacOS/Electron: replacing existing signature
+/tmp/test-apps/case6-runtime-full-selfsigned/Electron.app: replacing existing signature
+  Kiểm tra chữ ký:
+CodeDirectory v=20500 size=436 flags=0x10000(runtime) hashes=3+7 location=embedded
+Authority=DesktopAssistant Dev Test A
+TeamIdentifier=not set
+  Khởi chạy tiến trình kiểm tra (timeout 5s)...
+  Exit code: 0
+  Output / Error: V8 JS executed successfully: 2
+  --> KẾT QUẢ: THÀNH CÔNG (Pass)
+
+=== HOÀN TẤT THỰC NGHIỆM HARDENED RUNTIME ===
+
+------------------------------------------------------------
+CHI TIẾT LỖI KHI THIẾU TỪNG ENTITLEMENT CỤ THỂ:
+
+1. KHI BẬT HARDENED RUNTIME NHƯNG THIẾU com.apple.security.cs.disable-library-validation:
+   - Dấu hiệu: macOS chặn tải các dylibs, frameworks và native node modules (napi-rs / better-sqlite3) không cùng Team ID với app binary.
+   - Exit code: 134 (SIGABRT qua dyld)
+   - Thông báo lỗi nguyên văn:
+     dyld[14335]: Library not loaded: @rpath/Electron Framework.framework/Electron Framework
+     Reason: tried: '.../Electron Framework.framework/Electron Framework' (code signature in ... not valid for use in process: mapping process and mapped file (non-platform) have different Team IDs)
+
+2. KHI BẬT com.apple.security.cs.disable-library-validation NHƯNG THIẾU com.apple.security.cs.allow-jit:
+   - Dấu hiệu: V8 JavaScript engine cố gắng cấp phát bộ nhớ thực thi cho JIT compiler (CodeRange) nhưng bị kernel macOS từ chối.
+   - Exit code: 133 (SIGTRAP)
+   - Thông báo lỗi nguyên văn:
+     # Fatal process out of memory: Failed to reserve virtual memory for CodeRange
+     ----- Native stack trace -----
+      1: node::WorkerThreadsTaskRunner::DelayedTaskScheduler::Start()
+      2: ares_llist_node_next
+      3: v8::CodeEvent::GetScriptColumn()
+      ...
+      10: v8::Isolate::Initialize(v8::Isolate*, v8::Isolate::CreateParams const&)
+
+3. KẾT LUẬN CÁC ENTITLEMENTS BẮT BUỘC CHO ELECTRON TRÊN MACOS:
+   - com.apple.security.cs.allow-jit (Bắt buộc cho V8 JS execution)
+   - com.apple.security.cs.allow-unsigned-executable-memory (Bắt buộc cho Node.js/Electron memory allocation)
+   - com.apple.security.cs.allow-dyld-environment-variables (Bắt buộc cho helper processes)
+   - com.apple.security.cs.disable-library-validation (Bắt buộc cho native modules như napi-rs, better-sqlite3 và development builds)

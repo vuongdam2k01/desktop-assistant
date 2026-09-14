@@ -1,0 +1,54 @@
+==========================================================
+SP-7 / Q1 FOCUS TEST (macOS) - 10 RUNS CONSECUTIVE AUTOMATION
+Timestamp: 2026-09-13T13:31:12Z
+Mode: normal (dock: show)
+Target: 200 characters pumped into TextEdit via CGEvent
+Event: Dialogue Card pops up MID-STREAM at ~2.5s (char ~100)
+Pass Criteria: 200/200 chars received in every run (0 lost)
+==========================================================
+
+--- Starting Run 1 of 10 ---
+Screenshot captured at run 1: /Users/<user>/projects/desktop-assistant/spikes/SP-7-pet-window-os/macos/evidence/q1-focus-editor-during-popup.png
+Expected length: 200 | Actual length: 200
+Run 1: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 2 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 2: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 3 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 3: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 4 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 4: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 5 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 5: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 6 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 6: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 7 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 7: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 8 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 8: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 9 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 9: PASS (200/200 characters received, 0 lost)
+
+--- Starting Run 10 of 10 ---
+Expected length: 200 | Actual length: 200
+Run 10: PASS (200/200 characters received, 0 lost)
+
+==========================================================
+Q1 FOCUS TEST COMPLETE:
+Total Runs: 10 | Pass: 10 | Fail: 0 | Pass Rate: 100%
+==========================================================

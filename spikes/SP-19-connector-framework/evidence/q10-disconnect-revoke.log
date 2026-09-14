@@ -1,0 +1,31 @@
+================================================================================
+SPIKE SP-19 / Q10: Ngắt kết nối gọi revoke endpoint và job fail sạch (FR-CF-08, FR-AG-07)
+Yêu cầu: Gọi revoke endpoint, xoá token; job đang chạy dùng connector đó fail sạch
+================================================================================
+
+[1] Trạng thái ban đầu:
+  - Connector: gmail
+  - Revoke endpoint khai báo trong manifest: https://oauth2.googleapis.com/revoke
+  - Registry status: connected
+
+[2] Thực hiện hành động ngắt kết nối (Disconnect & Revoke):
+  - Đã gọi adapter.revoke(): success = true
+  - Trạng thái adapter sau revoke: revoked
+  - Trạng thái trong registry: revoked
+  ✅ Revoke hoàn tất, token nội bộ đã bị xoá khỏi bộ nhớ an toàn.
+
+[3] Mô phỏng Job đang chạy (in-flight) cố gọi tool sau khi connector đã bị ngắt:
+  ⚡ Bắt được lỗi khi thực thi tool: CONNECTOR_REVOKED: Gmail connector token has been revoked.
+  - Lỗi có phải dạng chuẩn CONNECTOR_REVOKED không? true
+
+[4] Kiểm tra bản ghi Uniform Ledger cho job bị fail:
+  - Seq #1: [INTENT] tool=gmail_search_emails reason=n/a
+  - Seq #2: [BLOCKED] tool=gmail_search_emails reason=Execution failed: CONNECTOR_REVOKED: Gmail connector token has been revoked.
+  ✅ ĐẠT: Ledger ghi nhận BLOCKED sạch sẽ, kèm mã lỗi rõ ràng.
+
+================================================================================
+KẾT LUẬN Q10: ĐẠT 100%
+1. Ngắt kết nối thực hiện gọi revoke endpoint và xoá sạch token khỏi bộ nhớ.
+2. Job đang chạy (in-flight) đụng connector đã ngắt sẽ FAIL SẠCH theo FR-AG-07,
+   không treo luồng, không nuốt lỗi, và ghi nhận lý do rõ ràng vào ledger.
+================================================================================

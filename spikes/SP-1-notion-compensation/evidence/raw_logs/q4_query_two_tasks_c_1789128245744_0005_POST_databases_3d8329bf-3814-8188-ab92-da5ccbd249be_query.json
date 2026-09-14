@@ -1,0 +1,220 @@
+{
+  "call_id": "1789128245744_0005_POST_databases_3d8329bf-3814-8188-ab92-da5ccbd249be_query",
+  "category": "q4_query_two_tasks_c",
+  "timestamp": "2026-09-11T12:04:06Z",
+  "duration_ms": 677,
+  "request": {
+    "method": "POST",
+    "url": "https://api.notion.com/v1/databases/3d8329bf-3814-8188-ab92-da5ccbd249be/query",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "page_size": 2
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:04:06 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968870a90b827f-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=Nn1Bd0hfrcadG_6vdvOVEsGXFD1vYW6KWwYR8vLv_cI-1789128245.8664079-1.0.1.1-K1hehQmz8nSzoEq6GnZ7gmdXp2tytdkJKUUWF16xi0SalnlXYW3HkRV0RUWCCkerWn1wcYLaAyBhBGhWVdRKMp7zO2t86kCJrednaekAbXBwbllprh1yjuqrhLp8mPHh; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:34:06 GMT",
+      "ETag": "W/\"b1d-K1Kj2Wrt9muKRIyIIpsAC2+y4GQ\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "f583e4c6-8424-4825-8bb6-22fcfb009284",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "list",
+      "results": [
+        {
+          "object": "page",
+          "id": "3d8329bf-3814-81eb-9c2d-e2085395af59",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8329bf-3814-8188-ab92-da5ccbd249be"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Order": {
+              "id": "BCK%3B",
+              "type": "number",
+              "number": 13
+            },
+            "Due date": {
+              "id": "Kxlr",
+              "type": "date",
+              "date": {
+                "start": "2026-09-20",
+                "end": null,
+                "time_zone": null
+              }
+            },
+            "Status": {
+              "id": "WIcO",
+              "type": "select",
+              "select": {
+                "id": "5fe9b184-a61a-440d-93ad-55a5c1155dd7",
+                "name": "Backlog",
+                "color": "default"
+              }
+            },
+            "Priority": {
+              "id": "qJ%3CJ",
+              "type": "select",
+              "select": {
+                "id": "1d857aef-82e9-402d-9778-fc16a63120bc",
+                "name": "Cao",
+                "color": "default"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Đàm phán gia hạn license",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Đàm phán gia hạn license",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/m-ph-n-gia-h-n-license-3d8329bf381481eb9c2de2085395af59",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8329bf-3814-81f5-8ab3-e35b300dad74",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8329bf-3814-8188-ab92-da5ccbd249be"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Order": {
+              "id": "BCK%3B",
+              "type": "number",
+              "number": 12
+            },
+            "Due date": {
+              "id": "Kxlr",
+              "type": "date",
+              "date": {
+                "start": "2026-10-01",
+                "end": null,
+                "time_zone": null
+              }
+            },
+            "Status": {
+              "id": "WIcO",
+              "type": "select",
+              "select": {
+                "id": "5fe9b184-a61a-440d-93ad-55a5c1155dd7",
+                "name": "Backlog",
+                "color": "default"
+              }
+            },
+            "Priority": {
+              "id": "qJ%3CJ",
+              "type": "select",
+              "select": {
+                "id": "8ff6939e-b4b3-4c40-ad38-268ede6f861a",
+                "name": "Thấp",
+                "color": "default"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Xoá feature flag cũ",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Xoá feature flag cũ",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/Xo-feature-flag-c-3d8329bf381481f58ab3e35b300dad74",
+          "public_url": null,
+          "archived": false
+        }
+      ],
+      "next_cursor": "s:d425a03f-db93-42b8-a2c1-90630f406646:3d8329bf-3814-81e7-9eb9-d7b932b22214",
+      "has_more": true,
+      "type": "page_or_database",
+      "page_or_database": {},
+      "request_id": "f583e4c6-8424-4825-8bb6-22fcfb009284"
+    },
+    "error": null
+  }
+}

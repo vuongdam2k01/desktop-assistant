@@ -1,0 +1,26 @@
+﻿{
+    "Timestamp":  "2026-09-12 11:40:43",
+    "GroupE_StatesMotion":  {
+                                "Q19_LayeredStateMachine":  "PASS (Base locomotion [standing/walking/dragged] decoupled from 5 work states [FR-PET-02])",
+                                "Q20_StateTransitionSmoothness":  {
+                                                                      "AvgFps":  60,
+                                                                      "MinFps":  60,
+                                                                      "Status":  "PASS"
+                                                                  },
+                                "Q21_AdaptiveCardFlip":  {
+                                                             "InitialOrientation":  "right",
+                                                             "EdgeFlippedOrientation":  "left",
+                                                             "AdaptiveFlipWorking":  true,
+                                                             "Screenshot":  "evidence/q21-dialogue-adaptive-flip.png"
+                                                         }
+                            },
+    "GroupF_EdgeCases":  {
+                             "Q22_SessionLock":  "VERIFIED (WM_WTSSESSION_CHANGE: freeze render loop on lock, restore on unlock)",
+                             "Q23_SleepWake":  "VERIFIED (WM_POWERBROADCAST: PBT_APMSUSPEND pause timer, PBT_APMRESUMEAUTOMATIC resume)",
+                             "Q24_DpiChange":  "VERIFIED (WM_DPICHANGED: recalculate workArea bounds via SetWindowPos without visual scale jump)",
+                             "Q25_DisplayRemoval":  "VERIFIED (WM_DISPLAYCHANGE: fallback clamp to PrimaryScreen workArea immediately)",
+                             "Q26_FullscreenApp":  "VERIFIED (SHAppBarMessage / GetForegroundWindow rect match screen bounds -\u003e auto-park/hide)",
+                             "Q27_Accessibility":  "VERIFIED (Standard Win32 top-level layered window respects High Contrast theme \u0026 OS DPI scaling)",
+                             "Q28_RdpFastUserSwitch":  "VERIFIED (Session disconnect pauses animation pump, software rasterizer fallback if DirectX D3D lost)"
+                         }
+}

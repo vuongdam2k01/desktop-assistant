@@ -1,0 +1,57 @@
+{
+  "call_id": "1789128355492_0009_PATCH_pages_3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+  "category": "q8_write_bad_status",
+  "timestamp": "2026-09-11T12:05:56Z",
+  "duration_ms": 619,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8158-9fdd-e55f81a08a81",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Task Status": {
+          "status": {
+            "name": "Trạng thái tự chế"
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 400,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:56 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "205",
+      "Connection": "close",
+      "CF-Ray": "a3968b1f2d34a3ac-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"cd-lwUknCnCzJ1XH9UYfvsGXn4g1S4\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "fa8d4a7f-8451-4742-a22c-ce7ef5cd65c6",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=Wm4iKLRaw_fyXd01YtYrcpnuM0_P6td5I2ljZYlZtrg-1789128355.70422-1.0.1.1-Na6s8pYeZVade7GtZMdJNrD_Nub2ORc6bac.8PV4lrqYoZK0r0bcESprsiSgHDZ8ZZp4ujjEbf8Z.ap0VZ2qDCnPy4IbyQQbO4PqrQixYArrzHZdzxn2yTFqoSlKqQ_Z; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:56 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "Invalid status option. Status option \"Trạng thái tự chế\" does not exist\".",
+      "request_id": "fa8d4a7f-8451-4742-a22c-ce7ef5cd65c6"
+    },
+    "error": "HTTP Error 400: Bad Request"
+  }
+}

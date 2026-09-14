@@ -1,0 +1,55 @@
+{
+  "call_id": "1789128196738_0004_PATCH_pages_3d8c0043-56ec-8122-b0d7-cba070e61750",
+  "category": "q1_patch_created_by",
+  "timestamp": "2026-09-11T12:03:17Z",
+  "duration_ms": 397,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8122-b0d7-cba070e61750",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "created_by": {
+          "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 400,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:03:17 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "163",
+      "Connection": "close",
+      "CF-Ray": "a396873e6aaca39d-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"a3-p/PMK+z8XddltJI9sgqCXM5hc4k\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "156ec398-595b-4e94-bd24-b1e5328aa5e3",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=WOV93l5p894QVdetdGSvcWsseUiw53Yg1FtIPPol4lY-1789128196.864241-1.0.1.1-H1Syr8X7e1.MXi1A8sxz3fWY2y0mqx_n8pFru1bam8IyhOxS7R2Q3e8hgYp4TLUWd0OntqrEMX8pVHvktcanq2JbYCBmuwV9o1_tzWZ.PzMNjdQSGUvyp9xUcSrNoDBf; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:33:17 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 400,
+      "code": "validation_error",
+      "message": "created_by is not a property that exists.",
+      "request_id": "156ec398-595b-4e94-bd24-b1e5328aa5e3"
+    },
+    "error": "HTTP Error 400: Bad Request"
+  }
+}

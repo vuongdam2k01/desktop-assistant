@@ -1,0 +1,59 @@
+{
+  "status_400_validation_error": {
+    "status": 400,
+    "code": "validation_error",
+    "message": "path failed validation: path.page_id should be a valid uuid, instead was `\"invalid-uuid-12345\"`."
+  },
+  "status_401_unauthorized": {
+    "status": 401,
+    "code": "unauthorized",
+    "message": "API token is invalid."
+  },
+  "status_403_restricted_resource": {
+    "status": 403,
+    "code": "restricted_resource",
+    "message": "Insufficient permissions for this endpoint."
+  },
+  "status_404_not_found": {
+    "status": 404,
+    "tested_uuid": "6ba94bf3-3d0a-4fac-9d35-6d2f135ae755",
+    "code": "object_not_found",
+    "message": "Could not find page with ID: 6ba94bf3-3d0a-4fac-9d35-6d2f135ae755. Make sure the relevant pages and databases are shared with your integration \"spike-a\"."
+  },
+  "status_200_archived_comparison": {
+    "status": 200,
+    "archived_field": true,
+    "behavior": "Notion KHÔNG trả 404 cho page bị archive. Page trong Trash vẫn trả về 200 OK kèm archived: true. Chỉ khi bị xóa vĩnh viễn (empty trash) hoặc gỡ integration thì mới trả 404."
+  },
+  "status_409_conflict_analysis": {},
+  "status_429_rate_limited": {
+    "official_limit": "Trung bình 3 req/giây (Notion documentation)",
+    "observed_burst_capacity": "Token bucket cho phép burst ngắn ~60-70 requests trước khi kích hoạt 429",
+    "has_retry_after_header": true,
+    "retry_after_details": {
+      "header_name": "Retry-After",
+      "unit": "seconds (giây nguyên)",
+      "body_field": "additional_data.retry_after",
+      "observed_value": "49"
+    },
+    "headers_on_200": "Hoàn toàn KHÔNG CÓ X-RateLimit-* trên 200 (Notion che giấu quota còn lại cho tới khi chạm trần 429)",
+    "recommended_queue_rate": "2.5 req/giây cho luồng nền ổn định",
+    "burst_policy": "Cho phép burst tối đa 20 requests đồng thời khi khởi động/sync",
+    "backoff_policy": "Khi gặp 429: Đọc header 'Retry-After' (ép kiểu int giây) -> tạm dừng hàng đợi đúng số giây đó + 0.5s jitter. Nếu không có header, dùng exponential backoff: 1s, 2s, 4s, tối đa 60s."
+  },
+  "undo_detection_strategy": {
+    "case_page_in_trash": {
+      "api_response": "HTTP 200 với archived: true",
+      "detection": "Page vẫn còn trong Trash. Undo-agent có thể tự động unarchive bằng PATCH {'archived': false} trước khi khôi phục snapshot."
+    },
+    "case_page_deleted_permanently_or_unshared": {
+      "api_response": "HTTP 404 với code: 'object_not_found'",
+      "can_distinguish_via_api": false,
+      "distinction_mechanism": "Notion API cố ý bảo mật bằng cách trả cùng một mã 404 object_not_found cho cả hai trường hợp: (1) page không tồn tại / đã xóa vĩnh viễn, và (2) page tồn tại nhưng bot không được cấp quyền. Hệ thống Desktop Assistant phân biệt dựa vào ledger: nếu page_id đã từng được ghi thành công bởi agent trong ledger nhưng nay trả 404 -> đánh dấu là 'OBJECT_DELETED_OR_PERMISSION_REVOKED', gắn cờ CONFLICT theo FR-UD-02 và dừng undo, báo người dùng."
+    },
+    "case_token_revoked_or_expired": {
+      "api_response": "HTTP 401 unauthorized",
+      "detection": "Chuyển job sang failed với lý do token hết hạn, hướng dẫn người dùng kết nối lại (FR-NT-07)."
+    }
+  }
+}

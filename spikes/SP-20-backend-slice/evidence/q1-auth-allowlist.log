@@ -1,0 +1,34 @@
+Q1 VERIFICATION LOG — 2026-09-12T05:10:32.959Z
+
+Test 1: Non-allowlisted email (stranger.unauthorized@example.com)
+HTTP Status: 403 (Expected: 403)
+Response Body: {
+  "error": "EMAIL_NOT_IN_ALLOWLIST",
+  "message": "Email 'stranger.unauthorized@example.com' is not in the closed beta allowlist."
+}
+
+Test 2: Allowlisted email (beta.tester@example.com)
+HTTP Status: 200 (Expected: 200)
+Response Body: {
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyYWI2NjdmNS1jYTE4LTQxN2UtODc4ZS1mODczMDFmYWFiMjkiLCJlbWFpbCI6ImJldGEudGVzdGVyQGV4YW1wbGUuY29tIiwiZGV2aWNlSWQiOiJkZXZfd2luXzAwMSIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3ODkxODk4MzMsImV4cCI6MTc4OTE5MDczM30.OWyuZZCDYEy7q8x52cMry8QTjr4Bzmz_V3GgYdud5Xw",
+  "refreshToken": "6c338b38-9d80-4de4-a020-c673666824b1.50c5dd45650549cf58278777e7429ef8e226873fa6adf0a1acfd68a8ee5eea63",
+  "tokenType": "Bearer",
+  "expiresIn": 900,
+  "user": {
+    "id": "2ab667f5-ca18-417e-878e-f87301faab29",
+    "email": "beta.tester@example.com"
+  }
+}
+
+Test 3: Refresh session
+HTTP Status: 200 (Expected: 200)
+Response Body: {
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyYWI2NjdmNS1jYTE4LTQxN2UtODc4ZS1mODczMDFmYWFiMjkiLCJlbWFpbCI6ImJldGEudGVzdGVyQGV4YW1wbGUuY29tIiwiZGV2aWNlSWQiOiJkZXZfd2luXzAwMSIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3ODkxODk4MzMsImV4cCI6MTc4OTE5MDczM30.OWyuZZCDYEy7q8x52cMry8QTjr4Bzmz_V3GgYdud5Xw",
+  "refreshToken": "6c338b38-9d80-4de4-a020-c673666824b1.50c5dd45650549cf58278777e7429ef8e226873fa6adf0a1acfd68a8ee5eea63",
+  "tokenType": "Bearer",
+  "expiresIn": 900,
+  "user": {
+    "id": "2ab667f5-ca18-417e-878e-f87301faab29",
+    "email": "beta.tester@example.com"
+  }
+}

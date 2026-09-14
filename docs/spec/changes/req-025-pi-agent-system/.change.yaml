@@ -1,0 +1,5 @@
+schema: design
+created: 2026-09-13
+kind: C
+skip_specs: false
+depends_on: [req-006-agent-loop, req-007-pi-sdk-harness, req-013-sqlite-ledger, req-015-concurrency-coordinator, req-017-provider-matrix, req-019-connector-framework, req-021-ask-user-offline, req-022-account-sync, req-024-pet-pack-framework]

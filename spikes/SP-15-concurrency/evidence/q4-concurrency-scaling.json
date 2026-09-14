@@ -1,0 +1,66 @@
+{
+  "sp1_baseline": {
+    "officialRps": 3,
+    "maxBurstCapacityTested": 60,
+    "retryAfterObserved": "40s - 49s"
+  },
+  "scalingMetrics": [
+    {
+      "concurrencyJobs": 1,
+      "totalRequests": 3,
+      "totalDurationMs": 457,
+      "avgLatencyPerReqMs": 444,
+      "avgQueueWaitMs": 0,
+      "maxQueueWaitMs": 0,
+      "http429Count": 0,
+      "userPerceivedLatency": "Rất mượt (<3s)"
+    },
+    {
+      "concurrencyJobs": 3,
+      "totalRequests": 9,
+      "totalDurationMs": 1725,
+      "avgLatencyPerReqMs": 353,
+      "avgQueueWaitMs": 367,
+      "maxQueueWaitMs": 1327,
+      "http429Count": 0,
+      "userPerceivedLatency": "Rất mượt (<3s)"
+    },
+    {
+      "concurrencyJobs": 5,
+      "totalRequests": 15,
+      "totalDurationMs": 3620,
+      "avgLatencyPerReqMs": 305,
+      "avgQueueWaitMs": 1221,
+      "maxQueueWaitMs": 3332,
+      "http429Count": 0,
+      "userPerceivedLatency": "Chấp nhận được (<6s)"
+    },
+    {
+      "concurrencyJobs": 8,
+      "totalRequests": 24,
+      "totalDurationMs": 7533,
+      "avgLatencyPerReqMs": 230,
+      "avgQueueWaitMs": 3767,
+      "maxQueueWaitMs": 7233,
+      "http429Count": 0,
+      "userPerceivedLatency": "Chậm trễ đáng kể (~7s)"
+    },
+    {
+      "concurrencyJobs": 10,
+      "totalRequests": 30,
+      "totalDurationMs": 9533,
+      "avgLatencyPerReqMs": 230,
+      "avgQueueWaitMs": 4767,
+      "maxQueueWaitMs": 9233,
+      "http429Count": 1,
+      "userPerceivedLatency": "Nút cổ chai rõ rệt (>8s)"
+    }
+  ],
+  "bottleneckKneePoint": 5,
+  "recommendedConcurrencyLimit": {
+    "interactiveJobs": 1,
+    "backgroundJobs": 2,
+    "maxTotalConcurrent": 3,
+    "rationale": "Ở mức 3–5 job song song (tương đương 9–15 requests), hàng đợi rate limit 3 req/s giải phóng trong 2–4 giây, vẫn nằm trong vùng dung sai chấp nhận được của người dùng (NFR-PF-03 ack ≤2s, hoàn tất job tương tác ≤5s). Khi số job vượt quá 5 (>= 15-24 requests), thời gian chờ hàng đợi vượt quá 5-8 giây, rate limit Notion trở thành nút cổ chai chiếm 80% tổng thời gian thực thi. Do đó, Job Manager chỉ nên cấp phép tối đa 3-4 jobs chạy song song cùng đụng tới một Notion connector token, các job còn lại phải xếp hàng pending."
+  }
+}

@@ -1,0 +1,82 @@
+﻿{
+    "Timestamp":  "2026-09-12 10:57:50",
+    "Q5_HitTestPrecision":  {
+                                "ClickThroughAccuracy":  "EXACT_PIXEL_MASK",
+                                "BorderVariancePx":  0,
+                                "Status":  "PASS"
+                            },
+    "Q6_DragSmoothness":  {
+                              "AvgLatencyMs":  4.1,
+                              "MaxLatencyMs":  40.66,
+                              "TrajectoryPointsCount":  21,
+                              "Status":  "PASS"
+                          },
+    "Q7_DropCases":  [
+                         {
+                             "Case":  "Screen Edge Left",
+                             "Target":  {
+                                            "y":  300,
+                                            "x":  0
+                                        },
+                             "Status":  "PASS",
+                             "Behavior":  "Clamped to valid workArea boundaries; no disappearing pet."
+                         },
+                         {
+                             "Case":  "Screen Corner Top-Left",
+                             "Target":  {
+                                            "y":  0,
+                                            "x":  0
+                                        },
+                             "Status":  "PASS",
+                             "Behavior":  "Clamped to valid workArea boundaries; no disappearing pet."
+                         },
+                         {
+                             "Case":  "Half Off-screen",
+                             "Target":  {
+                                            "y":  200,
+                                            "x":  -80
+                                        },
+                             "Status":  "PASS",
+                             "Behavior":  "Clamped to valid workArea boundaries; no disappearing pet."
+                         },
+                         {
+                             "Case":  "Taskbar Area",
+                             "Target":  {
+                                            "y":  660,
+                                            "x":  500
+                                        },
+                             "Status":  "PASS",
+                             "Behavior":  "Clamped to valid workArea boundaries; no disappearing pet."
+                         },
+                         {
+                             "Case":  "Secondary Monitor",
+                             "Target":  {
+                                            "y":  300,
+                                            "x":  1600
+                                        },
+                             "Status":  "PASS",
+                             "Behavior":  "Clamped to valid workArea boundaries; no disappearing pet."
+                         }
+                     ],
+    "Q8_ThrowInertia":  {
+                            "InertiaFeasibility":  "FEASIBLE",
+                            "DecayFactor":  0.92,
+                            "EdgeSnapThresholdPx":  40,
+                            "EdgeSnapDurationMs":  180,
+                            "Conclusion":  "Inertia throw and snap-to-edge implemented purely via velocity vector decay on mouse-up; 0 OS overhead."
+                        },
+    "Q9_SessionPersistence":  {
+                                  "SavedCoord":  {
+                                                     "DisplayCount":  3,
+                                                     "LastKnownX":  3500,
+                                                     "LastKnownY":  500
+                                                 },
+                                  "Validation":  "DISPLAY_NOT_FOUND",
+                                  "FallbackCoord":  {
+                                                        "y":  472,
+                                                        "x":  1080
+                                                    },
+                                  "Status":  "PASS",
+                                  "Note":  "Falls back to Primary Display WorkArea bottom-right when saved display is disconnected (E2)."
+                              }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "sp-12-sqlite-ledger",
+  "version": "1.0.0",
+  "description": "SPIKE SP-12: SQLite Ledger - Append-only, Fail-closed, Crash Recovery",
+  "main": "src/engine.js",
+  "scripts": {
+    "test": "node src/crash-runner.js",
+    "test:q2": "node src/q2-append-only-test.js",
+    "test:q4": "node src/crash-runner.js",
+    "test:q5": "node src/q5-storage-sim.js",
+    "test:q6": "node src/q6-migration-test.js",
+    "test:all": "node src/q2-append-only-test.js && node src/crash-runner.js && node src/q5-storage-sim.js && node src/q6-migration-test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  }
+}

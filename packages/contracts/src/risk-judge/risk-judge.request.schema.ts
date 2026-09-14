@@ -1,0 +1,89 @@
+/**
+ * Normative shape of what the Tier 2 judge is shown about one pending tool call, for approval/contracts/risk-judge@0.1.0. The file is a boundary as much as a payload: what is absent from it is absent from the judge's view. There is no member carrying an approval, an authorisation, a prior verdict, a ledger excerpt or a system note, because a request that could carry one would let text written on an external platform arrive dressed as the product's own voice - the impersonation measured as case W-25 in spikes/SP-10-risk-judge/REPORT.md section 1 Q5. Ownership and scale are taken from the connector's own record and stated here as facts, never inferred from the arguments being judged.
+ */
+export interface RiskEvaluationRequest {
+  /**
+   * Correlates this evaluation with the call it judged and the ledger record that holds its verdict. Assigned by the wrapper; a request arriving with an identifier already used is a replay and is refused rather than judged again.
+   */
+  evaluationId: string;
+  /**
+   * The tool about to run, e.g. notion_archive_page. Taken from the registered tool set, not from anything the model wrote.
+   */
+  toolName: string;
+  /**
+   * The connector the tool belongs to, as its manifest declares it.
+   */
+  connectorId: string;
+  /**
+   * The arguments the call would run with. Every string inside is untrusted external content - titles, descriptions, comments carried in from a platform - and is shown to the judge as data to be assessed, never as instruction. This is the one member of the request that an attacker can influence, which is why nothing else in the file is derived from it.
+   */
+  arguments: {
+    [k: string]: unknown;
+  };
+  /**
+   * The instruction the user gave that began this job, in their own words. It is what makes a benign-looking change judgeable: the same property update is routine when the user asked for it and worth stopping when nobody did.
+   */
+  userIntent: string;
+  /**
+   * Whether the target object was created by the signed-in user, read from the connector's record of the object. Stated as a fact rather than left for the judge to infer, and false does not reach Tier 2 at all in smart mode: a write to an object the user did not create is intercepted at Tier 1 (INV-AP-13).
+   */
+  isUserCreated: boolean;
+  /**
+   * How many objects this one call would change. Counted by the product, not claimed by the call, so that a bulk operation cannot present itself as a single edit.
+   */
+  affectedCount: number;
+}
+
+
+export const RISK_JUDGE_REQUEST_SCHEMA = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/approval/risk-judge/request/0.1.0.json",
+  "title": "RiskEvaluationRequest",
+  "description": "Normative shape of what the Tier 2 judge is shown about one pending tool call, for approval/contracts/risk-judge@0.1.0. The file is a boundary as much as a payload: what is absent from it is absent from the judge's view. There is no member carrying an approval, an authorisation, a prior verdict, a ledger excerpt or a system note, because a request that could carry one would let text written on an external platform arrive dressed as the product's own voice - the impersonation measured as case W-25 in spikes/SP-10-risk-judge/REPORT.md section 1 Q5. Ownership and scale are taken from the connector's own record and stated here as facts, never inferred from the arguments being judged.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evaluationId",
+    "toolName",
+    "connectorId",
+    "arguments",
+    "userIntent",
+    "isUserCreated",
+    "affectedCount"
+  ],
+  "properties": {
+    "evaluationId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Correlates this evaluation with the call it judged and the ledger record that holds its verdict. Assigned by the wrapper; a request arriving with an identifier already used is a replay and is refused rather than judged again."
+    },
+    "toolName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The tool about to run, e.g. notion_archive_page. Taken from the registered tool set, not from anything the model wrote."
+    },
+    "connectorId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The connector the tool belongs to, as its manifest declares it."
+    },
+    "arguments": {
+      "type": "object",
+      "description": "The arguments the call would run with. Every string inside is untrusted external content - titles, descriptions, comments carried in from a platform - and is shown to the judge as data to be assessed, never as instruction. This is the one member of the request that an attacker can influence, which is why nothing else in the file is derived from it."
+    },
+    "userIntent": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The instruction the user gave that began this job, in their own words. It is what makes a benign-looking change judgeable: the same property update is routine when the user asked for it and worth stopping when nobody did."
+    },
+    "isUserCreated": {
+      "type": "boolean",
+      "description": "Whether the target object was created by the signed-in user, read from the connector's record of the object. Stated as a fact rather than left for the judge to infer, and false does not reach Tier 2 at all in smart mode: a write to an object the user did not create is intercepted at Tier 1 (INV-AP-13)."
+    },
+    "affectedCount": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "How many objects this one call would change. Counted by the product, not claimed by the call, so that a bulk operation cannot present itself as a single edit."
+    }
+  }
+} as const;

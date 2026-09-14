@@ -1,0 +1,139 @@
+{
+  "states": [
+    "idle",
+    "receiving_order",
+    "working",
+    "waiting_approval",
+    "has_result"
+  ],
+  "stateStats": {
+    "idle": {
+      "samples": [
+        6.9,
+        15.8,
+        12.3
+      ],
+      "avgMs": 11.67,
+      "minMs": 6.9,
+      "maxMs": 15.8
+    },
+    "receiving_order": {
+      "samples": [
+        2.8,
+        1.3,
+        11.4
+      ],
+      "avgMs": 5.17,
+      "minMs": 1.3,
+      "maxMs": 11.4
+    },
+    "working": {
+      "samples": [
+        15.1,
+        15.7,
+        12.1
+      ],
+      "avgMs": 14.3,
+      "minMs": 12.1,
+      "maxMs": 15.7
+    },
+    "waiting_approval": {
+      "samples": [
+        10.7,
+        14.3,
+        11.2
+      ],
+      "avgMs": 12.07,
+      "minMs": 10.7,
+      "maxMs": 14.3
+    },
+    "has_result": {
+      "samples": [
+        12.7,
+        12.9,
+        10.7
+      ],
+      "avgMs": 12.1,
+      "minMs": 10.7,
+      "maxMs": 12.9
+    }
+  },
+  "overallAvgMs": 11.06,
+  "rawTransitions": [
+    {
+      "cycle": 1,
+      "state": "idle",
+      "latencyMs": 6.9
+    },
+    {
+      "cycle": 1,
+      "state": "receiving_order",
+      "latencyMs": 2.8
+    },
+    {
+      "cycle": 1,
+      "state": "working",
+      "latencyMs": 15.1
+    },
+    {
+      "cycle": 1,
+      "state": "waiting_approval",
+      "latencyMs": 10.7
+    },
+    {
+      "cycle": 1,
+      "state": "has_result",
+      "latencyMs": 12.7
+    },
+    {
+      "cycle": 2,
+      "state": "idle",
+      "latencyMs": 15.8
+    },
+    {
+      "cycle": 2,
+      "state": "receiving_order",
+      "latencyMs": 1.3
+    },
+    {
+      "cycle": 2,
+      "state": "working",
+      "latencyMs": 15.7
+    },
+    {
+      "cycle": 2,
+      "state": "waiting_approval",
+      "latencyMs": 14.3
+    },
+    {
+      "cycle": 2,
+      "state": "has_result",
+      "latencyMs": 12.9
+    },
+    {
+      "cycle": 3,
+      "state": "idle",
+      "latencyMs": 12.3
+    },
+    {
+      "cycle": 3,
+      "state": "receiving_order",
+      "latencyMs": 11.4
+    },
+    {
+      "cycle": 3,
+      "state": "working",
+      "latencyMs": 12.1
+    },
+    {
+      "cycle": 3,
+      "state": "waiting_approval",
+      "latencyMs": 11.2
+    },
+    {
+      "cycle": 3,
+      "state": "has_result",
+      "latencyMs": 10.7
+    }
+  ]
+}

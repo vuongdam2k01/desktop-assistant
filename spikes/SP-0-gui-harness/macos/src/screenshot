@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+# spikes/SP-0-gui-harness/macos/src/screenshot
+# Capture full screen, capture by window ID, or list on-screen windows.
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HELPER="$SCRIPT_DIR/bin/harness_helper"
+
+if [[ ! -x "$HELPER" ]]; then
+    clang -framework CoreGraphics -framework ApplicationServices -framework CoreFoundation -framework AppKit \
+          -o "$HELPER" "$SCRIPT_DIR/harness_helper.m"
+fi
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage:" >&2
+    echo "  screenshot --full <output.png>" >&2
+    echo "  screenshot --wid <window_id> <output.png> [--shadow]" >&2
+    echo "  screenshot --app <app_name> <output.png> [--shadow]" >&2
+    echo "  screenshot --list [--json]" >&2
+    exit 1
+fi
+
+MODE="$1"
+shift
+
+case "$MODE" in
+    --full)
+        OUT="$1"
+        if [[ -z "$OUT" ]]; then
+            echo "Output file path required: screenshot --full <out.png>" >&2
+            exit 1
+        fi
+        mkdir -p "$(dirname "$OUT")"
+        screencapture "$OUT"
+        echo "Captured full screen to $OUT"
+        ;;
+    --wid)
+        WID="$1"
+        OUT="$2"
+        SHADOW_FLAG="-o"
+        if [[ "$3" == "--shadow" ]]; then
+            SHADOW_FLAG=""
+        fi
+        if [[ -z "$WID" || -z "$OUT" ]]; then
+            echo "Usage: screenshot --wid <id> <out.png> [--shadow]" >&2
+            exit 1
+        fi
+        mkdir -p "$(dirname "$OUT")"
+        screencapture -l "$WID" $SHADOW_FLAG "$OUT"
+        echo "Captured window $WID to $OUT"
+        ;;
+    --app)
+        APP="$1"
+        OUT="$2"
+        SHADOW_FLAG="-o"
+        if [[ "$3" == "--shadow" ]]; then
+            SHADOW_FLAG=""
+        fi
+        if [[ -z "$APP" || -z "$OUT" ]]; then
+            echo "Usage: screenshot --app <AppName> <out.png> [--shadow]" >&2
+            exit 1
+        fi
+        mkdir -p "$(dirname "$OUT")"
+        WID=$("$HELPER" list --json | node -e '
+            const fs = require("fs");
+            const data = JSON.parse(fs.readFileSync(0, "utf-8"));
+            const target = "'"$APP"'".toLowerCase();
+            const w = data.find(x => x.owner.toLowerCase().includes(target) && x.layer === 0 && x.w > 50 && x.h > 50);
+            if (w) console.log(w.id);
+        ' 2>/dev/null || true)
+        if [[ -z "$WID" ]]; then
+            echo "Error: Could not find window for app '$APP'" >&2
+            exit 1
+        fi
+        screencapture -l "$WID" $SHADOW_FLAG "$OUT"
+        echo "Captured window $WID ($APP) to $OUT"
+        ;;
+    --list)
+        if [[ "$1" == "--json" ]]; then
+            "$HELPER" list --json
+        else
+            "$HELPER" list
+        fi
+        ;;
+    *)
+        echo "Unknown option: $MODE" >&2
+        exit 1
+        ;;
+esac

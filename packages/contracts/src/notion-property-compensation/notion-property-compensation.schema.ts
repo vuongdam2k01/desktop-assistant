@@ -1,0 +1,312 @@
+/**
+ * Normative shape of one connector's property compensation rule set, for connector/contracts/notion-property-compensation@0.1.0. The rules are published as data, in the same sense that a manifest is data, so that they can be validated and reviewed rather than read out of code - and so that the one rule a reviewer must catch, a choice restored by its label rather than by its identity, is caught by reading a file rather than by reading an adapter. The file expresses which kinds may be written, what a projection keeps, what a restoring payload sends, and the two couplings measured at the platform: a select or status keeps an option and is restored by identity, and a multi_select keeps an option list and is restored by identity. What it cannot express, and what the contract document holds instead: that the rules are complete for the connector, that a property kind absent from them is neither projected nor written (INV-NT-01), and that the outcome vocabulary the undo planner reports means what the measured behaviour showed.
+ */
+export interface PropertyCompensationRuleSet {
+  /**
+   * The connector these rules belong to, matching the id of its manifest. Pairing is by identity, as an adapter is paired to a manifest.
+   */
+  connector: string;
+  /**
+   * One rule per property kind, and the complete set for this connector. A kind that is absent is refused at authoring time rather than met as a surprise at undo time.
+   *
+   * @minItems 1
+   */
+  rules: [
+    {
+      /**
+       * The platform's own name for the kind.
+       */
+      property_kind: string;
+      /**
+       * False means the platform computes the value: it is never projected and never sent, and writing it is refused by the platform itself.
+       */
+      writeable: boolean;
+      /**
+       * What enters the projection. A projection is not the platform's object: it is what these rules kept, and the difference is the part no write can restore (INV-NT-02).
+       */
+      keep: "scalar" | "text" | "option" | "option_list" | "date" | "identity_list" | "not_projected";
+      /**
+       * How a restoring payload is built from what was kept. Identity addresses a write and a label never does, so an option that has disappeared from the schema produces a conflict rather than a new option created by label (INV-NT-04).
+       */
+      restore: "scalar" | "text" | "date" | "identity_list" | "option_by_id" | "option_list_by_id" | "nothing";
+      /**
+       * What the platform does when the kept value is empty. Restoring a property to empty is a write rather than an omission; platform_default is the one kind where the platform substitutes its own value, and the step is then reported as approximated rather than restored.
+       */
+      empty_behaviour: "cleared" | "platform_default" | "not_applicable";
+      /**
+       * What compensating a write of this kind can leave behind. A residue is named in the report and never repaired: no platform operation removes an option a write invented from a database's settings.
+       */
+      residue: "none" | "schema_option";
+      /**
+       * Whether this row was exercised against a real workspace. A row that was not says so rather than arguing from resemblance.
+       */
+      measured?: boolean;
+    } & {
+      /**
+       * The platform's own name for the kind.
+       */
+      property_kind: string;
+      /**
+       * False means the platform computes the value: it is never projected and never sent, and writing it is refused by the platform itself.
+       */
+      writeable: boolean;
+      /**
+       * What enters the projection. A projection is not the platform's object: it is what these rules kept, and the difference is the part no write can restore (INV-NT-02).
+       */
+      keep: "scalar" | "text" | "option" | "option_list" | "date" | "identity_list" | "not_projected";
+      /**
+       * How a restoring payload is built from what was kept. Identity addresses a write and a label never does, so an option that has disappeared from the schema produces a conflict rather than a new option created by label (INV-NT-04).
+       */
+      restore: "scalar" | "text" | "date" | "identity_list" | "option_by_id" | "option_list_by_id" | "nothing";
+      /**
+       * What the platform does when the kept value is empty. Restoring a property to empty is a write rather than an omission; platform_default is the one kind where the platform substitutes its own value, and the step is then reported as approximated rather than restored.
+       */
+      empty_behaviour: "cleared" | "platform_default" | "not_applicable";
+      /**
+       * What compensating a write of this kind can leave behind. A residue is named in the report and never repaired: no platform operation removes an option a write invented from a database's settings.
+       */
+      residue: "none" | "schema_option";
+      /**
+       * Whether this row was exercised against a real workspace. A row that was not says so rather than arguing from resemblance.
+       */
+      measured?: boolean;
+    },
+    ...({
+      /**
+       * The platform's own name for the kind.
+       */
+      property_kind: string;
+      /**
+       * False means the platform computes the value: it is never projected and never sent, and writing it is refused by the platform itself.
+       */
+      writeable: boolean;
+      /**
+       * What enters the projection. A projection is not the platform's object: it is what these rules kept, and the difference is the part no write can restore (INV-NT-02).
+       */
+      keep: "scalar" | "text" | "option" | "option_list" | "date" | "identity_list" | "not_projected";
+      /**
+       * How a restoring payload is built from what was kept. Identity addresses a write and a label never does, so an option that has disappeared from the schema produces a conflict rather than a new option created by label (INV-NT-04).
+       */
+      restore: "scalar" | "text" | "date" | "identity_list" | "option_by_id" | "option_list_by_id" | "nothing";
+      /**
+       * What the platform does when the kept value is empty. Restoring a property to empty is a write rather than an omission; platform_default is the one kind where the platform substitutes its own value, and the step is then reported as approximated rather than restored.
+       */
+      empty_behaviour: "cleared" | "platform_default" | "not_applicable";
+      /**
+       * What compensating a write of this kind can leave behind. A residue is named in the report and never repaired: no platform operation removes an option a write invented from a database's settings.
+       */
+      residue: "none" | "schema_option";
+      /**
+       * Whether this row was exercised against a real workspace. A row that was not says so rather than arguing from resemblance.
+       */
+      measured?: boolean;
+    } & {
+      /**
+       * The platform's own name for the kind.
+       */
+      property_kind: string;
+      /**
+       * False means the platform computes the value: it is never projected and never sent, and writing it is refused by the platform itself.
+       */
+      writeable: boolean;
+      /**
+       * What enters the projection. A projection is not the platform's object: it is what these rules kept, and the difference is the part no write can restore (INV-NT-02).
+       */
+      keep: "scalar" | "text" | "option" | "option_list" | "date" | "identity_list" | "not_projected";
+      /**
+       * How a restoring payload is built from what was kept. Identity addresses a write and a label never does, so an option that has disappeared from the schema produces a conflict rather than a new option created by label (INV-NT-04).
+       */
+      restore: "scalar" | "text" | "date" | "identity_list" | "option_by_id" | "option_list_by_id" | "nothing";
+      /**
+       * What the platform does when the kept value is empty. Restoring a property to empty is a write rather than an omission; platform_default is the one kind where the platform substitutes its own value, and the step is then reported as approximated rather than restored.
+       */
+      empty_behaviour: "cleared" | "platform_default" | "not_applicable";
+      /**
+       * What compensating a write of this kind can leave behind. A residue is named in the report and never repaired: no platform operation removes an option a write invented from a database's settings.
+       */
+      residue: "none" | "schema_option";
+      /**
+       * Whether this row was exercised against a real workspace. A row that was not says so rather than arguing from resemblance.
+       */
+      measured?: boolean;
+    })[]
+  ];
+  /**
+   * How the connector recognises the property a database expresses manual order with. Recognition never creates and never chooses under doubt: where no property matches, or where more than one does, free reordering is refused for that database and the user is told what it would need.
+   */
+  order_detection: {
+    kind: string;
+    name_patterns: string[];
+  };
+}
+
+
+export const NOTION_PROPERTY_COMPENSATION_SCHEMA = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/connector/notion-property-compensation/0.1.0.json",
+  "title": "PropertyCompensationRuleSet",
+  "description": "Normative shape of one connector's property compensation rule set, for connector/contracts/notion-property-compensation@0.1.0. The rules are published as data, in the same sense that a manifest is data, so that they can be validated and reviewed rather than read out of code - and so that the one rule a reviewer must catch, a choice restored by its label rather than by its identity, is caught by reading a file rather than by reading an adapter. The file expresses which kinds may be written, what a projection keeps, what a restoring payload sends, and the two couplings measured at the platform: a select or status keeps an option and is restored by identity, and a multi_select keeps an option list and is restored by identity. What it cannot express, and what the contract document holds instead: that the rules are complete for the connector, that a property kind absent from them is neither projected nor written (INV-NT-01), and that the outcome vocabulary the undo planner reports means what the measured behaviour showed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "connector",
+    "rules",
+    "order_detection"
+  ],
+  "properties": {
+    "connector": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$",
+      "description": "The connector these rules belong to, matching the id of its manifest. Pairing is by identity, as an adapter is paired to a manifest."
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "property_kind"
+              ],
+              "properties": {
+                "property_kind": {
+                  "enum": [
+                    "select",
+                    "status"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "keep": {
+                  "const": "option"
+                },
+                "restore": {
+                  "enum": [
+                    "option_by_id",
+                    "nothing"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "property_kind"
+              ],
+              "properties": {
+                "property_kind": {
+                  "const": "multi_select"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "keep": {
+                  "const": "option_list"
+                },
+                "restore": {
+                  "enum": [
+                    "option_list_by_id",
+                    "nothing"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "property_kind",
+          "writeable",
+          "keep",
+          "restore",
+          "empty_behaviour",
+          "residue"
+        ],
+        "properties": {
+          "property_kind": {
+            "type": "string",
+            "description": "The platform's own name for the kind."
+          },
+          "writeable": {
+            "type": "boolean",
+            "description": "False means the platform computes the value: it is never projected and never sent, and writing it is refused by the platform itself."
+          },
+          "keep": {
+            "type": "string",
+            "enum": [
+              "scalar",
+              "text",
+              "option",
+              "option_list",
+              "date",
+              "identity_list",
+              "not_projected"
+            ],
+            "description": "What enters the projection. A projection is not the platform's object: it is what these rules kept, and the difference is the part no write can restore (INV-NT-02)."
+          },
+          "restore": {
+            "type": "string",
+            "enum": [
+              "scalar",
+              "text",
+              "date",
+              "identity_list",
+              "option_by_id",
+              "option_list_by_id",
+              "nothing"
+            ],
+            "description": "How a restoring payload is built from what was kept. Identity addresses a write and a label never does, so an option that has disappeared from the schema produces a conflict rather than a new option created by label (INV-NT-04)."
+          },
+          "empty_behaviour": {
+            "type": "string",
+            "enum": [
+              "cleared",
+              "platform_default",
+              "not_applicable"
+            ],
+            "description": "What the platform does when the kept value is empty. Restoring a property to empty is a write rather than an omission; platform_default is the one kind where the platform substitutes its own value, and the step is then reported as approximated rather than restored."
+          },
+          "residue": {
+            "type": "string",
+            "enum": [
+              "none",
+              "schema_option"
+            ],
+            "description": "What compensating a write of this kind can leave behind. A residue is named in the report and never repaired: no platform operation removes an option a write invented from a database's settings."
+          },
+          "measured": {
+            "type": "boolean",
+            "description": "Whether this row was exercised against a real workspace. A row that was not says so rather than arguing from resemblance."
+          }
+        }
+      },
+      "description": "One rule per property kind, and the complete set for this connector. A kind that is absent is refused at authoring time rather than met as a surprise at undo time."
+    },
+    "order_detection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "name_patterns"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "How the connector recognises the property a database expresses manual order with. Recognition never creates and never chooses under doubt: where no property matches, or where more than one does, free reordering is refused for that database and the user is told what it would need."
+    }
+  }
+} as const;

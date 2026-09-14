@@ -1,0 +1,1030 @@
+/**
+ * Normative shape of a connector manifest, for connector/contracts/connector-manifest@1.2.0. A manifest is what makes a connector data rather than code: the tool set the agent is given, the approval classification of each operation, the compensating action undo replays, what an interrupted call meant, and now which objects a call may change are all read from here and from nowhere else (INV-CN-06). Validation is whole-manifest - a manifest that breaks any rule expressed here yields no tool at all. This version adds the coordination declaration: tool_coordination is required on every write tool, because a write whose resources nobody declared is a write the coordinator cannot protect, and connector_coordination carries the optional per-connector pacing and concurrency figures. Every manifest valid at 1.1 remains structurally valid; what changes is that a write tool declaring no resources is refused whole. The rules this file cannot express are relations between members and are held by the contract document: that every tool names a capability this manifest declares, that no scope profile grants scope for a capability no tool requires, that snapshot.read_operation and compensation.tool name tools this manifest declares, that a declared argument path exists in that tool's parameters, and that no two manifests share an id.
+ */
+export interface ConnectorManifest {
+  /**
+   * The major.minor of the connector-manifest contract this manifest was written against, never the version of the connector. A build loads a manifest sharing its major number.
+   */
+  schema_version: "1.0" | "1.1" | "1.2";
+  /**
+   * Identifies the connector for the lifetime of the product (INV-CN-04). Ledger records, approval rules and stored authorisations all refer to it.
+   */
+  id: string;
+  name: string;
+  version: string;
+  icon?: string;
+  description?: string;
+  auth: {
+    kind: "oauth2" | "bearer_token" | "api_key";
+    provider_id?: string;
+    proof_key?: boolean;
+    endpoints: {
+      authorize_url?: string;
+      token_url?: string;
+      api_base_url?: string;
+    };
+    revocation: {
+      supported: boolean;
+      endpoint?: string;
+      settings_url?: string;
+      note?: string;
+    };
+    byo_client?: {
+      supported: boolean;
+      guidance_steps?: string[];
+      refresh_lifetime_caveat?: string;
+    };
+  };
+  capabilities: {
+    [k: string]: {
+      name: string;
+      description: string;
+    };
+  };
+  scope_profiles: {
+    [k: string]: {
+      [k: string]: string[];
+    };
+  };
+  rate_policy?: {
+    requests_per_second?: number;
+    burst?: number;
+  };
+  /**
+   * This connector's pacing, concurrency and identifier-spelling opinions. Absent means the product's defaults. A figure above the measured maximum is clamped and the clamp reported to the author rather than the manifest being refused, because a pacing opinion should not cost the product a platform.
+   */
+  connector_coordination?: {
+    identifier_normalisation?: "none" | "lowercase" | "strip_separators" | "strip_separators_lowercase";
+    concurrency?: number;
+    reserved_interactive?: number;
+    rate?: {
+      requests_per_second: number;
+      burst?: number;
+    };
+    class_weights?: {
+      interactive: number;
+      background: number;
+    };
+    background_floor?: number;
+    wait_limit_ms?: number;
+  };
+  content_sanitization?: {
+    strip_instructions: boolean;
+    max_inline_content_bytes?: number;
+  };
+  /**
+   * @minItems 1
+   */
+  tools: [
+    {
+      name: string;
+      label: string;
+      description: string;
+      direction: "read" | "write";
+      capability: string;
+      parameters: {
+        type: "object";
+        properties: {
+          [k: string]: unknown;
+        };
+        required?: string[];
+        additionalProperties?: boolean;
+        [k: string]: unknown;
+      };
+      /**
+       * Required on every tool, read or write. Its shape is job/contracts/tool-reconciliation@0.1.0, embedded here verbatim and not redefined.
+       */
+      reconciliation: {
+        method: "readback" | "none";
+        read_operation?: string;
+        comparison?: {
+          [k: string]: unknown;
+        };
+        ambiguous_outcome?: "ask_user" | "treat_as_unperformed";
+        reason?: string;
+        [k: string]: unknown;
+      };
+      snapshot?: {
+        read_operation: string;
+        target_param: string;
+        /**
+         * The values the platform computes and refuses on write. Required, and may be empty: an empty array is the author stating the platform computes none of this object's values, while an absent field is the author having not considered the question.
+         */
+        exclude_computed: string[];
+      };
+      compensation?: {
+        tool: string;
+        /**
+         * Where the compensating action's arguments come from: the recorded snapshot, or the result the call returned. Absent means snapshot.
+         */
+        arguments_source?: "snapshot" | "result";
+        arguments_from: string;
+      };
+      irreversible?: boolean;
+      /**
+       * Effects this operation has outside the platform's own data, each with whether anything withdraws it. An effect recorded as recallable must name what withdraws it.
+       *
+       * @minItems 1
+       */
+      side_effects?: [
+        {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        },
+        ...({
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        })[]
+      ];
+      /**
+       * Which of this tool's own arguments name the things it may change. Required on every write tool: the coordinator must know what a call is about before the call happens, and it must know it without knowing anything about the platform. A declaration is read once at registration and never from a call.
+       */
+      tool_coordination?: {
+        /**
+         * @minItems 1
+         */
+        resources: [
+          {
+            type: string;
+            path: string;
+            optional?: boolean;
+          },
+          ...{
+            type: string;
+            path: string;
+            optional?: boolean;
+          }[]
+        ];
+      };
+      changes_permission?: boolean;
+      bulk_threshold_param?: string;
+    } & {
+      name: string;
+      label: string;
+      description: string;
+      direction: "read" | "write";
+      capability: string;
+      parameters: {
+        type: "object";
+        properties: {
+          [k: string]: unknown;
+        };
+        required?: string[];
+        additionalProperties?: boolean;
+        [k: string]: unknown;
+      };
+      /**
+       * Required on every tool, read or write. Its shape is job/contracts/tool-reconciliation@0.1.0, embedded here verbatim and not redefined.
+       */
+      reconciliation: {
+        method: "readback" | "none";
+        read_operation?: string;
+        comparison?: {
+          [k: string]: unknown;
+        };
+        ambiguous_outcome?: "ask_user" | "treat_as_unperformed";
+        reason?: string;
+        [k: string]: unknown;
+      };
+      snapshot?: {
+        read_operation: string;
+        target_param: string;
+        /**
+         * The values the platform computes and refuses on write. Required, and may be empty: an empty array is the author stating the platform computes none of this object's values, while an absent field is the author having not considered the question.
+         */
+        exclude_computed: string[];
+      };
+      compensation?: {
+        tool: string;
+        /**
+         * Where the compensating action's arguments come from: the recorded snapshot, or the result the call returned. Absent means snapshot.
+         */
+        arguments_source?: "snapshot" | "result";
+        arguments_from: string;
+      };
+      irreversible?: boolean;
+      /**
+       * Effects this operation has outside the platform's own data, each with whether anything withdraws it. An effect recorded as recallable must name what withdraws it.
+       *
+       * @minItems 1
+       */
+      side_effects?: [
+        {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        },
+        ...({
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        })[]
+      ];
+      /**
+       * Which of this tool's own arguments name the things it may change. Required on every write tool: the coordinator must know what a call is about before the call happens, and it must know it without knowing anything about the platform. A declaration is read once at registration and never from a call.
+       */
+      tool_coordination?: {
+        /**
+         * @minItems 1
+         */
+        resources: [
+          {
+            type: string;
+            path: string;
+            optional?: boolean;
+          },
+          ...{
+            type: string;
+            path: string;
+            optional?: boolean;
+          }[]
+        ];
+      };
+      changes_permission?: boolean;
+      bulk_threshold_param?: string;
+    },
+    ...({
+      name: string;
+      label: string;
+      description: string;
+      direction: "read" | "write";
+      capability: string;
+      parameters: {
+        type: "object";
+        properties: {
+          [k: string]: unknown;
+        };
+        required?: string[];
+        additionalProperties?: boolean;
+        [k: string]: unknown;
+      };
+      /**
+       * Required on every tool, read or write. Its shape is job/contracts/tool-reconciliation@0.1.0, embedded here verbatim and not redefined.
+       */
+      reconciliation: {
+        method: "readback" | "none";
+        read_operation?: string;
+        comparison?: {
+          [k: string]: unknown;
+        };
+        ambiguous_outcome?: "ask_user" | "treat_as_unperformed";
+        reason?: string;
+        [k: string]: unknown;
+      };
+      snapshot?: {
+        read_operation: string;
+        target_param: string;
+        /**
+         * The values the platform computes and refuses on write. Required, and may be empty: an empty array is the author stating the platform computes none of this object's values, while an absent field is the author having not considered the question.
+         */
+        exclude_computed: string[];
+      };
+      compensation?: {
+        tool: string;
+        /**
+         * Where the compensating action's arguments come from: the recorded snapshot, or the result the call returned. Absent means snapshot.
+         */
+        arguments_source?: "snapshot" | "result";
+        arguments_from: string;
+      };
+      irreversible?: boolean;
+      /**
+       * Effects this operation has outside the platform's own data, each with whether anything withdraws it. An effect recorded as recallable must name what withdraws it.
+       *
+       * @minItems 1
+       */
+      side_effects?: [
+        {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        },
+        ...({
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        })[]
+      ];
+      /**
+       * Which of this tool's own arguments name the things it may change. Required on every write tool: the coordinator must know what a call is about before the call happens, and it must know it without knowing anything about the platform. A declaration is read once at registration and never from a call.
+       */
+      tool_coordination?: {
+        /**
+         * @minItems 1
+         */
+        resources: [
+          {
+            type: string;
+            path: string;
+            optional?: boolean;
+          },
+          ...{
+            type: string;
+            path: string;
+            optional?: boolean;
+          }[]
+        ];
+      };
+      changes_permission?: boolean;
+      bulk_threshold_param?: string;
+    } & {
+      name: string;
+      label: string;
+      description: string;
+      direction: "read" | "write";
+      capability: string;
+      parameters: {
+        type: "object";
+        properties: {
+          [k: string]: unknown;
+        };
+        required?: string[];
+        additionalProperties?: boolean;
+        [k: string]: unknown;
+      };
+      /**
+       * Required on every tool, read or write. Its shape is job/contracts/tool-reconciliation@0.1.0, embedded here verbatim and not redefined.
+       */
+      reconciliation: {
+        method: "readback" | "none";
+        read_operation?: string;
+        comparison?: {
+          [k: string]: unknown;
+        };
+        ambiguous_outcome?: "ask_user" | "treat_as_unperformed";
+        reason?: string;
+        [k: string]: unknown;
+      };
+      snapshot?: {
+        read_operation: string;
+        target_param: string;
+        /**
+         * The values the platform computes and refuses on write. Required, and may be empty: an empty array is the author stating the platform computes none of this object's values, while an absent field is the author having not considered the question.
+         */
+        exclude_computed: string[];
+      };
+      compensation?: {
+        tool: string;
+        /**
+         * Where the compensating action's arguments come from: the recorded snapshot, or the result the call returned. Absent means snapshot.
+         */
+        arguments_source?: "snapshot" | "result";
+        arguments_from: string;
+      };
+      irreversible?: boolean;
+      /**
+       * Effects this operation has outside the platform's own data, each with whether anything withdraws it. An effect recorded as recallable must name what withdraws it.
+       *
+       * @minItems 1
+       */
+      side_effects?: [
+        {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        },
+        ...({
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        } & {
+          effect: string;
+          recipient: string;
+          recallable: boolean;
+          withdrawn_by?: string;
+          user_text: string;
+        })[]
+      ];
+      /**
+       * Which of this tool's own arguments name the things it may change. Required on every write tool: the coordinator must know what a call is about before the call happens, and it must know it without knowing anything about the platform. A declaration is read once at registration and never from a call.
+       */
+      tool_coordination?: {
+        /**
+         * @minItems 1
+         */
+        resources: [
+          {
+            type: string;
+            path: string;
+            optional?: boolean;
+          },
+          ...{
+            type: string;
+            path: string;
+            optional?: boolean;
+          }[]
+        ];
+      };
+      changes_permission?: boolean;
+      bulk_threshold_param?: string;
+    })[]
+  ];
+}
+
+
+export const CONNECTOR_MANIFEST_SCHEMA = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/connector/connector-manifest/1.2.0.json",
+  "title": "ConnectorManifest",
+  "description": "Normative shape of a connector manifest, for connector/contracts/connector-manifest@1.2.0. A manifest is what makes a connector data rather than code: the tool set the agent is given, the approval classification of each operation, the compensating action undo replays, what an interrupted call meant, and now which objects a call may change are all read from here and from nowhere else (INV-CN-06). Validation is whole-manifest - a manifest that breaks any rule expressed here yields no tool at all. This version adds the coordination declaration: tool_coordination is required on every write tool, because a write whose resources nobody declared is a write the coordinator cannot protect, and connector_coordination carries the optional per-connector pacing and concurrency figures. Every manifest valid at 1.1 remains structurally valid; what changes is that a write tool declaring no resources is refused whole. The rules this file cannot express are relations between members and are held by the contract document: that every tool names a capability this manifest declares, that no scope profile grants scope for a capability no tool requires, that snapshot.read_operation and compensation.tool name tools this manifest declares, that a declared argument path exists in that tool's parameters, and that no two manifests share an id.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "version",
+    "auth",
+    "capabilities",
+    "scope_profiles",
+    "tools"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "1.0",
+        "1.1",
+        "1.2"
+      ],
+      "description": "The major.minor of the connector-manifest contract this manifest was written against, never the version of the connector. A build loads a manifest sharing its major number."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$",
+      "description": "Identifies the connector for the lifetime of the product (INV-CN-04). Ledger records, approval rules and stored authorisations all refer to it."
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "auth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "endpoints",
+        "revocation"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "oauth2",
+            "bearer_token",
+            "api_key"
+          ]
+        },
+        "provider_id": {
+          "type": "string"
+        },
+        "proof_key": {
+          "type": "boolean"
+        },
+        "endpoints": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "authorize_url": {
+              "type": "string"
+            },
+            "token_url": {
+              "type": "string"
+            },
+            "api_base_url": {
+              "type": "string"
+            }
+          }
+        },
+        "revocation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supported"
+          ],
+          "properties": {
+            "supported": {
+              "type": "boolean"
+            },
+            "endpoint": {
+              "type": "string"
+            },
+            "settings_url": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "byo_client": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supported"
+          ],
+          "properties": {
+            "supported": {
+              "type": "boolean"
+            },
+            "guidance_steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "refresh_lifetime_caveat": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "description"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scope_profiles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rate_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requests_per_second": {
+          "type": "number"
+        },
+        "burst": {
+          "type": "integer"
+        }
+      }
+    },
+    "connector_coordination": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "identifier_normalisation": {
+          "type": "string",
+          "enum": [
+            "none",
+            "lowercase",
+            "strip_separators",
+            "strip_separators_lowercase"
+          ]
+        },
+        "concurrency": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "reserved_interactive": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requests_per_second"
+          ],
+          "properties": {
+            "requests_per_second": {
+              "type": "number",
+              "minimum": 0.1
+            },
+            "burst": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "class_weights": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "interactive",
+            "background"
+          ],
+          "properties": {
+            "interactive": {
+              "type": "number",
+              "minimum": 1
+            },
+            "background": {
+              "type": "number",
+              "minimum": 1
+            }
+          }
+        },
+        "background_floor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "wait_limit_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 60000
+        }
+      },
+      "description": "This connector's pacing, concurrency and identifier-spelling opinions. Absent means the product's defaults. A figure above the measured maximum is clamped and the clamp reported to the author rather than the manifest being refused, because a pacing opinion should not cost the product a platform."
+    },
+    "content_sanitization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strip_instructions"
+      ],
+      "properties": {
+        "strip_instructions": {
+          "type": "boolean"
+        },
+        "max_inline_content_bytes": {
+          "type": "integer"
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "direction"
+              ],
+              "properties": {
+                "direction": {
+                  "const": "write"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "tool_coordination"
+              ],
+              "oneOf": [
+                {
+                  "required": [
+                    "compensation"
+                  ],
+                  "not": {
+                    "required": [
+                      "irreversible"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "irreversible"
+                  ],
+                  "properties": {
+                    "irreversible": {
+                      "const": true
+                    }
+                  },
+                  "not": {
+                    "required": [
+                      "compensation"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "label",
+          "description",
+          "direction",
+          "capability",
+          "parameters",
+          "reconciliation"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "read",
+              "write"
+            ]
+          },
+          "capability": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object",
+            "required": [
+              "type",
+              "properties"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "object"
+                ]
+              },
+              "properties": {
+                "type": "object"
+              },
+              "required": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": {
+                "type": "boolean"
+              }
+            }
+          },
+          "reconciliation": {
+            "type": "object",
+            "required": [
+              "method"
+            ],
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "readback",
+                  "none"
+                ]
+              },
+              "read_operation": {
+                "type": "string"
+              },
+              "comparison": {
+                "type": "object"
+              },
+              "ambiguous_outcome": {
+                "type": "string",
+                "enum": [
+                  "ask_user",
+                  "treat_as_unperformed"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "description": "Required on every tool, read or write. Its shape is job/contracts/tool-reconciliation@0.1.0, embedded here verbatim and not redefined."
+          },
+          "snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "read_operation",
+              "target_param",
+              "exclude_computed"
+            ],
+            "properties": {
+              "read_operation": {
+                "type": "string"
+              },
+              "target_param": {
+                "type": "string"
+              },
+              "exclude_computed": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The values the platform computes and refuses on write. Required, and may be empty: an empty array is the author stating the platform computes none of this object's values, while an absent field is the author having not considered the question."
+              }
+            }
+          },
+          "compensation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tool",
+              "arguments_from"
+            ],
+            "properties": {
+              "tool": {
+                "type": "string"
+              },
+              "arguments_source": {
+                "type": "string",
+                "enum": [
+                  "snapshot",
+                  "result"
+                ],
+                "description": "Where the compensating action's arguments come from: the recorded snapshot, or the result the call returned. Absent means snapshot."
+              },
+              "arguments_from": {
+                "type": "string"
+              }
+            }
+          },
+          "irreversible": {
+            "type": "boolean"
+          },
+          "side_effects": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "required": [
+                      "recallable"
+                    ],
+                    "properties": {
+                      "recallable": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "withdrawn_by"
+                    ]
+                  }
+                }
+              ],
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "effect",
+                "recipient",
+                "recallable",
+                "user_text"
+              ],
+              "properties": {
+                "effect": {
+                  "type": "string"
+                },
+                "recipient": {
+                  "type": "string"
+                },
+                "recallable": {
+                  "type": "boolean"
+                },
+                "withdrawn_by": {
+                  "type": "string"
+                },
+                "user_text": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Effects this operation has outside the platform's own data, each with whether anything withdraws it. An effect recorded as recallable must name what withdraws it."
+          },
+          "tool_coordination": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "resources"
+            ],
+            "properties": {
+              "resources": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "type",
+                    "path"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "optional": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Which of this tool's own arguments name the things it may change. Required on every write tool: the coordinator must know what a call is about before the call happens, and it must know it without knowing anything about the platform. A declaration is read once at registration and never from a call."
+          },
+          "changes_permission": {
+            "type": "boolean"
+          },
+          "bulk_threshold_param": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+} as const;

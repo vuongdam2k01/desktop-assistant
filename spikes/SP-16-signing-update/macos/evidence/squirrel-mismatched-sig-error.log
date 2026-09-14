@@ -1,0 +1,20 @@
+=== KẾT QUẢ ĐỐI CHỨNG CHỮ KÝ TRONG SQUIRREL.MAC / SHIPIT (Q4) ===
+Thời gian: Sun Sep 13 21:44:32 +07 2026
+macOS: 26.5.2 (25F84) | arm64
+
+1. THỬ NGHIỆM 1: CẬP NHẬT TỪ V1.0.0 SANG V1.0.1 (CÙNG KÝ CERT "DesktopAssistant Dev Test A")
+- Designated Requirement của v1.0.0:
+  designated => identifier "com.desktopassistant.sp16mac" and certificate root = H"8fc56be87f579fd5be2b6ef41c150c3ef12fcbea"
+- Designated Requirement của v1.0.1:
+  designated => identifier "com.desktopassistant.sp16mac" and certificate root = H"8fc56be87f579fd5be2b6ef41c150c3ef12fcbea"
+- Kết quả: THÀNH CÔNG 100%. ShipIt giải nén, thay thế bundle trong /tmp/sp16-running-app/DesktopAssistantSpikeMac.app và relaunch phiên bản mới v1.0.1 (PID 71032).
+
+2. THỬ NGHIỆM 2: CẬP NHẬT TỪ V1.0.0 (CERT) SANG V1.0.1 (KÝ AD-HOC HOẶC SAI CERT)
+- Chữ ký bản cập nhật: ad-hoc (flags=0x2(adhoc), hashes=3+3, cdhash khác biệt)
+- Phản hồi nguyên văn từ Squirrel.Mac (Native macOS Updater):
+  [Error: Code signature at URL file:///Users/<user>/Library/Caches/com.desktopassistant.sp16mac.ShipIt/update.2mpNTka/DesktopAssistantSpikeMac.app/ did not pass validation: code failed to satisfy specified code requirement(s)] {
+    code: -1,
+    domain: 'SQRLCodeSignatureErrorDomain'
+  }
+  [2026-09-13T14:44:32.081Z] [PID:71384] [v1.0.0] LỖI AUTO-UPDATER: Error: Code signature at URL file:///Users/<user>/Library/Caches/com.desktopassistant.sp16mac.ShipIt/update.2mpNTka/DesktopAssistantSpikeMac.app/ did not pass validation: code failed to satisfy specified code requirement(s)
+- Kết quả: CHẶN ĐỨNG TUYỆT ĐỐI. Bản cài đặt bị huỷ, tiến trình cũ không bị kill.

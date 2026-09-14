@@ -1,0 +1,25 @@
+{
+  "name": "@desktop-assistant/build-check",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "build-check": "./bin/build-check.mjs"
+  },
+  "main": "./dist/cli.js",
+  "types": "./dist/cli.d.ts",
+  "scripts": {
+    "build": "tsup src/cli.ts --format esm --out-dir dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@electron/asar": "4.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.4",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.0"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-09-11T10:52:38.195815+00:00",
+  "note": "Sinh tu dong boi discovery. Khong sua tay. Chay lai de cap nhat.",
+  "workspaces": {
+    "A": {
+      "workspace_name": "spike-a-simple",
+      "bot_name": "spike-a",
+      "roots": [
+        {
+          "id": "3d8c0043-56ec-8048-b55b-e5d65d40a401",
+          "title": "spike a",
+          "parent_type": "workspace",
+          "url": "https://app.notion.com/p/spike-a-3d8c004356ec8048b55be5d65d40a401"
+        }
+      ],
+      "databases": [
+        {
+          "id": "3d8c0043-56ec-81cf-a480-e9e679285df6",
+          "title": "Tasks",
+          "role": "tasks"
+        }
+      ]
+    },
+    "B": {
+      "workspace_name": "spike-b-complex",
+      "bot_name": "spike-b",
+      "roots": [
+        {
+          "id": "3d8d409b-f710-80e5-9c2a-fa6feb94eb7c",
+          "title": "spike b",
+          "parent_type": "workspace",
+          "url": "https://app.notion.com/p/spike-b-3d8d409bf71080e59c2afa6feb94eb7c"
+        }
+      ],
+      "databases": [
+        {
+          "id": "3d8d409b-f710-81c2-9312-f74d4c693f4c",
+          "title": "Projects",
+          "role": "projects"
+        },
+        {
+          "id": "3d8d409b-f710-8184-9b52-c5257e276372",
+          "title": "Tasks",
+          "role": "tasks"
+        }
+      ]
+    },
+    "C": {
+      "workspace_name": "spike-c-order",
+      "bot_name": "spike-c",
+      "roots": [
+        {
+          "id": "3d8329bf-3814-8072-affd-cb938df26186",
+          "title": "spike c",
+          "parent_type": "workspace",
+          "url": "https://app.notion.com/p/spike-c-3d8329bf38148072affdcb938df26186"
+        }
+      ],
+      "databases": [
+        {
+          "id": "3d8329bf-3814-8188-ab92-da5ccbd249be",
+          "title": "Tasks",
+          "role": "tasks"
+        }
+      ]
+    }
+  }
+}

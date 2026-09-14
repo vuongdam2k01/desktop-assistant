@@ -1,0 +1,36 @@
+=== SP-13 Q1: KIỂM CHỨNG CHẾ ĐỘ SERVE (LOOPBACK 127.0.0.1) TỰ ĐỘNG ===
+✓ Đã sinh PKCE S256 verifier và challenge.
+Redirect URI: http://localhost:8765
+Authorization URL sinh ra:
+https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=479928792321-h44mk6ohi38piupipfnt96itkdifuf00.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8765&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.readonly&access_type=offline&prompt=consent&code_challenge=ZG23SEILcq0nXEAZoP0qNs0EtBnAdWsU5WGmyEkvuLw&code_challenge_method=S256
+
+✓ HTTP Server loopback đang lắng nghe tại http://127.0.0.1:8765 (timeout: 300s)
+✓ Đã khởi chạy background screenshot worker ghi lại evidence luồng consent.
+✓ Đang tự động mở trình duyệt mặc định trên Windows...
+
+=======================================================
+✓ THÀNH CÔNG: Đã tự động bắt được Authorization Code!
+  Code nhận được: 4/0ATsMZqCS3vDW...SH1paGpw (chiều dài: 73)
+  Người dùng KHÔNG phải copy-paste URL hay mã nào.
+=======================================================
+
+Đang thực hiện token exchange với Google Token Endpoint...
+✓ Đổi token THÀNH CÔNG!
+  refresh_token: CÓ (HỢP LỆ)
+  scope được cấp: https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/gmail.readonly
+  expires_in: 3599 giây
+  __granted_at ghi nhận: 2026-09-12T02:33:43.486013+00:00
+  File token đã cập nhật: D:\projects\desktop-assistant\spikes\secrets\google-tokens.json
+
+--- KIỂM TRA ĐỌC GMAIL THẬT ---
+  ✓ Đọc được danh sách thư: 3 messages
+    Thư mới nhất - From: Google <no-reply@accounts.google.com>
+                 - Subject: Security alert
+
+--- KIỂM TRA ĐỌC GOOGLE DRIVE THẬT ---
+  ✓ Đọc được danh sách file: 5 files
+    - File: theo dõi thói quen                         | MIME: application/vnd.google-apps.spreadsheet
+    - File: kỷ luật                                    | MIME: application/vnd.google-apps.folder
+    - File: clickup                                    | MIME: application/vnd.google-apps.folder
+
+=== KẾT LUẬN Q1: Chế độ serve (loopback 127.0.0.1) chạy trọn vòng 100% tự động trên Windows! ===

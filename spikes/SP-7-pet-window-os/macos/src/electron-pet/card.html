@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SP7-Dialogue-Card</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="card-body">
+  <div id="card-container" class="card-container interactive">
+    <div class="card-header">
+      <span class="card-tag tag-approval">APPROVAL REQUIRED</span>
+      <span class="card-close" id="btn-close">&times;</span>
+    </div>
+    <div class="card-content">
+      <div class="card-title">Xác nhận thao tác Notion</div>
+      <div class="card-desc">Agent yêu cầu xóa vĩnh viễn <strong>5 tasks</strong> trong database <em>Tasks</em> (khớp quy tắc bảo vệ dữ liệu).</div>
+      <div class="card-input-wrapper">
+        <input type="text" id="card-input" placeholder="Ghi chú hoặc lý do (tuỳ chọn)..." />
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-deny" id="btn-deny">Từ chối</button>
+      <button class="btn btn-approve" id="btn-approve">Phê duyệt</button>
+    </div>
+  </div>
+
+  <script>
+    document.body.addEventListener('click', () => {
+      if (window.api && window.api.onCardClicked) {
+        window.api.onCardClicked();
+      }
+    });
+
+    document.getElementById('btn-close').addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.close();
+    });
+  </script>
+</body>
+</html>

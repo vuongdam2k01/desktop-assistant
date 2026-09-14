@@ -1,0 +1,110 @@
+{
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "electronVersion": "44.3.0",
+    "nodeVersion": "24.20.0",
+    "chromeVersion": "152.0.7977.78",
+    "isEncryptionAvailable": true,
+    "checkedAt": "2026-09-12T01:58:28.814Z"
+  },
+  "payloadBenchmarks": [
+    {
+      "name": "Notion Internal Token",
+      "type": "connector_token",
+      "plainBytes": 52,
+      "cipherBytes": 83,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 0.098,
+      "decryptMs": 0.015,
+      "match": true
+    },
+    {
+      "name": "Google Refresh Token",
+      "type": "oauth_refresh_token",
+      "plainBytes": 103,
+      "cipherBytes": 134,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 0.03,
+      "decryptMs": 0.008,
+      "match": true
+    },
+    {
+      "name": "Google BYO Client Secret JSON (FR-CF-11)",
+      "type": "byo_client_credentials",
+      "plainBytes": 458,
+      "cipherBytes": 489,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 0.012,
+      "decryptMs": 0.007,
+      "match": true
+    },
+    {
+      "name": "Combined Connector State (FR-CF-11 + FR-BE-02)",
+      "type": "connector_full_state",
+      "plainBytes": 733,
+      "cipherBytes": 764,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 0.011,
+      "decryptMs": 0.004,
+      "match": true
+    },
+    {
+      "name": "Large Multi-Connector & LLM Bundle (2.5 KB)",
+      "type": "full_bundle_2500b",
+      "plainBytes": 1353,
+      "cipherBytes": 1384,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 0.012,
+      "decryptMs": 0.004,
+      "match": true
+    },
+    {
+      "name": "Stress Test: 10 KB Payload",
+      "type": "stress_10kb",
+      "plainBytes": 10240,
+      "cipherBytes": 10271,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 0.042,
+      "decryptMs": 0.013,
+      "match": true
+    },
+    {
+      "name": "Stress Test: 100 KB Payload",
+      "type": "stress_100kb",
+      "plainBytes": 102400,
+      "cipherBytes": 102431,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 0.408,
+      "decryptMs": 0.233,
+      "match": true
+    },
+    {
+      "name": "Stress Test: 1 MB (1,048,576 bytes) Payload",
+      "type": "stress_1mb",
+      "plainBytes": 1048576,
+      "cipherBytes": 1048607,
+      "overheadBytes": 31,
+      "headerSignature": "v10",
+      "encryptMs": 2.929,
+      "decryptMs": 5.458,
+      "match": true
+    }
+  ],
+  "overheadExplanation": {
+    "overheadBytesPerEntry": 31,
+    "breakdown": [
+      "3 bytes: Version prefix (\"v10\" = 0x76 0x31 0x30)",
+      "12 bytes: AES-256-GCM Nonce / Initialization Vector",
+      "16 bytes: AES-256-GCM Authentication Tag"
+    ],
+    "dpapiIntegration": "The master 256-bit AES key is encrypted with Windows DPAPI (CryptProtectData) and stored in Local State under os_crypt.encrypted_key."
+  }
+}

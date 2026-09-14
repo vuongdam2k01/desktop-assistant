@@ -1,0 +1,23 @@
+{
+  "name": "sp-17-provider-matrix",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench:ack": "tsx src/benchmark-ack.ts",
+    "test:errors": "tsx src/test-errors.ts",
+    "calc:costs": "tsx src/cost-calculator.ts",
+    "test:all": "tsx src/run-all.ts"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "dotenv": "^17.4.2",
+    "typebox": "^1.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
+  }
+}

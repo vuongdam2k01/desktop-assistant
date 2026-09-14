@@ -1,0 +1,8 @@
+schema: design
+created: 2026-09-12
+kind: B
+skip_specs: false
+depends_on:
+  - req-020-backend-slice
+  - req-008-pet-window-os
+synced_at: "2026-09-12T21:11:53.893Z"

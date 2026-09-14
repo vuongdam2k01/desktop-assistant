@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/agent-session/0.1.0.json",
+  "title": "Transcript",
+  "description": "Normative shape of a stored agent transcript for agent/contracts/agent-session@0.1.0. This is the artifact, not the live session: it is what the transcript store holds, what replicates to the account, and what a rebuilt session is constructed from. The equivalence that makes resume one behaviour rather than two rests on it - a fresh session built from these turns must produce the same next step as the live session that wrote them (INV-AG-06). A transcript is also the only explanation a user has of what an agent did, which is why a reader meeting a content kind it does not know renders it as an unreadable turn and never drops it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sessionId", "jobId", "role", "turns"],
+  "properties": {
+    "sessionId": { "type": "string", "minLength": 1 },
+    "jobId": { "type": "string", "minLength": 1 },
+    "role": { "enum": ["pet", "worker", "rule_elicitation", "undo"] },
+    "turns": {
+      "type": "array",
+      "description": "Append-only within a run, with dense and strictly increasing positions (INV-AG-03). That positions are dense, unique and increasing is a relation between turns rather than a property of one, so it is held by the store and by the session rather than by this file.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["position", "author", "content", "at"],
+        "properties": {
+          "position": { "type": "integer", "minimum": 1 },
+          "author": { "enum": ["user", "agent", "tool_result", "reasoning"] },
+          "at": {
+            "type": "string",
+            "minLength": 1,
+            "description": "ISO-8601. Displayed, never used to order: ordering is position within the transcript."
+          },
+          "usage": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["input", "output", "reasoning", "total"],
+            "description": "Read from the provider response, never estimated - VERIFIED (spikes/SP-6-pi-sdk/REPORT.md section 1 Q7). Present on agent turns only. What is shown and what it costs belong to req-017-provider-matrix.",
+            "properties": {
+              "input": { "type": "integer", "minimum": 0 },
+              "output": { "type": "integer", "minimum": 0 },
+              "reasoning": { "type": "integer", "minimum": 0 },
+              "total": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "content": {
+            "description": "The closed set of things a turn can carry. A kind added at a later MINOR is rendered by an older reader as an unreadable turn rather than omitted, because silently omitting one would show a user a conversation that never happened.",
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "text"],
+                "properties": {
+                  "kind": { "const": "text" },
+                  "text": { "type": "string" }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "images"],
+                "properties": {
+                  "kind": { "const": "images" },
+                  "text": { "type": "string" },
+                  "images": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["data", "mimeType", "width", "height", "bytes"],
+                      "description": "Carried as content in the turn rather than as a path, so the transcript is self-contained. Released when the job reaches a terminal state (INV-AG-10); a window never receives this payload.",
+                      "properties": {
+                        "data": { "type": "string", "minLength": 1 },
+                        "mimeType": { "type": "string", "minLength": 1 },
+                        "width": { "type": "integer", "minimum": 14 },
+                        "height": { "type": "integer", "minimum": 14 },
+                        "bytes": { "type": "integer", "minimum": 1, "maximum": 10485760 }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "calls"],
+                "properties": {
+                  "kind": { "const": "tool_calls" },
+                  "calls": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["callId", "tool", "arguments"],
+                      "properties": {
+                        "callId": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "The same identifier the ledger uses to correlate the intent and the result of this call (INV-AG-05)."
+                        },
+                        "tool": { "type": "string", "minLength": 1 },
+                        "arguments": { "type": "object" }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "callId", "result"],
+                "properties": {
+                  "kind": { "const": "tool_result" },
+                  "callId": { "type": "string", "minLength": 1 },
+                  "result": true
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "callId", "reason", "ruleId"],
+                "description": "A refused call. It is an ordinary outcome the run continues from, not a failure: a refused call is not a failed job.",
+                "properties": {
+                  "kind": { "const": "tool_refused" },
+                  "callId": { "type": "string", "minLength": 1 },
+                  "reason": { "type": "string", "minLength": 1 },
+                  "ruleId": { "type": "string", "minLength": 1 }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "reason", "replacedPosition"],
+                "description": "A turn removed by retention or by the user, replaced at the same position so the conversation does not silently change shape.",
+                "properties": {
+                  "kind": { "const": "redacted" },
+                  "reason": { "enum": ["retention", "user_deletion"] },
+                  "replacedPosition": { "type": "integer", "minimum": 1 }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "suspension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "callId", "requestId", "atPosition", "since"],
+      "description": "Where a run stopped. Present exactly while the run is suspended. Written durably, and the job moved to waiting, before the approval request reaches any surface - which is what makes an abrupt stop uninteresting. A transcript carrying a suspension whose call already has a result turn is a run that executed a held call; that is a relation between turns, so the store refuses it rather than this file.",
+      "properties": {
+        "reason": { "enum": ["awaiting_approval", "awaiting_answer"] },
+        "callId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The ledger correlation identifier of the held call (INV-AG-05). At this point the ledger holds an intent for it and no result."
+        },
+        "requestId": { "type": "string", "minLength": 1 },
+        "atPosition": { "type": "integer", "minimum": 1 },
+        "since": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "ResumePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jobId", "callId", "disposition"],
+      "description": "How a suspension is satisfied. Not part of a transcript: it is the message that ends one, carried through the job manager and never by the window that showed the request. Applied once; applying one to a run that has already ended is RUN_ALREADY_FINISHED and changes nothing.",
+      "properties": {
+        "jobId": { "type": "string", "minLength": 1 },
+        "callId": { "type": "string", "minLength": 1 },
+        "disposition": { "enum": ["approved", "denied", "answered", "expired", "cancelled"] },
+        "answer": true
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# The contract drift check compares generated files byte for byte against the
+# committed ones. Without this, a Windows checkout rewrites every committed file
+# to CRLF while the generator still emits LF, and every contract reports drift.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.riv binary
+*.wasm binary
+*.node binary
+*.asar binary

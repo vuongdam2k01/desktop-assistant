@@ -1,0 +1,160 @@
+﻿{
+    "TestName":  "Windows Credential Manager Size \u0026 Payload Benchmark",
+    "Platform":  "Windows NT (win32)",
+    "Api":  "Advapi32.dll CredWrite / CredRead / CredDelete",
+    "CredentialType":  "CRED_TYPE_GENERIC (1)",
+    "MaxSupportedBlobSize":  2560,
+    "ExceedError":  {
+                        "Win32Message":  "The stub received bad data",
+                        "Code":  1783,
+                        "Name":  "ERROR_UNRECOGNIZED_MEDIA"
+                    },
+    "SizeBenchmark":  [
+                          {
+                              "SizeBytes":  50,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  8.388,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  100,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  6.282,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  256,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  7.908,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  400,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  11.685,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  512,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  11.339,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  1000,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  12.832,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  2000,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  7.547,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  2500,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  9.54,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  2560,
+                              "Success":  true,
+                              "Win32Error":  0,
+                              "ErrorMessage":  "OK",
+                              "DurationMs":  7.545,
+                              "ReadBackMatch":  true
+                          },
+                          {
+                              "SizeBytes":  2561,
+                              "Success":  false,
+                              "Win32Error":  1783,
+                              "ErrorMessage":  "The stub received bad data",
+                              "DurationMs":  0.547,
+                              "ReadBackMatch":  false
+                          },
+                          {
+                              "SizeBytes":  3000,
+                              "Success":  false,
+                              "Win32Error":  1783,
+                              "ErrorMessage":  "The stub received bad data",
+                              "DurationMs":  0.392,
+                              "ReadBackMatch":  false
+                          },
+                          {
+                              "SizeBytes":  4000,
+                              "Success":  false,
+                              "Win32Error":  1783,
+                              "ErrorMessage":  "The stub received bad data",
+                              "DurationMs":  0.532,
+                              "ReadBackMatch":  false
+                          },
+                          {
+                              "SizeBytes":  5000,
+                              "Success":  false,
+                              "Win32Error":  1783,
+                              "ErrorMessage":  "The stub received bad data",
+                              "DurationMs":  0.878,
+                              "ReadBackMatch":  false
+                          }
+                      ],
+    "RealPayloadBenchmark":  [
+                                 {
+                                     "Name":  "Notion Internal Token",
+                                     "SizeBytes":  52,
+                                     "Success":  true,
+                                     "Win32Error":  0,
+                                     "ErrorMessage":  "OK",
+                                     "ReadBackMatch":  true
+                                 },
+                                 {
+                                     "Name":  "Google Refresh Token",
+                                     "SizeBytes":  103,
+                                     "Success":  true,
+                                     "Win32Error":  0,
+                                     "ErrorMessage":  "OK",
+                                     "ReadBackMatch":  true
+                                 },
+                                 {
+                                     "Name":  "Google BYO Client JSON",
+                                     "SizeBytes":  396,
+                                     "Success":  true,
+                                     "Win32Error":  0,
+                                     "ErrorMessage":  "OK",
+                                     "ReadBackMatch":  true
+                                 },
+                                 {
+                                     "Name":  "Combined Connector State (JSON)",
+                                     "SizeBytes":  752,
+                                     "Success":  true,
+                                     "Win32Error":  0,
+                                     "ErrorMessage":  "OK",
+                                     "ReadBackMatch":  true
+                                 },
+                                 {
+                                     "Name":  "Full Multi-Connector Bundle (Google + Notion + LLM)",
+                                     "SizeBytes":  2261,
+                                     "Success":  true,
+                                     "Win32Error":  0,
+                                     "ErrorMessage":  "OK",
+                                     "ReadBackMatch":  true
+                                 }
+                             ]
+}

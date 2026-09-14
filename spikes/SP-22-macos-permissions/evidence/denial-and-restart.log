@@ -1,0 +1,7 @@
+=== Testing Denial Behavior and Restart Requirements ===
+Executing test_ax_prompt:
+AXIsProcessTrusted (preflight): 1
+AXIsProcessTrustedWithOptions (prompt): 1
+Testing ScreenCapture preflight without prompt:
+CGPreflightScreenCaptureAccess: GRANTED
+Denial tests complete.

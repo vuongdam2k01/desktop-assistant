@@ -1,0 +1,27 @@
+======================================================================
+📦 Q5: ELECTRON-BUILDER PACKAGING & UNIVERSAL BINARY ON MACOS
+======================================================================
+
+--- 1. App Bundle Sizes (.app directory) ---
+  - mac-arm64   : 313 MB
+  - mac-x64     : 320 MB
+  - mac-universal: 536 MB (delta vs arm64: +223 MB / +71.2%)
+
+--- 2. Inspecting Binary Architectures ---
+Main Executable (Universal):
+  /Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/MacOS/SP12MacPackagingTest: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64:Mach-O 64-bit executable arm64]
+/Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/MacOS/SP12MacPackagingTest (for architecture x86_64):	Mach-O 64-bit executable x86_64
+/Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/MacOS/SP12MacPackagingTest (for architecture arm64):	Mach-O 64-bit executable arm64
+Node Addon [darwin-arm64.node]:
+  /Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-arm64.node: Mach-O 64-bit bundle arm64
+Node Addon [darwin-x64.node]:
+  /Users/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/macos/src/packaging-test/dist/mac-universal/SP12MacPackagingTest.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-x64.node: Mach-O 64-bit bundle x86_64
+
+--- 3. Verifying Packaged Execution ---
+arm64 Execution: PACKAGED_TEST_SUCCESS: {"success":true,"row":{"id":1,"correlation_id":"corr_packaged_mac_001","payload":"{\"action\":\"packaged_native_check\",\"timestamp\":\"2026-09-13T14:13:49.255Z\"}"},"dbPath":"/Users/<user>/Library/Application Support/sp12-mac-packaging-test/packaged-test.db","electronVersion":"44.3.0","nodeVersion":"24.20.0","modulesVersion":"149","arch":"arm64","platform":"darwin","isAsar":true}
+universal Execution: PACKAGED_TEST_SUCCESS: {"success":true,"row":{"id":1,"correlation_id":"corr_packaged_mac_001","payload":"{\"action\":\"packaged_native_check\",\"timestamp\":\"2026-09-13T14:13:49.483Z\"}"},"dbPath":"/Users/<user>/Library/Application Support/sp12-mac-packaging-test/packaged-test.db","electronVersion":"44.3.0","nodeVersion":"24.20.0","modulesVersion":"149","arch":"arm64","platform":"darwin","isAsar":true}
+
+Saved package data to evidence/q5-package-sizes.json
+
+=== Q5 PACKAGING TEST COMPLETE: PASS ===
+

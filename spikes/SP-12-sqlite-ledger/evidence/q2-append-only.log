@@ -1,0 +1,36 @@
+================================================================
+SPIKE SP-12 / Q2: APPEND-ONLY ENFORCEMENT TEST (FR-LG-02)
+Database: /home/<user>/projects/desktop-assistant/spikes/SP-12-sqlite-ledger/evidence/q2-test.db
+Timestamp: 2026-09-11T12:10:25.648Z
+================================================================
+
+[SETUP] Inserted initial record with ID: 1, seq: 1
+
+--- Test 2.1: Internal UPDATE attempt via SQLite Statement ---
+[SUCCESS] UPDATE was BLOCKED as expected!
+Error message: "ActionRecord is append-only: UPDATE is forbidden (FR-LG-02)"
+
+--- Test 2.2: Internal DELETE attempt via SQLite Statement ---
+[SUCCESS] DELETE was BLOCKED as expected!
+Error message: "ActionRecord is append-only: DELETE is forbidden (FR-LG-02)"
+
+--- Test 2.3: External Tool (Python sqlite3) attempting UPDATE & DELETE ---
+[Python] Attempting UPDATE on action_records...
+[Python] BLOCKED: ActionRecord is append-only: UPDATE is forbidden (FR-LG-02)
+[Python] Attempting DELETE on action_records...
+[Python] BLOCKED: ActionRecord is append-only: DELETE is forbidden (FR-LG-02)
+[Python] Attempting DROP TRIGGER trg_action_records_no_update...
+[Python] WARNING: DROP TRIGGER succeeded (external tool with write access can drop triggers)!
+
+--- Verification: Row count and integrity ---
+Current records count: 1
+Record 1: {"id":1,"job_id":"job_test_q2","seq":1,"type":"tool_intent","tool":"notion_update_page","args":"{\"pageId\":\"p123\"}","result":null,"snapshot_before":null,"snapshot_after":null,"is_reversible":0,"compensating_action":null,"correlation_id":null,"timestamp":"2026-09-11T12:10:25.754Z"}
+
+================================================================
+Q2 CONCLUSION SUMMARY:
+1. SQLite Triggers enforce append-only at the database engine level.
+2. Triggers work regardless of whether the query comes from the app or an external tool (verified with Python sqlite3).
+3. An external tool with file write permissions CAN drop triggers (unless authorizers or OS read-only permissions are configured).
+4. RECOMMENDATION: Defense-in-depth (Repository abstraction in application layer + SQLite Triggers in DDL).
+================================================================
+

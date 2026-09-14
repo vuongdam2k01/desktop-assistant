@@ -1,0 +1,26 @@
+appId: com.desktopassistant.app
+productName: DesktopAssistant
+asar: true
+asarUnpack:
+  - '**/*.node'
+npmRebuild: false
+extraResources:
+  - from: 'renderer-pet/assets/pet.riv'
+    to: 'assets/pet.riv'
+directories:
+  output: release
+files:
+  - 'dist/**/*'
+  - '!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}'
+  - '!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}'
+mac:
+  x64ArchFiles: '*.node'
+  target:
+    - dir
+win:
+  verifyUpdateCodeSignature: true
+  target:
+    - dir
+linux:
+  target:
+    - dir

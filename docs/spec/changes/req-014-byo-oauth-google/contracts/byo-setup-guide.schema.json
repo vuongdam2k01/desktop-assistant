@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/connector/byo-setup-guide/0.1.0.json",
+  "title": "SetupGuide",
+  "description": "Normative shape of a bring-your-own setup guide, for connector/contracts/byo-setup-guide@0.1.0. One guide per connector offering the route, shipped as a build resource beside that connector's manifest and validated at load: a guide this file refuses makes the route absent rather than partial, because a sequence a person cannot finish is worse than a route that was never offered. The file carries the four preamble notes the user is owed before the first step - how long the task is, that the provider will show a warning screen, that the connection will need re-establishing while their client is unverified, and where what they supply is kept - the requirement that a console step names the page it happens on, and the requirement that exactly the file step exists to hand the client over. What it cannot express, and what the contract document holds instead: that the steps are in an order a person can follow, that a troubleshooting entry names a step this guide declares, and that the words match what the provider actually shows.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "connector_id",
+    "version",
+    "preamble",
+    "steps",
+    "expiry_notice"
+  ],
+  "properties": {
+    "connector_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$",
+      "description": "The connector this guide belongs to. Pairing is by identity, as an adapter is paired to a manifest."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "preamble": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "step_count_note",
+        "provider_warning_note",
+        "reconnection_note",
+        "storage_note"
+      ],
+      "properties": {
+        "step_count_note": {
+          "type": "string"
+        },
+        "provider_warning_note": {
+          "type": "string"
+        },
+        "reconnection_note": {
+          "type": "string"
+        },
+        "storage_note": {
+          "type": "string"
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "contains": {
+        "type": "object",
+        "properties": {
+          "completion": {
+            "type": "object",
+            "required": [
+              "by",
+              "accepts"
+            ],
+            "properties": {
+              "by": {
+                "const": "file"
+              },
+              "accepts": {
+                "const": "authorisation_client"
+              }
+            }
+          }
+        },
+        "required": [
+          "completion"
+        ]
+      },
+      "items": {
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "location"
+              ],
+              "properties": {
+                "location": {
+                  "const": "provider_console"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "page_url"
+              ]
+            }
+          }
+        ],
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "body",
+          "location",
+          "completion"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string",
+            "enum": [
+              "provider_console",
+              "application",
+              "browser"
+            ]
+          },
+          "page_url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "illustration": {
+            "type": "string"
+          },
+          "completion": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "by"
+            ],
+            "properties": {
+              "by": {
+                "type": "string",
+                "enum": [
+                  "confirmation",
+                  "file",
+                  "authorisation"
+                ]
+              },
+              "accepts": {
+                "type": "string",
+                "enum": [
+                  "authorisation_client"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "description": "Ordered; the order is the sequence. At least one step completes by supplying the authorisation client file, which is what the contains rule requires: a guide with no such step describes a route that cannot end in a connection."
+    },
+    "expiry_notice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "body",
+        "action_label"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "action_label": {
+          "type": "string"
+        }
+      },
+      "description": "The words shown when an authorisation obtained this way stops working, and the words on the control that re-establishes it. Required, because the lifetime caveat of an unverified client is a certainty rather than a risk."
+    },
+    "troubleshooting": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "symptom",
+          "remedy_step_id",
+          "body"
+        ],
+        "properties": {
+          "symptom": {
+            "type": "string"
+          },
+          "remedy_step_id": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

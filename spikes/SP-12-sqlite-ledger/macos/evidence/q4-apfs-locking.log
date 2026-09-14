@@ -1,0 +1,42 @@
+======================================================================
+🔒 Q4: APFS FILE LOCKING, WAL BEHAVIOR & MULTI-PROCESS CONCURRENCY
+======================================================================
+
+--- 1. FileVault & APFS Filesystem Inspection ---
+Partition Type:            41504653-0000-11AA-AA11-00306543ECAC
+   File System Personality:   APFS
+   Type (Bundle):             apfs
+   Media Type:                Generic
+   FileVault:                 Yes
+
+--- 2. WAL, SHM File Lifecycle on APFS ---
+Files present while DB is OPEN and has uncheckpointed data:
+  - DB  exists: true (4096 bytes)
+  - WAL exists: true (12392 bytes)
+  - SHM exists: true (32768 bytes)
+
+Files present after clean db.close() (passive checkpoint):
+  - DB  exists: true
+  - WAL exists: false (size: 0 bytes)
+  - SHM exists: false (size: 0 bytes)
+
+--- 3. Multi-Process Concurrency Test (1 Writer + 2 Concurrent Readers) ---
+READER_1_READS: 25 LAST_COUNT: 37
+READER_2_READS: 25 LAST_COUNT: 37
+WRITER_COMPLETED_50_INSERTS
+
+Concurrency execution results:
+  - Process writer exited with code 0
+  - Process reader1 exited with code 0
+  - Process reader2 exited with code 0
+✔ Concurrent Writer and Readers executed seamlessly without lock contention on APFS!
+
+--- 4. Multi-Writer Mutual Exclusion Test (SQLITE_BUSY on conflicting write) ---
+Writer 1 acquired BEGIN IMMEDIATE lock.
+Writer 2 blocked with expected error: [SQLITE_BUSY] database is locked
+Writer 1 committed.
+Writer 2 acquired BEGIN IMMEDIATE successfully after Writer 1 released lock.
+✔ Multi-Writer mutual exclusion verified: SQLITE_BUSY safely prevents double-write corruption.
+
+=== Q4 APFS LOCKING & WAL TEST COMPLETE: PASS ===
+

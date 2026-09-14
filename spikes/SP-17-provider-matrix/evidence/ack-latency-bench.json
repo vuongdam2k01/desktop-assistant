@@ -1,0 +1,439 @@
+{
+  "benchmarkTimestamp": "2026-09-12T02:01:26.653Z",
+  "endpoint": "https://ark.ap-southeast.bytepluses.com/api/coding/v3",
+  "textBenchmarks": [
+    {
+      "modelName": "CHEAP (DeepSeek V4 Flash)",
+      "modelId": "deepseek-v4-flash-ga-260731",
+      "runs": [
+        {
+          "run": 1,
+          "ttftMs": 2594,
+          "totalMs": 2602,
+          "inputTokens": 126,
+          "outputTokens": 149,
+          "text": "Nhận rồi, tôi sẽ tạo task review PR #212 với hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 2,
+          "ttftMs": 3104,
+          "totalMs": 3110,
+          "inputTokens": 126,
+          "outputTokens": 221,
+          "text": "Đã nhận lệnh, tôi tạo task review PR #212 với hạn thứ Sáu tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 3,
+          "ttftMs": 1817,
+          "totalMs": 1859,
+          "inputTokens": 126,
+          "outputTokens": 76,
+          "text": "Nhận rồi, tôi sẽ tạo task review PR #212 với hạn thứ Sáu tuần sau ngay!",
+          "success": true
+        },
+        {
+          "run": 4,
+          "ttftMs": 1773,
+          "totalMs": 1815,
+          "inputTokens": 126,
+          "outputTokens": 102,
+          "text": "Nhận rồi, tôi sẽ tạo task review PR #212 với hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 5,
+          "ttftMs": 1635,
+          "totalMs": 1640,
+          "inputTokens": 126,
+          "outputTokens": 66,
+          "text": "Ok, tôi sẽ tạo task review PR #212 với hạn thứ Sáu tuần sau ngay!",
+          "success": true
+        },
+        {
+          "run": 6,
+          "ttftMs": 1898,
+          "totalMs": 1940,
+          "inputTokens": 126,
+          "outputTokens": 130,
+          "text": "Nhận rồi, tôi kiểm tra Notion và tạo task review PR #212 với hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 7,
+          "ttftMs": 1861,
+          "totalMs": 1903,
+          "inputTokens": 126,
+          "outputTokens": 103,
+          "text": "Đã nhận, tôi tạo task review PR #212 với hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 8,
+          "ttftMs": 1934,
+          "totalMs": 1976,
+          "inputTokens": 126,
+          "outputTokens": 106,
+          "text": "Đã nhận, tôi sẽ tạo task review PR #212 với hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 9,
+          "ttftMs": 2027,
+          "totalMs": 2069,
+          "inputTokens": 126,
+          "outputTokens": 109,
+          "text": "Đã nhận, tôi sẽ tạo task review PR #212 với hạn thứ 6 tuần sau ngay!",
+          "success": true
+        },
+        {
+          "run": 10,
+          "ttftMs": 2129,
+          "totalMs": 2172,
+          "inputTokens": 126,
+          "outputTokens": 137,
+          "text": "Nhận rồi, tôi kiểm tra Notion và tạo task review PR #212 với hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        }
+      ],
+      "ttft": {
+        "min": 1635,
+        "max": 3104,
+        "mean": 2077.2,
+        "median": 1916,
+        "p90": 3104
+      },
+      "totalLatency": {
+        "min": 1640,
+        "max": 3110,
+        "mean": 2108.6,
+        "median": 1958,
+        "p90": 3110
+      },
+      "tokens": {
+        "avgInput": 126,
+        "avgOutput": 120,
+        "avgTotal": 246
+      },
+      "meetsNfrPf03Ttft": true,
+      "meetsNfrPf03Total": true
+    },
+    {
+      "modelName": "STRONG (DeepSeek V4 Pro)",
+      "modelId": "deepseek-v4-pro-ga-260813",
+      "runs": [
+        {
+          "run": 1,
+          "ttftMs": 2284,
+          "totalMs": 2880,
+          "inputTokens": 126,
+          "outputTokens": 88,
+          "text": "Nhận rồi, mình tạo task review PR #212 trên Notion với deadline thứ 6 tuần sau ngay đây!",
+          "success": true
+        },
+        {
+          "run": 2,
+          "ttftMs": 3836,
+          "totalMs": 4266,
+          "inputTokens": 126,
+          "outputTokens": 140,
+          "text": "Nhận rồi, tôi sẽ tạo task review PR #212 hạn thứ 6 tuần sau ngay đây!",
+          "success": true
+        },
+        {
+          "run": 3,
+          "ttftMs": 3540,
+          "totalMs": 4023,
+          "inputTokens": 126,
+          "outputTokens": 116,
+          "text": "Đã nhận, tôi sẽ tạo task review PR #212 với hạn chót là thứ Sáu tuần sau nhé!",
+          "success": true
+        },
+        {
+          "run": 4,
+          "ttftMs": 3584,
+          "totalMs": 4090,
+          "inputTokens": 126,
+          "outputTokens": 184,
+          "text": "Nhận rồi, tôi kiểm tra Notion và tạo task review PR #212 hạn thứ 6 tuần sau ngay đây!",
+          "success": true
+        },
+        {
+          "run": 5,
+          "ttftMs": 7954,
+          "totalMs": 8352,
+          "inputTokens": 126,
+          "outputTokens": 431,
+          "text": "Nhận rồi, tôi tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 6,
+          "ttftMs": 3754,
+          "totalMs": 4420,
+          "inputTokens": 126,
+          "outputTokens": 178,
+          "text": "Nhận rồi, tôi tạo task review PR #212 và thêm deadline thứ 6 tuần sau vào Notion cho bạn ngay!",
+          "success": true
+        },
+        {
+          "run": 7,
+          "ttftMs": 3899,
+          "totalMs": 4289,
+          "inputTokens": 126,
+          "outputTokens": 167,
+          "text": "Đã nhận, tôi tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 8,
+          "ttftMs": 2850,
+          "totalMs": 3443,
+          "inputTokens": 126,
+          "outputTokens": 130,
+          "text": "Đã nhận, tôi sẽ tạo task review PR #212 với deadline thứ 6 tuần sau ngay đây!",
+          "success": true
+        },
+        {
+          "run": 9,
+          "ttftMs": 3487,
+          "totalMs": 3791,
+          "inputTokens": 126,
+          "outputTokens": 171,
+          "text": "Nhận rồi, tôi tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 10,
+          "ttftMs": 3679,
+          "totalMs": 4062,
+          "inputTokens": 126,
+          "outputTokens": 172,
+          "text": "Nhận rồi, tôi kiểm tra Notion và tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        }
+      ],
+      "ttft": {
+        "min": 2284,
+        "max": 7954,
+        "mean": 3886.7,
+        "median": 3631.5,
+        "p90": 7954
+      },
+      "totalLatency": {
+        "min": 2880,
+        "max": 8352,
+        "mean": 4361.6,
+        "median": 4076,
+        "p90": 8352
+      },
+      "tokens": {
+        "avgInput": 126,
+        "avgOutput": 178,
+        "avgTotal": 304
+      },
+      "meetsNfrPf03Ttft": false,
+      "meetsNfrPf03Total": false
+    },
+    {
+      "modelName": "VISION (Seed 2.0 Pro)",
+      "modelId": "seed-2-0-pro-260328",
+      "runs": [
+        {
+          "run": 1,
+          "ttftMs": 2751,
+          "totalMs": 2794,
+          "inputTokens": 123,
+          "outputTokens": 113,
+          "text": "Nhận rồi, tôi sẽ tạo task review PR #212 hạn đến thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 2,
+          "ttftMs": 2982,
+          "totalMs": 2983,
+          "inputTokens": 123,
+          "outputTokens": 93,
+          "text": "Nhận rồi, tôi tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 3,
+          "ttftMs": 4024,
+          "totalMs": 4065,
+          "inputTokens": 123,
+          "outputTokens": 98,
+          "text": "Nhận rồi, tôi tạo task review PR #212 đặt hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 4,
+          "ttftMs": 2470,
+          "totalMs": 2511,
+          "inputTokens": 123,
+          "outputTokens": 94,
+          "text": "Nhận rồi, tôi lập tức tạo task review PR #212 với hạn đến thứ 6 tuần sau nhé!",
+          "success": true
+        },
+        {
+          "run": 5,
+          "ttftMs": 2696,
+          "totalMs": 2738,
+          "inputTokens": 123,
+          "outputTokens": 102,
+          "text": "Nhận rồi, tôi tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 6,
+          "ttftMs": 3209,
+          "totalMs": 3212,
+          "inputTokens": 123,
+          "outputTokens": 83,
+          "text": "Nhận rồi, tôi tạo task review PR #212 đặt hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 7,
+          "ttftMs": 4447,
+          "totalMs": 4488,
+          "inputTokens": 123,
+          "outputTokens": 105,
+          "text": "Nhận rồi, tôi tạo task review PR #212 có hạn hoàn thành thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 8,
+          "ttftMs": 6052,
+          "totalMs": 6094,
+          "inputTokens": 123,
+          "outputTokens": 88,
+          "text": "Nhận rồi, tôi tạo task review PR #212 đặt hạn đến thứ 6 tuần sau cho bạn ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 9,
+          "ttftMs": 2946,
+          "totalMs": 2948,
+          "inputTokens": 123,
+          "outputTokens": 112,
+          "text": "Nhận rồi, tôi tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        },
+        {
+          "run": 10,
+          "ttftMs": 3186,
+          "totalMs": 3228,
+          "inputTokens": 123,
+          "outputTokens": 114,
+          "text": "Nhận rồi, tôi tạo task review PR #212 hạn thứ 6 tuần sau ngay nhé!",
+          "success": true
+        }
+      ],
+      "ttft": {
+        "min": 2470,
+        "max": 6052,
+        "mean": 3476.3,
+        "median": 3084,
+        "p90": 6052
+      },
+      "totalLatency": {
+        "min": 2511,
+        "max": 6094,
+        "mean": 3506.1,
+        "median": 3097.5,
+        "p90": 6094
+      },
+      "tokens": {
+        "avgInput": 123,
+        "avgOutput": 100,
+        "avgTotal": 223
+      },
+      "meetsNfrPf03Ttft": false,
+      "meetsNfrPf03Total": false
+    }
+  ],
+  "multimodalBenchmark": {
+    "modelName": "VISION (Seed 2.0 Pro)",
+    "modelId": "seed-2-0-pro-260328",
+    "runs": [
+      {
+        "run": 1,
+        "ttftMs": 4980,
+        "totalMs": 5023,
+        "inputTokens": 1377,
+        "outputTokens": 210,
+        "text": "Đã nhận ảnh danh sách 3 công việc cần hoàn thành trước thứ Sáu, tôi bắt đầu xử lý các task này ngay!",
+        "success": true
+      },
+      {
+        "run": 2,
+        "ttftMs": 10513,
+        "totalMs": 10552,
+        "inputTokens": 1377,
+        "outputTokens": 159,
+        "text": "Đã nhận 3 công việc cần hoàn thành trước thứ Sáu trong ảnh, tôi sẽ tiến hành xử lý các task này ngay!",
+        "success": true
+      },
+      {
+        "run": 3,
+        "ttftMs": 19651,
+        "totalMs": 19693,
+        "inputTokens": 41,
+        "outputTokens": 164,
+        "text": "Đã nhận ảnh danh sách 3 công việc cần hoàn thành trước thứ Sáu, tôi bắt đầu xử lý các task này ngay!",
+        "success": true
+      },
+      {
+        "run": 4,
+        "ttftMs": 6613,
+        "totalMs": 6655,
+        "inputTokens": 1377,
+        "outputTokens": 247,
+        "text": "Đã nhận ảnh danh sách 3 công việc cần hoàn thành trước thứ Sáu, tôi sẽ bắt đầu xử lý các task này ngay!",
+        "success": true
+      },
+      {
+        "run": 5,
+        "ttftMs": 4861,
+        "totalMs": 4902,
+        "inputTokens": 1377,
+        "outputTokens": 140,
+        "text": "Đã nhận ảnh danh sách 3 task cần làm trước thứ Sáu, tôi sẽ tiến hành xử lý các công việc này ngay!",
+        "success": true
+      }
+    ],
+    "ttft": {
+      "min": 4861,
+      "max": 19651,
+      "mean": 9323.6,
+      "median": 6613,
+      "p90": 19651
+    },
+    "totalLatency": {
+      "min": 4902,
+      "max": 19693,
+      "mean": 9365,
+      "median": 6655,
+      "p90": 19693
+    },
+    "tokens": {
+      "avgInput": 1110,
+      "avgOutput": 184,
+      "avgTotal": 1294
+    }
+  },
+  "visionRejectionChecks": [
+    {
+      "modelName": "CHEAP (DeepSeek Flash)",
+      "modelId": "deepseek-v4-flash-ga-260731",
+      "rejected": false
+    },
+    {
+      "modelName": "STRONG (DeepSeek Pro)",
+      "modelId": "deepseek-v4-pro-ga-260813",
+      "rejected": false
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+=== SP-13 Q2: KIỂM TRA CỔNG ĐỘNG VS CỔNG CỐ ĐỊNH GOOGLE OAUTH ===
+OAuth Client Type: installed (Desktop app)
+Redirect URIs đã đăng ký trong client JSON: ['http://localhost']
+
+--> Kiểm tra: http://localhost:8765
+    Mô tả: Cổng 8765 cố định của script test
+    Kết quả: SUCCESS (HTTP 200)
+    => Google CHẤP NHẬN redirect_uri này (phục vụ trang đăng nhập/consent bình thường).
+
+--> Kiểm tra: http://localhost:54321
+    Mô tả: Cổng 54321 động ngẫu nhiên
+    Kết quả: SUCCESS (HTTP 200)
+    => Google CHẤP NHẬN redirect_uri này (phục vụ trang đăng nhập/consent bình thường).
+
+--> Kiểm tra: http://localhost:19283
+    Mô tả: Cổng 19283 động ngẫu nhiên
+    Kết quả: SUCCESS (HTTP 200)
+    => Google CHẤP NHẬN redirect_uri này (phục vụ trang đăng nhập/consent bình thường).
+
+--> Kiểm tra: http://localhost
+    Mô tả: Không chỉ định cổng (khớp chính xác redirect_uris khai báo)
+    Kết quả: SUCCESS (HTTP 200)
+    => Google CHẤP NHẬN redirect_uri này (phục vụ trang đăng nhập/consent bình thường).
+
+--> Kiểm tra: http://127.0.0.1:8765
+    Mô tả: IP Loopback 127.0.0.1 kèm cổng 8765
+    Kết quả: SUCCESS (HTTP 200)
+    => Google CHẤP NHẬN redirect_uri này (phục vụ trang đăng nhập/consent bình thường).
+
+--> Kiểm tra: http://127.0.0.1
+    Mô tả: IP Loopback 127.0.0.1 không kèm cổng
+    Kết quả: SUCCESS (HTTP 200)
+    => Google CHẤP NHẬN redirect_uri này (phục vụ trang đăng nhập/consent bình thường).
+
+--> Kiểm tra: http://localhost:80
+    Mô tả: Cổng chuẩn 80
+    Kết quả: SUCCESS (HTTP 200)
+    => Google CHẤP NHẬN redirect_uri này (phục vụ trang đăng nhập/consent bình thường).
+
+--> Kiểm tra: https://example.com/oauth/callback
+    Mô tả: Tên miền ngoài không đăng ký (kiểm tra đối chứng lỗi)
+    Kết quả: ERROR_PAGE (HTTP 200)
+    => Google TỪ CHỐI. Snippet: <!doctype html><html lang="en-US" dir="ltr"><head><base href="https://accounts.google.com/"><link rel="preconnect" href="//www.gstatic.com"><meta name...
+
+=== BẢNG TỔNG HỢP KIỂM CHỨNG Q2 ===
+| http://localhost:8765               | ✓ CHẤP NHẬN (HỢP LỆ)   | Cổng 8765 cố định của script test |
+| http://localhost:54321              | ✓ CHẤP NHẬN (HỢP LỆ)   | Cổng 54321 động ngẫu nhiên |
+| http://localhost:19283              | ✓ CHẤP NHẬN (HỢP LỆ)   | Cổng 19283 động ngẫu nhiên |
+| http://localhost                    | ✓ CHẤP NHẬN (HỢP LỆ)   | Không chỉ định cổng (khớp chính xác redirect_uris khai báo) |
+| http://127.0.0.1:8765               | ✓ CHẤP NHẬN (HỢP LỆ)   | IP Loopback 127.0.0.1 kèm cổng 8765 |
+| http://127.0.0.1                    | ✓ CHẤP NHẬN (HỢP LỆ)   | IP Loopback 127.0.0.1 không kèm cổng |
+| http://localhost:80                 | ✓ CHẤP NHẬN (HỢP LỆ)   | Cổng chuẩn 80 |
+| https://example.com/oauth/callback  | ✗ TỪ CHỐI (LỖI)        | Tên miền ngoài không đăng ký (kiểm tra đối chứng lỗi) |

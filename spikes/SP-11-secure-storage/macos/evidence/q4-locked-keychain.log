@@ -1,0 +1,5 @@
+Write to keychain: OSStatus = 0
+Read while UNLOCKED: OSStatus = 0 (retrieved 19 bytes)
+SecKeychainLock: OSStatus = 0
+Read while LOCKED (interaction disallowed): OSStatus = -128
+-> Result code: -128

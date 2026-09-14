@@ -1,0 +1,182 @@
+{
+  "call_id": "1789128388778_0028_GET_databases_3d8329bf-3814-8188-ab92-da5ccbd249be",
+  "category": "q4_get_db_c",
+  "timestamp": "2026-09-11T12:06:29Z",
+  "duration_ms": 897,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/databases/3d8329bf-3814-8188-ab92-da5ccbd249be",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:06:29 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968bee9bb68f24-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=LDfboU7nfLCQlmgugDKU2ZbXyRC57bBNKNLjGTXF3ZQ-1789128388.8960028-1.0.1.1-oR1byXMYM5nVf_gfLG0rVuSABKLADqouB2ouXMgadXXKWLdS9_RrQWYyyTrTnWuVv_wDvLe_8chdOX96vk6o2fuyYLFegkz68qDO2YgJmHSPhJwQTsSQFCM1sm0.zugf; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:36:29 GMT",
+      "ETag": "W/\"858-pwW8UaBOG1efasmte2oPMD7v1ic\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "68ed7f77-2791-4548-b7f8-67f054c1e16b",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "database",
+      "id": "3d8329bf-3814-8188-ab92-da5ccbd249be",
+      "cover": null,
+      "icon": null,
+      "created_time": "2026-09-11T10:54:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+      },
+      "last_edited_time": "2026-09-11T10:54:00.000Z",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Tasks",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Tasks",
+          "href": null
+        }
+      ],
+      "description": [],
+      "is_inline": false,
+      "database_type": null,
+      "properties": {
+        "Order": {
+          "id": "BCK%3B",
+          "name": "Order",
+          "description": null,
+          "type": "number",
+          "number": {
+            "format": "number"
+          }
+        },
+        "Due date": {
+          "id": "Kxlr",
+          "name": "Due date",
+          "description": null,
+          "type": "date",
+          "date": {}
+        },
+        "Status": {
+          "id": "WIcO",
+          "name": "Status",
+          "description": null,
+          "type": "select",
+          "select": {
+            "options": [
+              {
+                "id": "5fe9b184-a61a-440d-93ad-55a5c1155dd7",
+                "name": "Backlog",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "0fa90c4d-91d4-43e2-bd5a-d09cf5996df9",
+                "name": "Đang làm",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "d4654b70-e251-4beb-a4ba-6c2838d364fa",
+                "name": "Chờ review",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "a70d62cc-643f-4170-8ac2-29882236d9d2",
+                "name": "Xong",
+                "color": "default",
+                "description": null
+              }
+            ]
+          }
+        },
+        "Priority": {
+          "id": "qJ%3CJ",
+          "name": "Priority",
+          "description": null,
+          "type": "select",
+          "select": {
+            "options": [
+              {
+                "id": "8ff6939e-b4b3-4c40-ad38-268ede6f861a",
+                "name": "Thấp",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "18463fdc-b55a-4491-b6c2-5d2e1c3f365f",
+                "name": "Trung bình",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "1d857aef-82e9-402d-9778-fc16a63120bc",
+                "name": "Cao",
+                "color": "default",
+                "description": null
+              },
+              {
+                "id": "01b9a0a3-bdce-43d8-9efe-e8d507ea8ab1",
+                "name": "Khẩn",
+                "color": "default",
+                "description": null
+              }
+            ]
+          }
+        },
+        "Name": {
+          "id": "title",
+          "name": "Name",
+          "description": null,
+          "type": "title",
+          "title": {}
+        }
+      },
+      "parent": {
+        "type": "page_id",
+        "page_id": "3d8329bf-3814-8072-affd-cb938df26186"
+      },
+      "url": "https://app.notion.com/p/3d8329bf38148188ab92da5ccbd249be",
+      "public_url": null,
+      "in_trash": false,
+      "archived": false,
+      "request_id": "68ed7f77-2791-4548-b7f8-67f054c1e16b"
+    },
+    "error": null
+  }
+}

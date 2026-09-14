@@ -1,0 +1,17 @@
+[2026-09-13T14:42:53.817Z] Update Server đang lắng nghe tại http://127.0.0.1:8089
+[2026-09-13T14:42:53.818Z] Phục vụ file từ: /Users/<user>/projects/desktop-assistant/spikes/SP-16-signing-update/macos/src/server/updates
+[2026-09-13T14:42:55.788Z] REQUEST: GET /health -> Decoded: /health (Range: none)
+[2026-09-13T14:43:02.098Z] REQUEST: GET /updates/latest-mac.yml?noCache=1k2djhfa6 -> Decoded: /updates/latest-mac.yml (Range: none)
+[2026-09-13T14:43:02.099Z] FULL RESPONSE: 556 bytes -> latest-mac.yml
+[2026-09-13T14:43:02.129Z] REQUEST: GET /updates/DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip -> Decoded: /updates/DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip (Range: none)
+[2026-09-13T14:43:02.129Z] FULL RESPONSE: 126711990 bytes -> DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip
+[2026-09-13T14:43:11.883Z] Đang dừng server...
+[2026-09-13T14:44:22.318Z] Update Server đang lắng nghe tại http://127.0.0.1:8089
+[2026-09-13T14:44:22.319Z] Phục vụ file từ: /Users/<user>/projects/desktop-assistant/spikes/SP-16-signing-update/macos/src/server/updates
+[2026-09-13T14:44:28.471Z] REQUEST: GET /updates/latest-mac.yml?noCache=1k2djk3lf -> Decoded: /updates/latest-mac.yml (Range: none)
+[2026-09-13T14:44:28.471Z] FULL RESPONSE: 385 bytes -> latest-mac.yml
+[2026-09-13T14:44:28.491Z] REQUEST: GET /updates/DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip.blockmap -> Decoded: /updates/DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip.blockmap (Range: none)
+[2026-09-13T14:44:28.491Z] NOT FOUND: /Users/<user>/projects/desktop-assistant/spikes/SP-16-signing-update/macos/src/server/updates/DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip.blockmap
+[2026-09-13T14:44:28.493Z] REQUEST: GET /updates/DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip -> Decoded: /updates/DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip (Range: none)
+[2026-09-13T14:44:28.493Z] FULL RESPONSE: 128043443 bytes -> DesktopAssistantSpikeMac-1.0.1-arm64-mac.zip
+[2026-09-13T14:44:38.287Z] Đang dừng server...

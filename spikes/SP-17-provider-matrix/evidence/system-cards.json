@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0",
+  "compliancePrdAppendix": "A.2 (SYSTEM Card)",
+  "cards": [
+    {
+      "trigger": "Invalid API Key",
+      "card": {
+        "type": "SYSTEM",
+        "title": "Lỗi xác thực LLM Provider",
+        "description": "API Key cấu hình không hợp lệ hoặc đã bị vô hiệu hoá trên provider.",
+        "remedy": "Vui lòng kiểm tra và cập nhật lại API Key trong mục Cài đặt.",
+        "actionLabel": "Mở Cài đặt LLM Provider",
+        "actionTarget": "settings://providers/llm",
+        "isBlocking": false,
+        "autoDismissSeconds": null,
+        "badgePersistent": true,
+        "rawErrorCode": 401,
+        "providerDetails": "401: {\"code\":\"AuthenticationError\",\"message\":\"The API key format is incorrect. Request id: 021789178604078008f00307548aaad250a55687bd5a74270fbc6\",\"param\":\"\",\"type\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "trigger": "Non-existent Model",
+      "card": {
+        "type": "SYSTEM",
+        "title": "Model LLM không khả dụng",
+        "description": "Model đã chọn không tồn tại trên provider hoặc không thuộc gói dịch vụ đã kích hoạt.",
+        "remedy": "Vui lòng chọn model hợp lệ khác trong danh mục model khả dụng.",
+        "actionLabel": "Đổi Model trong Cài đặt",
+        "actionTarget": "settings://providers/llm/models",
+        "isBlocking": false,
+        "autoDismissSeconds": null,
+        "badgePersistent": true,
+        "rawErrorCode": 404,
+        "providerDetails": "404: {\"code\":\"UnsupportedModel\",\"message\":\"The requested model does not support the coding plan feature. Please refer to the documentation at https://docs.byteplus.com/en/docs/ModelArk/1925114 to select a compatible model. Request id: 02178917860420199b13dab45b2d10982c2cf34f4d4639dc7cc42\",\"param\":\"\",\"type\":\"\"}"
+      }
+    },
+    {
+      "trigger": "Quota Exceeded (429)",
+      "card": {
+        "type": "SYSTEM",
+        "title": "Hết hạn mức / Quota LLM Provider",
+        "description": "Tài khoản provider đã vượt giới hạn lượt gọi hoặc đã dùng hết số dư tín dụng.",
+        "remedy": "Vui lòng nạp thêm credit vào tài khoản provider hoặc đợi hạn mức phục hồi.",
+        "actionLabel": "Kiểm tra Tài khoản Provider",
+        "actionTarget": "https://ark.bytedance.net",
+        "isBlocking": false,
+        "autoDismissSeconds": null,
+        "badgePersistent": true,
+        "rawErrorCode": 429,
+        "providerDetails": "HTTP 429 Too Many Requests: Insufficient quota or rate limit exceeded on provider account."
+      }
+    }
+  ]
+}

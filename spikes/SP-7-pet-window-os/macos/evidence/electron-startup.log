@@ -1,0 +1,6 @@
+[2026-09-13T13:28:16.707Z] App ready on macOS. Electron: 44.3.0, Node: 24.20.0, arch: arm64
+[2026-09-13T13:28:16.887Z] Creating CardWindow: mode=panel, type=panel, focusable=true
+[2026-09-13T13:28:16.934Z] Tray icon created successfully on macOS menu bar
+[2026-09-13T13:28:16.937Z] HTTP Control Server listening on http://127.0.0.1:18923
+[2026-09-13T13:29:32.843Z] Creating CardWindow: mode=panel, type=panel, focusable=true
+[2026-09-13T13:31:12.213Z] Creating CardWindow: mode=normal, type=normal, focusable=true

@@ -1,0 +1,351 @@
+{
+  "calculatedAt": "2026-09-12T02:01:27.111Z",
+  "exchangeRateUsdToVnd": 25400,
+  "tokenProfiles": {
+    "petAck": {
+      "inputTokens": 350,
+      "outputTokens": 25,
+      "totalTokens": 375
+    },
+    "workerSimple": {
+      "inputTokens": 14705,
+      "outputTokens": 3676,
+      "totalTokens": 18381
+    },
+    "workerMedium": {
+      "inputTokens": 19205,
+      "outputTokens": 4802,
+      "totalTokens": 24007
+    },
+    "workerComplex": {
+      "inputTokens": 26391,
+      "outputTokens": 6598,
+      "totalTokens": 32989
+    },
+    "workerAverage": {
+      "inputTokens": 18708,
+      "outputTokens": 4677,
+      "totalTokens": 23385
+    },
+    "riskJudgePerCall": {
+      "inputTokens": 1485,
+      "outputTokens": 353,
+      "totalTokens": 1838
+    },
+    "riskJudgePerJob": {
+      "inputTokens": 2227.5,
+      "outputTokens": 529.5,
+      "totalTokens": 2757
+    },
+    "undoPerInvocation": {
+      "inputTokens": 2000,
+      "outputTokens": 500,
+      "totalTokens": 2500
+    },
+    "ruleElicitationMonthly": {
+      "inputTokens": 10400,
+      "outputTokens": 2600,
+      "totalTokens": 13000
+    }
+  },
+  "providerPlans": [
+    {
+      "id": "ark-dual-optimal",
+      "name": "BytePlus Ark Coding Plan (Định tuyến phân vai tối ưu)",
+      "description": "Pet & Judge: DeepSeek V4 Flash | Worker, Rule & Undo: DeepSeek V4 Pro",
+      "cheapPricing": {
+        "inputPerMillion": 0.07,
+        "outputPerMillion": 0.28
+      },
+      "strongPricing": {
+        "inputPerMillion": 0.27,
+        "outputPerMillion": 1.1
+      }
+    },
+    {
+      "id": "ark-all-pro",
+      "name": "BytePlus Ark Coding Plan (Toàn bộ dùng Pro)",
+      "description": "Toàn bộ 4 vai trò + Judge đều dùng DeepSeek V4 Pro",
+      "cheapPricing": {
+        "inputPerMillion": 0.27,
+        "outputPerMillion": 1.1
+      },
+      "strongPricing": {
+        "inputPerMillion": 0.27,
+        "outputPerMillion": 1.1
+      }
+    },
+    {
+      "id": "openai-dual",
+      "name": "OpenAI BYO (GPT-4o-mini + GPT-4o)",
+      "description": "Pet & Judge: GPT-4o-mini | Worker, Rule & Undo: GPT-4o",
+      "cheapPricing": {
+        "inputPerMillion": 0.15,
+        "outputPerMillion": 0.6
+      },
+      "strongPricing": {
+        "inputPerMillion": 2.5,
+        "outputPerMillion": 10
+      }
+    },
+    {
+      "id": "openai-all-mini",
+      "name": "OpenAI BYO (Tiết kiệm - 100% GPT-4o-mini)",
+      "description": "Toàn bộ vai trò dùng GPT-4o-mini (Vision + Tool calling sẵn)",
+      "cheapPricing": {
+        "inputPerMillion": 0.15,
+        "outputPerMillion": 0.6
+      },
+      "strongPricing": {
+        "inputPerMillion": 0.15,
+        "outputPerMillion": 0.6
+      }
+    },
+    {
+      "id": "anthropic-dual",
+      "name": "Anthropic BYO (Claude 3.5 Haiku + Sonnet)",
+      "description": "Pet & Judge: Claude 3.5 Haiku | Worker, Rule & Undo: Claude 3.5 Sonnet",
+      "cheapPricing": {
+        "inputPerMillion": 0.8,
+        "outputPerMillion": 4
+      },
+      "strongPricing": {
+        "inputPerMillion": 3,
+        "outputPerMillion": 15
+      }
+    }
+  ],
+  "reports": [
+    {
+      "intensityTier": "M-V1 Chuẩn (Baseline: ≥3 job/tuần)",
+      "jobsPerMonth": 15,
+      "jobsPerWeek": 3.5,
+      "plans": [
+        {
+          "planId": "ark-dual-optimal",
+          "planName": "BytePlus Ark Coding Plan (Định tuyến phân vai tối ưu)",
+          "monthlyTokenTotal": 418255,
+          "workerCostUsd": 0.1529,
+          "petAckCostUsd": 0.0005,
+          "judgeCostUsd": 0.0046,
+          "undoCostUsd": 0.0033,
+          "ruleCostUsd": 0.0057,
+          "totalCostUsd": 0.167,
+          "totalCostVnd": 4240,
+          "costPerJobUsd": 0.0111,
+          "costPerJobVnd": 283
+        },
+        {
+          "planId": "ark-all-pro",
+          "planName": "BytePlus Ark Coding Plan (Toàn bộ dùng Pro)",
+          "monthlyTokenTotal": 418255,
+          "workerCostUsd": 0.1529,
+          "petAckCostUsd": 0.0018,
+          "judgeCostUsd": 0.0178,
+          "undoCostUsd": 0.0033,
+          "ruleCostUsd": 0.0057,
+          "totalCostUsd": 0.181,
+          "totalCostVnd": 4609,
+          "costPerJobUsd": 0.0121,
+          "costPerJobVnd": 307
+        },
+        {
+          "planId": "openai-dual",
+          "planName": "OpenAI BYO (GPT-4o-mini + GPT-4o)",
+          "monthlyTokenTotal": 418255,
+          "workerCostUsd": 1.4031,
+          "petAckCostUsd": 0.001,
+          "judgeCostUsd": 0.0098,
+          "undoCostUsd": 0.03,
+          "ruleCostUsd": 0.052,
+          "totalCostUsd": 1.496,
+          "totalCostVnd": 37996,
+          "costPerJobUsd": 0.0997,
+          "costPerJobVnd": 2533
+        },
+        {
+          "planId": "openai-all-mini",
+          "planName": "OpenAI BYO (Tiết kiệm - 100% GPT-4o-mini)",
+          "monthlyTokenTotal": 418255,
+          "workerCostUsd": 0.0842,
+          "petAckCostUsd": 0.001,
+          "judgeCostUsd": 0.0098,
+          "undoCostUsd": 0.0018,
+          "ruleCostUsd": 0.0031,
+          "totalCostUsd": 0.1,
+          "totalCostVnd": 2537,
+          "costPerJobUsd": 0.0067,
+          "costPerJobVnd": 169
+        },
+        {
+          "planId": "anthropic-dual",
+          "planName": "Anthropic BYO (Claude 3.5 Haiku + Sonnet)",
+          "monthlyTokenTotal": 418255,
+          "workerCostUsd": 1.8942,
+          "petAckCostUsd": 0.0057,
+          "judgeCostUsd": 0.0585,
+          "undoCostUsd": 0.0405,
+          "ruleCostUsd": 0.0702,
+          "totalCostUsd": 2.069,
+          "totalCostVnd": 52555,
+          "costPerJobUsd": 0.1379,
+          "costPerJobVnd": 3504
+        }
+      ]
+    },
+    {
+      "intensityTier": "Trung bình (Moderate: 1 job/ngày)",
+      "jobsPerMonth": 30,
+      "jobsPerWeek": 7,
+      "plans": [
+        {
+          "planId": "ark-dual-optimal",
+          "planName": "BytePlus Ark Coding Plan (Định tuyến phân vai tối ưu)",
+          "monthlyTokenTotal": 823510,
+          "workerCostUsd": 0.3059,
+          "petAckCostUsd": 0.0009,
+          "judgeCostUsd": 0.0091,
+          "undoCostUsd": 0.0065,
+          "ruleCostUsd": 0.0057,
+          "totalCostUsd": 0.328,
+          "totalCostVnd": 8335,
+          "costPerJobUsd": 0.0109,
+          "costPerJobVnd": 278
+        },
+        {
+          "planId": "ark-all-pro",
+          "planName": "BytePlus Ark Coding Plan (Toàn bộ dùng Pro)",
+          "monthlyTokenTotal": 823510,
+          "workerCostUsd": 0.3059,
+          "petAckCostUsd": 0.0037,
+          "judgeCostUsd": 0.0355,
+          "undoCostUsd": 0.0065,
+          "ruleCostUsd": 0.0057,
+          "totalCostUsd": 0.357,
+          "totalCostVnd": 9074,
+          "costPerJobUsd": 0.0119,
+          "costPerJobVnd": 302
+        },
+        {
+          "planId": "openai-dual",
+          "planName": "OpenAI BYO (GPT-4o-mini + GPT-4o)",
+          "monthlyTokenTotal": 823510,
+          "workerCostUsd": 2.8062,
+          "petAckCostUsd": 0.002,
+          "judgeCostUsd": 0.0196,
+          "undoCostUsd": 0.06,
+          "ruleCostUsd": 0.052,
+          "totalCostUsd": 2.94,
+          "totalCostVnd": 74670,
+          "costPerJobUsd": 0.098,
+          "costPerJobVnd": 2489
+        },
+        {
+          "planId": "openai-all-mini",
+          "planName": "OpenAI BYO (Tiết kiệm - 100% GPT-4o-mini)",
+          "monthlyTokenTotal": 823510,
+          "workerCostUsd": 0.1684,
+          "petAckCostUsd": 0.002,
+          "judgeCostUsd": 0.0196,
+          "undoCostUsd": 0.0036,
+          "ruleCostUsd": 0.0031,
+          "totalCostUsd": 0.197,
+          "totalCostVnd": 4995,
+          "costPerJobUsd": 0.0066,
+          "costPerJobVnd": 167
+        },
+        {
+          "planId": "anthropic-dual",
+          "planName": "Anthropic BYO (Claude 3.5 Haiku + Sonnet)",
+          "monthlyTokenTotal": 823510,
+          "workerCostUsd": 3.7884,
+          "petAckCostUsd": 0.0114,
+          "judgeCostUsd": 0.117,
+          "undoCostUsd": 0.081,
+          "ruleCostUsd": 0.0702,
+          "totalCostUsd": 4.068,
+          "totalCostVnd": 103326,
+          "costPerJobUsd": 0.1356,
+          "costPerJobVnd": 3444
+        }
+      ]
+    },
+    {
+      "intensityTier": "Cường độ cao (Power User: 2 jobs/ngày)",
+      "jobsPerMonth": 60,
+      "jobsPerWeek": 14,
+      "plans": [
+        {
+          "planId": "ark-dual-optimal",
+          "planName": "BytePlus Ark Coding Plan (Định tuyến phân vai tối ưu)",
+          "monthlyTokenTotal": 1634020,
+          "workerCostUsd": 0.6118,
+          "petAckCostUsd": 0.0019,
+          "judgeCostUsd": 0.0183,
+          "undoCostUsd": 0.0131,
+          "ruleCostUsd": 0.0057,
+          "totalCostUsd": 0.651,
+          "totalCostVnd": 16526,
+          "costPerJobUsd": 0.0108,
+          "costPerJobVnd": 275
+        },
+        {
+          "planId": "ark-all-pro",
+          "planName": "BytePlus Ark Coding Plan (Toàn bộ dùng Pro)",
+          "monthlyTokenTotal": 1634020,
+          "workerCostUsd": 0.6118,
+          "petAckCostUsd": 0.0073,
+          "judgeCostUsd": 0.071,
+          "undoCostUsd": 0.0131,
+          "ruleCostUsd": 0.0057,
+          "totalCostUsd": 0.709,
+          "totalCostVnd": 18005,
+          "costPerJobUsd": 0.0118,
+          "costPerJobVnd": 300
+        },
+        {
+          "planId": "openai-dual",
+          "planName": "OpenAI BYO (GPT-4o-mini + GPT-4o)",
+          "monthlyTokenTotal": 1634020,
+          "workerCostUsd": 5.6124,
+          "petAckCostUsd": 0.0041,
+          "judgeCostUsd": 0.0391,
+          "undoCostUsd": 0.12,
+          "ruleCostUsd": 0.052,
+          "totalCostUsd": 5.828,
+          "totalCostVnd": 148020,
+          "costPerJobUsd": 0.0971,
+          "costPerJobVnd": 2467
+        },
+        {
+          "planId": "openai-all-mini",
+          "planName": "OpenAI BYO (Tiết kiệm - 100% GPT-4o-mini)",
+          "monthlyTokenTotal": 1634020,
+          "workerCostUsd": 0.3367,
+          "petAckCostUsd": 0.0041,
+          "judgeCostUsd": 0.0391,
+          "undoCostUsd": 0.0072,
+          "ruleCostUsd": 0.0031,
+          "totalCostUsd": 0.39,
+          "totalCostVnd": 9912,
+          "costPerJobUsd": 0.0065,
+          "costPerJobVnd": 165
+        },
+        {
+          "planId": "anthropic-dual",
+          "planName": "Anthropic BYO (Claude 3.5 Haiku + Sonnet)",
+          "monthlyTokenTotal": 1634020,
+          "workerCostUsd": 7.5767,
+          "petAckCostUsd": 0.0228,
+          "judgeCostUsd": 0.234,
+          "undoCostUsd": 0.162,
+          "ruleCostUsd": 0.0702,
+          "totalCostUsd": 8.066,
+          "totalCostVnd": 204870,
+          "costPerJobUsd": 0.1344,
+          "costPerJobVnd": 3414
+        }
+      ]
+    }
+  ]
+}

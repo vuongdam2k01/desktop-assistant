@@ -1,0 +1,223 @@
+/**
+ * Normative shape of the parameters of the ask_user tool, for agent/contracts/ask-user@0.1.0. The harness validates a call against this file before any surface is told to show anything, so a malformed inquiry is returned to the agent as INVALID_ASK_SCHEMA and the user never sees it. The bounds are the measured ones - VERIFIED (spikes/SP-21-ask-user-offline/REPORT.md section 1 Q1, spikes/SP-21-ask-user-offline/evidence/q1-ask-user-schema.log): at most four options, labels of at most thirty characters. One consolidated question is required rather than a list, because an agent that needs several things clarified must ask for them together.
+ */
+export interface AskUserParams {
+  /**
+   * A single consolidated question covering everything still missing. An agent needing clarification on several items states them here together rather than issuing further inquiries, which is also what the one-open-inquiry ceiling enforces from the other side.
+   */
+  question: string;
+  /**
+   * Zero to four quick choices. The ceiling is a presentation bound as much as a cognitive one: the options are rendered as chips in a pet speech bubble, and a fifth does not fit.
+   *
+   * @maxItems 4
+   */
+  options?:
+    | []
+    | [
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        }
+      ]
+    | [
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        },
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        }
+      ]
+    | [
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        },
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        },
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        }
+      ]
+    | [
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        },
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        },
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        },
+        {
+          /**
+           * Machine-readable identifier of the option, returned in the answer when the user chooses this chip.
+           */
+          id: string;
+          /**
+           * What the chip reads. Bounded so that a label cannot become the card.
+           */
+          label: string;
+          /**
+           * Optional secondary explanation of the choice.
+           */
+          description?: string;
+        }
+      ];
+  /**
+   * Whether typing is permitted alongside the options. Free text the user types is authoritative when it contradicts an option they were offered, so this member widens what the user may say and never narrows what their answer means.
+   */
+  allow_free_text?: boolean;
+}
+
+
+export const ASK_USER_SCHEMA = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/ask-user/0.1.0.json",
+  "title": "AskUserParams",
+  "description": "Normative shape of the parameters of the ask_user tool, for agent/contracts/ask-user@0.1.0. The harness validates a call against this file before any surface is told to show anything, so a malformed inquiry is returned to the agent as INVALID_ASK_SCHEMA and the user never sees it. The bounds are the measured ones - VERIFIED (spikes/SP-21-ask-user-offline/REPORT.md section 1 Q1, spikes/SP-21-ask-user-offline/evidence/q1-ask-user-schema.log): at most four options, labels of at most thirty characters. One consolidated question is required rather than a list, because an agent that needs several things clarified must ask for them together.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "question"
+  ],
+  "properties": {
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A single consolidated question covering everything still missing. An agent needing clarification on several items states them here together rather than issuing further inquiries, which is also what the one-open-inquiry ceiling enforces from the other side."
+    },
+    "options": {
+      "type": "array",
+      "maxItems": 4,
+      "description": "Zero to four quick choices. The ceiling is a presentation bound as much as a cognitive one: the options are rendered as chips in a pet speech bubble, and a fifth does not fit.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Machine-readable identifier of the option, returned in the answer when the user chooses this chip."
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30,
+            "description": "What the chip reads. Bounded so that a label cannot become the card."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional secondary explanation of the choice."
+          }
+        }
+      }
+    },
+    "allow_free_text": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether typing is permitted alongside the options. Free text the user types is authoritative when it contradicts an option they were offered, so this member widens what the user may say and never narrows what their answer means."
+    }
+  }
+} as const;

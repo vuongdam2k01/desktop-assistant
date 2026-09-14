@@ -1,0 +1,11 @@
+﻿SP-7 Q5 4-Corner Dialogue Positioning Log - 2026-09-11 22:33:30
+Corner 'top-left': WorkArea=(0,0 1280x672), Pet=(0,0), Card=(150,10 340x220), InsideWorkArea=True => PASS
+  Screenshot: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-7-pet-window-os\evidence\q5-corner-top-left.png
+Corner 'top-right': WorkArea=(0,0 1280x672), Pet=(1140,0), Card=(790,10 340x220), InsideWorkArea=True => PASS
+  Screenshot: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-7-pet-window-os\evidence\q5-corner-top-right.png
+Corner 'bottom-left': WorkArea=(0,0 1280x672), Pet=(0,532), Card=(150,452 340x220), InsideWorkArea=True => PASS
+  Screenshot: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-7-pet-window-os\evidence\q5-corner-bottom-left.png
+Corner 'bottom-right': WorkArea=(0,0 1280x672), Pet=(1140,532), Card=(790,452 340x220), InsideWorkArea=True => PASS
+  Screenshot: C:\Users\<user>\OneDrive\Desktop\projects\desktop-assistant\spikes\SP-7-pet-window-os\evidence\q5-corner-bottom-right.png
+
+Q5 OVERALL RESULT: PASS (All 4 corners adapt inside workArea without clipping)

@@ -1,0 +1,156 @@
+﻿[
+    {
+        "Hwnd":  5374156,
+        "Title":  "*Hello Caret Tracking World - Notepad",
+        "ClassName":  "Notepad",
+        "ProcessId":  17964,
+        "ProcessName":  "Notepad",
+        "Bounds":  {
+                       "Y":  152,
+                       "Width":  332,
+                       "Height":  202,
+                       "X":  152
+                   },
+        "IsForeground":  true
+    },
+    {
+        "Hwnd":  5245228,
+        "Title":  "*Hello Caret Tracking World - Notepad",
+        "ClassName":  "Notepad",
+        "ProcessId":  17964,
+        "ProcessName":  "Notepad",
+        "Bounds":  {
+                       "Y":  114,
+                       "Width":  332,
+                       "Height":  202,
+                       "X":  114
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  3279052,
+        "Title":  "*Testing Caret Position Detection... - Notepad",
+        "ClassName":  "Notepad",
+        "ProcessId":  17964,
+        "ProcessName":  "Notepad",
+        "Bounds":  {
+                       "Y":  300,
+                       "Width":  332,
+                       "Height":  202,
+                       "X":  600
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  262986,
+        "Title":  "Xuyên Thành Thái Hậu, Ta Chỉ Muốn Nằm Yên Hưởng Phúc! - YouTube - Google Chrome",
+        "ClassName":  "Chrome_WidgetWin_1",
+        "ProcessId":  20044,
+        "ProcessName":  "chrome",
+        "Bounds":  {
+                       "Y":  -8,
+                       "Width":  1936,
+                       "Height":  1048,
+                       "X":  1912
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  3148460,
+        "Title":  "Pull Latest Code",
+        "ClassName":  "Chrome_WidgetWin_1",
+        "ProcessId":  12032,
+        "ProcessName":  "Antigravity",
+        "Bounds":  {
+                       "Y":  0,
+                       "Width":  1280,
+                       "Height":  672,
+                       "X":  0
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  1900794,
+        "Title":  "handover | Notion - Google Chrome",
+        "ClassName":  "Chrome_WidgetWin_1",
+        "ProcessId":  20044,
+        "ProcessName":  "chrome",
+        "Bounds":  {
+                       "Y":  -7,
+                       "Width":  1295,
+                       "Height":  687,
+                       "X":  -7
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  3868704,
+        "Title":  "Settings",
+        "ClassName":  "Windows.UI.Core.CoreWindow",
+        "ProcessId":  14060,
+        "ProcessName":  "SystemSettings",
+        "Bounds":  {
+                       "Y":  1,
+                       "Width":  800,
+                       "Height":  632,
+                       "X":  0
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  722678,
+        "Title":  "Settings",
+        "ClassName":  "ApplicationFrameWindow",
+        "ProcessId":  6936,
+        "ProcessName":  "ApplicationFrameHost",
+        "Bounds":  {
+                       "Y":  32,
+                       "Width":  815,
+                       "Height":  640,
+                       "X":  39
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  198448,
+        "Title":  "Orca",
+        "ClassName":  "Chrome_WidgetWin_1",
+        "ProcessId":  13744,
+        "ProcessName":  "Orca",
+        "Bounds":  {
+                       "Y":  -32000,
+                       "Width":  237,
+                       "Height":  39,
+                       "X":  -32000
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  132090,
+        "Title":  "Windows Input Experience",
+        "ClassName":  "Windows.UI.Core.CoreWindow",
+        "ProcessId":  9460,
+        "ProcessName":  "TextInputHost",
+        "Bounds":  {
+                       "Y":  0,
+                       "Width":  1280,
+                       "Height":  720,
+                       "X":  0
+                   },
+        "IsForeground":  false
+    },
+    {
+        "Hwnd":  65886,
+        "Title":  "Program Manager",
+        "ClassName":  "Progman",
+        "ProcessId":  20972,
+        "ProcessName":  "explorer",
+        "Bounds":  {
+                       "Y":  0,
+                       "Width":  3840,
+                       "Height":  1080,
+                       "X":  0
+                   },
+        "IsForeground":  false
+    }
+]

@@ -1,0 +1,30 @@
+{
+  "name": "sp-20-backend-slice",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/server.ts",
+    "test": "tsx src/scripts/run-full-verification.ts",
+    "test:load": "tsx src/scripts/run-load-test.ts",
+    "test:scan": "tsx src/scripts/run-secret-scan.ts",
+    "test:diff": "tsx src/scripts/run-diff-check.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@fastify/cors": "^11.3.0",
+    "@fastify/rate-limit": "^11.2.0",
+    "dotenv": "^17.4.2",
+    "fastify": "^5.2.1",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/autocannon": "^7.12.7",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.9",
+    "autocannon": "^8.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

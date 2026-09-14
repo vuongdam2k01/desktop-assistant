@@ -1,0 +1,37 @@
+================================================================================
+SPIKE SP-21 / Q6: KIỂM CHỨNG TIMEOUT waiting_input VÀ TẠM DỪNG AN TOÀN
+Phụ lục A.5 mục 6: Dùng chung cấu hình với phê duyệt (mặc định 30 phút = 1800s).
+Quá hạn -> job tạm dừng an toàn (suspended), card về badge, và resume được từ app.
+================================================================================
+
+1. Khởi tạo job 'job-q6-timeout-test' với cấu hình timeout: 1500ms (Mặc định sản phẩm: 30 phút / 1.800.000ms)
+2. Agent gọi ask_user -> Job chuyển sang waiting_input:
+  - Trạng thái ban đầu: waiting_input (Kỳ vọng: waiting_input)
+  - Active ask ID: call-ask-timeout-01
+
+3. Người dùng KHÔNG phản hồi trong 1500ms...
+   Đang đợi timeout timer kích hoạt...
+
+--- Trạng thái Job sau khi hết hạn timeout ---
+  - Trạng thái mới trong ledger: suspended (Kỳ vọng: suspended)
+  - active_ask_call_id còn được lưu: call-ask-timeout-01
+  - Tool execute trả về sau timeout: {"content":[{"type":"text","text":"JOB_SUSPENDED_TIMEOUT: waiting_input timed out after 1500ms. Job safely suspended."}],"isError":true,"details":{"error":"JOB_SUSPENDED_TIMEOUT: waiting_input timed out after 1500ms. Job safely suspended."}}
+  -> ✅ ĐÃ XÁC NHẬN: Quá hạn timeout -> Job tạm dừng an toàn (suspended), card blocking thu về badge.
+
+--------------------------------------------------------------------------------
+4. KIỂM CHỨNG KHẢ NĂNG RESUME TỪ APP KHI JOB ĐANG BỊ TẠM DỪNG (SUSPENDED):
+--------------------------------------------------------------------------------
+  Người dùng mở app, thấy card trong danh sách chờ, nhấn nút [Tiếp tục] và chọn 'Đồng ý'
+  - Quyết định muộn đã ghi ledger (Source: app, Decision ID: 22f02cbc-4991-460c-81bd-6068d2672ade)
+  - Gọi resumedAgent.continue() để tiếp tục chu trình suy luận...
+
+--- Kiểm tra sau khi Resume hoàn tất ---
+  - Job status cuối: running
+  - writeCallCount: 1
+  - Task tạo trong store: {"id":"task-3","title":"Production Deployment Completed","status":"done","priority":"Normal","dbId":"db-tasks"}
+  -> ✅ ĐÃ XÁC NHẬN: Resume sau timeout thành công 100%, không mất mát dữ liệu.
+
+5. KẾT LUẬN Q6:
+  - Timeout waiting_input dùng chung cấu hình với phê duyệt (mặc định 30 phút).
+  - Khi quá hạn: job tạm dừng an toàn (suspended), card thu về badge, không làm rò rỉ bộ nhớ hay tiến trình ma.
+  - Người dùng có thể mở app bất kỳ lúc nào để trả lời và resume job tiếp tục từ đúng điểm dừng.

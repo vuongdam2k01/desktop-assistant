@@ -1,0 +1,70 @@
+name: Pet 8-Hour Longevity Soak
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Daily at 02:00 UTC
+  workflow_dispatch:
+    inputs:
+      duration_minutes:
+        description: 'Duration in minutes (default 480 for 8 hours)'
+        required: false
+        default: '480'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  soak:
+    name: 8-Hour Soak (${{ matrix.os }})
+    # Target self-hosted runners labeled pet-soak (GitHub-hosted jobs have a 6-hour maximum limit)
+    runs-on: [self-hosted, '${{ matrix.os }}', pet-soak]
+    timeout-minutes: 540 # 9 hours
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [Windows, macOS]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.4.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.21.0'
+          cache: 'pnpm'
+
+      - name: Setup Windows C++ and Rust toolchain
+        if: matrix.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install stable Rust toolchain (Windows)
+        if: matrix.os == 'Windows'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build workspace packages
+        run: pnpm build
+
+      - name: Run Pet Longevity Soak Test
+        run: |
+          pnpm --filter=@desktop-assistant/desktop run test:soak --duration=${{ github.event.inputs.duration_minutes || '480' }}
+        env:
+          CI: '1'
+          DESKTOP_ASSISTANT_SOFTWARE_RENDERING: '1'
+
+      - name: Upload Soak Telemetry Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pet-soak-report-${{ matrix.os }}
+          path: apps/desktop/release/soak-report.json
+          if-no-files-found: warn

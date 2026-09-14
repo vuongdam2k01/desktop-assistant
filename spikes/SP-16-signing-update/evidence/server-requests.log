@@ -1,0 +1,37 @@
+[2026-09-12T03:28:21.935Z] === HTTP UPDATE SERVER SẴN SÀNG TẠI http://127.0.0.1:8089/updates ===
+[2026-09-12T03:28:21.939Z] Phục vụ file từ: d:\projects\desktop-assistant\spikes\SP-16-signing-update\src\server\updates
+[2026-09-12T03:28:29.065Z] REQUEST: GET /health (Range: none)
+[2026-09-12T03:28:29.114Z] REQUEST: GET /updates/latest.yml (Range: none)
+[2026-09-12T03:28:29.116Z] SERVE FULL: latest.yml (371 bytes)
+[2026-09-12T03:28:45.079Z] REQUEST: GET /health (Range: none)
+[2026-09-12T03:30:36.699Z] REQUEST: GET /health (Range: none)
+[2026-09-12T03:31:40.979Z] REQUEST: GET /updates/latest.yml?noCache=1k29qnf8u (Range: none)
+[2026-09-12T03:31:40.980Z] SERVE FULL: latest.yml (371 bytes)
+[2026-09-12T03:31:41.006Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.1.exe.blockmap (Range: none)
+[2026-09-12T03:31:41.007Z] NOT FOUND: d:\projects\desktop-assistant\spikes\SP-16-signing-update\src\server\updates\DesktopAssistantSpike%20Setup%201.0.1.exe.blockmap
+[2026-09-12T03:31:41.015Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.1.exe (Range: none)
+[2026-09-12T03:31:41.016Z] NOT FOUND: d:\projects\desktop-assistant\spikes\SP-16-signing-update\src\server\updates\DesktopAssistantSpike%20Setup%201.0.1.exe
+[2026-09-12T03:32:29.474Z] === HTTP UPDATE SERVER SẴN SÀNG TẠI http://127.0.0.1:8089/updates ===
+[2026-09-12T03:32:29.479Z] Phục vụ file từ: d:\projects\desktop-assistant\spikes\SP-16-signing-update\src\server\updates
+[2026-09-12T03:32:35.184Z] REQUEST: HEAD /updates/DesktopAssistantSpike%20Setup%201.0.1.exe -> Decoded: /updates/DesktopAssistantSpike Setup 1.0.1.exe (Range: none)
+[2026-09-12T03:32:35.187Z] SERVE FULL: DesktopAssistantSpike Setup 1.0.1.exe (111622960 bytes)
+[2026-09-12T03:33:23.748Z] REQUEST: GET /updates/latest.yml?noCache=1k29qqjkj -> Decoded: /updates/latest.yml (Range: none)
+[2026-09-12T03:33:23.750Z] SERVE FULL: latest.yml (371 bytes)
+[2026-09-12T03:33:23.778Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.1.exe.blockmap -> Decoded: /updates/DesktopAssistantSpike Setup 1.0.1.exe.blockmap (Range: none)
+[2026-09-12T03:33:23.780Z] SERVE FULL: DesktopAssistantSpike Setup 1.0.1.exe.blockmap (117816 bytes)
+[2026-09-12T03:33:23.806Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.0.exe.blockmap -> Decoded: /updates/DesktopAssistantSpike Setup 1.0.0.exe.blockmap (Range: none)
+[2026-09-12T03:33:23.807Z] NOT FOUND: d:\projects\desktop-assistant\spikes\SP-16-signing-update\src\server\updates\DesktopAssistantSpike Setup 1.0.0.exe.blockmap
+[2026-09-12T03:33:23.813Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.1.exe -> Decoded: /updates/DesktopAssistantSpike Setup 1.0.1.exe (Range: none)
+[2026-09-12T03:33:23.814Z] SERVE FULL: DesktopAssistantSpike Setup 1.0.1.exe (111622960 bytes)
+[2026-09-12T03:41:24.016Z] REQUEST: GET /updates/latest.yml?noCache=1k29r98kt -> Decoded: /updates/latest.yml (Range: none)
+[2026-09-12T03:41:24.017Z] SERVE FULL: latest.yml (371 bytes)
+[2026-09-12T03:41:24.066Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.1.exe.blockmap -> Decoded: /updates/DesktopAssistantSpike Setup 1.0.1.exe.blockmap (Range: none)
+[2026-09-12T03:41:24.067Z] SERVE FULL: DesktopAssistantSpike Setup 1.0.1.exe.blockmap (117683 bytes)
+[2026-09-12T03:41:24.651Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.1.exe -> Decoded: /updates/DesktopAssistantSpike Setup 1.0.1.exe (Range: bytes=0-15449, 43930-106002, 138771-159455, 15059414-15416991, 29483785-31062595, 94927274-94942990, 94960822-95159863, 95276800-95286780, 98306802-98330839, 101692969-101711480, 109545587-109712024, 111226543-111250649, 111482082-111622935)
+[2026-09-12T03:41:24.652Z] SERVE RANGE: DesktopAssistantSpike Setup 1.0.1.exe (0-15449/111622936 bytes, chunk 15450)
+[2026-09-12T03:41:24.662Z] REQUEST: GET /updates/DesktopAssistantSpike%20Setup%201.0.1.exe -> Decoded: /updates/DesktopAssistantSpike Setup 1.0.1.exe (Range: none)
+[2026-09-12T03:41:24.663Z] SERVE FULL: DesktopAssistantSpike Setup 1.0.1.exe (111622936 bytes)
+[2026-09-12T03:43:57.997Z] REQUEST: GET /updates/latest.yml?noCache=1k29rdv0u -> Decoded: /updates/latest.yml (Range: none)
+[2026-09-12T03:43:57.999Z] SERVE FULL: latest.yml (371 bytes)
+[2026-09-12T03:44:29.242Z] REQUEST: GET /updates/latest.yml?noCache=1k29reth9 -> Decoded: /updates/latest.yml (Range: none)
+[2026-09-12T03:44:29.243Z] SERVE FULL: latest.yml (371 bytes)

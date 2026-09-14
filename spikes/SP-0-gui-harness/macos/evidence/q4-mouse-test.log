@@ -1,0 +1,5 @@
+=== Q4 Mouse Movement and Coordinate Verification ===
+Move to (450, 320) -> Actual: (450, 320) | Match: PASS
+Click at (680, 510) -> Actual: (680, 510) | Match: PASS
+Double-click at (500, 400) -> Actual: (500, 400) | Match: PASS
+Q4 Verification Overall Result: PASS

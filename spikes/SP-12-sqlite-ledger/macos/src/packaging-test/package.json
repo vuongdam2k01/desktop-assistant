@@ -1,0 +1,27 @@
+{
+  "name": "sp12-mac-packaging-test",
+  "version": "1.0.0",
+  "description": "Packaging test for better-sqlite3 on macOS",
+  "main": "main.js",
+  "author": "Desktop Assistant Team",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  },
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.desktopassistant.sp12macpackaging",
+    "productName": "SP12MacPackagingTest",
+    "mac": {
+      "target": "dir",
+      "category": "public.app-category.utilities",
+      "x64ArchFiles": "*.node"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "**/*.node"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "completedAt": "2026-09-11T16:27:42.310Z",
+  "q1_lastWriteWins": true,
+  "q2_ledgerValidWithoutLock": false,
+  "q2_lostUpdateObserved": true,
+  "q2_lockPreservedJobA": true,
+  "q3_fairQueueSpeedupRatio": 11.7,
+  "q4_recommendedConcurrencyLimit": 3,
+  "q5_overlappingConflictCaught": true
+}

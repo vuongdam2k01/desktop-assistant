@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=\"UTF-8\">
+  <title>SP18-Pet-ArchA</title>
+  <link rel=\"stylesheet\" href=\"style.css\">
+</head>
+<body>
+  <div id=\"pet-container-a\">
+    <canvas id=\"rive-canvas\" class=\"rive-canvas\" width=\"200\" height=\"200\"></canvas>
+    <div id=\"pet-fallback\" class=\"pet-avatar\" style=\"display: none;\">
+      <div class=\"pet-eyes\">
+        <div class=\"pet-eye\"></div>
+        <div class=\"pet-eye\"></div>
+      </div>
+    </div>
+    <div id=\"state-badge\" class=\"pet-state-badge\">IDLE</div>
+    <div id=\"fps-badge\" class=\"fps-badge\"><span id=\"fps-val\">60</span> fps</div>
+  </div>
+
+  <script src=\"assets/rive.js\"></script>
+  <script src=\"renderer-a.js\"></script>
+</body>
+</html>

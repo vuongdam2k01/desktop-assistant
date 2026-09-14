@@ -1,0 +1,36 @@
+================================================================================
+SPIKE SP-21 / Q9: KIỂM CHỨNG CẤU TRÚC VÀ HÀNH VI SYSTEM CARD (Phụ lục A.2)
+Yêu cầu: Card SYSTEM báo đúng trạng thái, mô tả + khắc phục 1 dòng, non-blocking, badge.
+================================================================================
+
+1. Gửi lệnh khi backend gián đoạn (port 3992 offline):
+  - Trạng thái nhận lệnh: THÀNH CÔNG ✅
+  - queuedOffline: true
+
+2. ĐỐI CHIẾU ANATOMY CỦA SYSTEM CARD VỚI PHỤ LỤC A.2:
+  - Card ID: cd3ef814-509a-4029-94fa-e22be5989dca
+  - Type: "SYSTEM" (Kỳ vọng: SYSTEM)
+  - Category: "BACKEND_DISRUPTED" (Kỳ vọng: BACKEND_DISRUPTED)
+  - Title: "Backend gián đoạn"
+  - Description (Thân card - mô tả): "Máy chủ đồng bộ đang tạm thời gián đoạn. Lệnh của bạn đã được lưu vào hàng chờ cục bộ và sẽ tự động gửi lại khi kết nối phục hồi."
+  - Action (Hướng khắc phục 1 dòng): "Mở app kiểm tra trạng thái kết nối mạng"
+  - isBlocking (Có chặn người dùng không): false (Kỳ vọng: false)
+  - autoDismiss (Có tự biến mất sau vài giây không): false (Kỳ vọng: false - tồn tại tới khi hết lỗi)
+  - badge (Hiển thị badge trên pet): true (Kỳ vọng: true)
+  - active: true
+
+3. BẢNG KIỂM TRA ĐẠT TIÊU CHUẨN A.2:
+  - Loại card là SYSTEM: ĐẠT CHUẨN ✅
+  - Không blocking (isBlocking = false): ĐẠT CHUẨN ✅
+  - Không tự ẩn (autoDismiss = false): ĐẠT CHUẨN ✅
+  - Hiển thị dạng badge (badge = true): ĐẠT CHUẨN ✅
+  - Có mô tả thân card 1 dòng: ĐẠT CHUẨN ✅
+  - Có hướng khắc phục dẫn tới app: ĐẠT CHUẨN ✅
+
+4. KẾT LUẬN Q9:
+  - SYSTEM card phát sinh chính xác khi backend gián đoạn.
+  - Cấu trúc khớp 100% Phụ lục A.2:
+    + Thân card: Mô tả trạng thái gián đoạn.
+    + Hành động: 1 dòng hướng khắc phục.
+    + Non-blocking (người dùng vẫn thao tác bình thường, composer vẫn nhận lệnh).
+    + Không tự ẩn, duy trì badge tới khi backend phục hồi.

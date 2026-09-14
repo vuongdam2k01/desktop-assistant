@@ -1,0 +1,220 @@
+{
+  "call_id": "1789128436478_0222_PATCH_pages_3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+  "category": "q6_test_sanitized_patch",
+  "timestamp": "2026-09-11T12:07:17Z",
+  "duration_ms": 672,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Due date": {
+          "date": {
+            "start": "2026-09-20",
+            "end": null
+          }
+        },
+        "Assignee": {
+          "people": [
+            {
+              "id": "2cfd872b-594c-81c2-b5a4-000262cf9e79"
+            }
+          ]
+        },
+        "Status": {
+          "select": {
+            "name": "Backlog"
+          }
+        },
+        "Tags": {
+          "multi_select": [
+            {
+              "name": "design"
+            }
+          ]
+        },
+        "Project": {
+          "relation": [
+            {
+              "id": "3d8d409b-f710-81b0-94a0-d3122e5b622e"
+            }
+          ]
+        },
+        "Name": {
+          "title": [
+            {
+              "text": {
+                "content": "Đánh giá thư viện animation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:17 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968d1948498457-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=mhJpwHAWlsLuODNXLeDiZrJmD04Oz8QH9LjRH64XWtQ-1789128436.6918807-1.0.1.1-ZruCa3F7vc.PmvMV4lIiSHk31mVCM5mgTTi1v7XdrJLJEcf0u9j.lXsJ.L9JhH8xP2LBrr1SLkMpiK22xI3rtJTp9AyQEY887acaLYTLiN4tcAxfIXQ.18hQBI8jgrZh; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:17 GMT",
+      "ETag": "W/\"7e1-YatbPBhwZ42fzHQd8FyXdJVRWM8\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "9a1a8a82-f8e0-4e86-971d-ad39ef97b8b7",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8d409b-f710-81f5-ad4e-f4836815ac1c",
+      "created_time": "2026-09-11T10:55:00.000Z",
+      "last_edited_time": "2026-09-11T12:07:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8d409b-f710-8184-9b52-c5257e276372"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "%3CR%5Eo",
+          "type": "date",
+          "date": {
+            "start": "2026-09-20",
+            "end": null,
+            "time_zone": null
+          }
+        },
+        "Assignee": {
+          "id": "EcIH",
+          "type": "people",
+          "people": [
+            {
+              "object": "user",
+              "id": "2cfd872b-594c-81c2-b5a4-000262cf9e79",
+              "name": "Workspace Owner",
+              "avatar_url": null,
+              "type": "person",
+              "person": {
+                "email": "owner@example.com",
+                "email_verified": true
+              }
+            }
+          ]
+        },
+        "Status": {
+          "id": "G%7CgC",
+          "type": "select",
+          "select": {
+            "id": "360255fe-ef0c-4808-b2f2-5d626280c70c",
+            "name": "Backlog",
+            "color": "default"
+          }
+        },
+        "Tags": {
+          "id": "QKhu",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "2c8bc977-02b8-404f-afd7-8562cd18f909",
+              "name": "design",
+              "color": "default"
+            }
+          ]
+        },
+        "Days left": {
+          "id": "Yv~c",
+          "type": "formula",
+          "formula": {
+            "type": "number",
+            "number": 8
+          }
+        },
+        "Project": {
+          "id": "b%3Ax%7B",
+          "type": "relation",
+          "relation": [
+            {
+              "id": "3d8d409b-f710-81b0-94a0-d3122e5b622e"
+            }
+          ],
+          "has_more": false
+        },
+        "Project status": {
+          "id": "cZsp",
+          "type": "rollup",
+          "rollup": {
+            "type": "array",
+            "array": [
+              {
+                "type": "select",
+                "select": {
+                  "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                  "name": "Đang chạy",
+                  "color": "default"
+                }
+              }
+            ],
+            "function": "show_original"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Đánh giá thư viện animation",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Đánh giá thư viện animation",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/nh-gi-th-vi-n-animation-3d8d409bf71081f5ad4ef4836815ac1c",
+      "public_url": null,
+      "archived": false,
+      "request_id": "9a1a8a82-f8e0-4e86-971d-ad39ef97b8b7"
+    },
+    "error": null
+  }
+}

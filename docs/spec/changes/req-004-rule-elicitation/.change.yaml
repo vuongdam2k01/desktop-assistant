@@ -1,0 +1,8 @@
+schema: design
+created: 2026-09-12
+kind: B
+skip_specs: false
+depends_on:
+  - req-009-rule-ir-hardgate
+  - req-017-provider-matrix
+synced_at: "2026-09-12T21:02:38.262Z"

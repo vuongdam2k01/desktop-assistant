@@ -1,0 +1,52 @@
+================================================================================
+SPIKE SP-21 / Q3: KIỂM CHỨNG CHUYỂN waiting_input VÀ RESUME ĐÚNG ĐIỂM DỪNG
+Tiêu chuẩn cấm US-4.2/AC2: Tuyệt đối KHÔNG chạy lại bước đã xong.
+================================================================================
+
+--------------------------------------------------------------------------------
+[CHẾ ĐỘ 1] IN-FLIGHT ASYNC SUSPENSION & RESUME (Phục vụ UI Card / Ô thoại)
+--------------------------------------------------------------------------------
+
+1. Bắt đầu prompt agent:
+   'Hãy đọc danh sách task (read_tasks), rồi hỏi tôi độ ưu tiên qua ask_user, sau đó tạo task 'Prepare Q4 OKRs''
+2. Chờ agent thực thi Bước 1 (read_tasks) và rơi vào trạng thái waiting_input...
+
+--- Trạng thái tại thời điểm agent đang tạm dừng (PAUSE POINT) ---
+- Job status trong ledger: waiting_input (Kỳ vọng: waiting_input)
+- readCallCount (Bước 1): 1 (Đã chạy xong)
+- writeCallCount (Bước 3): 0 (Chưa chạy, đang chờ câu trả lời)
+- Active ask question: "Độ ưu tiên của task 'Prepare Q4 OKRs' là gì?"
+  -> ✅ Đã xác nhận: Job chuyển waiting_input đúng điểm dừng.
+
+3. Người dùng nhập câu trả lời: option_id: 'high' (Độ ưu tiên Cao)
+4. Chờ agent tiếp tục và hoàn tất...
+
+--- Trạng thái sau khi Resume hoàn tất ---
+- readCallCount (Bước 1): 1 (Kỳ vọng = 1, TUYỆT ĐỐI KHÔNG lặp lại)
+- writeCallCount (Bước 3): 1 (Kỳ vọng = 1, đã tạo task)
+- Task vừa được tạo trong store: {"id":"task-3","title":"Prepare Q4 OKRs","status":"Todo","priority":"High","dbId":"db-tasks"}
+  -> ✅ CHẾ ĐỘ 1 THÀNH CÔNG: Resume đúng điểm dừng, ngữ cảnh câu trả lời được nạp chuẩn, 0 lặp bước.
+
+--------------------------------------------------------------------------------
+[CHẾ ĐỘ 2] COLD CHECKPOINT PERSISTENCE & RESUME (Phục vụ Crash / App Restart)
+--------------------------------------------------------------------------------
+1. Dựng checkpoint session bị gián đoạn đã lưu trong SQLite:
+   - Lượt 1: User prompt 'Đọc tasks rồi hỏi tôi priority để tạo task 'Audit Security''
+   - Lượt 2: Assistant gọi read_tasks và ask_user
+   - Lượt 3: ToolResult của read_tasks đã có, ask_user đang waiting_input thì app bị tắt.
+   -> Checkpoint messages count: 3
+2. Người dùng mở app và trả lời câu hỏi: option_id = 'urgent' (Khẩn cấp)
+3. Khởi tạo instance Agent MỚI hoàn toàn từ checkpoint (4 messages)
+4. Gọi coldAgent.continue() để tiếp tục chu trình suy luận...
+   -> coldAgent.continue() hoàn tất trong 6118ms!
+
+--- Kiểm tra sau khi Cold Resume hoàn tất ---
+- readCallCount phiên mới: 0 (Kỳ vọng = 0, hoàn toàn không gọi lại)
+- writeCallCount: 1 (Kỳ vọng = 1)
+- Task được tạo: {"id":"task-3","title":"Audit Security","status":"Todo","priority":"Urgent","dbId":"db-tasks"}
+  -> ✅ CHẾ ĐỘ 2 THÀNH CÔNG: Khôi phục sạch từ checkpoint, không lặp lại bước cũ.
+
+5. KẾT LUẬN Q3:
+  - Job chuyển trạng thái waiting_input chuẩn xác khi ask_user được gọi.
+  - Resume diễn ra ĐÚNG ĐIỂM DỪNG với câu trả lời làm ngữ cảnh.
+  - Tuân thủ tuyệt đối US-4.2/AC2: Không có bất kỳ bước nào đã xong bị chạy lại (cả in-flight và cold restart).

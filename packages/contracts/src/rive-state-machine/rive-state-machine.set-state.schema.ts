@@ -1,0 +1,47 @@
+/**
+ * Shape of the payload carried on the pet:setState channel, for pet/contracts/rive-state-machine@2.0.0. It is the only way the application changes what the pet is doing, and it carries states rather than animations, so the asset keeps ownership of how one state becomes another. Version 2.0.0 carries the two layers separately and requires neither, because the two change independently: a job status change must be expressible without restating where the pet is walking, and a movement without restating what the system is doing. A payload naming neither layer is dropped. A value outside a layer's declared set is dropped for that layer alone and the other layer still applies, which is why the ranges are expressed here rather than left to the renderer.
+ */
+export interface SetPetStatePayload {
+  /**
+   * 0 idle, 1 receiving an order, 2 working, 3 waiting for an approval, 4 holding a result. The mapping is carried unchanged from 1.0.0, so assets authored against that revision animate the same states for the same numbers. Changing which number means which state is a MAJOR change, because an asset produced against the old mapping would animate the wrong thing rather than fail.
+   */
+  workStatus?: 0 | 1 | 2 | 3 | 4;
+  /**
+   * 0 standing, 1 walking, 2 dragged, 3 falling. Written by the locomotion engine independently of workStatus. A pack that declares no locomotion layer still receives these values; they reach the shipped default pack's locomotion behaviour, which is what per-capability substitution means at the wire level.
+   */
+  locomotion?: 0 | 1 | 2 | 3;
+}
+
+
+export const RIVE_STATE_MACHINE_SET_STATE_SCHEMA = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/pet/rive-state-machine/set-state/2.0.0.json",
+  "title": "SetPetStatePayload",
+  "description": "Shape of the payload carried on the pet:setState channel, for pet/contracts/rive-state-machine@2.0.0. It is the only way the application changes what the pet is doing, and it carries states rather than animations, so the asset keeps ownership of how one state becomes another. Version 2.0.0 carries the two layers separately and requires neither, because the two change independently: a job status change must be expressible without restating where the pet is walking, and a movement without restating what the system is doing. A payload naming neither layer is dropped. A value outside a layer's declared set is dropped for that layer alone and the other layer still applies, which is why the ranges are expressed here rather than left to the renderer.",
+  "type": "object",
+  "additionalProperties": false,
+  "minProperties": 1,
+  "properties": {
+    "workStatus": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "description": "0 idle, 1 receiving an order, 2 working, 3 waiting for an approval, 4 holding a result. The mapping is carried unchanged from 1.0.0, so assets authored against that revision animate the same states for the same numbers. Changing which number means which state is a MAJOR change, because an asset produced against the old mapping would animate the wrong thing rather than fail."
+    },
+    "locomotion": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "description": "0 standing, 1 walking, 2 dragged, 3 falling. Written by the locomotion engine independently of workStatus. A pack that declares no locomotion layer still receives these values; they reach the shipped default pack's locomotion behaviour, which is what per-capability substitution means at the wire level."
+    }
+  }
+} as const;

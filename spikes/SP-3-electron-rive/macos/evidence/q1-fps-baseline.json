@@ -1,0 +1,92 @@
+{
+  "test": "Baseline (Idle, no artificial load)",
+  "durationSec": 10,
+  "averageFps": 60,
+  "minFps": 60,
+  "maxFps": 60,
+  "p95Fps": 60,
+  "sampleCount": 9,
+  "history": [
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60,
+    60
+  ],
+  "samples": [
+    {
+      "second": 1,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 61
+    },
+    {
+      "second": 2,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 3,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 4,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 5,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 6,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 7,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 8,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 9,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    },
+    {
+      "second": 10,
+      "currentFps": 60,
+      "avgFps": 60,
+      "minFps": 60,
+      "maxFps": 60
+    }
+  ]
+}

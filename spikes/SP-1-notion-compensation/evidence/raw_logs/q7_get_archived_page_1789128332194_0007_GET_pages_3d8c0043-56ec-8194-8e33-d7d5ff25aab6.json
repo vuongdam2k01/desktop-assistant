@@ -1,0 +1,104 @@
+{
+  "call_id": "1789128332194_0007_GET_pages_3d8c0043-56ec-8194-8e33-d7d5ff25aab6",
+  "category": "q7_get_archived_page",
+  "timestamp": "2026-09-11T12:05:32Z",
+  "duration_ms": 587,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-8194-8e33-d7d5ff25aab6",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:32 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968a8dbdf78452-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=tyrLwU5tl72YFurduzD3aUO_Wat7eHqbDexXfXpnV9k-1789128332.4425225-1.0.1.1-UZbUjTwVGQxrAoYTV6E1IgtXHRWRdU_Q8rUOfyUNukqWf3SbkyfFG3NI4aLK_URwuTEAyCt31UEz0joyViz.gxgzVCUXSm8HnrHIbmNhb3RWRrB07uieku6Uo2GnaHpl; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:32 GMT",
+      "ETag": "W/\"42d-BrTBDZFF9630H/LPPCpsWCgHv+c\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "e9200908-435d-495c-92d3-5a2753203d44",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-8194-8e33-d7d5ff25aab6",
+      "created_time": "2026-09-11T12:05:00.000Z",
+      "last_edited_time": "2026-09-11T12:05:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": true,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": null
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Page for 404 vs Archive Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Page for 404 vs Archive Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/Page-for-404-vs-Archive-Test-3d8c004356ec81948e33d7d5ff25aab6",
+      "public_url": null,
+      "archived": true,
+      "request_id": "e9200908-435d-495c-92d3-5a2753203d44"
+    },
+    "error": null
+  }
+}

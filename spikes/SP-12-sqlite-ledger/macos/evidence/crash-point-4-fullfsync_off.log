@@ -1,0 +1,58 @@
+[RUNNER] Launching worker with CRASH_POINT=4, FULLFSYNC=0, SYNC=NORMAL...
+
+--- Worker Output (pre-crash) ---
+[WORKER 17976] Started with CrashPoint=4, JobId=job_crash_pt4
+
+▶ [ENGINE] Starting Job job_crash_pt4 (Mode: smart, CrashPoint: 4)...
+✔ [ENGINE] Job job_crash_pt4 created with status 'pending'
+⏳ [ENGINE] Approval required for Notion update.
+✔ [ENGINE] Job job_crash_pt4 transitioned to 'waiting_approval'. Approval card posted.
+👤 [USER ACTION] User approves tool execution for Job job_crash_pt4.
+✔ [ENGINE] Approval recorded. Job job_crash_pt4 set to 'running'.
+🔍 [ENGINE] Fetching pre-execution snapshot from Notion for page_task_101...
+📝 [ENGINE] Committing 'tool_intent' to SQLite Ledger (Correlation: corr_892bba1b-3998-44e8-8de2-340b1748b7d9)...
+✔ [ENGINE] 'tool_intent' successfully committed to WAL.
+🌐 [ENGINE] Calling external Notion API updatePage(page_task_101)...
+✔ [ENGINE] External Notion API call returned HTTP 200 OK.
+💥 [CRASH INJECTOR] TRIGGERING SIGKILL at Point 4: After external API call succeeded, BEFORE tool_result written to ledger
+💥 Process PID 17976 terminating immediately...
+
+--- Crash Exit Status ---
+Exit Code: null
+Signal: SIGKILL
+
+--- SQLite WAL Integrity Check ---
+PRAGMA integrity_check: [{"integrity_check":"ok"}]
+
+--- Running Recovery Protocol ---
+
+======================================================
+🔄 [RECOVERY MANAGER] Starting crash recovery protocol...
+======================================================
+📋 Found 1 active/unfinalized job(s) in SQLite database.
+
+🔍 Inspecting Job job_crash_pt4 (Status: running)...
+   Last Ledger Record: [seq=2, type=tool_intent]
+   ⚠️ Found UNMATCHED 'tool_intent' [correlationId=corr_892bba1b-3998-44e8-8de2-340b1748b7d9]!
+   🔎 Conducting external reconciliation against Notion API...
+   📊 State Comparison:
+      - Snapshot Before Status : 'To Do'
+      - Current Notion Status  : 'In Progress'
+      - Target Intended Status : 'In Progress'
+   ✅ RECONCILIATION RESULT: External call SUCCEEDED before crash!
+   📝 Committing reconciled 'tool_result' to ledger...
+
+======================================================
+🗂️ RECONSTRUCTED CARD QUEUE (Priority Order per PRD A.4):
+   [1] Type: RESULT   | Job: job_crash_pt4 | Title: Hoàn thành (Đã đối soát sau crash)
+======================================================
+
+
+--- Post-Recovery Verification ---
+Job ID: job_crash_pt4
+Job Status: completed
+Ledger Records Count: 3
+  - seq=1 | type=approval | tool=notion_update_page
+  - seq=2 | type=tool_intent | tool=notion_update_page
+  - seq=3 | type=tool_result | tool=notion_update_page
+✔ Point 4 PASSED: Reconciliation detected external success, tool_result appended, double execution prevented!

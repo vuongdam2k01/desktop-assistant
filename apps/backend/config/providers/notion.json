@@ -1,0 +1,16 @@
+{
+  "providerId": "notion",
+  "version": "0.1.0",
+  "name": "Notion",
+  "authorizeEndpoint": "https://api.notion.com/v1/oauth/authorize",
+  "tokenEndpoint": "https://api.notion.com/v1/oauth/token",
+  "clientIdRef": "NOTION_CLIENT_ID",
+  "clientSecretRef": "NOTION_CLIENT_SECRET",
+  "tokenAuthMethod": "credentials-in-header",
+  "usesProofKey": false,
+  "defaultScopes": [],
+  "extraAuthorizeParams": {
+    "owner": "user"
+  },
+  "status": "offered"
+}

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/tool-wrapping/0.2.0.json",
+  "title": "ToolImplementation",
+  "description": "Normative shape of what a connector adapter, a capability pack or an internal module hands the wrapping factory, for agent/contracts/tool-wrapping@0.2.0. It is the registration surface, not a runtime payload: a declaration that does not satisfy this file yields no tool at all, and the refusal lands at registration where a connector author sees it rather than at the first call where a user does. The executable member is deliberately absent from the file - a schema can describe what must be declared about a tool, not the function the factory closes over and keeps unreachable (INV-AG-02). At 0.2.0 the file gains one optional member, secrets; every document valid against 0.1.0 is valid against this file unchanged.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "origin", "description", "parameters", "declarations"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique across the tool set of one session."
+    },
+    "origin": {
+      "description": "Where a tool came from. There is no third value, and no value meaning trusted: an internal tool is not exempt from the wrapper, it is merely cheap to put through it.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "connector"],
+          "properties": {
+            "kind": { "const": "connector" },
+            "connector": { "type": "string", "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": {
+            "kind": { "const": "internal" }
+          }
+        }
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Shown to the model. Text only, with no capability of its own: nothing the model reads here grants anything, because the verdict is taken outside everything a model reads or writes."
+    },
+    "parameters": {
+      "type": "object",
+      "required": ["type", "properties"],
+      "description": "The shape the engine validates a call against before the wrapper runs.",
+      "properties": {
+        "type": { "const": "object" },
+        "properties": { "type": "object" },
+        "required": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "declarations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["writes", "changesPermission", "reconciliation"],
+      "description": "Everything the gate and recovery read about this tool. Read from the manifest, never from the arguments of a call. This is the block a writing tool must complete: principle IV forbids a write whose reversibility nobody declared.",
+      "properties": {
+        "writes": { "type": "boolean" },
+        "isIrreversible": { "type": "boolean" },
+        "changesPermission": { "type": "boolean" },
+        "reconciliation": {
+          "type": "object",
+          "required": ["method"],
+          "description": "What an interrupted call can say about itself. The vocabulary is owned by ledger/contracts/tool-reconciliation@0.1.0 and referenced rather than restated here; a declaration that is absent or unreadable makes recovery fall back rather than guess.",
+          "properties": {
+            "method": { "type": "string", "minLength": 1 }
+          }
+        },
+        "snapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["read_operation", "target_path"],
+          "description": "How the state about to be changed is read before the change, so undo has something to replay against. A reversible write that cannot read its before state is refused (SNAPSHOT_UNREADABLE) rather than performed unrecoverably.",
+          "properties": {
+            "read_operation": { "type": "string", "minLength": 1, "description": "A read tool the same origin declares." },
+            "target_path": { "type": "string", "minLength": 1, "description": "Where in the arguments the object being changed is named." }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "writes": { "const": true } }, "required": ["writes"] },
+          "then": { "required": ["isIrreversible"] }
+        },
+        {
+          "if": {
+            "properties": { "writes": { "const": true }, "isIrreversible": { "const": false } },
+            "required": ["writes", "isIrreversible"]
+          },
+          "then": { "required": ["snapshot"] }
+        }
+      ]
+    },
+    "secrets": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional since 0.2.0, and optional permanently. What this tool knows about its own secret-bearing fields, so the redaction boundary can project them by path instead of by recognition. Omitting the member, or omitting one field of it, narrows nothing: the boundary applies every declared class's recognition rule to every argument and every result, so an undeclared field carrying a token is redacted anyway (INV-AG-42). A declaration can therefore only widen what is redacted, which is why adding this member to the file is MINOR. The unredacted value still reaches the platform the call is made against, so no declaration here can break a call. The standalone form of this declaration in agent/contracts/secret-redaction@1.0.0 repeats a schema version and the tool's name so a document can be validated on its own; inside a registration both are already present and neither is repeated.",
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "maxItems": 64,
+          "description": "Argument fields known to carry secret material. Projected before the intent record is built, so neither the record nor the model request ever holds the value. Declaring a field here does not change what the adapter receives.",
+          "items": { "$ref": "#/$defs/secretField" }
+        },
+        "results": {
+          "type": "array",
+          "maxItems": 64,
+          "description": "Fields of a successful call's returned value known to carry secret material. Projected before the result record is built, for the same reason.",
+          "items": { "$ref": "#/$defs/secretField" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "secretField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "class"],
+      "description": "One field and the class of secret it carries. The pair is what the boundary needs: the reference that replaces the value names the class and the field it occupied and nothing else, because a key, a hash or a truncation would all be unsafe to replicate (INV-AG-43). Both members are owned by agent/contracts/secret-redaction@1.0.0 and constrained there; this file states the shape of the pair and defers the grammars, in the same way declarations.reconciliation defers to ledger/contracts/tool-reconciliation@0.1.0.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "The field, as a traversal path within the arguments object or the result value, in the field-path grammar of secret-redaction@1.0.0. A path naming no member of this tool's declared parameter shape is refused at registration, where the tool's author sees it, rather than at the first call, where a user would."
+        },
+        "class": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A member of the redaction-class vocabulary declared through agent/contracts/secret-redaction@1.0.0 - the shipped set is provider-credential, connector-authorisation-token, authorisation-code, refresh-token and personal-identifier, and an activated capability pack may contribute more under its own prefix. A class no declaration provides is refused at registration: a tool cannot invent a class, because the reference it would produce would name something no reader can explain."
+        }
+      }
+    }
+  }
+}

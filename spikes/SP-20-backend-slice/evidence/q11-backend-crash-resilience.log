@@ -1,0 +1,14 @@
+Q11 VERIFICATION LOG — 2026-09-12T05:10:34.155Z
+
+Simulation: Backend is shut down while client is running jobs.
+Backend health call failed as expected: fetch failed
+Backend status: OFFLINE (Verified: YES)
+
+Architectural Analysis for R-9:
+1. **Hội thoại LLM & Công việc (Job)**: Theo ADR-007, desktop client gọi TRỰC TIẾP tới LLM Provider (BytePlus Ark / OpenAI) bằng client-side credentials trong OS Keychain/Credential Manager. Không có LLM Gateway trung gian trên backend.
+2. **Connector Tools & Ledger**: Connector tokens (Notion, Google) được lưu tại secure storage của client (NFR-SEC-01). Action ledger lưu trong SQLite cục bộ (ADR-005 / NFR-SEC-03). Do đó worker-agent tiếp tục đọc/ghi Notion, Gmail và ghi ledger bình thường mà không cần backend.
+3. **Bán kính ảnh hưởng thực tế khi backend sập**:
+   - Đăng nhập tài khoản mới: BỊ CHẶN.
+   - Kết nối connector mới cần OAuth broker: BỊ CHẶN.
+   - Kiểm tra bản cập nhật mới (/v1/app/version): BỊ CHẶN.
+   - Các job đang chạy, pet hội thoại, và thao tác trên connector đã kết nối: TIẾP TỤC HOẠT ĐỘNG 100% BÌNH THƯỜNG.

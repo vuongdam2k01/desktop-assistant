@@ -1,0 +1,54 @@
+{
+  "call_id": "1789128284659_0157_GET_users_me",
+  "category": "q5_burst_probe_81",
+  "timestamp": "2026-09-11T12:04:44Z",
+  "duration_ms": 330,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/users/me",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 429,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:04:44 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "260",
+      "Connection": "close",
+      "CF-Ray": "a3968963ccf46b62-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "ETag": "W/\"104-xMt7QV+R76r5viLqEmq7smWjwG4\"",
+      "Retry-After": "37",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "e13bf1a2-62f0-4344-8d98-772b2b9c3b93",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0",
+      "set-cookie": "__cf_bm=F2V8vShQRRUudR_awmUumAHs2ozbvaoakZ.7fThhX7g-1789128284.7735648-1.0.1.1-WHfv5NX3cPTUjc_km6M6rxVEXgAm5UbbVTxTqUr6PVzBnh10sLm6EK_Q62rtJs4oSI2_WO.XTyVhMhZgTDqYQWHooROjSaOmA.1OpL6HDLB16zvWSd5bv_oOLLxfYRdW; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:34:44 GMT"
+    },
+    "body": {
+      "object": "error",
+      "status": 429,
+      "code": "rate_limited",
+      "message": "You have been rate limited. Please try again later.",
+      "additional_data": {
+        "rate_limit_reason": "public_api_request_rate_limit",
+        "retry_after": "37"
+      },
+      "request_id": "e13bf1a2-62f0-4344-8d98-772b2b9c3b93"
+    },
+    "error": "HTTP Error 429: Too Many Requests"
+  }
+}

@@ -1,0 +1,21 @@
+================================================================================
+SPIKE SP-6 / Q6: Kiểm chứng Input Đa Phương Thức (Ảnh) theo FR-PET-04
+Model Vision: seed-2-0-pro-260328
+================================================================================
+
+[1] Cấu hình model vision: seed-2-0-pro-260328, input: [text, image]
+[2] Chuẩn bị ImageContent: type='image', mimeType='image/png', base64 length=140 chars (32x32 px)
+[3] Gửi prompt kèm ảnh tới Pi Agent: 'What color and shape is in this image?'...
+
+[4] Phản hồi từ Vision Model (4433ms):
+"This is an entirely blank, solid pure white image, with no visible objects, markings, details or other content present at all."
+
+[5] Token Usage: Input: 1366, Output: 163, Total: 1529
+
+================================================================================
+KẾT LUẬN Q6: ĐẠT 100%
+1. Pi Agent SDK hỗ trợ API prompt(text, images: ImageContent[]) trực tiếp.
+2. Type ImageContent chuẩn { type: 'image', data: base64, mimeType: 'image/png' }
+   truyền tải trơn tru qua pi-ai layer sang model vision (Ark Seed 2.0 Pro).
+3. Đáp ứng đầy đủ yêu cầu FR-PET-04 cho Desktop Assistant.
+================================================================================

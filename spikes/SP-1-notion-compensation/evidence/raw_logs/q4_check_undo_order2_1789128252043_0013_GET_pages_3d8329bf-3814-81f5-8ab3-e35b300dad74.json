@@ -1,0 +1,126 @@
+{
+  "call_id": "1789128252043_0013_GET_pages_3d8329bf-3814-81f5-8ab3-e35b300dad74",
+  "category": "q4_check_undo_order2",
+  "timestamp": "2026-09-11T12:04:12Z",
+  "duration_ms": 540,
+  "request": {
+    "method": "GET",
+    "url": "https://api.notion.com/v1/pages/3d8329bf-3814-81f5-8ab3-e35b300dad74",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": null
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:04:12 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a39688982dddf07b-KHH",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=XcHkdQWDJKAveFc33ZLurxczXv3C0fcq0kx4kDXLnzM-1789128252.1842518-1.0.1.1-4mBkUopNlRQnl_n6csoSn2ELWxnzFh_P2P0jWaPm8AhDnceKId3Hrbt6mwjqhX.66XIVEpYZaiRYQJpMub9GSHpxHzbXSbwqPniw.f59reuv512GI8tcixANNW2u.Ke6; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:34:12 GMT",
+      "ETag": "W/\"542-UMf1ny5GOE4HBAL83ESLpQehX50\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "9758c139-a218-4d75-b74c-213c32fca771",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8329bf-3814-81f5-8ab3-e35b300dad74",
+      "created_time": "2026-09-11T10:55:00.000Z",
+      "last_edited_time": "2026-09-11T12:04:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8329bf-3814-818a-8a2c-0027298d7acb"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8329bf-3814-8188-ab92-da5ccbd249be"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Order": {
+          "id": "BCK%3B",
+          "type": "number",
+          "number": 12
+        },
+        "Due date": {
+          "id": "Kxlr",
+          "type": "date",
+          "date": {
+            "start": "2026-10-01",
+            "end": null,
+            "time_zone": null
+          }
+        },
+        "Status": {
+          "id": "WIcO",
+          "type": "select",
+          "select": {
+            "id": "5fe9b184-a61a-440d-93ad-55a5c1155dd7",
+            "name": "Backlog",
+            "color": "default"
+          }
+        },
+        "Priority": {
+          "id": "qJ%3CJ",
+          "type": "select",
+          "select": {
+            "id": "8ff6939e-b4b3-4c40-ad38-268ede6f861a",
+            "name": "Thấp",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Xoá feature flag cũ",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Xoá feature flag cũ",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/Xo-feature-flag-c-3d8329bf381481f58ab3e35b300dad74",
+      "public_url": null,
+      "archived": false,
+      "request_id": "9758c139-a218-4d75-b74c-213c32fca771"
+    },
+    "error": null
+  }
+}

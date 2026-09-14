@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-09-13T14:03:38.796Z",
+  "taxonomyTests": [
+    {
+      "key": "connector:notion:default:token",
+      "cipherLength": 131,
+      "match": true
+    },
+    {
+      "key": "connector:google:byo:client_credentials",
+      "cipherLength": 147,
+      "match": true
+    },
+    {
+      "key": "connector:google:account:user@example.com:tokens",
+      "cipherLength": 243,
+      "match": true
+    },
+    {
+      "key": "llm:provider:byteplus:api_key",
+      "cipherLength": 51,
+      "match": true
+    },
+    {
+      "key": "auth:session:main",
+      "cipherLength": 179,
+      "match": true
+    }
+  ],
+  "tamperTests": [
+    {
+      "case": "Flipped byte in ciphertext",
+      "errorMessage": "Decryption failed for key 'connector:notion:default:token': Error while decrypting the ciphertext provided to safeStorage.decryptString.",
+      "systemCard": {
+        "card_type": "SYSTEM",
+        "id": "sys_card_sec_1789308218818",
+        "title": "Lỗi giải mã thông tin xác thực",
+        "body": "Không thể giải mã dữ liệu cho 'connector:notion:default:token'. Khóa bảo mật macOS Keychain không khớp hoặc bị từ chối truy cập. Vui lòng kết nối lại.",
+        "severity": "error",
+        "blocking": false,
+        "auto_dismiss": false,
+        "persistent_badge": true,
+        "created_at": "2026-09-13T14:03:38.818Z",
+        "action": {
+          "label": "Mở Cài đặt > Kết nối",
+          "route": "/settings/connectors",
+          "context": {
+            "targetKey": "connector:notion:default:token",
+            "reason": "SAFE_STORAGE_DECRYPT_FAILURE",
+            "error_detail": "Error while decrypting the ciphertext provided to safeStorage.decryptString."
+          }
+        }
+      }
+    },
+    {
+      "case": "Corrupted header prefix",
+      "errorMessage": "Decryption failed for key 'connector:notion:default:token': Error while decrypting the ciphertext provided to safeStorage.decryptString. Ciphertext does not appear to be encrypted.",
+      "systemCard": {
+        "card_type": "SYSTEM",
+        "id": "sys_card_sec_1789308218818",
+        "title": "Lỗi giải mã thông tin xác thực",
+        "body": "Không thể giải mã dữ liệu cho 'connector:notion:default:token'. Khóa bảo mật macOS Keychain không khớp hoặc bị từ chối truy cập. Vui lòng kết nối lại.",
+        "severity": "error",
+        "blocking": false,
+        "auto_dismiss": false,
+        "persistent_badge": true,
+        "created_at": "2026-09-13T14:03:38.818Z",
+        "action": {
+          "label": "Mở Cài đặt > Kết nối",
+          "route": "/settings/connectors",
+          "context": {
+            "targetKey": "connector:notion:default:token",
+            "reason": "SAFE_STORAGE_DECRYPT_FAILURE",
+            "error_detail": "Error while decrypting the ciphertext provided to safeStorage.decryptString. Ciphertext does not appear to be encrypted."
+          }
+        }
+      }
+    }
+  ],
+  "wipeTests": {
+    "preWipeKeyCount": 5,
+    "postWipeKeyCount": 0,
+    "postWipeFileExists": false,
+    "wipeResult": {
+      "wipedKeysCount": 5,
+      "fileDeleted": true,
+      "keychainDeleted": true,
+      "storagePath": "/Users/<user>/projects/desktop-assistant/spikes/SP-11-secure-storage/macos/evidence/test-store.json"
+    },
+    "isKeychainClean": true,
+    "keychainCheckOutput": "security: SecKeychainSearchCopyNext: The specified item could not be found in the keychain."
+  }
+}

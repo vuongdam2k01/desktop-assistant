@@ -1,0 +1,151 @@
+{
+  "workspace": "B",
+  "timestamp": "2026-09-11T15:37:14.207Z",
+  "tasks": [
+    {
+      "id": "3d8d409b-f710-81bf-ac3d-c6bc6e34602f",
+      "title": "Kickoff Chatbot CS cho Vinmart",
+      "status": "Not started",
+      "due_date": "2026-09-15",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "meeting"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-81b2-a7a9-cc732d4714d1"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-81c7-be72-fad3cea33df3",
+      "title": "Setup CI cho repo mobile",
+      "status": "In progress",
+      "due_date": "2026-09-16",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "feature"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815f-ab00-f32663ac5a0a"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-810a-8fbb-fc00c3f4651f",
+      "title": "Sync với khách về contract",
+      "status": "Done",
+      "due_date": "2026-09-08",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "meeting"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815f-ab00-f32663ac5a0a"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-8115-8e6d-ce7d77901b24",
+      "title": "Viết test cho module payroll",
+      "status": "Not started",
+      "due_date": "2026-09-21",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "feature"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-8167-9206-fef449bd5a1a"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-817f-aa9e-d15e6b63959d",
+      "title": "Fix crash khi upload avatar",
+      "status": "Not started",
+      "due_date": "2026-09-17",
+      "priority": "",
+      "order": null,
+      "assignee": "Hùng",
+      "tags": [
+        "bug"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-8167-9206-fef449bd5a1a"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-816d-a91f-eec73cd097ef",
+      "title": "Monthly report HR",
+      "status": "Not started",
+      "due_date": "2026-09-30",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "docs"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-8167-9206-fef449bd5a1a"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-81aa-8082-f7369f7011b8",
+      "title": "Weekly report Vinmart",
+      "status": "Not started",
+      "due_date": "2026-09-12",
+      "priority": "",
+      "order": null,
+      "assignee": "user",
+      "tags": [
+        "docs"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815f-ab00-f32663ac5a0a"
+      ],
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-810f-8c88-dee4fb694798",
+      "title": "Design review màn checkout",
+      "status": "In progress",
+      "due_date": "2026-09-14",
+      "priority": "",
+      "order": null,
+      "assignee": "Trang",
+      "tags": [
+        "feature"
+      ],
+      "project_relation": [
+        "3d8d409b-f710-815f-ab00-f32663ac5a0a"
+      ],
+      "archived": false
+    }
+  ],
+  "projects": [
+    {
+      "id": "3d8d409b-f710-81b2-a7a9-cc732d4714d1",
+      "title": "Chatbot CS cho Vinmart",
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-8167-9206-fef449bd5a1a",
+      "title": "HR portal nội bộ",
+      "archived": false
+    },
+    {
+      "id": "3d8d409b-f710-815f-ab00-f32663ac5a0a",
+      "title": "Mobile app Vinmart",
+      "archived": false
+    }
+  ]
+}

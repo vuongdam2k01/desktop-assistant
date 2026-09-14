@@ -1,0 +1,294 @@
+{
+  "call_id": "1789128309070_0004_POST_databases_3d8d409b-f710-81c2-9312-f74d4c693f4c_query",
+  "category": "q6_query_projects",
+  "timestamp": "2026-09-11T12:05:09Z",
+  "duration_ms": 580,
+  "request": {
+    "method": "POST",
+    "url": "https://api.notion.com/v1/databases/3d8d409b-f710-81c2-9312-f74d4c693f4c/query",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "page_size": 10
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:05:09 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a39689fc687d808c-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=.HFAsVZBbejOBHvMaAqhSXBdVh1e7Q3UXio.q_vmB1c-1789128309.1864846-1.0.1.1-A5RlMxFR6sgKZXxqgWYa5CcNABXe7rTD8fWwxZ7hlnugYEXvR06Svg7tR3W.h_VzgxH1Q57gc4.UP48GEnZoFfIGZ6PxQZmw_rLdI9CjPyLHnPHu1Oa3wPVWDgHk8MWs; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:35:09 GMT",
+      "ETag": "W/\"106a-MUytHoxEuNY5rwUUHPqp03uNUHs\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "dc276fe6-a6fd-4485-8f80-a8574ff9bb3f",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "list",
+      "results": [
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-8157-9121-c2fc870aaa27",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-81c2-9312-f74d4c693f4c"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Status": {
+              "id": "hT%3Cc",
+              "type": "select",
+              "select": {
+                "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                "name": "Đang chạy",
+                "color": "default"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "App mobile v2",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "App mobile v2",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/App-mobile-v2-3d8d409bf71081579121c2fc870aaa27",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-81ce-8668-f1cf957d5abb",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-81c2-9312-f74d4c693f4c"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Status": {
+              "id": "hT%3Cc",
+              "type": "select",
+              "select": {
+                "id": "2520cb87-5ce1-478f-8966-d2099d6f0ea2",
+                "name": "Tạm dừng",
+                "color": "default"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Migrate hạ tầng",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Migrate hạ tầng",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/Migrate-h-t-ng-3d8d409bf71081ce8668f1cf957d5abb",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-816e-8c7a-d618b3d0657e",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-81c2-9312-f74d4c693f4c"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Status": {
+              "id": "hT%3Cc",
+              "type": "select",
+              "select": {
+                "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                "name": "Đang chạy",
+                "color": "default"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Website công ty",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Website công ty",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/Website-c-ng-ty-3d8d409bf710816e8c7ad618b3d0657e",
+          "public_url": null,
+          "archived": false
+        },
+        {
+          "object": "page",
+          "id": "3d8d409b-f710-81b0-94a0-d3122e5b622e",
+          "created_time": "2026-09-11T10:55:00.000Z",
+          "last_edited_time": "2026-09-11T10:55:00.000Z",
+          "created_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "last_edited_by": {
+            "object": "user",
+            "id": "3d8d409b-f710-8179-b9ef-002728ab19b2"
+          },
+          "cover": null,
+          "icon": null,
+          "parent": {
+            "type": "database_id",
+            "database_id": "3d8d409b-f710-81c2-9312-f74d4c693f4c"
+          },
+          "in_trash": false,
+          "is_archived": false,
+          "is_locked": false,
+          "properties": {
+            "Status": {
+              "id": "hT%3Cc",
+              "type": "select",
+              "select": {
+                "id": "c59661d6-a21b-448a-8056-85ab27771eb0",
+                "name": "Đang chạy",
+                "color": "default"
+              }
+            },
+            "Name": {
+              "id": "title",
+              "type": "title",
+              "title": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Desktop Assistant",
+                    "link": null
+                  },
+                  "annotations": {
+                    "bold": false,
+                    "italic": false,
+                    "strikethrough": false,
+                    "underline": false,
+                    "code": false,
+                    "color": "default"
+                  },
+                  "plain_text": "Desktop Assistant",
+                  "href": null
+                }
+              ]
+            }
+          },
+          "url": "https://app.notion.com/p/Desktop-Assistant-3d8d409bf71081b094a0d3122e5b622e",
+          "public_url": null,
+          "archived": false
+        }
+      ],
+      "next_cursor": null,
+      "has_more": false,
+      "type": "page_or_database",
+      "page_or_database": {},
+      "request_id": "dc276fe6-a6fd-4485-8f80-a8574ff9bb3f"
+    },
+    "error": null
+  }
+}

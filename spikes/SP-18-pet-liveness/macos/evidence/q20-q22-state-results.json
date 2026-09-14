@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-09-13T14:51:34.954Z",
+  "q20_layered_state_machine": {
+    "status": "PASS",
+    "model": "Layered State Machine (Tách 2 tầng độc lập: Tầng 1 Locomotion x Tầng 2 Work Status)",
+    "windows_parity": "GIỐNG Windows — Cả hai OS đều dùng state machine phân tầng để xử lý đồng thời trạng thái công việc và vận động",
+    "evaluated_states": [
+      {
+        "work": "idle (0)",
+        "loco": "standing",
+        "description": "Pet đứng yên nhàn rỗi"
+      },
+      {
+        "work": "receiving_order (1)",
+        "loco": "standing",
+        "description": "Pet chăm chú nghe lệnh"
+      },
+      {
+        "work": "working (2)",
+        "loco": "walking",
+        "description": "Pet vừa đi vừa xử lý công việc"
+      },
+      {
+        "work": "waiting_approval (3)",
+        "loco": "standing",
+        "description": "Pet đứng giơ tay chờ phê duyệt"
+      },
+      {
+        "work": "has_result (4)",
+        "loco": "walking",
+        "description": "Pet hớn hở bước tới mang kết quả"
+      },
+      {
+        "work": "working (2)",
+        "loco": "dragged",
+        "description": "Người dùng nhấc pet lên trong lúc pet đang làm việc"
+      },
+      {
+        "work": "idle (0)",
+        "loco": "falling",
+        "description": "Pet rơi tự do khi thả chuột"
+      }
+    ]
+  },
+  "q21_transition_during_motion": {
+    "status": "PASS",
+    "fps_during_rapid_switching": 60,
+    "min_fps": 60,
+    "glitch_or_stutter": "Hoàn toàn không có hiện tượng khựng hình hay nhấp nháy nhờ Metal double-buffering."
+  },
+  "q22_attached_card_adaptive_flip": {
+    "status": "PASS",
+    "rule": "Adaptive Edge Flip (E1)",
+    "behavior_at_right_edge": "Tự động đổi orientation sang 'right' khi x + cardWidth > workArea.width",
+    "behavior_at_bottom_edge": "Clamp Y nằm trên đỉnh Dock",
+    "screenshot": "evidence/q22-dialogue-adaptive-flip.png"
+  }
+}

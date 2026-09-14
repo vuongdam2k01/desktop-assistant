@@ -1,0 +1,87 @@
+{
+  "comments_reversibility": {
+    "create_status": 403,
+    "error": {
+      "object": "error",
+      "status": 403,
+      "code": "restricted_resource",
+      "message": "Insufficient permissions for this endpoint.",
+      "request_id": "9f26ec49-8f68-4454-9109-f3ab4888ab1d"
+    }
+  },
+  "block_archive_unarchive": {
+    "block_id": "3d8c0043-56ec-8168-b348-ea81d412d10a",
+    "delete_block_status": 200,
+    "delete_block_archived": true,
+    "restore_block_status": 200,
+    "restore_block_response": {
+      "object": "block",
+      "id": "3d8c0043-56ec-8168-b348-ea81d412d10a",
+      "parent": {
+        "type": "page_id",
+        "page_id": "3d8c0043-56ec-81de-a42f-cedbbae9389f"
+      },
+      "created_time": "2026-09-11T12:06:00.000Z",
+      "last_edited_time": "2026-09-11T12:06:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "has_children": false,
+      "in_trash": false,
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Test block for archival",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "Test block for archival",
+            "href": null
+          }
+        ],
+        "icon": null,
+        "color": "default"
+      },
+      "archived": false,
+      "request_id": "be59d6f8-fd5e-48b5-a7b2-4c2006f3579f"
+    },
+    "conclusion": "Block con có thể archive qua DELETE /v1/blocks/:id và unarchive qua PATCH /v1/blocks/:id với {'archived': false}."
+  },
+  "irreversible_operations_summary": [
+    {
+      "operation": "create_comment",
+      "reason": "Notion API không hỗ trợ DELETE hay PATCH trên đối tượng comment. Comment tạo ra sẽ tồn tại vĩnh viễn trên page.",
+      "flag": "IRREVERSIBLE"
+    },
+    {
+      "operation": "assign_user (Assignee / People property)",
+      "reason": "Gán người dùng kích hoạt thông báo push/email của Notion ngay lập tức. Thao tác bù trừ (gỡ user) khôi phục property nhưng không thể thu hồi email/thông báo đã gửi.",
+      "flag": "REVERSIBLE_WITH_IRREVERSIBLE_SIDE_EFFECTS"
+    },
+    {
+      "operation": "permanent_page_deletion",
+      "reason": "Notion API không hỗ trợ xóa vĩnh viễn (chỉ archive). Tuy nhiên nếu người dùng dọn rác thùng rác (empty trash) trên Notion GUI, API trả về 404 và không thể unarchive.",
+      "flag": "EXTERNAL_PERMANENT_LOSS"
+    },
+    {
+      "operation": "database_schema_drop_property",
+      "reason": "Nếu xóa một property của database (ví dụ qua PATCH /databases), toàn bộ dữ liệu của cột đó trên mọi dòng bị mất, không thể bù trừ tự động bằng snapshot của một dòng.",
+      "flag": "IRREVERSIBLE"
+    }
+  ]
+}

@@ -1,0 +1,490 @@
+{
+  "scenarioId": "S-16",
+  "instruction": "add mấy cái này vào notion, cái nào có rồi thì thôi",
+  "hasImage": true,
+  "stats": {
+    "turns": 4,
+    "toolCallsCount": 3,
+    "writeCallsCount": 1,
+    "readCallsCount": 2,
+    "hasSelfVerified": true,
+    "askUserRecords": [],
+    "totalInputTokens": 5635,
+    "totalOutputTokens": 1107,
+    "totalReasoningTokens": 654,
+    "totalTokens": 24374,
+    "durationMs": 22857
+  },
+  "clarificationStatus": "CORRECT",
+  "success": false,
+  "reasons": [
+    "Expected due date 2026-09-17 or 2026-09-18, got 2026-09-11"
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "add mấy cái này vào notion, cái nào có rồi thì thôi"
+        },
+        {
+          "type": "image",
+          "data": "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",
+          "mimeType": "image/png"
+        }
+      ],
+      "timestamp": 1789141147404
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "I will check existing HR portal tasks in Notion, add three new ones, skipping duplicates. The three tasks to add have been confirmed: fix avatar upload crash, write payroll module tests, update the HR onboarding document on Drive. Current time is Friday 11/09/2026, and I will query all Notion tasks to check for existing duplicates before creating the new ones.\n\nI've confirmed the \"due date before Friday\" mentioned in the task reference is today, and the assignee is you. I will first query all HR portal related tasks to check for existing entries before proceeding.\n",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "toolCall",
+          "id": "call_80vuh1x0ifw7nzgbrc50matf",
+          "name": "notion_query_database",
+          "arguments": {
+            "database_role": "tasks"
+          }
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "seed-2-0-pro-260328",
+      "usage": {
+        "input": 2197,
+        "output": 444,
+        "cacheRead": 2104,
+        "cacheWrite": 0,
+        "reasoning": 408,
+        "totalTokens": 4745,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "toolUse",
+      "timestamp": 1789141147404,
+      "responseId": "021789141147636c2670fe791a5f29d61bdea8e0ada6c5d4634ff",
+      "responseModel": "dola-seed-2-0-pro",
+      "rawStopReason": "tool_calls"
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_80vuh1x0ifw7nzgbrc50matf",
+      "toolName": "notion_query_database",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"database_role\": \"tasks\",\n  \"count\": 7,\n  \"pages\": [\n    {\n      \"id\": \"3d8d409b-f710-8183-a0ec-fcf4509147b4\",\n      \"title\": \"Setup CI cho repo mobile\",\n      \"status\": \"In progress\",\n      \"due_date\": \"2026-09-16\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"feature\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-8118-abe0-c14509cb75e8\",\n      \"title\": \"Sync với khách về contract\",\n      \"status\": \"Done\",\n      \"due_date\": \"2026-09-08\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"meeting\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-8124-bc85-c368f580f91f\",\n      \"title\": \"Viết test cho module payroll\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-21\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"feature\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-8164-aaf1-dcd8ad7fea1d\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-818b-8229-dabc52f073e8\",\n      \"title\": \"Fix crash khi upload avatar\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-17\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"Hùng\",\n      \"tags\": [\n        \"bug\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-8164-aaf1-dcd8ad7fea1d\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-81c4-ad3e-daf8f4ec6fd3\",\n      \"title\": \"Monthly report HR\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-30\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"docs\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-8164-aaf1-dcd8ad7fea1d\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-813f-bb76-d95b92bf9c61\",\n      \"title\": \"Weekly report Vinmart\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-12\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"docs\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-810f-9dbe-e15e7e7b705f\",\n      \"title\": \"Design review màn checkout\",\n      \"status\": \"In progress\",\n      \"due_date\": \"2026-09-14\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"Trang\",\n      \"tags\": [\n        \"feature\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    }\n  ]\n}"
+        }
+      ],
+      "details": {
+        "database_role": "tasks",
+        "count": 7,
+        "pages": [
+          {
+            "id": "3d8d409b-f710-8183-a0ec-fcf4509147b4",
+            "title": "Setup CI cho repo mobile",
+            "status": "In progress",
+            "due_date": "2026-09-16",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "feature"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-8118-abe0-c14509cb75e8",
+            "title": "Sync với khách về contract",
+            "status": "Done",
+            "due_date": "2026-09-08",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "meeting"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-8124-bc85-c368f580f91f",
+            "title": "Viết test cho module payroll",
+            "status": "Not started",
+            "due_date": "2026-09-21",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "feature"
+            ],
+            "project": [
+              "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-818b-8229-dabc52f073e8",
+            "title": "Fix crash khi upload avatar",
+            "status": "Not started",
+            "due_date": "2026-09-17",
+            "priority": "",
+            "order": null,
+            "assignee": "Hùng",
+            "tags": [
+              "bug"
+            ],
+            "project": [
+              "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-81c4-ad3e-daf8f4ec6fd3",
+            "title": "Monthly report HR",
+            "status": "Not started",
+            "due_date": "2026-09-30",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "docs"
+            ],
+            "project": [
+              "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-813f-bb76-d95b92bf9c61",
+            "title": "Weekly report Vinmart",
+            "status": "Not started",
+            "due_date": "2026-09-12",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "docs"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-810f-9dbe-e15e7e7b705f",
+            "title": "Design review màn checkout",
+            "status": "In progress",
+            "due_date": "2026-09-14",
+            "priority": "",
+            "order": null,
+            "assignee": "Trang",
+            "tags": [
+              "feature"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          }
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789141156605
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Checking existing tasks reveals the avatar upload crash fix is already in the DB.\n\nThe payroll module test task also already exists, only the HR onboarding doc update task needs to be added. I’ve confirmed all relevant parameters for this task, and will create it now.\n",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "toolCall",
+          "id": "call_bagq62hpbtajxzjvpfc2dmln",
+          "name": "notion_create_page",
+          "arguments": {
+            "database_role": "tasks",
+            "title": "Update HR onboarding document (Drive)",
+            "status": "Not started",
+            "due_date": "2026-09-11",
+            "assignee": "user",
+            "tags": [
+              "docs"
+            ],
+            "project_id": "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+          }
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "seed-2-0-pro-260328",
+      "usage": {
+        "input": 1498,
+        "output": 343,
+        "cacheRead": 4152,
+        "cacheWrite": 0,
+        "reasoning": 180,
+        "totalTokens": 5993,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "toolUse",
+      "timestamp": 1789141156605,
+      "responseId": "021789141156680c2670fe791a5f29d61bdea8e0ada6c5d5e5f89",
+      "responseModel": "dola-seed-2-0-pro",
+      "rawStopReason": "tool_calls"
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_bagq62hpbtajxzjvpfc2dmln",
+      "toolName": "notion_create_page",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"id\": \"3d8d409b-f710-8128-92b1-e402723ceaf4\",\n  \"title\": \"Update HR onboarding document (Drive)\",\n  \"message\": \"Created page in tasks successfully\"\n}"
+        }
+      ],
+      "details": {
+        "success": true,
+        "id": "3d8d409b-f710-8128-92b1-e402723ceaf4",
+        "title": "Update HR onboarding document (Drive)",
+        "message": "Created page in tasks successfully"
+      },
+      "isError": false,
+      "timestamp": 1789141162029
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "To verify the task and items, I will re-query the database and present the final result.\n",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "toolCall",
+          "id": "call_b40wyf58q43zw8hxlis5jyq7",
+          "name": "notion_query_database",
+          "arguments": {
+            "database_role": "tasks"
+          }
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "seed-2-0-pro-260328",
+      "usage": {
+        "input": 522,
+        "output": 74,
+        "cacheRead": 5432,
+        "cacheWrite": 0,
+        "reasoning": 37,
+        "totalTokens": 6028,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "toolUse",
+      "timestamp": 1789141162029,
+      "responseId": "021789141162107c2670fe791a5f29d61bdea8e0ada6c5ddc6799",
+      "responseModel": "dola-seed-2-0-pro",
+      "rawStopReason": "tool_calls"
+    },
+    {
+      "role": "toolResult",
+      "toolCallId": "call_b40wyf58q43zw8hxlis5jyq7",
+      "toolName": "notion_query_database",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"database_role\": \"tasks\",\n  \"count\": 8,\n  \"pages\": [\n    {\n      \"id\": \"3d8d409b-f710-8128-92b1-e402723ceaf4\",\n      \"title\": \"Update HR onboarding document (Drive)\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-11\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"docs\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-8164-aaf1-dcd8ad7fea1d\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-8183-a0ec-fcf4509147b4\",\n      \"title\": \"Setup CI cho repo mobile\",\n      \"status\": \"In progress\",\n      \"due_date\": \"2026-09-16\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"feature\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-8118-abe0-c14509cb75e8\",\n      \"title\": \"Sync với khách về contract\",\n      \"status\": \"Done\",\n      \"due_date\": \"2026-09-08\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"meeting\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-8124-bc85-c368f580f91f\",\n      \"title\": \"Viết test cho module payroll\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-21\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"feature\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-8164-aaf1-dcd8ad7fea1d\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-818b-8229-dabc52f073e8\",\n      \"title\": \"Fix crash khi upload avatar\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-17\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"Hùng\",\n      \"tags\": [\n        \"bug\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-8164-aaf1-dcd8ad7fea1d\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-81c4-ad3e-daf8f4ec6fd3\",\n      \"title\": \"Monthly report HR\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-30\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"docs\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-8164-aaf1-dcd8ad7fea1d\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-813f-bb76-d95b92bf9c61\",\n      \"title\": \"Weekly report Vinmart\",\n      \"status\": \"Not started\",\n      \"due_date\": \"2026-09-12\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"user\",\n      \"tags\": [\n        \"docs\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    },\n    {\n      \"id\": \"3d8d409b-f710-810f-9dbe-e15e7e7b705f\",\n      \"title\": \"Design review màn checkout\",\n      \"status\": \"In progress\",\n      \"due_date\": \"2026-09-14\",\n      \"priority\": \"\",\n      \"order\": null,\n      \"assignee\": \"Trang\",\n      \"tags\": [\n        \"feature\"\n      ],\n      \"project\": [\n        \"3d8d409b-f710-81bd-887b-e2377d3403c8\"\n      ]\n    }\n  ]\n}"
+        }
+      ],
+      "details": {
+        "database_role": "tasks",
+        "count": 8,
+        "pages": [
+          {
+            "id": "3d8d409b-f710-8128-92b1-e402723ceaf4",
+            "title": "Update HR onboarding document (Drive)",
+            "status": "Not started",
+            "due_date": "2026-09-11",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "docs"
+            ],
+            "project": [
+              "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-8183-a0ec-fcf4509147b4",
+            "title": "Setup CI cho repo mobile",
+            "status": "In progress",
+            "due_date": "2026-09-16",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "feature"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-8118-abe0-c14509cb75e8",
+            "title": "Sync với khách về contract",
+            "status": "Done",
+            "due_date": "2026-09-08",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "meeting"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-8124-bc85-c368f580f91f",
+            "title": "Viết test cho module payroll",
+            "status": "Not started",
+            "due_date": "2026-09-21",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "feature"
+            ],
+            "project": [
+              "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-818b-8229-dabc52f073e8",
+            "title": "Fix crash khi upload avatar",
+            "status": "Not started",
+            "due_date": "2026-09-17",
+            "priority": "",
+            "order": null,
+            "assignee": "Hùng",
+            "tags": [
+              "bug"
+            ],
+            "project": [
+              "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-81c4-ad3e-daf8f4ec6fd3",
+            "title": "Monthly report HR",
+            "status": "Not started",
+            "due_date": "2026-09-30",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "docs"
+            ],
+            "project": [
+              "3d8d409b-f710-8164-aaf1-dcd8ad7fea1d"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-813f-bb76-d95b92bf9c61",
+            "title": "Weekly report Vinmart",
+            "status": "Not started",
+            "due_date": "2026-09-12",
+            "priority": "",
+            "order": null,
+            "assignee": "user",
+            "tags": [
+              "docs"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          },
+          {
+            "id": "3d8d409b-f710-810f-9dbe-e15e7e7b705f",
+            "title": "Design review màn checkout",
+            "status": "In progress",
+            "due_date": "2026-09-14",
+            "priority": "",
+            "order": null,
+            "assignee": "Trang",
+            "tags": [
+              "feature"
+            ],
+            "project": [
+              "3d8d409b-f710-81bd-887b-e2377d3403c8"
+            ]
+          }
+        ]
+      },
+      "isError": false,
+      "timestamp": 1789141164874
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "Final results are ready for user explanation.\n",
+          "thinkingSignature": "reasoning_content"
+        },
+        {
+          "type": "text",
+          "text": "✅ Đã kiểm tra và xử lý xong 3 task bạn đưa vào:\n\n| Task | Trạng thái |\n|---|---|\n| 1. `fix the avatar upload crash` | ❌ Đã có sẵn trong Notion (đang giao cho Hùng, hạn 17/09) → bỏ qua không tạo trùng |\n| 2. `write tests for the payroll module` | ❌ Đã có sẵn trong Notion (giao cho bạn, hạn 21/09) → bỏ qua không tạo trùng |\n| 3. `update the HR onboarding doc (Drive)` | ✅ **Đã tạo thành công** vào DB Tasks, gán cho bạn, hạn đến Hôm nay (11/09), tag `docs`, liên kết dự án HR portal |\n\nTổng số task trong database giờ là 8 mục. Các task đã có sẵn vẫn giữ nguyên trạng thái, assignee và deadline gốc như cũ."
+        }
+      ],
+      "api": "openai-completions",
+      "provider": "custom",
+      "model": "seed-2-0-pro-260328",
+      "usage": {
+        "input": 1418,
+        "output": 246,
+        "cacheRead": 5944,
+        "cacheWrite": 0,
+        "reasoning": 29,
+        "totalTokens": 7608,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "stopReason": "stop",
+      "timestamp": 1789141164874,
+      "responseId": "021789141164951c2670fe791a5f29d61bdea8e0ada6c5d97cf7a",
+      "responseModel": "dola-seed-2-0-pro",
+      "rawStopReason": "stop"
+    }
+  ]
+}

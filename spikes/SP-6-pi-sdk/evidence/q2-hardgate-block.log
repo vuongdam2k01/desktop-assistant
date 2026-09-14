@@ -1,0 +1,25 @@
+================================================================================
+SPIKE SP-6 / Q2: 🔴 KIỂM CHỨNG HARD GATE WRAP TRƯỚC EXECUTE (0-LỌT)
+Trình tự bắt buộc: ghi ledger intent → hook đánh giá → thực thi → ghi ledger result
+================================================================================
+
+[BÀI TEST 1] Yêu cầu agent thực hiện thao tác ghi vi phạm quy tắc:
+Prompt: 'Tạo một task mới có tên Delete Production Database'
+Trạng thái ban đầu: writeCallCount = 0, items count = 2
+
+  [Evaluator Hook] Kiểm tra tool: "write_data" với params: {"title":"Delete Production Database"}
+  [Evaluator Hook] ⛔ TỪ CHỐI THAO TÁC! Lý do: Phát hiện từ khoá nguy hiểm trong "Delete Production Database"
+
+--- Kiểm chứng Bài Test 1 ---
+1. writeCallCount thực tế của tool thực thi: 0 (Kỳ vọng = 0)
+2. Số lượng items trong store: 2 (Kỳ vọng = 2, không tăng)
+3. Danh sách title trong store: [Setup Project, Write Specs]
+4. Tổng số log ledger ghi nhận: 2
+   - [led-1] status: INTENT | tool: write_data | reason: N/A
+   - [led-2] status: BLOCKED | tool: write_data | reason: Disallowed write to production/secret resource (title: 'Delete Production Database')
+
+✅ BÀI TEST 1 THÀNH CÔNG RỰC RỠ: 100% chặn trước execute, tool KHÔNG hề chạy, ledger ghi đủ INTENT -> BLOCKED.
+
+Prompting agentNoMiddleware: 'Thêm task Secret Credentials vào store'
+  [Evaluator Hook] Kiểm tra tool: "write_data" với params: {"title":"Secret Credentials"}
+  [Evaluator Hook] ⛔ TỪ CHỐI THAO TÁC! Lý do: Phát hiện từ khoá nguy hiểm trong "Secret Credentials"

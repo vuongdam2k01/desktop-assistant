@@ -1,0 +1,133 @@
+{
+  "timestamp": "2026-09-13T14:46:38.926Z",
+  "pid": 71438,
+  "total_samples": 12,
+  "sample_interval_sec": 1,
+  "initial_rss_mb": 117.41,
+  "final_rss_mb": 117.91,
+  "delta_rss_mb": 0.5,
+  "slope_mb_per_hour": 160.0996,
+  "leak_verdict": "PASS — Dốc phẳng (Flat slope), không phát hiện rò rỉ bộ nhớ nhanh.",
+  "samples": [
+    {
+      "step": 1,
+      "timestamp": 1789310786681,
+      "rss_mb": 117.41,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 6719,
+      "fps": 60,
+      "heap_used_mb": 5.43
+    },
+    {
+      "step": 2,
+      "timestamp": 1789310787704,
+      "rss_mb": 117.55,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 6776,
+      "fps": 60,
+      "heap_used_mb": 5.51
+    },
+    {
+      "step": 3,
+      "timestamp": 1789310788729,
+      "rss_mb": 117.72,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 6834,
+      "fps": 60,
+      "heap_used_mb": 4.87
+    },
+    {
+      "step": 4,
+      "timestamp": 1789310789751,
+      "rss_mb": 117.77,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 6892,
+      "fps": 60,
+      "heap_used_mb": 4.94
+    },
+    {
+      "step": 5,
+      "timestamp": 1789310790774,
+      "rss_mb": 117.84,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 6949,
+      "fps": 60,
+      "heap_used_mb": 5.01
+    },
+    {
+      "step": 6,
+      "timestamp": 1789310791796,
+      "rss_mb": 117.89,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 7007,
+      "fps": 60,
+      "heap_used_mb": 5.09
+    },
+    {
+      "step": 7,
+      "timestamp": 1789310792819,
+      "rss_mb": 117.92,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 7064,
+      "fps": 60,
+      "heap_used_mb": 5.16
+    },
+    {
+      "step": 8,
+      "timestamp": 1789310793842,
+      "rss_mb": 117.92,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 7121,
+      "fps": 60,
+      "heap_used_mb": 5.23
+    },
+    {
+      "step": 9,
+      "timestamp": 1789310794865,
+      "rss_mb": 117.92,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 7179,
+      "fps": 60,
+      "heap_used_mb": 5.31
+    },
+    {
+      "step": 10,
+      "timestamp": 1789310795888,
+      "rss_mb": 118.08,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 7237,
+      "fps": 60,
+      "heap_used_mb": 5.39
+    },
+    {
+      "step": 11,
+      "timestamp": 1789310796900,
+      "rss_mb": 117.89,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 7294,
+      "fps": 60,
+      "heap_used_mb": 5.45
+    },
+    {
+      "step": 12,
+      "timestamp": 1789310797924,
+      "rss_mb": 117.91,
+      "virt_mb": 1903693.69,
+      "threads": 35,
+      "movesCount": 7351,
+      "fps": 60,
+      "heap_used_mb": 5.52
+    }
+  ]
+}

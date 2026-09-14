@@ -1,0 +1,18 @@
+﻿[2026-09-12 08:58:30.129] === START DPAPI CROSS-USER ISOLATION TEST ===
+[2026-09-12 08:58:30.153] Current User Profile: BEO-LAP\vuong
+[2026-09-12 08:58:30.321] Creating temporary Windows local user: testuser_sp11...
+[2026-09-12 08:58:30.695] Created user testuser_sp11 successfully.
+[2026-09-12 08:58:30.699] Encrypting plaintext under 'vuong' using DPAPI DataProtectionScope.CurrentUser...
+[2026-09-12 08:58:30.761] Encrypted payload (278 bytes) written to C:\Users\Public\sp11_cross_user_secret.bin
+[2026-09-12 08:58:30.779] Self-decryption by 'vuong': True
+[2026-09-12 08:58:30.801] Executing worker script under user 'testuser_sp11'...
+[2026-09-12 08:58:33.860] Worker process exited with code: 0
+[2026-09-12 08:58:33.962] Cross-user Decryption Result:
+[2026-09-12 08:58:33.968]   Worker User: testuser_sp11
+[2026-09-12 08:58:33.974]   Decryption Success: False
+[2026-09-12 08:58:33.992]   Exception Type: System.Security.Cryptography.CryptographicException
+[2026-09-12 08:58:33.999]   Exception Message: Key not valid for use in specified state.
+[2026-09-12 08:58:34.004]   HResult: 0x8009000B
+[2026-09-12 08:58:34.017] DPAPI Cryptographic Isolation Verified: True
+[2026-09-12 08:58:34.036] Cleaning up temporary user and files...
+[2026-09-12 08:58:34.056] Cleanup complete.

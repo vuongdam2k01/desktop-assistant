@@ -1,0 +1,125 @@
+{
+  "call_id": "1789128443837_0234_PATCH_pages_3d8c0043-56ec-81b9-bf91-e99eeacd77cf",
+  "category": "q8_write_status_name",
+  "timestamp": "2026-09-11T12:07:24Z",
+  "duration_ms": 574,
+  "request": {
+    "method": "PATCH",
+    "url": "https://api.notion.com/v1/pages/3d8c0043-56ec-81b9-bf91-e99eeacd77cf",
+    "headers": {
+      "Authorization": "Bearer ***",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "properties": {
+        "Task Status": {
+          "status": {
+            "name": "In progress"
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Date": "Fri, 11 Sep 2026 12:07:24 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "close",
+      "CF-Ray": "a3968d46ceef4a28-TPE",
+      "CF-Cache-Status": "DYNAMIC",
+      "set-cookie": "__cf_bm=DASxUBRj_rBKxciydXtOXfosqYNOMXgBYZYZgxwo4CA-1789128443.9722438-1.0.1.1-RevCsAwB9W_QAFO9R6Q0Hqu0TeM48WGBMU_1WiLiynb7Dbqk9sw1F2Vi9rT0lEcpgtBlkuNxRjtyu6lpwHrktu1HfS0BYCk_1UsfmLSntz6tyj4Eb8AmieAkDbC5VW1f; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Fri, 11 Sep 2026 12:37:24 GMT",
+      "ETag": "W/\"505-LOAJx3KkBtQIcqdFA8ks8WOzaek\"",
+      "Server": "cloudflare",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+      "Vary": "Accept-Encoding",
+      "content-security-policy": "default-src 'none'",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-dns-prefetch-control": "off",
+      "x-download-options": "noopen",
+      "x-frame-options": "SAMEORIGIN",
+      "x-notion-request-id": "e38eee71-67ce-4d45-b422-e441197aa67d",
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "0"
+    },
+    "body": {
+      "object": "page",
+      "id": "3d8c0043-56ec-81b9-bf91-e99eeacd77cf",
+      "created_time": "2026-09-11T12:07:00.000Z",
+      "last_edited_time": "2026-09-11T12:07:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "3d8c0043-56ec-814e-a28e-00276c461f30"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "3d8c0043-56ec-81cf-a480-e9e679285df6"
+      },
+      "in_trash": false,
+      "is_archived": false,
+      "is_locked": false,
+      "properties": {
+        "Due date": {
+          "id": "N%7D%5B%5E",
+          "type": "date",
+          "date": null
+        },
+        "Task Status": {
+          "id": "TbrL",
+          "type": "status",
+          "status": {
+            "id": "2441e731-5bb9-4140-9ed2-3ffc239ec6d7",
+            "name": "In progress",
+            "color": "blue"
+          }
+        },
+        "Status": {
+          "id": "~iuF",
+          "type": "select",
+          "select": {
+            "id": "898c7412-5994-49d4-aa4f-9b9c4b8f3f45",
+            "name": "Đang làm",
+            "color": "default"
+          }
+        },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "SP1 Q8 Status vs Select Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "SP1 Q8 Status vs Select Test",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://app.notion.com/p/SP1-Q8-Status-vs-Select-Test-3d8c004356ec81b9bf91e99eeacd77cf",
+      "public_url": null,
+      "archived": false,
+      "request_id": "e38eee71-67ce-4d45-b422-e441197aa67d"
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,58 @@
+================================================================================
+SPIKE SP-6 / Q5: Cơ chế Provider Layer & Phân Tích FR-AG-11
+Bối cảnh: FR-AG-11 ghi 'subscription qua /login OAuth, API key, custom provider'.
+Mục tiêu: Làm rõ SDK phơi ra gì, phân biệt SDK vs CLI, kiến nghị sửa FR-AG-11.
+================================================================================
+
+[1] Khảo sát kiến trúc Provider Layer trong @earendil-works/pi-ai:
+  - Các họ API native được hỗ trợ:
+    * openai-completions (chuẩn tương thích OpenAI, dùng cho mọi endpoint bên thứ ba)
+    * openai-responses / azure-openai-responses
+    * anthropic-messages
+    * google-generative-ai / google-vertex
+    * bedrock-converse-stream
+    * mistral-conversations
+
+[2] Cơ chế cấu hình Provider trong đường NHÚNG SDK (Embedded SDK Path):
+  - Model configuration là plain TypeScript object (Model<TApi>):
+    { baseUrl: "https://ark.ap-southeast.bytepluses.com/api/coding/v3", api: "openai-completions", provider: "custom" }
+  - Cơ chế cấp phát Credential:
+    * Trực tiếp qua options.apiKey
+    * Động qua getApiKey(provider: string) callback (phù hợp token xoay vòng / expiring tokens)
+    * Tuỳ biến request headers qua custom headers object (hỗ trợ gateway / auth proxy)
+
+[3] Thực nghiệm gọi 2 model khác nhau (STRONG và CHEAP) qua custom provider endpoint:
+
+  --- Đang test model STRONG: deepseek-v4-pro-ga-260813 ---
+  -> Phản hồi (3735ms): "Pong received, STRONG model operational."
+  -> Token Usage: Input: 31, Output: 104, Total: 135
+  -> Stop reason: stop
+
+  --- Đang test model CHEAP: deepseek-v4-flash-ga-260731 ---
+  -> Phản hồi (1688ms): "Ping received from Desktop Assistant SP-6 test for CHEAP model."
+  -> Token Usage: Input: 31, Output: 71, Total: 102
+  -> Stop reason: stop
+
+[4] Phân tích đối chiếu lệnh CLI '/login' vs SDK Nhúng:
+  - Bản chất của Pi:
+    * Pi là phần mềm mã nguồn mở MIT do Mario Zechner & Armin Ronacher tạo ra.
+    * Pi KHÔNG bán dịch vụ hay bán subscription (không có cái gọi là 'Pi Subscription').
+    * Trên Pi CLI, '/login' là một lệnh interactive mở trình duyệt hoặc hiển thị device code
+      để người dùng đăng nhập tài khoản Anthropic / GitHub / Google của chính họ.
+  - Trên ứng dụng nhúng (Electron / Desktop Assistant):
+    * KHÔNG có terminal shell để gõ '/login'.
+    * Ứng dụng Desktop Assistant sẽ cung cấp giao diện Settings UI (hoặc màn hình onboarding),
+      người dùng nhập API key hoặc thực hiện OAuth (SP-13) qua cửa sổ Electron.
+    * Sau đó, Desktop Assistant lưu credential vào OS secure storage (SP-11) và truyền
+      vào pi-agent SDK qua tham số apiKey hoặc customStreamFn.
+
+================================================================================
+KẾT LUẬN Q5 & KIẾN NGHỊ SỬA FR-AG-11:
+1. Provider Layer của Pi hỗ trợ xuất sắc Custom Provider và OpenAI-compatible endpoints.
+2. Không tồn tại 'Pi subscription'. Lời văn hiện tại trong FR-AG-11:
+   'cấu hình provider theo đúng cơ chế providers của pi agents (subscription qua /login OAuth, API key...)'
+   là do nhầm lẫn giữa affordance giao diện dòng lệnh (CLI interactive) với API của SDK nhúng.
+3. KIẾN NGHỊ SỬA LỜI VĂN FR-AG-11:
+   'App cung cấp UI cấu hình provider (hỗ trợ API key của các nhà cung cấp OpenAI, Anthropic, Google,
+   hoặc custom endpoint tương thích OpenAI); credential lưu trong secure storage của OS (NFR-SEC-01)...'
+================================================================================

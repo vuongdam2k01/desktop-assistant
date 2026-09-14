@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-09-11T16:27:27.962Z",
+  "totalScenarios": 4,
+  "allPassed": true,
+  "scenarios": [
+    {
+      "scenarioId": "NET-01-DEAD-PORT",
+      "name": "Cổng chết cục bộ (Connection Refused)",
+      "description": "Trỏ base URL sang cổng 127.0.0.1:59999 không có service nào lắng nghe.",
+      "testCaseUsed": "W-01",
+      "expectedDecision": "ESCALATE_USER",
+      "actualDecision": "ESCALATE_USER",
+      "isFallback": true,
+      "latencyMs": 58,
+      "reasoning": "FAIL-CLOSED FALLBACK: Lời gọi risk judge thất bại (fetch failed). Đẩy lên người dùng duyệt an toàn.",
+      "errorDetail": "fetch failed",
+      "passed": true
+    },
+    {
+      "scenarioId": "NET-02-TIMEOUT-BLACKHOLE",
+      "name": "Mất mạng / IP không phản hồi (Network Timeout / Blackhole IP)",
+      "description": "Trỏ base URL sang địa chỉ TEST-NET 192.0.2.1:81 với timeout 1500ms.",
+      "testCaseUsed": "W-01",
+      "expectedDecision": "ESCALATE_USER",
+      "actualDecision": "ESCALATE_USER",
+      "isFallback": true,
+      "latencyMs": 1501,
+      "reasoning": "FAIL-CLOSED FALLBACK: Lời gọi risk judge thất bại (This operation was aborted). Đẩy lên người dùng duyệt an toàn.",
+      "errorDetail": "This operation was aborted",
+      "passed": true
+    },
+    {
+      "scenarioId": "NET-03-INVALID-AUTH",
+      "name": "Sai thông tin xác thực / Hết hạn token (HTTP 401 Unauthorized)",
+      "description": "Gửi request với API key không hợp lệ.",
+      "testCaseUsed": "W-01",
+      "expectedDecision": "ESCALATE_USER",
+      "actualDecision": "ESCALATE_USER",
+      "isFallback": true,
+      "latencyMs": 267,
+      "reasoning": "FAIL-CLOSED FALLBACK: Lời gọi risk judge thất bại (HTTP 401 Unauthorized: {\"error\":{\"code\":\"AuthenticationError\",\"message\":\"The API key format is incorrect. Request id: 021789144047751682bfa727eaa8ae907bb4f408e14b63da17362\",\"param\":\"\",\"type\":\"Unauthorized\"}}). Đẩy lên người dùng duyệt an toàn.",
+      "errorDetail": "HTTP 401 Unauthorized: {\"error\":{\"code\":\"AuthenticationError\",\"message\":\"The API key format is incorrect. Request id: 021789144047751682bfa727eaa8ae907bb4f408e14b63da17362\",\"param\":\"\",\"type\":\"Unauthorized\"}}",
+      "passed": true
+    },
+    {
+      "scenarioId": "NET-04-INVALID-MODEL",
+      "name": "Model không tồn tại / Hết quota model (HTTP 404 / 400)",
+      "description": "Gọi model ID không hợp lệ trong catalog.",
+      "testCaseUsed": "W-01",
+      "expectedDecision": "ESCALATE_USER",
+      "actualDecision": "ESCALATE_USER",
+      "isFallback": true,
+      "latencyMs": 168,
+      "reasoning": "FAIL-CLOSED FALLBACK: Lời gọi risk judge thất bại (HTTP 404 Not Found: {\"error\":{\"code\":\"UnsupportedModel\",\"message\":\"The requested model does not support the coding plan feature. Please refer to the documentation at https://docs.byteplus.com/en/docs/ModelArk/1925114 to select a compatible model. Request id: 021789144047925c2670fe791a5f29d61bdea8e0ada6c5d4f608d\",\"param). Đẩy lên người dùng duyệt an toàn.",
+      "errorDetail": "HTTP 404 Not Found: {\"error\":{\"code\":\"UnsupportedModel\",\"message\":\"The requested model does not support the coding plan feature. Please refer to the documentation at https://docs.byteplus.com/en/docs/ModelArk/1925114 to select a compatible model. Request id: 021789144047925c2670fe791a5f29d61bdea8e0ada6c5d4f608d\",\"param",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+openapi: 3.0.3
+info:
+  title: Desktop Assistant Backend API
+  description: |
+    API specification for Desktop Assistant Backend Service (M5 / SP-20).
+    Vertical slice covering authentication, generalized OAuth broker, version manifest, and account lifecycle.
+  version: 0.1.0-beta.1
+servers:
+  - url: http://127.0.0.1:3000
+    description: Local Dev Server
+  - url: https://api.desktopassistant.local
+    description: Production Server
+
+paths:
+  /v1/auth/google:
+    post:
+      summary: Authenticate with Google Sign-In
+      description: |
+        Receives Google ID token from client, verifies token integrity with Google Identity services,
+        validates email against closed beta allowlist, upserts Account, registers Device,
+        and returns app JWT access + refresh tokens.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id_token
+                - device_id
+              properties:
+                id_token:
+                  type: string
+                  description: Google ID token received by client from Google Identity SDK
+                device_id:
+                  type: string
+                  description: Unique identifier for the client machine/installation
+                device_name:
+                  type: string
+                  description: Human-readable machine hostname or friendly name
+      responses:
+        '200':
+          description: Authentication successful, session issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokens'
+        '400':
+          description: Missing required fields
+        '401':
+          description: Invalid or expired Google ID token
+        '403':
+          description: Email not in closed beta allowlist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/auth/refresh:
+    post:
+      summary: Refresh App Session
+      description: Exchanges a valid app refresh token for a new app access token.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refresh_token
+              properties:
+                refresh_token:
+                  type: string
+                  description: App refresh token in format {sessionId}.{secret}
+      responses:
+        '200':
+          description: Session refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokens'
+        '401':
+          description: Invalid, expired, or revoked refresh token
+
+  /v1/auth/logout:
+    post:
+      summary: Revoke Session (Logout)
+      description: Revokes the specified refresh token and session on backend.
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: Successfully logged out
+
+  /v1/oauth/{provider}/authorize-url:
+    get:
+      summary: Get OAuth Authorization URL
+      description: |
+        Returns the authorization URL and state parameter for the specified provider (e.g. notion, google).
+        Adding new providers does not alter this API contract.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [notion, google]
+        - name: redirect_uri
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: scope
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Authorization URL generated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  provider:
+                    type: string
+                  authorizeUrl:
+                    type: string
+                  state:
+                    type: string
+        '404':
+          description: Unsupported provider
+
+  /v1/oauth/{provider}/exchange:
+    post:
+      summary: Exchange Authorization Code for Connector Tokens
+      description: |
+        Exchanges authorization code for provider access/refresh tokens using server-held client_secret.
+        CRITICAL ARCHITECTURAL GUARANTEE (FR-BE-02, NFR-BE-05): Server DOES NOT store connector tokens.
+        Tokens are returned directly to client for storage in OS secure credential manager.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [notion, google]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+                - redirect_uri
+              properties:
+                code:
+                  type: string
+                redirect_uri:
+                  type: string
+                code_verifier:
+                  type: string
+      responses:
+        '200':
+          description: Token exchange successful. Token is delivered to client and NOT saved in DB.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenExchangeResult'
+        '400':
+          description: Missing code or redirect_uri
+        '500':
+          description: Upstream provider rejected token exchange
+
+  /v1/oauth/{provider}/refresh:
+    post:
+      summary: Refresh Provider Token via Broker
+      description: |
+        Refreshes a provider token via broker when provider requires confidential client credentials (client_secret).
+        Tokens are returned to client and NOT saved in backend DB.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [notion, google]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refresh_token
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenExchangeResult'
+
+  /v1/app/version:
+    get:
+      summary: Get Version & Update Manifest
+      description: Returns current production client version, update manifest URL, and mandatory update flag.
+      security: []
+      responses:
+        '200':
+          description: Current version information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                  minClientVersion:
+                    type: string
+                  mandatory:
+                    type: boolean
+                  releaseNotesUrl:
+                    type: string
+                  updateUrl:
+                    type: string
+
+  /v1/health:
+    get:
+      summary: Service Health Check
+      description: Returns health status of service and database connection.
+      security: []
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: healthy
+                  service:
+                    type: string
+                  uptimeSeconds:
+                    type: integer
+                  database:
+                    type: string
+                    example: healthy
+
+  /v1/account:
+    delete:
+      summary: Delete User Account (FR-BE-12)
+      description: |
+        Completely deletes user Account, Device, Session, and allowlist activation records from backend.
+        Client concurrently wipes local storage and revokes connector permissions.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Account completely deleted from backend
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    AuthTokens:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+          example: Bearer
+        expiresIn:
+          type: integer
+          example: 900
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+
+    TokenExchangeResult:
+      type: object
+      properties:
+        provider:
+          type: string
+        accessToken:
+          type: string
+        tokenType:
+          type: string
+          example: Bearer
+        expiresIn:
+          type: integer
+        refreshToken:
+          type: string
+        scope:
+          type: string
+        extra:
+          type: object
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string

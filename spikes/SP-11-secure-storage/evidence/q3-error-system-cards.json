@@ -1,0 +1,72 @@
+{
+  "tamperIntegrityTests": [
+    {
+      "test": "Bit flip in AES-GCM Auth Tag",
+      "expectedFailure": true,
+      "failedAsExpected": true,
+      "errorName": "Error",
+      "errorMessage": "Error while decrypting the ciphertext provided to safeStorage.decryptString."
+    },
+    {
+      "test": "Bit flip in Ciphertext Body",
+      "expectedFailure": true,
+      "failedAsExpected": true,
+      "errorName": "Error",
+      "errorMessage": "Error while decrypting the ciphertext provided to safeStorage.decryptString."
+    },
+    {
+      "test": "Corrupted Header Prefix",
+      "expectedFailure": true,
+      "failedAsExpected": true,
+      "errorName": "Error",
+      "errorMessage": "Error while decrypting the ciphertext provided to safeStorage.decryptString. Ciphertext does not appear to be encrypted."
+    },
+    {
+      "test": "Truncated Buffer (15 bytes)",
+      "expectedFailure": true,
+      "failedAsExpected": true,
+      "errorName": "Error",
+      "errorMessage": "Error while decrypting the ciphertext provided to safeStorage.decryptString."
+    }
+  ],
+  "systemCardSpec": {
+    "decryption_failed": {
+      "card_type": "SYSTEM",
+      "id": "sys_card_sec_decrypt_fail_01",
+      "title": "Kho bảo mật không thể giải mã dữ liệu",
+      "body": "Dữ liệu bảo mật bị can thiệp hoặc tài khoản Windows đã thay đổi. Vui lòng kết nối lại tài khoản.",
+      "severity": "error",
+      "blocking": false,
+      "auto_dismiss": false,
+      "persistent_badge": true,
+      "created_at": "2026-09-12T01:58:28.826Z",
+      "action": {
+        "label": "Mở Cài đặt > Kết nối",
+        "route": "/settings/connectors",
+        "context": {
+          "target": "connector:google",
+          "reason": "SAFE_STORAGE_DECRYPT_FAILURE",
+          "error_detail": "Error while decrypting the ciphertext provided to safeStorage.decryptString."
+        }
+      }
+    },
+    "storage_unavailable": {
+      "card_type": "SYSTEM",
+      "id": "sys_card_sec_unavailable_02",
+      "title": "Kho bảo mật OS không khả dụng",
+      "body": "Không thể truy cập dịch vụ DPAPI của Windows để bảo vệ mật khẩu/token.",
+      "severity": "warning",
+      "blocking": false,
+      "auto_dismiss": false,
+      "persistent_badge": true,
+      "created_at": "2026-09-12T01:58:28.826Z",
+      "action": {
+        "label": "Kiểm tra trạng thái hệ thống",
+        "route": "/settings/security",
+        "context": {
+          "reason": "SAFE_STORAGE_UNAVAILABLE"
+        }
+      }
+    }
+  }
+}

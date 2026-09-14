@@ -1,0 +1,224 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master, dev]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.4.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.21.0'
+          cache: 'pnpm'
+
+      - name: Setup Windows C++ and Rust toolchain
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install stable Rust toolchain (Windows)
+        if: runner.os == 'Windows'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify contracts drift
+        run: pnpm contracts:check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      # The backend is a Linux service whose integration tests exercise real PostgreSQL
+      # and Redis instances. GitHub's Windows and macOS runners cannot host them, so the
+      # backend is tested on Linux only, against the services the repository declares.
+      - name: Start backend services (Linux)
+        if: runner.os == 'Linux'
+        run: pnpm db:up
+
+      - name: Apply backend migrations (Linux)
+        if: runner.os == 'Linux'
+        run: pnpm db:migrate
+        env:
+          DATABASE_URL: postgresql://postgres:devpassword@127.0.0.1:54320/desktop_assistant_dev
+
+      - name: Run test suite (Linux)
+        if: runner.os == 'Linux'
+        run: pnpm test
+
+      - name: Run test suite (Windows / macOS)
+        if: runner.os != 'Linux'
+        run: pnpm exec turbo run test --filter=!@desktop-assistant/backend
+
+      - name: Stop backend services (Linux)
+        if: always() && runner.os == 'Linux'
+        run: pnpm db:down
+
+      - name: Build workspace packages
+        run: pnpm build
+
+      - name: Lint and BOM check
+        run: pnpm lint
+
+      - name: Run static build checks
+        run: pnpm build:check
+
+      - name: Install system dependencies for headless tests (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libegl1 libgles2 libx11-6 scrot
+
+      - name: Run native credential store smoke (Ubuntu)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a pnpm --filter @desktop-assistant/desktop test:credential-store:os
+
+      - name: Run native credential store smoke (Windows / macOS)
+        if: runner.os != 'Linux'
+        run: pnpm --filter @desktop-assistant/desktop test:credential-store:os
+
+      # The window-integration suite measures that revealing the card never takes keyboard
+      # focus from the foreground application. That cannot be measured here: a hosted runner
+      # executes in a background session rather than the active input desktop, which
+      # spikes/SP-0-gui-harness/REPORT.md §Q2 records as the reason its own harness had to
+      # bind to WinSta0\Default. Running it anyway would report a failure about the session,
+      # not about the product. It belongs on a machine with an interactive desktop.
+      - name: Native target build & test
+        run: |
+          pnpm native:build
+          pnpm native:test
+
+      - name: Run Pet Rendering E2E & Performance Tests (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          xvfb-run -a pnpm --filter=@desktop-assistant/desktop run test:e2e
+        env:
+          CI: '1'
+          DESKTOP_ASSISTANT_SOFTWARE_RENDERING: '1'
+
+      - name: Run Pet Rendering E2E & Performance Tests (Windows & macOS)
+        if: runner.os != 'Linux'
+        run: |
+          pnpm --filter=@desktop-assistant/desktop run test:e2e
+        env:
+          CI: '1'
+          DESKTOP_ASSISTANT_SOFTWARE_RENDERING: '1'
+
+      - name: Upload Pet Rendering Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pet-rendering-results-${{ matrix.os }}
+          path: |
+            apps/desktop/test-results
+            apps/desktop/playwright-report
+          if-no-files-found: ignore
+  no-cpp-toolchain:
+    name: Clean Machine Proof (No C++ Toolchain)
+    runs-on: ubuntu-latest
+    container:
+      image: node:24.21.0-bookworm-slim
+
+    steps:
+      - name: Prove absence of C++ compiler toolchain
+        run: |
+          echo "Verifying no C++ compiler toolchain exists in container..."
+          ! which c++ && ! which g++ && ! which clang++ && echo "PROVED: No C++ compiler toolchain found."
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@12.4.1 --activate
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      # The backend needs PostgreSQL and Redis, which this container does not host. What
+      # this job proves is that the product builds and tests without a C++ toolchain.
+      - name: Run tests
+        run: pnpm exec turbo run test --filter=!@desktop-assistant/backend
+
+  package-unsigned:
+    name: Package Unsigned (${{ matrix.os }})
+    needs: [quality, no-cpp-toolchain]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.4.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.21.0'
+          cache: 'pnpm'
+
+      - name: Setup Windows C++ and Rust toolchain
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install stable Rust toolchain (Windows)
+        if: runner.os == 'Windows'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build native target if applicable
+        run: pnpm native:build
+
+      # The packaging check runs through the build-check command line, which lives in this
+      # workspace and only exists once it has been compiled.
+      - name: Build workspace packages
+        run: pnpm build
+
+      - name: Package unsigned directory and run artifact verification
+        run: pnpm package:unsigned
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+
+      - name: Upload unsigned unpacked desktop artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-unsigned-${{ matrix.os }}-${{ runner.arch }}
+          path: |
+            apps/desktop/release/*-unpacked
+            apps/desktop/release/mac*
+          if-no-files-found: error

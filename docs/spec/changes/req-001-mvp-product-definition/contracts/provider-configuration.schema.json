@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/provider-configuration/0.1.0.json",
+  "title": "ProviderConfiguration",
+  "description": "Shape of the stored model-provider configuration and its role assignments, for agent/contracts/provider-configuration@0.1.0. The user brings their own provider and pays their own bill, so this document describes a provider, refers to a credential without carrying it, and binds each role to a model. It is displayed, exported for inspection and replicated to the account, which is why no member of it may hold a secret value. What the file cannot express is stated by the contract document: that every role resolves, falling back to the provider's recommended default rather than creating a job that would fail on its first call, and that cost figures are display only and never a gate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["providers", "assignments"],
+  "properties": {
+    "providers": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The configured providers. A provider is a place calls are sent and a credential reference, never a credential.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "displayName", "credentialRef", "models"],
+        "properties": {
+          "id": { "type": "string", "description": "Stable identity of this provider within the configuration; role assignments refer to it." },
+          "kind": {
+            "type": "string",
+            "enum": ["subscription", "api_key", "custom"],
+            "description": "How the provider is reached and paid for. A custom provider is the only kind that carries its own base address."
+          },
+          "displayName": { "type": "string" },
+          "credentialRef": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["namespace", "key"],
+            "description": "A reference into the operating system's secure storage. The credential exists in exactly one place and every other entity holds a reference, which is what lets this document be displayed, exported and replicated.",
+            "properties": {
+              "namespace": { "type": "string" },
+              "key": { "type": "string" }
+            }
+          },
+          "baseUrl": { "type": "string", "description": "Present only for a custom provider." },
+          "models": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "inputs"],
+              "properties": {
+                "id": { "type": "string" },
+                "inputs": {
+                  "type": "array",
+                  "minItems": 1,
+                  "description": "The declared input capability, read before a call is attempted. The composer disables image attachment when the model assigned to the role that would receive the image declares no image input, because sending an image to a model that cannot accept it is a failure the user cannot see.",
+                  "items": { "type": "string", "enum": ["text", "image"] }
+                },
+                "contextTokens": { "type": "integer" },
+                "costPerMillionInput": { "type": "number", "description": "Display only. Never a gate: the account and the bill are the user's own." },
+                "costPerMillionOutput": { "type": "number", "description": "Display only, on the same footing as the input figure." }
+              }
+            }
+          }
+        }
+      }
+    },
+    "assignments": {
+      "type": "array",
+      "description": "Which model each role runs under. A role with no entry here resolves to the provider's recommended default rather than to nothing.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "providerId", "modelId", "source"],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": ["pet", "worker", "rule_elicitation", "undo", "risk_judge"],
+            "description": "The five roles the product runs. Adding one is a MINOR change; removing one or changing what it means is MAJOR."
+          },
+          "providerId": { "type": "string" },
+          "modelId": { "type": "string" },
+          "source": {
+            "type": "string",
+            "enum": ["default", "user"],
+            "description": "Distinguishes a recommended default from the user's own choice, so a later release may change the recommendation without overwriting a deliberate decision."
+          }
+        }
+      }
+    }
+  }
+}

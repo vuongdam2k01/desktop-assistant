@@ -1,0 +1,54 @@
+[2026-09-12T01:58:34.378Z] === START SECURE STORAGE SERVICE & ACCOUNT WIPE TEST ===
+[2026-09-12T01:58:34.379Z] 
+--- 1. Writing Credentials into Secure Store ---
+[2026-09-12T01:58:34.383Z] Written key 'connector:notion:default:token': 210 ciphertext bytes
+[2026-09-12T01:58:34.387Z] Written key 'connector:google:byo:client_credentials': 222 ciphertext bytes
+[2026-09-12T01:58:34.390Z] Written key 'connector:google:account:owner@example.com:tokens': 260 ciphertext bytes
+[2026-09-12T01:58:34.394Z] Written key 'llm:provider:byteplus:api_key': 300 ciphertext bytes
+[2026-09-12T01:58:34.401Z] Written key 'auth:session:main': 201 ciphertext bytes
+[2026-09-12T01:58:34.402Z] Vault file on disk: true (3603 bytes)
+[2026-09-12T01:58:34.421Z] Plaintext Leakage Check on Disk: PASS (0% plaintext on disk)
+[2026-09-12T01:58:34.422Z] 
+--- 2. Reading Back & Verifying Credentials ---
+[2026-09-12T01:58:34.422Z] Read key 'connector:notion:default:token': match = true
+[2026-09-12T01:58:34.422Z] Read key 'connector:google:byo:client_credentials': match = true
+[2026-09-12T01:58:34.422Z] Read key 'connector:google:account:owner@example.com:tokens': match = true
+[2026-09-12T01:58:34.422Z] Read key 'llm:provider:byteplus:api_key': match = true
+[2026-09-12T01:58:34.422Z] Read key 'auth:session:main': match = true
+[2026-09-12T01:58:34.422Z] 
+All Keys count: 5
+[2026-09-12T01:58:34.422Z] Connector keys count: 3
+[2026-09-12T01:58:34.422Z] LLM keys count: 1
+[2026-09-12T01:58:34.422Z] 
+--- 3. Testing Decryption Error & SYSTEM Card Generation ---
+[2026-09-12T01:58:34.423Z] Caught expected error: Decryption failed for key 'connector:notion:default:token': Error while decrypting the ciphertext provided to safeStorage.decryptString.
+[2026-09-12T01:58:34.423Z] Attached SYSTEM Card: {
+  "card_type": "SYSTEM",
+  "id": "sys_card_sec_1789178314423",
+  "title": "Lỗi giải mã thông tin xác thực",
+  "body": "Không thể giải mã dữ liệu cho 'connector:notion:default:token'. Khóa bảo mật Windows không khớp hoặc bị hỏng. Vui lòng kết nối lại.",
+  "severity": "error",
+  "blocking": false,
+  "auto_dismiss": false,
+  "persistent_badge": true,
+  "created_at": "2026-09-12T01:58:34.423Z",
+  "action": {
+    "label": "Mở Cài đặt > Kết nối",
+    "route": "/settings/connectors",
+    "context": {
+      "targetKey": "connector:notion:default:token",
+      "reason": "SAFE_STORAGE_DECRYPT_FAILURE",
+      "error_detail": "Error while decrypting the ciphertext provided to safeStorage.decryptString."
+    }
+  }
+}
+[2026-09-12T01:58:34.423Z] 
+--- 4. Testing Account Wipe (FR-BE-12) ---
+[2026-09-12T01:58:34.423Z] Pre-wipe key count in memory: 5
+[2026-09-12T01:58:34.423Z] Pre-wipe file exists: true
+[2026-09-12T01:58:34.429Z] Wipe operation completed: wipedKeysCount = 5
+[2026-09-12T01:58:34.429Z] Post-wipe file exists: false
+[2026-09-12T01:58:34.429Z] Post-wipe memory cache size: 0
+[2026-09-12T01:58:34.429Z] Post-wipe listKeys(): []
+[2026-09-12T01:58:34.429Z] Post-wipe read 'connector:notion:default:token': null
+[2026-09-12T01:58:34.430Z] FR-BE-12 Account Wipe Verification: PASS (100% CLEAN PURGE)

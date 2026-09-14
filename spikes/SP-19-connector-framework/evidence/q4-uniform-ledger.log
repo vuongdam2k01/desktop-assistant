@@ -1,0 +1,38 @@
+================================================================================
+SPIKE SP-19 / Q4: Hook và Ledger áp dụng đồng nhất trên cả 2 connector
+Yêu cầu FR-CF-07: Xử lý được cả 2 hình dạng (Notion ghi+snapshot vs Gmail đọc) mà không rẽ nhánh
+================================================================================
+
+[1] Thực thi tool Notion (Write: notion_create_page)...
+  -> Tạo page thành công: id=3d9c0043-56ec-8151-a39a-e084bb151143
+[2] Thực thi tool Notion Update (Write: notion_update_page_properties có pre-write snapshot)...
+  -> Update page thành công kèm pre-write snapshot.
+  -> Đã archive dọn dẹp task thử nghiệm.
+
+[3] Thực thi tool Gmail (Read-only: gmail_search_emails)...
+  -> Gmail search thành công: count=2
+
+[4] Kiểm tra cấu trúc bản ghi Uniform Ledger (11 records):
+  - #1 [INTENT] connector=notion tool=notion_create_page target=n/a
+  - #2 [PRE_SNAPSHOT] connector=notion tool=notion_create_page target=n/a
+    * Pre-snapshot captured: false, CompensatingAction: {"operation":"archive_page","note":"Target ID will be resolved from creation result"}
+  - #3 [RESULT] connector=notion tool=notion_create_page target=n/a
+  - #4 [INTENT] connector=notion tool=notion_update_page_properties target=n/a
+  - #5 [PRE_SNAPSHOT] connector=notion tool=notion_update_page_properties target=3d9c0043-56ec-8151-a39a-e084bb151143
+    * Pre-snapshot captured: true, CompensatingAction: {"operation":"update_page_properties","params":{"page_id":"3d9c0043-56ec-8151-a39a-e084bb151143","properties":{"Due date":{"id":"N%7D%5B%5E","type":"date","date":null},"Task Status":{"id":"TbrL","type":"status","status":{"id":"5f9885ba-7007-4fbb-a946-70324a88bfc6","name":"Not started","color":"default"}},"Creator":{"id":"%7DykQ","type":"rich_text","rich_text":[]},"Status":{"id":"~iuF","type":"select","select":null},"Name":{"id":"title","type":"title","title":[{"type":"text","text":{"content":"[SP-19 Test] Uniform Ledger Validation Task","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"[SP-19 Test] Uniform Ledger Validation Task","href":null}]}}}}
+  - #6 [RESULT] connector=notion tool=notion_update_page_properties target=n/a
+  - #7 [INTENT] connector=notion tool=notion_archive_page target=n/a
+  - #8 [PRE_SNAPSHOT] connector=notion tool=notion_archive_page target=3d9c0043-56ec-8151-a39a-e084bb151143
+    * Pre-snapshot captured: true, CompensatingAction: {"operation":"update_page_properties","params":{"page_id":"3d9c0043-56ec-8151-a39a-e084bb151143","archived":false}}
+  - #9 [RESULT] connector=notion tool=notion_archive_page target=n/a
+  - #10 [INTENT] connector=gmail tool=gmail_search_emails target=n/a
+  - #11 [RESULT] connector=gmail tool=gmail_search_emails target=n/a
+  ✅ Notion update ghi nhận đầy đủ preSnapshot và compensatingAction phục vụ rollback.
+  ✅ Gmail read-only tool chỉ sinh INTENT & RESULT, không có snapshot rác.
+
+================================================================================
+KẾT LUẬN Q4: ĐẠT 100%
+1. Lớp hook và ledger hoạt động hoàn toàn đồng nhất trên cả 2 connector.
+2. Không cần bất kỳ rẽ nhánh theo tên connector nào: mọi hành vi snapshot và
+   bù trừ được quyết định tự động bởi manifest metadata.
+================================================================================

@@ -1,0 +1,41 @@
+=== KIỂM CHỨNG NOTARYTOOL VÀ STAPLER TRÊN MACOS (Q3) ===
+Thời gian: Sun Sep 13 21:29:05 +07 2026
+macOS: 26.5.2 (25F84) | xcrun notarytool & stapler
+
+1. LỆNH XCRUN NOTARYTOOL SUBMIT KHI CHƯA CÓ CREDENTIALS APPLE DEVELOPER:
+$ xcrun notarytool submit /tmp/test-app.zip
+Output:
+Conducting pre-submission checks for test-app.zip and initiating connection to the Apple notary service...
+Error: Must provide credentials.
+
+See the 'store-credentials' command, App Store Connect API arguments for Team Keys (--key, --key-id, --issuer), and Individual Keys (--key, --key-id), or app-specific password arguments (--apple-id, --password, --team-id).
+
+Exit code: 64
+
+2. LỆNH XCRUN NOTARYTOOL VỚI ĐỊNH DẠNG .APP THÔ (CHƯA ĐÓNG GÓI):
+$ xcrun notarytool submit /tmp/test-apps/case6-runtime-full-selfsigned/Electron.app
+Output:
+Conducting pre-submission checks for Electron.app and initiating connection to the Apple notary service...
+Error: Electron.app must be a zip archive (.zip), flat installer package (.pkg), or UDIF disk image (.dmg), use 'notarytool submit --force' to skip this validation and submit anyway.
+Usage: notarytool <subcommand>
+
+Exit code: 64
+
+3. LỆNH XCRUN STAPLER STAPLE TRÊN FILE KÝ TỰ TẠO (CHƯA QUA NOTARY SERVICE):
+$ xcrun stapler staple /tmp/test-apps/case6-runtime-full-selfsigned/Electron.app
+Output:
+Processing: /tmp/test-apps/case6-runtime-full-selfsigned/Electron.app
+CloudKit query for Electron.app (2/259c7f5a36b0e099340df369475facb247de264c) failed due to "Record not found".
+Could not find base64 encoded ticket in response for 2/259c7f5a36b0e099340df369475facb247de264c
+The staple and validate action failed! Error 65.
+
+Exit code: 65
+
+4. DANH SÁCH CHÍNH XÁC CÁC ĐIỀU KIỆN ĐỂ NOTARYTOOL VÀ STAPLER HOẠT ĐỘNG:
+- Tài khoản: Apple Developer Program ($99/năm)
+- Chứng chỉ: Developer ID Application (cấp bởi Apple Worldwide Developer Relations Certification Authority)
+- Thông tin định danh xác thực Notary Service:
+  + Lựa chọn 1 (API Key): File khóa riêng tư .p8, Key ID (10 ký tự), Issuer ID (UUID)
+  + Lựa chọn 2 (App-Specific Password): Apple ID, Mật khẩu ứng dụng (App-Specific Password), Team ID (10 ký tự)
+- Định dạng nộp: .zip, .dmg, hoặc .pkg (không nộp thư mục .app thô)
+- Yêu cầu mã nguồn: Phải bật Hardened Runtime (--options runtime), có Timestamp (--timestamp), và ký đầy đủ tất cả Mach-O/dylib/framework lồng nhau.

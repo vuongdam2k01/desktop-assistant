@@ -1,0 +1,23 @@
+{
+  "name": "sp-4-agent-loop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "run:s": "tsx src/runner.ts",
+    "run:all": "tsx src/runner.ts --all",
+    "generate:images": "python3 src/fixtures/generate_images.py",
+    "test:reset": "tsx src/test-seed-reset.ts"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "dotenv": "^17.4.2",
+    "typebox": "^1.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
+  }
+}

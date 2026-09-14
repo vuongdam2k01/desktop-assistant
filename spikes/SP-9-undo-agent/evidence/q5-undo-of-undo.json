@@ -1,0 +1,24 @@
+{
+  "originalJob": {
+    "id": "job-10-undo-of-undo",
+    "undo_of": null,
+    "recordsCount": 2
+  },
+  "undoJob1": {
+    "id": "undo-job-10-undo-of-undo-6466",
+    "undo_of": "job-10-undo-of-undo",
+    "recordsCount": 2
+  },
+  "undoJob2": {
+    "id": "undo-undo-job-10-undo-of-undo-6466-6850",
+    "undo_of": "undo-job-10-undo-of-undo-6466",
+    "recordsCount": 2
+  },
+  "stateTransitions": {
+    "initial": "Not started",
+    "afterOriginalJob": "Done",
+    "afterUndo1": "Not started",
+    "afterUndo2": "Done"
+  },
+  "undoOfUndoSuccess": true
+}

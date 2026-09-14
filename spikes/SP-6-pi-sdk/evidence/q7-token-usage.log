@@ -1,0 +1,37 @@
+================================================================================
+SPIKE SP-6 / Q7: Truy xuất Token Usage từ Session (R-6, R-11)
+Mục tiêu: Đảm bảo Desktop Assistant trích xuất được chi phí LLM / job để hiển thị
+cho người dùng (BYO-provider cost tracking).
+================================================================================
+
+[1] Lượt 1: Gửi lệnh kích hoạt tool call 'Kiểm tra danh sách task'...
+  [Event: turn_end #1] input=324, output=47, reasoning=20, total=371
+  [Event: turn_end #2] input=418, output=59, reasoning=28, total=477
+
+[2] Lượt 2: Gửi câu hỏi tiếp theo trong cùng session...
+  [Event: turn_end #3] input=507, output=56, reasoning=34, total=563
+
+--- Tổng Hợp Token Usage Sau 2 Lượt Hội Thoại ---
+Tổng số turn ghi nhận từ event: 3
+  - Turn #1: In=324 | Out=47 | Reasoning=20 | Total=371
+  - Turn #2: In=418 | Out=59 | Reasoning=28 | Total=477
+  - Turn #3: In=507 | Out=56 | Reasoning=34 | Total=563
+
+[3] Trích xuất trực tiếp từ transcript (agent.state.messages):
+  Assistant Msg #1: input=324, output=47, total=371
+  Assistant Msg #2: input=418, output=59, total=477
+  Assistant Msg #3: input=507, output=56, total=563
+
+Tổng chi phí toàn session (Session Aggregate):
+  - Tổng Input Tokens:     1249
+  - Tổng Output Tokens:    162
+  - Tổng Reasoning Tokens: 82
+  - Tổng Tokens:           1411
+
+================================================================================
+KẾT LUẬN Q7: ĐẠT 100%
+1. Token usage được phơi bày đầy đủ ở cả 2 cơ chế:
+   - Cơ chế Streaming/Event: Sự kiện 'turn_end' mang theo message.usage chính xác từng lượt.
+   - Cơ chế Transcript: Mọi AssistantMessage trong agent.state.messages đều chứa đối tượng usage.
+2. Đáp ứng hoàn hảo R-6 và R-11 cho việc hiển thị chi phí LLM trong chi tiết job của Desktop Assistant.
+================================================================================

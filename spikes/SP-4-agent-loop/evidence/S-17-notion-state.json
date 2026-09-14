@@ -1,0 +1,91 @@
+{
+  "workspace": "C",
+  "timestamp": "2026-09-11T15:39:53.479Z",
+  "tasks": [
+    {
+      "id": "3d8329bf-3814-8142-95fd-ebed7b2b0a91",
+      "title": "Chuẩn bị demo khách Vinmart (10h Thứ 4)",
+      "status": "Not started",
+      "due_date": "2026-09-16",
+      "priority": "High",
+      "order": null,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8329bf-3814-816f-9bf9-f3a5fc2d9d84",
+      "title": "Update thư viện lên RN 0.80",
+      "status": "Not started",
+      "due_date": "2026-10-02",
+      "priority": "Low",
+      "order": 6,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8329bf-3814-8188-8dde-c31bdc305706",
+      "title": "Trả lời feedback QA round 2",
+      "status": "Not started",
+      "due_date": "2026-09-15",
+      "priority": "High",
+      "order": 5,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8329bf-3814-8174-bb92-d79869017022",
+      "title": "Refactor module auth",
+      "status": "Not started",
+      "due_date": "2026-09-25",
+      "priority": "Low",
+      "order": 4,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8329bf-3814-8106-97df-d8b27f85cdea",
+      "title": "Review PR #212 của Hùng",
+      "status": "Not started",
+      "due_date": "2026-09-11",
+      "priority": "Medium",
+      "order": 3,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8329bf-3814-8121-b99f-e2e237ba084a",
+      "title": "Viết docs onboarding",
+      "status": "Not started",
+      "due_date": "2026-09-18",
+      "priority": "Medium",
+      "order": 2,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    },
+    {
+      "id": "3d8329bf-3814-8111-9bf6-c04e21129b93",
+      "title": "Fix crash màn thanh toán",
+      "status": "In progress",
+      "due_date": "2026-09-12",
+      "priority": "High",
+      "order": 1,
+      "assignee": "",
+      "tags": [],
+      "project_relation": [],
+      "archived": false
+    }
+  ],
+  "projects": []
+}

@@ -1,0 +1,46 @@
+================================================================================
+SPIKE SP-21 / Q2: 🔴 KIỂM CHỨNG RÀNG BUỘC TỐI ĐA 1 ASK MỞ / JOB (Phụ lục A.5 mục 2)
+Yêu cầu: Harness TỪ CHỐI call ASK thứ hai khi call thứ nhất chưa được trả lời.
+Đây là hành vi harness, không phải UI. Agent nhận tín hiệu để gộp câu hỏi (FR-AG-05).
+================================================================================
+
+1. KIỂM THỬ TRỰC TIẾP TẦNG HARNESS EXECUTION:
+  Bước 1: Gọi ask_user lần 1 (Question: 'Chọn độ ưu tiên:')
+  - Trạng thái hasActiveAsk(jobId): true (Kỳ vọng: true)
+  - Active ask ID hiện tại: call-ask-001
+  - Trạng thái job trong ledger: waiting_input (Kỳ vọng: waiting_input)
+
+  Bước 2: Cố tình gọi ask_user lần 2 trong khi lần 1 chưa được trả lời (Question: 'Chọn database:')
+  - Kết quả trả về của call 2:
+    isError: true
+    content: [{"type":"text","text":"ERROR [HARNESS_A5_VIOLATION]: Job 'job-q2-concurrency-ask' đã có 1 ask_user đang mở (Call ID: call-ask-001) chưa được trả lời. Harness TỪ CHỐI call ASK thứ hai theo Phụ lục A.5 mục 2. Agent phải gộp mọi câu hỏi còn thiếu thành 1 câu duy nhất theo FR-AG-05."}]
+    details: {"error":"ERROR [HARNESS_A5_VIOLATION]: Job 'job-q2-concurrency-ask' đã có 1 ask_user đang mở (Call ID: call-ask-001) chưa được trả lời. Harness TỪ CHỐI call ASK thứ hai theo Phụ lục A.5 mục 2. Agent phải gộp mọi câu hỏi còn thiếu thành 1 câu duy nhất theo FR-AG-05."}
+  -> ✅ HARNESS ĐÃ TỪ CHỐI DỨT KHOÁT CALL THỨ HAI với lỗi vi phạm A.5 mục 2.
+
+  Bước 3: Người dùng trả lời cho call 1:
+  - Call 1 hoàn thành sau khi trả lời: {"content":[{"type":"text","text":"{\"answer\":{\"option_id\":\"high\"}}"}],"details":{"answer":{"option_id":"high"},"source":"bubble"}}
+  - Trạng thái hasActiveAsk sau khi trả lời: false (Kỳ vọng: false)
+
+--------------------------------------------------------------------------------
+2. KIỂM THỬ AGENT NHẬN TÍN HIỆU LỖI VÀ GỘP CÂU HỎI THEO FR-AG-05:
+--------------------------------------------------------------------------------
+  Kịch bản: Người dùng gửi yêu cầu thiếu 2 thông tin: 'Tạo task mới nhưng tôi chưa quyết định tên task và độ ưu tiên'
+  Agent sẽ xử lý thế nào?
+
+  [BẰNG CHỨNG AGENT GỌI ask_user]:
+  - ToolCallId: call_ytgn7qxzjkjscgc1u2probne
+  - Câu hỏi của Agent: "Bạn muốn tạo task gì cho tuần tới? Vui lòng cho tôi biết tên task và mức độ ưu tiên của nó."
+  - Options: [{"id":"pri_high","label":"Ưu tiên cao","description":"Task quan trọng, cần hoàn thành sớm"},{"id":"pri_medium","label":"Ưu tiên trung bình","description":"Task bình thường, không quá gấp"},{"id":"pri_low","label":"Ưu tiên thấp","description":"Task có thể linh hoạt thời gian"}]
+  -> Agent chỉ phát đúng 1 cuộc gọi ask_user duy nhất.
+  -> Số lượng ask_user đang mở: 1
+
+  Thử nghiệm inject call thứ hai vào phiên agent đang waiting_input:
+  - isError: true
+  - Content: ERROR [HARNESS_A5_VIOLATION]: Job 'job-q2-agent-consolidation' đã có 1 ask_user đang mở (Call ID: call_ytgn7qxzjkjscgc1u2probne) chưa được trả lời. Harness TỪ CHỐI call ASK thứ hai theo Phụ lục A.5 mục 2. Agent phải gộp mọi câu hỏi còn thiếu thành 1 câu duy nhất theo FR-AG-05.
+  -> ✅ Harness kiên quyết chặn đứng, không cho phép 2 ask mở đồng thời.
+
+3. KẾT LUẬN Q2:
+  - Ràng buộc Phụ lục A.5 mục 2: mỗi job TỐI ĐA MỘT ASK mở tại một thời điểm được kiểm chứng 100%.
+  - Harness TỪ CHỐI tuyệt đối call ASK thứ hai khi call thứ nhất chưa được trả lời (isError: true).
+  - Lớp chặn nằm ở HARNESS RUNTIME, hoàn toàn độc lập với UI, bảo đảm an toàn ở tầng sâu nhất.
+  - Agent nhận phản hồi vi phạm và tuân thủ nguyên tắc gộp câu hỏi theo FR-AG-05.

@@ -1,0 +1,10 @@
+{
+  "name": "sp18-pet-liveness-macos",
+  "version": "1.0.0",
+  "description": "SP-18 Pet Liveness on macOS",
+  "main": "src/electron-liveness/main.js",
+  "scripts": {
+    "start": "electron src/electron-liveness/main.js"
+  },
+  "dependencies": {}
+}

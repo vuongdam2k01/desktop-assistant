@@ -1,0 +1,78 @@
+{
+  "schema_version": "v0",
+  "id": "gmail",
+  "name": "Gmail",
+  "version": "1.0.0",
+  "icon": "assets/gmail.svg",
+  "description": "Gmail read-only connector for reading emails and searching messages (FR-GM-01).",
+  "auth": {
+    "type": "oauth2",
+    "endpoints": {
+      "authorize_url": "https://accounts.google.com/o/oauth2/v2/auth",
+      "token_url": "https://oauth2.googleapis.com/token",
+      "revoke_url": "https://oauth2.googleapis.com/revoke",
+      "api_base_url": "https://gmail.googleapis.com/gmail/v1"
+    },
+    "pkce": true,
+    "capabilities": {
+      "email_read": {
+        "name": "Read Email Messages",
+        "description": "List, search, and view email messages and metadata in Gmail."
+      }
+    },
+    "scope_profiles": {
+      "byo": {
+        "email_read": [
+          "https://www.googleapis.com/auth/gmail.readonly"
+        ]
+      },
+      "central_mass_distribution": {
+        "email_read": [
+          "https://www.googleapis.com/auth/gmail.metadata"
+        ]
+      }
+    }
+  },
+  "tools": [
+    {
+      "id": "search_emails",
+      "name": "gmail_search_emails",
+      "label": "Search Gmail Messages",
+      "description": "Search for emails in Gmail using a query string (subject, sender, keywords). Returns matching message summaries.",
+      "category": "read",
+      "required_capability": "email_read",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Gmail search query, e.g. 'contract', 'from:tuan.pham', 'urgent'."
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum number of messages to return (default: 5)."
+          }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "id": "get_email_details",
+      "name": "gmail_get_email_details",
+      "label": "Get Email Details",
+      "description": "Fetch headers, subject, sender, date, and body snippet of a specific Gmail message by message_id.",
+      "category": "read",
+      "required_capability": "email_read",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "description": "Hexadecimal ID of the message to retrieve."
+          }
+        },
+        "required": ["message_id"]
+      }
+    }
+  ]
+}

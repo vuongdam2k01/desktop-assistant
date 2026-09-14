@@ -1,0 +1,20 @@
+Q10 ACCOUNT DELETION VERIFICATION DUMP — 2026-09-12T05:10:34.123Z
+
+=== BEFORE DELETION ===
+Accounts (1): [{"id":"2ab667f5-ca18-417e-878e-f87301faab29","email":"beta.tester@example.com","status":"active"}]
+Devices (1): [{"id":"458a2f28-ca4a-4e88-a713-3f588dd29525","account_id":"2ab667f5-ca18-417e-878e-f87301faab29","device_id":"dev_win_001"}]
+Sessions (1): [{"id":"6c338b38-9d80-4de4-a020-c673666824b1","account_id":"2ab667f5-ca18-417e-878e-f87301faab29","device_id":"dev_win_001"}]
+Allowlist: [{"email":"owner@example.com","status":"active","activated_account_id":null},{"email":"beta.tester@example.com","status":"redeemed","activated_account_id":"2ab667f5-ca18-417e-878e-f87301faab29"}]
+
+DELETE /v1/account Response: HTTP 200
+{
+  "success": true,
+  "message": "Account, devices, sessions, and allowlist entries completely deleted from backend",
+  "deleted": true
+}
+
+=== AFTER DELETION ===
+Accounts (0): []
+Devices (0): []
+Sessions (0): []
+Allowlist: [{"email":"owner@example.com","status":"active","activated_account_id":null}]

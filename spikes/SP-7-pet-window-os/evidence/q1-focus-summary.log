@@ -1,0 +1,10 @@
+﻿SP-7 Q1 Focus Test Summary - 2026-09-12 11:44:34
+Expected character count: 200
+----------------------------------------------------------
+Run 1: Expected=200, Actual=0, Match=False, CardVisible=True, CardFocused=False, Duration=6687ms => FAIL
+Run 2: Expected=200, Actual=200, Match=True, CardVisible=True, CardFocused=False, Duration=6311ms => PASS
+Run 3: Expected=200, Actual=200, Match=True, CardVisible=True, CardFocused=False, Duration=6310ms => PASS
+Run 4: Expected=200, Actual=200, Match=True, CardVisible=True, CardFocused=False, Duration=6310ms => PASS
+Run 5: Expected=200, Actual=200, Match=True, CardVisible=True, CardFocused=False, Duration=6289ms => PASS
+----------------------------------------------------------
+FINAL RESULT Q1: 4/5 PASS (80%), 1 FAIL

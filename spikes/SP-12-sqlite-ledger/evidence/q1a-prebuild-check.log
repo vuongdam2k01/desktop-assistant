@@ -1,0 +1,20 @@
+﻿=== Q1a: PREBUILD AVAILABILITY VERIFICATION LOG ===
+Target: better-sqlite3 v11.10.0
+Runtime: electron v44.3.0 (ABI 149)
+OS: win32 x64
+
+--- Command 1: Check Node.js prebuild ---
+> npx prebuild-install --verbose
+prebuild-install http request GET https://github.com/WiseLibs/better-sqlite3/releases/download/v11.10.0/better-sqlite3-v11.10.0-node-v137-win32-x64.tar.gz
+prebuild-install http 404 https://github.com/WiseLibs/better-sqlite3/releases/download/v11.10.0/better-sqlite3-v11.10.0-node-v137-win32-x64.tar.gz
+prebuild-install warn install No prebuilt binaries found (target=24.21.0 runtime=node arch=x64 libc= platform=win32)
+
+--- Command 2: Check Electron prebuild ---
+> npx prebuild-install --verbose --runtime=electron --target=44.3.0
+prebuild-install http request GET https://github.com/WiseLibs/better-sqlite3/releases/download/v11.10.0/better-sqlite3-v11.10.0-electron-v149-win32-x64.tar.gz
+prebuild-install http 404 https://github.com/WiseLibs/better-sqlite3/releases/download/v11.10.0/better-sqlite3-v11.10.0-electron-v149-win32-x64.tar.gz
+prebuild-install warn install No prebuilt binaries found (target=44.3.0 runtime=electron arch=x64 libc= platform=win32)
+
+CONCLUSION:
+WiseLibs/better-sqlite3 KHONG cung cap bat ky prebuilt binaries nao cho ABI Electron tren Windows (HTTP 404).
+Tat ca moi truong bat buoc phai bien dich tai cho (compile-from-source via node-gyp / electron-rebuild).

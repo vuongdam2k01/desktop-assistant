@@ -1,0 +1,11 @@
+=== Testing Raw macOS Keychain Size Limits ===
+Testing 50 B (Notion Token) (50 bytes)... SUCCESS (read 51 bytes)
+Testing 400 B (BYO JSON) (400 bytes)... SUCCESS (read 401 bytes)
+Testing 2560 B (Windows CredMgr limit) (2560 bytes)... SUCCESS (read 2561 bytes)
+Testing 4 KB (4096 bytes)... SUCCESS (read 4097 bytes)
+Testing 16 KB (16384 bytes)... SUCCESS (read 16385 bytes)
+Testing 64 KB (65536 bytes)... SUCCESS (read 65537 bytes)
+Testing 128 KB (131072 bytes)... SUCCESS (read 131073 bytes)
+Testing 512 KB (524288 bytes)... SUCCESS (read 524289 bytes)
+Testing 1 MB (1048576 bytes)... FAILED: ./spikes/SP-11-secure-storage/macos/src/test-keychain-raw-limit.sh: line 29: /usr/bin/security: Argument list too long
+=== Done ===

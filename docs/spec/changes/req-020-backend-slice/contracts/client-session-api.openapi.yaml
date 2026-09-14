@@ -1,0 +1,340 @@
+openapi: 3.1.0
+info:
+  title: Client Session API
+  version: 0.1.0
+  summary: How a device becomes a device of an account and stays one.
+  description: >-
+    Normative wire surface for backend/contracts/client-session-api@0.1.0. Sign-in, renewal, sign-out and
+    account deletion. Every other authenticated surface the backend offers depends on a session issued here.
+    The path layer is the one exercised in spikes/SP-20-backend-slice; field names are this contract's payload
+    types, which the harness rendered in snake_case on the same endpoints. The transport class carries the
+    class of a failure and the error code carries which failure it is - a caller that does not recognise a code
+    treats it as a non-retryable failure of the class the status indicates, never as success.
+servers:
+  - url: https://api.example.invalid/v1
+    description: Placeholder. The deployed origin is service configuration, not part of this contract.
+tags:
+  - name: session
+    description: Rate-limit class "authentication" for sign-in and renewal; see public-service-endpoints.
+paths:
+  /auth/google:
+    post:
+      tags:
+        - session
+      operationId: signIn
+      summary: Verify an identity token, admit it against the invitation allowlist, enrol the device.
+      description: >-
+        Verification then admission, in that order and never merged. Signing in twice from one device produces
+        one enrolment and a fresh session. Unauthenticated by necessity, and rate-limited at the edge before
+        verification.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInRequest'
+      responses:
+        '200':
+          description: A session for this account and device.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionTokens'
+        '401':
+          $ref: '#/components/responses/IdentityInvalid'
+        '403':
+          $ref: '#/components/responses/NotInAllowlist'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /auth/refresh:
+    post:
+      tags:
+        - session
+      operationId: refreshSession
+      summary: Exchange a refresh token for a fresh session.
+      description: >-
+        A refresh token that fails for any reason other than expiry yields one indistinguishable response,
+        because the difference is useful only to someone probing for a valid one.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+      responses:
+        '200':
+          description: A fresh session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionTokens'
+        '401':
+          $ref: '#/components/responses/SessionRefused'
+        '410':
+          $ref: '#/components/responses/AccountDeleted'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /auth/logout:
+    post:
+      tags:
+        - session
+      operationId: signOut
+      summary: Revoke exactly one session, this device's.
+      description: >-
+        Requires a valid access token as well as the refresh token being revoked. Other devices are untouched,
+        and the count of them is returned so the product can say so plainly rather than infer it.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignOutRequest'
+      responses:
+        '200':
+          description: This session is revoked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignOutResult'
+        '401':
+          $ref: '#/components/responses/SessionRefused'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /account:
+    delete:
+      tags:
+        - session
+      operationId: deleteAccount
+      summary: Withdraw the account's authorisations at the providers, then destroy the account.
+      description: >-
+        Withdrawal is attempted first and reported per provider; destruction proceeds regardless, because a
+        provider that refuses or offers no endpoint must not leave an account undeletable. Deletion is not
+        reversible and is not a status.
+      responses:
+        '200':
+          description: The account and everything reachable from it are destroyed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAccountResult'
+        '401':
+          $ref: '#/components/responses/SessionRefused'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+components:
+  securitySchemes:
+    accessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: The short-lived access token issued by sign-in or renewal.
+  schemas:
+    SignInRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - idToken
+        - deviceId
+      properties:
+        idToken:
+          type: string
+          minLength: 1
+          description: Identity token from the identity provider, verified server-side.
+        deviceId:
+          type: string
+          minLength: 1
+          description: Supplied by the device. Scopes an enrolment within one account.
+        deviceName:
+          type: string
+          description: Display text only. A label is never unique and never authenticates anything.
+    SessionTokens:
+      type: object
+      additionalProperties: false
+      required:
+        - accessToken
+        - refreshToken
+        - tokenType
+        - expiresInSeconds
+        - account
+      properties:
+        accessToken:
+          type: string
+          description: Short-lived. Presented on every authenticated call.
+        refreshToken:
+          type: string
+          description: >-
+            Long-lived, presented only to renew. Held by the backend as an irreversible hash, so a presented
+            token can be verified and no token can be produced from the store.
+        tokenType:
+          const: Bearer
+        expiresInSeconds:
+          type: integer
+          minimum: 1
+          description: Lifetime of accessToken.
+        account:
+          type: object
+          additionalProperties: false
+          required:
+            - id
+            - email
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+    RefreshRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          minLength: 1
+    SignOutRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          minLength: 1
+    SignOutResult:
+      type: object
+      additionalProperties: false
+      required:
+        - sessionRevoked
+        - otherSessionsRetained
+      properties:
+        sessionRevoked:
+          const: true
+        otherSessionsRetained:
+          type: integer
+          minimum: 0
+          description: This account's sessions on other devices, untouched.
+    DeleteAccountResult:
+      type: object
+      additionalProperties: false
+      required:
+        - accountDeleted
+        - devicesRemoved
+        - sessionsRevoked
+        - providerWithdrawals
+      properties:
+        accountDeleted:
+          const: true
+        devicesRemoved:
+          type: integer
+          minimum: 0
+        sessionsRevoked:
+          type: integer
+          minimum: 0
+        providerWithdrawals:
+          type: array
+          description: What the product reads to tell the user, by name, which platforms they must withdraw themselves.
+          items:
+            $ref: '#/components/schemas/ProviderWithdrawal'
+    ProviderWithdrawal:
+      type: object
+      additionalProperties: false
+      required:
+        - providerId
+        - outcome
+      properties:
+        providerId:
+          type: string
+        outcome:
+          type: string
+          enum:
+            - withdrawn
+            - failed
+            - no-revocation-endpoint
+    SessionError:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          enum:
+            - IDENTITY_INVALID
+            - EMAIL_NOT_IN_ALLOWLIST
+            - TOKEN_MISSING
+            - TOKEN_EXPIRED
+            - TOKEN_INVALID
+            - SESSION_REVOKED
+            - DEVICE_REVOKED
+            - ACCOUNT_DELETED
+            - RATE_LIMITED
+            - SERVICE_UNAVAILABLE
+        message:
+          type: string
+          description: Human-readable. Never states which part of a token was wrong.
+        retryAfterSeconds:
+          type: integer
+          minimum: 0
+          description: Present on RATE_LIMITED only.
+  responses:
+    IdentityInvalid:
+      description: >-
+        The identity token failed verification or has expired. Nothing is said about whether an account exists
+        for that address.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SessionError'
+    NotInAllowlist:
+      description: >-
+        A verified identity that no invitation admits. Distinct from IDENTITY_INVALID because the user's next
+        action is different, and no account, enrolment or session is created.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SessionError'
+    SessionRefused:
+      description: >-
+        TOKEN_MISSING, TOKEN_EXPIRED, TOKEN_INVALID, SESSION_REVOKED or DEVICE_REVOKED. A revoked session means
+        sign in again on this device; a revoked device means this device is no longer part of the account and
+        erases its copy.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SessionError'
+    AccountDeleted:
+      description: >-
+        The account was deleted, possibly while this device was offline. The device erases the account's data
+        from itself.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SessionError'
+    RateLimited:
+      description: >-
+        Calls from this source exceeded the configured rate. Never presented to the user as a sign-in failure.
+      headers:
+        Retry-After:
+          description: Seconds the caller waits before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SessionError'
+    ServiceUnavailable:
+      description: >-
+        The backend or its store is unreachable. An expected outcome rather than an exception: running jobs,
+        model calls and ledger writes continue on the device.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SessionError'
+security:
+  - accessToken: []

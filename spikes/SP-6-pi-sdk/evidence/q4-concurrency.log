@@ -1,0 +1,35 @@
+================================================================================
+SPIKE SP-6 / Q4: Chạy nhiều instance agent song song trong một process Node
+Yêu cầu FR-AG-04: Nhiều job chạy song song được, mỗi job cô lập context tuyệt đối.
+================================================================================
+
+[1] Khởi tạo 3 agent instances đồng thời trong cùng 1 process Node.js (PID: 118317)...
+[2] Kích hoạt Promise.all chạy đồng thời 3 worker agents...
+
+[3] Toàn bộ 3 agents đã hoàn thành trong 4106ms wall-clock time.
+
+--- Kết quả từng instance ---
+
+[Worker-Alpha] (Thời gian: 3977ms):
+Phản hồi: Tôi là **Worker-Alpha**, mã private code: **ALPHA-KEY-991**, thành phố: **Paris**.
+
+[Worker-Beta] (Thời gian: 4104ms):
+Phản hồi: Tôi là **Worker-Beta**, mã private code: **BETA-KEY-442**, ở thành phố **Tokyo**.
+
+[Worker-Gamma] (Thời gian: 3946ms):
+Phản hồi: - **Worker:** Worker-Gamma  
+- **Private Code:** GAMMA-KEY-773  
+- **Thành phố:** London
+
+[4] Kiểm tra cô lập dữ liệu (Cross-talk / Data Leak Check):
+- Worker-Alpha chứa đúng private code của mình (ALPHA-KEY-991): ✅ ĐÚNG
+- Worker-Beta chứa đúng private code của mình (BETA-KEY-442): ✅ ĐÚNG
+- Worker-Gamma chứa đúng private code của mình (GAMMA-KEY-773): ✅ ĐÚNG
+✅ KHÔNG HỀ CÓ HIỆN TƯỢNG CROSS-TALK HOẶC RÒ RỈ DỮ LIỆU GIỮA CÁC INSTANCE!
+
+================================================================================
+KẾT LUẬN Q4: ĐẠT 100%
+1. Pi Agent class thiết kế dạng instance riêng biệt hoàn toàn (độc lập _state, messages, queues).
+2. Không dùng global mutable state hay process-wide singleton (khác với @oh-my-pi's agentPauseGate).
+3. Nhiều job chạy song song trong cùng 1 process Node.js đạt chuẩn FR-AG-04.
+================================================================================

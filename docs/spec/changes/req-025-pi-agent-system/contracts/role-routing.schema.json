@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://desktop-assistant.local/schemas/agent/role-routing/1.0.0.json",
+  "title": "RoutingTable",
+  "description": "Normative shape of the routing table for agent/contracts/role-routing@1.0.0 - one table per account, created when the first profile is saved, edited only through settings, and validated against this file before it is saved. Revised from 0.1.0: the six closed role names become routing TIERS named by entries in agent/contracts/role-registry@1.0.0, so the map is keyed by tier name rather than by a fixed six-member record. Two properties the closed record used to guarantee structurally are kept: the six built-in tiers are still required to be present, because the six built-in role entries cannot be removed and a tier that is absent is how one quietly acquires an implicit default (INV-AG-24); and the table still admits no member beyond the two it declares, because a table-wide fallback profile is the substitution rule arriving by the back door, which INV-AG-23 forbids. What this file cannot know is which further tiers the account's registry names - that reconciliation is stated in the contract document and reports an absent tier as unassigned, never as a default. The split the defaults propose is the measured one - VERIFIED (spikes/SP-17-provider-matrix/REPORT.md#1-tra-loi-tung-cau-hoi Q1, Q3, Q6).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tableVersion", "assignments"],
+  "properties": {
+    "tableVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "The version of the role-routing contract this table was written against. The table replicates between devices on different builds: a newer build reads an older table unchanged, and an older build meeting a newer version refuses the whole table (TABLE_VERSION_AHEAD), because reading around an unrecognised member here would mean running a tier on a model the user assigned to something else."
+    },
+    "assignments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pet-text", "pet-image", "worker", "rule-elicitation", "undo", "risk-judge"],
+      "description": "One assignment per routing tier, keyed by tier name. The six built-in tiers are required because the six built-in role entries that name them cannot be removed; any further key is a tier contributed by an account-authored or pack-contributed role entry. An unassigned tier is represented by the explicit unassigned state and never by the key being absent - absence is reported against the registry, never resolved to a default.",
+      "propertyNames": {
+        "$ref": "#/$defs/TierName"
+      },
+      "properties": {
+        "pet-text": { "$ref": "#/$defs/Assignment" },
+        "pet-image": { "$ref": "#/$defs/Assignment" },
+        "worker": { "$ref": "#/$defs/Assignment" },
+        "rule-elicitation": { "$ref": "#/$defs/Assignment" },
+        "undo": { "$ref": "#/$defs/Assignment" },
+        "risk-judge": { "$ref": "#/$defs/Assignment" }
+      },
+      "patternProperties": {
+        "^[a-z][a-z0-9-]{1,62}$": { "$ref": "#/$defs/Assignment" }
+      }
+    }
+  },
+  "$defs": {
+    "TierName": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{1,62}$",
+      "description": "The name of a routing tier: the slot a model is assigned to. Open where the 0.1.0 role union was closed, but not free-form - a tier name is lower-case kebab-case so that the name a role entry writes and the key this table holds cannot differ by case or spacing. A key matching this pattern that no registry entry names is reported as TIER_UNKNOWN and is never resolved."
+    },
+    "Assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "description": "What a tier points at, or the explicit statement that it points at nothing. An assignment carries no capability list of its own: what a model offers belongs to agent/contracts/provider-profile@0.1.0 and what a tier requires belongs to the role entries naming it in agent/contracts/role-registry@1.0.0. A second copy here would be the one that goes stale when the user edits the profile - stale in the direction that sends an image to a model that can no longer read one.",
+      "properties": {
+        "state": { "enum": ["assigned", "unassigned"] },
+        "profileId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,62}$" },
+        "model": { "type": "string", "minLength": 1 },
+        "setAt": { "type": "string", "minLength": 1 },
+        "acknowledgedUnmeasured": {
+          "type": "boolean",
+          "description": "True when the user confirmed an assignment the product holds no measurement for. The product does not enforce a judgement it has no way to make; it states what was measured and records that the user decided anyway."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "state": { "const": "assigned" } }, "required": ["state"] },
+          "then": { "required": ["profileId", "model", "setAt"] }
+        },
+        {
+          "if": { "properties": { "state": { "const": "unassigned" } }, "required": ["state"] },
+          "then": { "not": { "required": ["profileId"] } }
+        }
+      ]
+    }
+  }
+}
