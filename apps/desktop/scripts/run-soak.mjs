@@ -8,6 +8,7 @@ import {
   resolveWindowByUrlMarker,
   PET_RENDERER_URL_MARKER,
 } from '../tests/helpers/window-locator.mjs';
+import { selectSoakMemory } from './soak-metrics.mjs';
 
 function parseDurationMinutes() {
   const arg = process.argv.find(a => a.startsWith('--duration='));
@@ -102,15 +103,23 @@ async function main() {
       if (now - lastSampleTime >= sampleIntervalMs || samples.length === 0) {
         lastSampleTime = now;
 
-        const mainMetrics = await electronApp.evaluate(({ app }) => {
-          const metrics = app.getAppMetrics();
-          const mainProcess = metrics.find(m => m.type === 'Browser');
-          const rendererProcess = metrics.find(m => m.type === 'Tab');
+        const { metrics, petProcessId } = await electronApp.evaluate(({ app, BrowserWindow }) => {
+          const petWin = BrowserWindow.getAllWindows().find(w =>
+            w.webContents.getURL().includes('renderer-pet')
+          );
+          if (!petWin) {
+            throw new Error('Pet window not found; there is no renderer to measure.');
+          }
           return {
-            mainRss: mainProcess?.memory.workingSetSize ?? 0,
-            rendererRss: rendererProcess?.memory.workingSetSize ?? 0,
+            petProcessId: petWin.webContents.getOSProcessId(),
+            metrics: app.getAppMetrics().map(entry => ({
+              pid: entry.pid,
+              type: entry.type,
+              workingSetSize: entry.memory.workingSetSize,
+            })),
           };
         });
+        const mainMetrics = selectSoakMemory(metrics, petProcessId);
 
         const rendererData = await petPage.evaluate(() => {
           const stage = document.getElementById('pet-stage');

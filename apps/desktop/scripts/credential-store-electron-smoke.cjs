@@ -196,4 +196,9 @@ runSmoke().catch(err => {
   } catch {
     // Ignore cleanup error on fatal exit
   }
+  // This check exists to catch secure storage handing back plaintext or failing to detect
+  // tampering. Without an exit the process stays alive, because nothing here opens a window
+  // for the event loop to drain, and the failure reaches continuous integration as a job
+  // timeout rather than as the security result it is.
+  app.exit(1);
 });

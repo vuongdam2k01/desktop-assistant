@@ -2,6 +2,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { selectUnpackedDirectory } from './unpacked-artifact.mjs';
 
 function runStep(name, cmd, args, env = {}) {
   console.log(`[package:unsigned] ${name}...`);
@@ -36,18 +37,21 @@ if (!fs.existsSync(releaseDir)) {
   process.exit(1);
 }
 
-const unpackedCandidates = fs
+const releaseEntries = fs
   .readdirSync(releaseDir, { withFileTypes: true })
-  .filter(d => d.isDirectory() && (d.name.endsWith('-unpacked') || d.name === 'mac' || d.name === 'mac-arm64'))
-  .map(d => path.join(releaseDir, d.name));
+  .filter(d => d.isDirectory())
+  .map(d => d.name);
 
-if (unpackedCandidates.length === 0) {
-  console.error(`[package:unsigned] No unpacked release directory found in ${releaseDir}`);
+let unpackedName;
+try {
+  unpackedName = selectUnpackedDirectory(releaseEntries, process.platform, process.arch);
+} catch (err) {
+  console.error(`[package:unsigned] ${err.message}`);
   process.exit(1);
 }
 
 const repoRoot = path.resolve('../..');
-const unpackedDir = unpackedCandidates[0];
+const unpackedDir = path.join(releaseDir, unpackedName);
 console.log(`[package:unsigned] Found unpacked directory at: ${unpackedDir}`);
 // 4. Artifact-mode packaging check
 runStep('Artifact-mode Packaging Check', 'pnpm', [

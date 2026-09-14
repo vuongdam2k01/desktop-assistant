@@ -145,7 +145,16 @@ jobs:
       - name: Prove absence of C++ compiler toolchain
         run: |
           echo "Verifying no C++ compiler toolchain exists in container..."
-          ! which c++ && ! which g++ && ! which clang++ && echo "PROVED: No C++ compiler toolchain found."
+          # `command -v` is a shell builtin and cannot be missing. `which` is a package
+          # Debian no longer installs by default, and a missing `which` is indistinguishable
+          # from a missing compiler, so the proof would pass on an image that has one.
+          for tool in c++ g++ clang++; do
+            if command -v "$tool" >/dev/null 2>&1; then
+              echo "FAILED: $tool is present at $(command -v "$tool")"
+              exit 1
+            fi
+          done
+          echo "PROVED: No C++ compiler toolchain found."
 
       - name: Enable Corepack and pnpm
         run: |
