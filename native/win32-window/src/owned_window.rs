@@ -1,7 +1,7 @@
 #[cfg(windows)]
 use windows_sys::Win32::Foundation::{GetLastError, SetLastError, HWND};
 #[cfg(windows)]
-use windows_sys::Win32::System::Threading::GetCurrentProcessId;
+use windows_sys::Win32::System::Threading::{GetCurrentProcessId, GetCurrentThreadId};
 #[cfg(windows)]
 use windows_sys::Win32::UI::WindowsAndMessaging::{
     GetWindowLongPtrW, GetWindowThreadProcessId, IsWindow, SetWindowLongPtrW, SetWindowPos,
@@ -87,6 +87,30 @@ pub fn validate_hwnd_ownership(hwnd_val: isize) -> Result<(), napi::Error> {
         unsafe { GetWindowThreadProcessId(hwnd, &mut process_id) };
         if process_id != unsafe { GetCurrentProcessId() } {
             return Err(napi::Error::from_reason("FOREIGN_HWND"));
+        }
+    }
+    #[cfg(not(windows))]
+    {
+        let _ = hwnd_val;
+    }
+    Ok(())
+}
+
+/// Refuses a window that belongs to another thread.
+///
+/// Window subclassing is only safe on the thread that owns the window: the subclass chain
+/// is per-window state that the owning thread's message loop walks, and installing or
+/// removing a link from elsewhere corrupts it rather than failing. The process check above
+/// does not cover this — a worker thread in this very process passes it — so the two checks
+/// are separate, and this one matches the main-thread requirement the macOS module states.
+pub fn validate_hwnd_thread(hwnd_val: isize) -> Result<(), napi::Error> {
+    #[cfg(windows)]
+    {
+        let hwnd = hwnd_val as HWND;
+        let mut process_id: u32 = 0;
+        let owning_thread = unsafe { GetWindowThreadProcessId(hwnd, &mut process_id) };
+        if owning_thread != unsafe { GetCurrentThreadId() } {
+            return Err(napi::Error::from_reason("WRONG_THREAD"));
         }
     }
     #[cfg(not(windows))]

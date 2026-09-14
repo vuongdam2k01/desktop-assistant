@@ -12,6 +12,8 @@ const DEGRADED_CAPABILITIES = Object.freeze({
 let binding = null;
 let loadAttempted = false;
 
+let lastLoadFailure;
+
 function loadBinding() {
   if (loadAttempted) return binding;
   loadAttempted = true;
@@ -25,23 +27,32 @@ function loadBinding() {
     'macos-window.node',
   ];
 
+  let firstFailure;
   for (const name of candidateNames) {
     const fullPath = path.join(__dirname, 'dist', name);
     try {
       binding = require(fullPath);
       return binding;
-    } catch {
-      // try next candidate
+    } catch (err) {
+      // Keep why the first candidate refused to load. "File not found", "wrong
+      // architecture", "missing runtime" and "registration failed" are four different
+      // problems that otherwise reach the user as one opaque code.
+      firstFailure = firstFailure ?? err;
     }
   }
 
+  lastLoadFailure = firstFailure;
   return null;
 }
 
 function ensureBinding() {
   const b = loadBinding();
   if (!b) {
-    throw new Error('NATIVE_MODULE_UNAVAILABLE');
+    const err = new Error('NATIVE_MODULE_UNAVAILABLE');
+    if (lastLoadFailure) {
+      err.cause = lastLoadFailure;
+    }
+    throw err;
   }
   return b;
 }

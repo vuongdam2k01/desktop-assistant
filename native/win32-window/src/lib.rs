@@ -62,12 +62,21 @@ pub fn enable_pixel_hit_test(
 ) -> napi::Result<()> {
     let hwnd = owned_window::parse_hwnd(handle.as_ref())?;
     owned_window::validate_hwnd_ownership(hwnd)?;
+    owned_window::validate_hwnd_thread(hwnd)?;
     hit_test::enable_hit_test(hwnd, width, height, alpha.to_vec())
 }
 
 #[napi(js_name = "disable_pixel_hit_test")]
 pub fn disable_pixel_hit_test(handle: Buffer) -> napi::Result<()> {
     let hwnd = owned_window::parse_hwnd(handle.as_ref())?;
+
+    // The mask is this process's own memory and is released first, unconditionally. Gating
+    // it on the window still existing means a window destroyed before teardown keeps its
+    // mask for the life of the process, which for a high-resolution pet is hundreds of
+    // kilobytes per window lifecycle.
+    hit_test::disable_hit_test(hwnd)?;
+
     owned_window::validate_hwnd_ownership(hwnd)?;
-    hit_test::disable_hit_test(hwnd)
+    owned_window::validate_hwnd_thread(hwnd)?;
+    hit_test::remove_subclass(hwnd)
 }

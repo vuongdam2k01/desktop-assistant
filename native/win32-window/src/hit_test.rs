@@ -75,8 +75,15 @@ pub enum HitDecision {
     Delegate,
 }
 
+/// The boundary between "the character is drawn here" and "this is padding".
+///
+/// Fully opaque is not the right boundary: a pixel at alpha 5 is one the user cannot see
+/// and would not expect to have hit. The macOS module uses the same value, so the same mask
+/// yields the same clickable silhouette on both platforms.
+pub const POINTER_ALPHA_THRESHOLD: u8 = 10;
+
 pub fn hit_decision(alpha: u8) -> HitDecision {
-    if alpha < 10 {
+    if alpha < POINTER_ALPHA_THRESHOLD {
         HitDecision::PassThrough
     } else {
         HitDecision::Delegate
@@ -172,28 +179,45 @@ pub fn enable_hit_test(
 ) -> Result<(), napi::Error> {
     checked_mask_size(width, height, data.len()).map_err(|e| napi::Error::from_reason(e))?;
 
-    set_mask(hwnd_val, width, height, data);
-
+    // The subclass goes in first. Until it is installed nothing consults the mask, and the
+    // procedure delegates when no mask is present, so the window behaves normally in the
+    // window between the two steps. Storing the mask first would leave it resident for the
+    // life of the process if the installation then failed, while telling the caller that
+    // per-pixel hit testing was live.
     #[cfg(windows)]
     {
         let hwnd = hwnd_val as HWND;
-        unsafe {
-            SetWindowSubclass(hwnd, Some(subclass_proc), SUBCLASS_ID, 0);
+        let installed = unsafe { SetWindowSubclass(hwnd, Some(subclass_proc), SUBCLASS_ID, 0) };
+        if installed == 0 {
+            return Err(napi::Error::from_reason("SUBCLASS_INSTALL_FAILED"));
         }
     }
+
+    set_mask(hwnd_val, width, height, data);
 
     Ok(())
 }
 
+/// Releases the mask this process holds for a window. Takes no view on whether the window
+/// still exists, because the memory is ours either way.
 pub fn disable_hit_test(hwnd_val: isize) -> Result<(), napi::Error> {
     remove_mask(hwnd_val);
+    Ok(())
+}
 
+/// Detaches the window procedure. Unlike the mask, this touches the window itself, so the
+/// caller validates the handle and the thread before reaching here.
+pub fn remove_subclass(hwnd_val: isize) -> Result<(), napi::Error> {
     #[cfg(windows)]
     {
         let hwnd = hwnd_val as HWND;
         unsafe {
             RemoveWindowSubclass(hwnd, Some(subclass_proc), SUBCLASS_ID);
         }
+    }
+    #[cfg(not(windows))]
+    {
+        let _ = hwnd_val;
     }
 
     Ok(())

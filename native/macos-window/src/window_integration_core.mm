@@ -2,6 +2,9 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
+// Shared with the Windows module; see native/win32-window/src/hit_test.rs.
+static const uint8_t DA_POINTER_ALPHA_THRESHOLD = 10;
+
 static const char kOriginalClassKey = 0;
 static const char kMaskDataKey = 0;
 
@@ -56,7 +59,12 @@ static id SubclassHitTest(id self, SEL _cmd, NSPoint point) {
     const uint8_t* bytes = (const uint8_t*)[holder.data bytes];
     uint8_t alpha = bytes[mask_y * holder.width + mask_x];
 
-    if (alpha == 0) {
+    // A pointer falls through wherever the character is not visibly drawn. The boundary is
+    // the same on every platform on purpose: the same mask produced the same silhouette, so
+    // a click near an anti-aliased edge must resolve the same way whichever platform the
+    // user is on. Fully opaque is not the right boundary, because a pixel at alpha 5 is one
+    // the user cannot see and would not expect to have hit.
+    if (alpha < DA_POINTER_ALPHA_THRESHOLD) {
         return nil;
     }
 
@@ -124,24 +132,32 @@ int CoreEnablePixelHitTest(NSView* view, uint32_t width, uint32_t height, const 
 
     Class origClass = (Class)objc_getAssociatedObject(view, &kOriginalClassKey);
     if (!origClass) {
-        origClass = object_getClass(view);
-        objc_setAssociatedObject(view, &kOriginalClassKey, origClass, OBJC_ASSOCIATION_ASSIGN);
+        Class currentClass = object_getClass(view);
 
-        NSString* subclassName = [NSString stringWithFormat:@"DAHitTest_%s_%p", class_getName(origClass), view];
+        NSString* subclassName = [NSString stringWithFormat:@"DAHitTest_%s_%p", class_getName(currentClass), view];
         const char* cSubclassName = [subclassName UTF8String];
         Class subClass = objc_getClass(cSubclassName);
         if (!subClass) {
-            subClass = objc_allocateClassPair(origClass, cSubclassName, 0);
-            if (subClass) {
-                Method origMethod = class_getInstanceMethod(origClass, @selector(hitTest:));
-                const char* types = origMethod ? method_getTypeEncoding(origMethod) : "@@:{CGPoint=dd}";
-                class_addMethod(subClass, @selector(hitTest:), (IMP)SubclassHitTest, types);
-                objc_registerClassPair(subClass);
+            subClass = objc_allocateClassPair(currentClass, cSubclassName, 0);
+            if (!subClass) {
+                return 3; // HIT_TEST_CLASS_UNAVAILABLE
             }
+            Method origMethod = class_getInstanceMethod(currentClass, @selector(hitTest:));
+            const char* types = origMethod ? method_getTypeEncoding(origMethod) : "@@:{CGPoint=dd}";
+            if (!class_addMethod(subClass, @selector(hitTest:), (IMP)SubclassHitTest, types)) {
+                objc_disposeClassPair(subClass);
+                return 3; // HIT_TEST_CLASS_UNAVAILABLE
+            }
+            objc_registerClassPair(subClass);
         }
-        if (subClass) {
-            object_setClass(view, subClass);
-        }
+
+        object_setClass(view, subClass);
+
+        // The association is what tells a later call that this view is already swizzled, and
+        // what a disable call restores the view to. Recording it before the swizzle succeeded
+        // meant a failure both reported success and made every later attempt short-circuit,
+        // leaving the view with its own hitTest: for the life of the process.
+        objc_setAssociatedObject(view, &kOriginalClassKey, currentClass, OBJC_ASSOCIATION_ASSIGN);
     }
 
     DAPixelMaskHolder* holder = [[DAPixelMaskHolder alloc] init];

@@ -111,8 +111,11 @@ static napi_value EnablePixelHitTest(napi_env env, napi_callback_info info) {
 
     uint32_t width = 0;
     uint32_t height = 0;
-    napi_get_value_uint32(env, argv[1], &width);
-    napi_get_value_uint32(env, argv[2], &height);
+    if (napi_get_value_uint32(env, argv[1], &width) != napi_ok ||
+        napi_get_value_uint32(env, argv[2], &height) != napi_ok) {
+        ThrowError(env, "INVALID_ARGUMENT", "width and height must be numbers");
+        return nullptr;
+    }
 
     if (width == 0 || height == 0) {
         ThrowError(env, "INVALID_ALPHA_MASK", "Width and height must be positive integers");
@@ -142,6 +145,13 @@ static napi_value EnablePixelHitTest(napi_env env, napi_callback_info info) {
     }
 
     int res = CoreEnablePixelHitTest(target.view, width, height, (const uint8_t*)alpha_data, alpha_len);
+    if (res == 3) {
+        // The mask was fine; the runtime would not give us a class to route hit testing
+        // through. Reporting this as a bad mask would send the caller looking at its own
+        // pixels for a fault that is not there.
+        ThrowError(env, "HIT_TEST_CLASS_UNAVAILABLE", "Could not install the hit test handler");
+        return nullptr;
+    }
     if (res != 0) {
         ThrowError(env, "INVALID_ALPHA_MASK", "Failed to configure hit test");
         return nullptr;
@@ -257,7 +267,12 @@ static napi_value ExcludeFromCapture(napi_env env, napi_callback_info info) {
     if (!target_ptr) return nullptr;
 
     bool excluded = false;
-    napi_get_value_bool(env, argv[1], &excluded);
+    // Without coercion a non-boolean argument leaves `excluded` false, which would set the
+    // window to shareable and report that the exclusion had been applied.
+    if (napi_get_value_bool(env, argv[1], &excluded) != napi_ok) {
+        ThrowError(env, "INVALID_ARGUMENT", "excludeFromCapture expects a boolean");
+        return nullptr;
+    }
 
     MatchedTarget target = CoreFindOwnedTarget(target_ptr);
     if (!target.window) {
