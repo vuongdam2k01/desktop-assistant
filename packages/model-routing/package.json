@@ -1,0 +1,32 @@
+{
+  "name": "@desktop-assistant/model-routing",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@desktop-assistant/contracts": "workspace:*",
+    "@desktop-assistant/credential-store": "workspace:*",
+    "@earendil-works/pi-ai": "0.85.1",
+    "better-sqlite3": "13.0.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.12",
+    "@types/node": "24.13.4",
+    "typescript": "5.9.3",
+    "vitest": "5.0.0"
+  }
+}

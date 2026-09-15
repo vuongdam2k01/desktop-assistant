@@ -22,6 +22,7 @@
     "@desktop-assistant/job-manager": "workspace:*",
     "@desktop-assistant/ledger-store": "workspace:*",
     "@desktop-assistant/macos-window": "workspace:*",
+    "@desktop-assistant/model-routing": "workspace:*",
     "@desktop-assistant/win32-window": "workspace:*",
     "@earendil-works/pi-agent-core": "0.85.1",
     "@earendil-works/pi-ai": "0.85.1",

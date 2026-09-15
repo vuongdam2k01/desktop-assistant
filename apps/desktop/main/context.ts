@@ -2,6 +2,7 @@ import type { BrowserWindow, Tray } from 'electron';
 import type { CredentialStore } from '@desktop-assistant/credential-store';
 import type { LedgerStore } from '@desktop-assistant/ledger-store';
 import type { JobManager } from '@desktop-assistant/job-manager';
+import type { ModelRoutingModule } from '@desktop-assistant/model-routing';
 import type { Locale } from '../i18n/resources.js';
 import type { PetWindowController } from './pet-window/pet-controller.js';
 import type { WindowIntegration } from './window-integration/types.js';
@@ -35,6 +36,7 @@ export class DesktopContext {
   #credentialStore?: CredentialStore;
   #ledgerStore?: LedgerStore;
   #jobManager?: JobManager;
+  #modelRoutingModule?: ModelRoutingModule;
 
   petWindow?: BrowserWindow;
   appWindow?: BrowserWindow;
@@ -104,6 +106,16 @@ export class DesktopContext {
 
   get hasJobManager(): boolean {
     return this.#jobManager !== undefined;
+  get modelRoutingModule(): ModelRoutingModule {
+    return published(this.#modelRoutingModule, 'modelRoutingModule');
+  }
+
+  set modelRoutingModule(value: ModelRoutingModule) {
+    this.#modelRoutingModule = value;
+  }
+
+  get hasModelRoutingModule(): boolean {
+    return this.#modelRoutingModule !== undefined;
   }
 
   setLocale(newLocale: Locale): void {
