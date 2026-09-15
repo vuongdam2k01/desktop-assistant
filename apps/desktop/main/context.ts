@@ -106,6 +106,8 @@ export class DesktopContext {
 
   get hasJobManager(): boolean {
     return this.#jobManager !== undefined;
+  }
+
   get modelRoutingModule(): ModelRoutingModule {
     return published(this.#modelRoutingModule, 'modelRoutingModule');
   }

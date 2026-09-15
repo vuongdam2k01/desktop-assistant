@@ -41,9 +41,11 @@ describe('Migration Scenarios (ledger spec)', () => {
       .get(intent.recordId)!;
     const preHash = crypto.createHash('sha256').update(preRow.content).digest('hex');
 
-    // Define step 2: adds a nullable column to action_record and a new table
+    // The shipped registry decides where a freshly opened store sits, so the step this
+    // scenario defines has to sit one above that rather than at a fixed number.
+    const shippedVersion = rawDb.prepare('PRAGMA user_version').pluck().get() as number;
     const step2: MigrationStep = {
-      version: 2,
+      version: shippedVersion + 1,
       name: 'add_auxiliary_metadata',
       apply: (db) => {
         db.exec('ALTER TABLE action_record ADD COLUMN sync_tag TEXT;');
@@ -52,12 +54,12 @@ describe('Migration Scenarios (ledger spec)', () => {
     };
 
     const manager = new MigrationManager(rawDb, [
-      { version: 1, name: 'initial', apply: () => {} },
+      { version: shippedVersion, name: 'already_applied', apply: () => {} },
       step2,
     ]);
 
     const newShape = manager.advanceShape();
-    expect(newShape.current).toBe(2);
+    expect(newShape.current).toBe(shippedVersion + 1);
     expect(newShape.pendingSteps).toHaveLength(0);
 
     // Old records carry null for the new column
@@ -81,9 +83,11 @@ describe('Migration Scenarios (ledger spec)', () => {
 
     const rawDb = new Database(dbPath);
 
+    const shippedVersion = rawDb.prepare('PRAGMA user_version').pluck().get() as number;
+
     // Bad migration 1: tries to add a NOT NULL column to action_record
     const badStepNotNull: MigrationStep = {
-      version: 2,
+      version: shippedVersion + 1,
       name: 'illegal_not_null_column',
       apply: (db) => {
         db.exec("ALTER TABLE action_record ADD COLUMN illegal_col TEXT NOT NULL DEFAULT 'val';");
@@ -91,7 +95,7 @@ describe('Migration Scenarios (ledger spec)', () => {
     };
 
     const managerNotNull = new MigrationManager(rawDb, [
-      { version: 1, name: 'initial', apply: () => {} },
+      { version: shippedVersion, name: 'already_applied', apply: () => {} },
       badStepNotNull,
     ]);
 
@@ -99,13 +103,13 @@ describe('Migration Scenarios (ledger spec)', () => {
       managerNotNull.advanceShape();
     }).toThrow(LedgerStoreError);
 
-    // Verify user_version was NOT advanced (stayed at 1)
+    // Verify user_version was NOT advanced
     const v1 = rawDb.prepare('PRAGMA user_version').pluck().get() as number;
-    expect(v1).toBe(1);
+    expect(v1).toBe(shippedVersion);
 
     // Bad migration 2: tries to tamper with existing records
     const badStepTamper: MigrationStep = {
-      version: 2,
+      version: shippedVersion + 1,
       name: 'illegal_tamper_records',
       apply: (db) => {
         // Even if someone temporarily tries to alter content
@@ -114,7 +118,7 @@ describe('Migration Scenarios (ledger spec)', () => {
     };
 
     const managerTamper = new MigrationManager(rawDb, [
-      { version: 1, name: 'initial', apply: () => {} },
+      { version: shippedVersion, name: 'already_applied', apply: () => {} },
       badStepTamper,
     ]);
 
@@ -123,7 +127,7 @@ describe('Migration Scenarios (ledger spec)', () => {
     }).toThrow();
 
     const v2 = rawDb.prepare('PRAGMA user_version').pluck().get() as number;
-    expect(v2).toBe(1);
+    expect(v2).toBe(shippedVersion);
 
     rawDb.close();
   });
@@ -157,10 +161,11 @@ describe('Migration Scenarios (ledger spec)', () => {
 
     expect(proc.status === null || proc.status !== 0).toBe(true);
 
-    // Reopen store: must be wholly at prior version (1), uncommitted table must not exist
+    // Reopen store: must be wholly at the shape the shipped registry targets, and the
+    // table the killed transaction started must not exist
     store = await openLedgerStore({ path: dbPath, deviceId });
     const shape = await store.shape();
-    expect(shape.current).toBe(1);
+    expect(shape.current).toBe(shape.target);
 
     const records = await store.readJob('job_mig_interrupted');
     expect(records).toHaveLength(1);
@@ -193,7 +198,7 @@ describe('Migration Scenarios (ledger spec)', () => {
 
     // Reset user_version so afterEach cleanup works cleanly
     const resetDb = new Database(dbPath);
-    resetDb.pragma('user_version = 1');
+    resetDb.pragma(`user_version = ${shape.target}`);
     resetDb.close();
     store = await openLedgerStore({ path: dbPath, deviceId });
   });

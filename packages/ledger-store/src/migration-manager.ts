@@ -10,12 +10,41 @@ export interface MigrationStep {
   apply(db: Database.Database): void;
 }
 
+/**
+ * Columns the job table gained after the initial schema shipped. A database created by
+ * the initial schema already carries them, so each one is added only when absent.
+ *
+ * SQLite cannot attach a CHECK constraint through ALTER TABLE, so a database that reaches
+ * these columns by migration relies on the caller's own type for the priority values,
+ * while a freshly created one also has the constraint from its CREATE TABLE.
+ */
+const JOB_SCHEDULING_COLUMNS: readonly { readonly name: string; readonly definition: string }[] = [
+  { name: 'created_on_device', definition: "TEXT NOT NULL DEFAULT 'local'" },
+  { name: 'priority', definition: "TEXT NOT NULL DEFAULT 'background'" },
+  { name: 'connector_account_id', definition: 'TEXT' },
+  { name: 'required_connectors_json', definition: 'TEXT' },
+];
+
 export const DEFAULT_MIGRATION_REGISTRY: readonly MigrationStep[] = [
   {
     version: 1,
     name: 'initial_ledger_schema',
     apply: () => {
       // Version 1 is applied during initial database schema initialization
+    },
+  },
+  {
+    version: 2,
+    name: 'job_scheduling_columns',
+    apply: (db) => {
+      const existing = new Set(
+        (db.prepare('PRAGMA table_info(job)').all() as { name: string }[]).map((c) => c.name)
+      );
+
+      for (const column of JOB_SCHEDULING_COLUMNS) {
+        if (existing.has(column.name)) continue;
+        db.exec(`ALTER TABLE job ADD COLUMN ${column.name} ${column.definition}`);
+      }
     },
   },
 ];

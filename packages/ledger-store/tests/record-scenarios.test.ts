@@ -336,7 +336,7 @@ describe('Record Scenarios (ledger spec)', () => {
     expect(records[0]!.type).toBe('intent');
 
     const shape = await readOnlyStore.shape();
-    expect(shape.current).toBe(1);
+    expect(shape.current).toBe(shape.target);
 
     // 4. Facade subscription works
     const received: string[] = [];
