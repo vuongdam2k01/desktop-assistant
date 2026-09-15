@@ -4,6 +4,7 @@ import { resolveUserDataOverride } from './development-overrides.js';
 import { DesktopContext } from './context.js';
 import { registerLifecycleModule } from './lifecycle/register-lifecycle-module.js';
 import { registerCredentialStoreModule } from './credential-store/register-credential-store-module.js';
+import { registerModelRoutingModule } from './model-routing/register-model-routing-module.js';
 import { registerLocaleModule } from './locale/register-locale-module.js';
 import { registerPetWindowModule } from './pet-window/register-pet-window-module.js';
 import { registerAppWindowModule } from './app-window/register-app-window-module.js';
@@ -43,6 +44,7 @@ async function boot(): Promise<void> {
   await registerWindowIntegrationModule(context);
   await registerLifecycleModule(context);
   await registerCredentialStoreModule(context);
+  await registerModelRoutingModule(context);
   await registerLocaleModule(context);
   await registerPetWindowModule(context);
   await registerAppWindowModule(context);
