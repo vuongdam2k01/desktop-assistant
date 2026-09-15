@@ -34,6 +34,10 @@ CREATE TABLE IF NOT EXISTS job (
     approval_mode TEXT NOT NULL CHECK (approval_mode IN ('off', 'smart', 'on')),
     summary_result TEXT,
     undo_of TEXT REFERENCES job(id),
+    created_on_device TEXT NOT NULL DEFAULT 'local',
+    priority TEXT NOT NULL DEFAULT 'background' CHECK (priority IN ('interactive', 'background')),
+    connector_account_id TEXT,
+    required_connectors_json TEXT,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL,
     state_changed_at TEXT NOT NULL

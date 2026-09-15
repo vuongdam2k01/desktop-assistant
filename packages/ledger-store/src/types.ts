@@ -243,6 +243,10 @@ export interface NewJob {
   readonly originalRequest: string;
   readonly approvalMode?: ApprovalMode | undefined;
   readonly undoOf?: string | null | undefined;
+  readonly createdOnDevice?: string | undefined;
+  readonly priority?: 'interactive' | 'background' | undefined;
+  readonly connectorAccountId?: string | null | undefined;
+  readonly requiredConnectors?: readonly string[] | undefined;
 }
 
 export interface StoredJob {
@@ -252,6 +256,10 @@ export interface StoredJob {
   readonly approvalMode: ApprovalMode;
   readonly summaryResult?: string | null | undefined;
   readonly undoOf?: string | null | undefined;
+  readonly createdOnDevice: string;
+  readonly priority: 'interactive' | 'background';
+  readonly connectorAccountId?: string | null | undefined;
+  readonly requiredConnectors?: readonly string[] | undefined;
   readonly createdAt: string;
   readonly updatedAt: string;
   readonly stateChangedAt: string;

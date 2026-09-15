@@ -63,8 +63,9 @@ export interface LedgerStore {
 
   // Job persistence primitives
   createJob(input: NewJob): Promise<StoredJob>;
-  setJobState(jobId: string, state: JobState, changedAt?: string): Promise<StoredJob>;
+  setJobState(jobId: string, state: JobState, changedAt?: string, summaryResult?: string | null): Promise<StoredJob>;
   getJob(jobId: string): Promise<StoredJob | null>;
+  listJobs(filter?: { states?: readonly JobState[] }): Promise<StoredJob[]>;
 
   // Approval persistence primitives
   createApprovalRequest(input: ApprovalRequest): Promise<StoredApprovalRequest>;
@@ -217,14 +218,19 @@ export class LedgerStoreImpl implements LedgerStore {
     return this.#repository.createJob(input);
   }
 
-  async setJobState(jobId: string, state: JobState, changedAt?: string): Promise<StoredJob> {
+  async setJobState(jobId: string, state: JobState, changedAt?: string, summaryResult?: string | null): Promise<StoredJob> {
     this.assertOpen();
-    return this.#repository.setJobState(jobId, state, changedAt);
+    return this.#repository.setJobState(jobId, state, changedAt, summaryResult);
   }
 
   async getJob(jobId: string): Promise<StoredJob | null> {
     this.assertOpen();
     return this.#repository.getJob(jobId);
+  }
+
+  async listJobs(filter?: { states?: readonly JobState[] }): Promise<StoredJob[]> {
+    this.assertOpen();
+    return this.#repository.listJobs(filter);
   }
 
   async createApprovalRequest(input: ApprovalRequest): Promise<StoredApprovalRequest> {
