@@ -53,7 +53,6 @@ apps/backend/backups/
 plugins/
 CLAUDE.md
 AGENTS.md
-plans/
 
 # Spike visual evidence is screen capture of a real working desktop. It is kept
 # locally with the rest of the evidence and is not published; one full-screen
