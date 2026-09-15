@@ -1,5 +1,7 @@
 import type { BrowserWindow, Tray } from 'electron';
 import type { CredentialStore } from '@desktop-assistant/credential-store';
+import type { LedgerStore } from '@desktop-assistant/ledger-store';
+import type { JobManager } from '@desktop-assistant/job-manager';
 import type { Locale } from '../i18n/resources.js';
 import type { PetWindowController } from './pet-window/pet-controller.js';
 import type { WindowIntegration } from './window-integration/types.js';
@@ -31,6 +33,8 @@ export class DesktopContext {
   #windowIntegration?: WindowIntegration;
   #cardWindow?: BrowserWindow;
   #credentialStore?: CredentialStore;
+  #ledgerStore?: LedgerStore;
+  #jobManager?: JobManager;
 
   petWindow?: BrowserWindow;
   appWindow?: BrowserWindow;
@@ -76,6 +80,30 @@ export class DesktopContext {
 
   get hasCredentialStore(): boolean {
     return this.#credentialStore !== undefined;
+  }
+
+  get ledgerStore(): LedgerStore {
+    return published(this.#ledgerStore, 'ledgerStore');
+  }
+
+  set ledgerStore(value: LedgerStore) {
+    this.#ledgerStore = value;
+  }
+
+  get hasLedgerStore(): boolean {
+    return this.#ledgerStore !== undefined;
+  }
+
+  get jobManager(): JobManager {
+    return published(this.#jobManager, 'jobManager');
+  }
+
+  set jobManager(value: JobManager) {
+    this.#jobManager = value;
+  }
+
+  get hasJobManager(): boolean {
+    return this.#jobManager !== undefined;
   }
 
   setLocale(newLocale: Locale): void {

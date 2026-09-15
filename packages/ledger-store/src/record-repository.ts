@@ -861,16 +861,33 @@ export class RecordRepository {
       const now = new Date().toISOString();
       const approvalMode = input.approvalMode || 'smart';
       const undoOf = input.undoOf || null;
+      const createdOnDevice = input.createdOnDevice || 'local';
+      const priority = input.priority || 'background';
+      const connectorAccountId = input.connectorAccountId || null;
+      const requiredConnectorsJson = input.requiredConnectors ? JSON.stringify(input.requiredConnectors) : null;
 
       try {
         this.db
           .prepare(
             `INSERT INTO job (
               id, original_request, state, approval_mode, summary_result, undo_of,
+              created_on_device, priority, connector_account_id, required_connectors_json,
               created_at, updated_at, state_changed_at
-            ) VALUES (?, ?, 'created', ?, NULL, ?, ?, ?, ?)`
+            ) VALUES (?, ?, 'created', ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?)`
           )
-          .run(input.id, input.originalRequest, approvalMode, undoOf, now, now, now);
+          .run(
+            input.id,
+            input.originalRequest,
+            approvalMode,
+            undoOf,
+            createdOnDevice,
+            priority,
+            connectorAccountId,
+            requiredConnectorsJson,
+            now,
+            now,
+            now
+          );
 
         this.db
           .prepare(
@@ -893,6 +910,10 @@ export class RecordRepository {
         approvalMode,
         summaryResult: null,
         undoOf,
+        createdOnDevice,
+        priority,
+        connectorAccountId: input.connectorAccountId,
+        requiredConnectors: input.requiredConnectors,
         createdAt: now,
         updatedAt: now,
         stateChangedAt: now,
@@ -900,7 +921,7 @@ export class RecordRepository {
     })();
   }
 
-  setJobState(jobId: string, state: JobState, changedAt?: string): StoredJob {
+  setJobState(jobId: string, state: JobState, changedAt?: string, summaryResult?: string | null): StoredJob {
     return this.db.transaction(() => {
       const jobRow = this.db
         .prepare<[string], {
@@ -910,6 +931,10 @@ export class RecordRepository {
           approval_mode: string;
           summary_result: string | null;
           undo_of: string | null;
+          created_on_device?: string;
+          priority?: 'interactive' | 'background';
+          connector_account_id?: string | null;
+          required_connectors_json?: string | null;
           created_at: string;
           updated_at: string;
           state_changed_at: string;
@@ -937,16 +962,24 @@ export class RecordRepository {
         .run(jobId, nextSeq, jobRow.state, state, now);
 
       this.db
-        .prepare('UPDATE job SET state = ?, updated_at = ?, state_changed_at = ? WHERE id = ?')
-        .run(state, now, now, jobId);
+        .prepare('UPDATE job SET state = ?, summary_result = COALESCE(?, summary_result), updated_at = ?, state_changed_at = ? WHERE id = ?')
+        .run(state, summaryResult ?? null, now, now, jobId);
+
+      const finalSummary = summaryResult !== undefined ? summaryResult : jobRow.summary_result;
 
       return {
         id: jobRow.id,
         originalRequest: jobRow.original_request,
         state,
         approvalMode: jobRow.approval_mode as StoredJob['approvalMode'],
-        summaryResult: jobRow.summary_result,
+        summaryResult: finalSummary,
         undoOf: jobRow.undo_of,
+        createdOnDevice: jobRow.created_on_device || 'local',
+        priority: jobRow.priority || 'background',
+        connectorAccountId: jobRow.connector_account_id,
+        requiredConnectors: jobRow.required_connectors_json
+          ? JSON.parse(jobRow.required_connectors_json)
+          : undefined,
         createdAt: jobRow.created_at,
         updatedAt: now,
         stateChangedAt: now,
@@ -963,6 +996,10 @@ export class RecordRepository {
         approval_mode: string;
         summary_result: string | null;
         undo_of: string | null;
+        created_on_device?: string;
+        priority?: 'interactive' | 'background';
+        connector_account_id?: string | null;
+        required_connectors_json?: string | null;
         created_at: string;
         updated_at: string;
         state_changed_at: string;
@@ -978,10 +1015,61 @@ export class RecordRepository {
       approvalMode: row.approval_mode as StoredJob['approvalMode'],
       summaryResult: row.summary_result,
       undoOf: row.undo_of,
+      createdOnDevice: row.created_on_device || 'local',
+      priority: row.priority || 'background',
+      connectorAccountId: row.connector_account_id,
+      requiredConnectors: row.required_connectors_json
+        ? JSON.parse(row.required_connectors_json)
+        : undefined,
       createdAt: row.created_at,
       updatedAt: row.updated_at,
       stateChangedAt: row.state_changed_at,
     };
+  }
+
+  listJobs(filter?: { states?: readonly JobState[] }): StoredJob[] {
+    let sql = 'SELECT * FROM job';
+    const params: unknown[] = [];
+    if (filter?.states && filter.states.length > 0) {
+      const placeholders = filter.states.map(() => '?').join(', ');
+      sql += ` WHERE state IN (${placeholders})`;
+      params.push(...filter.states);
+    }
+    sql += ' ORDER BY created_at ASC';
+
+    const rows = this.db.prepare(sql).all(...params) as Array<{
+      id: string;
+      original_request: string;
+      state: JobState;
+      approval_mode: string;
+      summary_result: string | null;
+      undo_of: string | null;
+      created_on_device?: string;
+      priority?: 'interactive' | 'background';
+      connector_account_id?: string | null;
+      required_connectors_json?: string | null;
+      created_at: string;
+      updated_at: string;
+      state_changed_at: string;
+    }>;
+
+    return rows.map((row) => ({
+      id: row.id,
+      originalRequest: row.original_request,
+      state: row.state,
+      approvalMode: row.approval_mode as StoredJob['approvalMode'],
+      summaryResult: row.summary_result,
+      undoOf: row.undo_of,
+      createdOnDevice: row.created_on_device || 'local',
+      priority: row.priority || 'background',
+      connectorAccountId: row.connector_account_id,
+      requiredConnectors: row.required_connectors_json
+        ? JSON.parse(row.required_connectors_json)
+        : undefined,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      stateChangedAt: row.state_changed_at,
+    }));
   }
 
   // ── Approval Request Primitives ─────────────────────────────────────────
